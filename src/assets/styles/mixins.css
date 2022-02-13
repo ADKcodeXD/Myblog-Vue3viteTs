@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  font-size: 14px;
+}
+body {
+  min-width: 1240px;
+  margin: 0;
+  font: 1em/1.4 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif;
+}
+ul,
+h1,
+h3,
+h4,
+p,
+dl,
+dd {
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  outline: none;
+}
+i {
+  font-style: normal;
+}
+input[type="text"],
+input[type="search"],
+input[type="password"],
+input[type="checkbox"] {
+  padding: 0;
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+}
+input[type="text"]::placeholder,
+input[type="search"]::placeholder,
+input[type="password"]::placeholder,
+input[type="checkbox"]::placeholder {
+  color: #ccc;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+  vertical-align: middle;
+}
+ul {
+  list-style: none;
+}
