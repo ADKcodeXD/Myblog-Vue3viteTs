@@ -4,6 +4,9 @@ export const useStore = defineStore('main', {
   state: () => {
     return{
         // 这里写变量
+        user:{
+          token:''
+        }
     }
   },
   // could also be defined as

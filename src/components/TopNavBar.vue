@@ -24,7 +24,7 @@
         </el-col>
         <el-col :span="4">
           <div class="right">
-            <p>欢迎你 尊敬的访客</p>
+            <p>欢迎,尊敬的访客 去<RouterLink to="/login">登录</RouterLink></p>
             <div class="container" @mouseenter="infoShow=true" @mouseleave="infoShow=false">
               <div class="avatar" >
                 <img src="@/assets/img/94551956_p0.png" alt="" />
