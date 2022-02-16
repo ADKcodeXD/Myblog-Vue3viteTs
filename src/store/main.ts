@@ -1,3 +1,4 @@
+import { getItem } from '@/utils/storage';
 import { defineStore } from 'pinia'
 
 export const useStore = defineStore('main', {
@@ -5,7 +6,7 @@ export const useStore = defineStore('main', {
     return{
         // 这里写变量
         user:{
-          token:''
+          token:getItem("user")||""
         }
     }
   },
