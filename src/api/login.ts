@@ -8,3 +8,11 @@ export const userLogin = (loginParams:any) => {
         data:loginParams
     })
 }
+
+export const userRegister = (loginParams:any) => {
+    return request({
+        method: 'post',
+        url: '/register',
+        data:loginParams
+    })
+}
