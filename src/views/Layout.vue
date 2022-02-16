@@ -21,10 +21,9 @@
 
 <script setup lang="ts">
 import TopNavBar from "@/components/TopNavBar.vue";
-import { useCounterStore } from "@/store/counter";
 </script>
 
-<style scoped lang="less">
+<style scoped  lang="less">
 @keyframes leftboxin {
   0% {
     top: 1009px;
@@ -45,12 +44,15 @@ import { useCounterStore } from "@/store/counter";
     left: 1985px;
   }
 }
-
+#app{
+  height: 100%;
+}
 .cotainer {
   width: 100%;
   position: relative;
   overflow: hidden;
-  height: auto;
+  min-height: 768px;
+  height: 100%;
   .boxgroup {
     .box {
       position: absolute;
