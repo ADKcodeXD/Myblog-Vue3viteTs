@@ -1,7 +1,7 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" >
     <!-- 导航组件 -->
-    <el-header>
+    <el-header :style="{backgroundColor:backColor}">
       <el-row :gutter="20">
         <el-col :span="4">
           <div class="icon">
@@ -12,11 +12,12 @@
         </el-col>
         <el-col :span="16">
           <div class="menu">
-            <ul class="menu-list">
-              <li><a>文章</a></li>
+            <ul class="menu-list" :style="{color:fontColor}">
+              <li><a @click="$router.push('/')">首页</a></li>
+              <li><a @click="$router.push('/articlelist')">文章</a></li>
               <li><a>留言板</a></li>
               <li><a @click="$router.push('/project')">作品</a></li>
-              <li>
+              <li @click="$router.push('/edit')">
                 <el-button :icon="Edit" circle></el-button><a>我也要写</a>
               </li>
             </ul>
@@ -24,13 +25,38 @@
         </el-col>
         <el-col :span="4">
           <div class="right">
-            <p>欢迎,尊敬的访客 去<RouterLink to="/login">登录</RouterLink></p>
-            <div class="container" @mouseenter="infoShow=true" @mouseleave="infoShow=false">
-              <div class="avatar" >
-                <img src="@/assets/img/94551956_p0.png" alt="" />
+            <p v-if="userinfo.id">{{ userinfo.username }} 你好</p>
+            <p v-else>访客你好 去<RouterLink to="/login">登录</RouterLink></p>
+            <div
+              class="container"
+              @mouseenter="infoShow = true"
+              @mouseleave="infoShow = false"
+            >
+              <div class="avatar">
+                <img v-if="userinfo.id" :src="userinfo.avatar" alt="" />
+                <img v-else src="@/assets/img/94551956_p0.png" alt="" />
               </div>
               <transition name="infobox" mode="out-in">
-                <div v-show="infoShow" class="info-box"></div>
+                <div v-show="infoShow" class="info-box">
+                  <div class="loginbox" v-if="userinfo.id">
+                    <div class="up">
+                      <div class="avatar">
+                        <img src="@/assets/img/94551956_p0.png" alt="" />
+                      </div>
+                      <div class="info">
+                        <h2>欢迎您{{ userinfo.username }}</h2>
+                        <div>你的角色是{{ userinfo.role }}</div>
+                      </div>
+                    </div>
+                    <div class="button">
+                      <el-button type="primary" round>编辑资料</el-button>
+                      <el-button type="danger" @click="logout" round
+                        >退出登录</el-button
+                      >
+                    </div>
+                  </div>
+                  <div class="nologin" v-else>您还未登录哦 请先登录</div>
+                </div>
               </transition>
             </div>
           </div>
@@ -41,9 +67,85 @@
 </template>
 
 <script setup lang="ts">
+import { useStore } from "@/store/main";
+import { removeItem } from "@/utils/storage";
 import { Edit } from "@element-plus/icons-vue";
-import { ref } from "vue";
+import { ElMessage } from "element-plus";
+import { currentUser } from "@/api/user";
+import { useUserStore } from "@/store/user";
+import { isValidKey } from "@/utils/tools";
+const props = defineProps({
+    backColor:{
+        type:String,
+        default:()=>'#ff9f9f'
+    },
+    fontColor:{
+      type:String,
+      default:()=>'#fff'
+    }
+})
 let infoShow = ref(false);
+const store = useStore();
+const userStore = useUserStore();
+const user = store.user;
+const getUserInfo = () => {
+  if (user && user.token) {
+    // 获取信息
+    currentUser()
+      .then((result: any) => {
+        const {data}=result;
+        if (data.code === 10003) {
+          ElMessage.error(data.msg);
+          removeItem("user");
+        } else {
+          userStore.setUser(data.data);
+          for(let key in userinfo){
+            // 此处直接使用key会报错 需要使用这个isValidKey函数来进行判断
+            if(isValidKey(key,userinfo)){
+              userinfo[key]=userStore.userinfo[key];
+            }
+          }
+        }
+      })
+      .catch((error: any) => {
+        ElMessage.error("请求失败");
+      });
+    
+  } else {
+    console.log("notoken");
+  }
+};
+getUserInfo();
+interface userinfo{
+  id:string,
+  username:string,
+  role:string,
+  avatar:string
+}
+let userinfo:userinfo=reactive({
+  id:'',
+  username:'',
+  role:'',
+  avatar:''
+});
+
+const logout = (): void => {
+  store.user.token = "";
+  removeItem("user");
+  userStore.setUser({
+    id: "",
+    username: "",
+    avatar: "",
+    role: "",
+  });
+  for(let key in userinfo){
+    if(isValidKey(key,userinfo)){
+      userinfo[key]=userStore.userinfo[key];
+    }
+  }
+  ElMessage.success("退出登录成功！");
+  infoShow.value=false;
+};
 </script>
 
 <style lang="less" scoped>
@@ -65,7 +167,7 @@ let infoShow = ref(false);
 .el-header {
   padding: 0;
   height: 93px;
-  background-color: #ff9f9f;
+  
   .el-row {
     height: 100%;
     padding: 10px;
@@ -86,7 +188,7 @@ let infoShow = ref(false);
         li {
           margin-right: 20px;
           cursor: pointer;
-          
+
           .el-button {
             background-color: rgb(102, 167, 253);
             margin-right: 10px;
@@ -105,34 +207,65 @@ let infoShow = ref(false);
       font-size: 20px;
       align-items: center;
       position: relative;
-      .container{
+      .container {
         .info-box {
           position: absolute;
           width: 329px;
-          height: 408px;
-          top: 80px;
+          top: 70px;
           left: 16px;
+          display: flex;
+          z-index: 999;
           background-color: rgb(253, 253, 253);
           box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.3);
+          .loginbox {
+            width: 100%;
+            display: flex;
+            color: rgb(0, 0, 0);
+            padding: 10px 0;
+            font-size: 14px;
+            flex-direction: column;
+            justify-content: space-between;
+            .up {
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+              h2 {
+                margin: 10px 0;
+                font-size: 20px;
+              }
+            }
+            .button {
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              margin-top: 20px;
+              padding: 0 30px;
+            }
+          }
+          .nologin {
+            width: 100%;
+            align-self: center;
+            text-align: center;
+            justify-self: center;
+            color: gray;
+          }
         }
         .avatar {
-        width: 73px;
-        height: 73px;
-        border-radius: 50%;
-        overflow: hidden;
-        background-color: #fff;
-        z-index: 2;
-        transition: all ease 1s;
-        &:hover {
-         
+          width: 73px;
+          height: 73px;
+          border-radius: 50%;
+          overflow: hidden;
+          background-color: #fff;
+          z-index: 2;
+          transition: all ease 1s;
+          &:hover {
+          }
+
+          img {
+            width: 100%;
+            object-fit: cover;
+          }
         }
-        
-        img {
-          width: 100%;
-          object-fit: cover;
-        }
-      }
-      
       }
     }
   }
