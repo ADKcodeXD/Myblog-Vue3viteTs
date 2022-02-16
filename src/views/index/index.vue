@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <Carousel />
+    <Carousel :items="banenrList" />
     <div class="view-content">
       <div class="article">
         <el-card class="box-card">
@@ -10,7 +10,8 @@
               <el-button class="button" type="text">查看更多</el-button>
             </div>
           </template>
-          <ArticleItem v-for="i in 5" :key="i" />
+          <ArticleItem v-for="articleItem in articles" :key="articleItem.id" :articleItem="articleItem" />
+          <el-empty v-if="articles.length===0" description="暂时没有文章发表哦~"></el-empty>
         </el-card>
       </div>
       <div class="rightbox">
@@ -22,10 +23,40 @@
 </template>
 
 <script setup lang="ts">
-import Carousel from "@/components/Carousel.vue";
+import { getIndexBanner, listArticle } from "@/api/article";
+import { ArticleItemInfo, Banner } from "@/interface/article";
+import { PageParams } from "@/interface/params";
 import ArticleItem from "./components/article-item.vue";
 import MyInfo from "./components/my-info.vue";
 import TimeLine from "./components/time-line.vue";
+
+
+
+// 获取首页文章 按照时间顺序 5篇
+let articles=ref<ArticleItemInfo[]>([]);
+let pageparams:PageParams={
+  page:1,
+  pagesize:5
+}
+// 获取文章列表
+const getIndexfive=async ()=>{
+  const {data}=await listArticle(pageparams)
+
+  articles.value=data.data;
+}
+
+
+let banenrList=ref<Banner[]>([]);
+// 获取文章头图
+const getBannerList=async ()=>{
+  const {data}=await getIndexBanner();
+  banenrList.value=data.data;
+}
+
+onMounted(()=>{
+  getIndexfive();
+  getBannerList();
+})
 </script>
 
 <style lang="less" scoped>
@@ -35,8 +66,9 @@ import TimeLine from "./components/time-line.vue";
     margin-top: 15px;
     .article {
       display: flex;
-      
+      width: 100%;
       .box-card {
+        width: 100%;
         .card-header {
           display: flex;
           justify-content: space-between;
