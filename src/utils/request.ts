@@ -11,7 +11,7 @@ request.interceptors.request.use((config: any) => {
     //config 配置对象 
     const store=useStore();
     if (store.user) {
-        config.headers.Authorization = `Bearer ${store.user.token}`
+        config.headers.Authorization = `${store.user.token}`
     }
     return config;
 })
