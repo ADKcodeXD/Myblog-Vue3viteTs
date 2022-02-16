@@ -10,7 +10,18 @@ const routes =[
                 path:'',
                 name:'index',
                 component:()=> import ('@/views/index/index.vue')
-            }
+            },
+            {
+                path:'edit',
+                name:'edit',
+                component:()=> import ('@/views/edit/index.vue')
+            },
+            {
+                path:'articlelist',
+                name:'articleList',
+                component:()=> import ('@/views/articlelist/index.vue')
+            },
+            
         ]
     },
     {
@@ -27,7 +38,12 @@ const routes =[
         path:'/login',
         name:'login',
         component: ()=> import ('@/views/login/index.vue')
-    }
+    },
+    {
+        path:'/article/:id',
+        name:'articledetail',
+        component:()=> import ('@/views/article/index.vue')
+    },
 ]
 
 
