@@ -17,8 +17,9 @@
           <div class="author">
             <img :src="article.authorVo.avatar" alt="" />
             <div class="author-info">
-              <p class="author-name">{{ article.authorVo.username }}</p>
-              <p>发布于{{ article.createDate }}</p>
+              <p class="author-name">{{ article.authorVo.nickname }}</p>
+              <p class="introduce">{{ article.authorVo.introduce }}</p>
+              
             </div>
           </div>
           <div class="summary">
@@ -50,11 +51,20 @@
                 >
                   发布时间{{ time }}
                 </p>
+                
               </div>
               <div class="icon">
-                <i class="iconfont icon-yanjing">{{ article.viewCounts }}</i>
+                <div class="icongroup">
+                  <i class="iconfont icon-yanjing">{{ article.viewCounts }}</i>
                 <i class="iconfont icon-pinglun">{{ article.commentCounts }}</i>
+                </div>
+                
+                <p>发布于{{ article.createDate }}</p>
               </div>
+
+            </div>
+            <div class="tags">
+              <TagsGroup :tags="article.tags"/>
             </div>
           </div>
         </div>
@@ -64,10 +74,63 @@
       <div class="comments">
         <div class="title">
           <p>评论区</p>
-          <el-empty
-            v-if="article.commentCounts === 0"
-            description="暂时没有评论哦"
-          ></el-empty>
+        </div>
+
+        <div class="edit-part">
+          <div class="up">
+            <h3>{{commentList.length}}条评论</h3>
+            <h4>需要登录后才能评论哦~</h4>
+          </div>
+          <el-divider></el-divider>
+          <div class="main-content">
+            <div class="avatar">
+              <img
+                :src="
+                  currentUser?.avatar === ''
+                    ? '/static/img/logo.png'
+                    : currentUser?.avatar
+                "
+                alt=""
+              />
+            </div>
+            <div class="edit-area">
+              <el-input
+                v-model="comment"
+                :rows="6"
+                :limit="256"
+                show-word-limit
+                resize="none"
+                type="textarea"
+                style="font-size: 20px; line-height: 30px"
+                placeholder="在这里可以发布评论哦~"
+              />
+            </div>
+          </div>
+          <div class="button">
+            <el-button
+              @click="publishComment"
+              class="buttonself"
+              :disabled="currentUser?.id === ''"
+              type="success"
+              >发布评论</el-button
+            >
+          </div>
+        </div>
+        <el-empty
+          v-if="commentList.length === 0"
+          description="暂时没有评论哦，快来发表第一条评论"
+        ></el-empty>
+        <div class="comment-list">
+          <transition-group name="comment">
+            <CommentItem
+              class="comment-item"
+              :commentInfo="commentitem"
+              :floor="i + 1"
+              v-for="(commentitem, i) in commentList"
+              :key="commentitem.id"
+              :authorId="article.authorVo.id"
+            />
+          </transition-group>
         </div>
       </div>
     </div>
@@ -76,12 +139,59 @@
 
 <script setup lang="ts">
 import { getArticleItem } from "@/api/article";
+import { addComment, getComments } from "@/api/comment";
 import { ArticleItemInfo } from "@/interface/article";
+import { CommentItemInfo } from "@/interface/comment";
+import { CommentParams } from "@/interface/params";
+import { UserEasy } from "@/interface/user";
+import { useUserStore } from "@/store/user";
 import { getRealativeTime } from "@/utils/dayjs";
 import { ElMessage } from "element-plus";
 import { useRoute } from "vue-router";
 const route = useRoute();
+const userStore = useUserStore();
+
+// 定义所有使用到的变量
+let comment = ref("");
+const user = userStore.userinfo;
+let currentUser = reactive<UserEasy>({
+  id:user.id,
+  role:user.role,
+  avatar:user.avatar,
+  username:user.username,
+  nickname:user.nickname,
+  introduce:user.introduce,
+  banner:user.banner
+});
+let commentParams: CommentParams = reactive({
+  articleId: route.params.id as string,
+  authorId: currentUser.id,
+  content: comment,
+});
 let article = ref<ArticleItemInfo>();
+let commentList = ref<CommentItemInfo[]>([]);
+
+
+
+// 计算属性 计算相对时间
+let time = computed(() => {
+  article.value as ArticleItemInfo;
+  return getRealativeTime(article.value.createDate);
+});
+
+
+// 方法区-----------------------
+const publishComment = async () => {
+  const { data } = await addComment(commentParams);
+  if (data.code === 200) {
+    ElMessage.success("发布成功");
+    comment.value="";
+    getAllComment();
+  } else {
+    ElMessage.error(data.msg);
+  }
+};
+// 获取文章
 const getArticle = async (id: any) => {
   const { data } = await getArticleItem(id);
   if (data.code === 200) {
@@ -90,16 +200,45 @@ const getArticle = async (id: any) => {
     ElMessage.error(data.msg);
   }
 };
-let time = computed(() => {
-  return getRealativeTime(article.value.createDate);
-});
+// 获取评论
+const getAllComment = async () => {
+  const { data } = await getComments(route.params.id as string);
+  commentList.value = data.data;
+};
+
+// 函数加载 挂载组件
 onMounted(() => {
+  if (user) {
+    currentUser = user;
+  }
   getArticle(route.params.id);
+  getAllComment();
 });
 </script>
 
 
 <style scoped lang="less" >
+.comment-enter-to,
+.comment-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.comment-leave-active {
+  position: absolute;
+  transition: all 0.8s ease-in-out;
+}
+.comment-move {
+  transition: all 0.8s ease;
+}
+.comment-enter-from,
+.comment-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.comment-item {
+  transition: all 0.8s ease;
+}
 .article {
   overflow-x: hidden;
   position: absolute;
@@ -176,6 +315,10 @@ onMounted(() => {
               font-size: 18px;
               font-weight: 600;
             }
+            .introduce{
+              font-size: 16px;
+              color: gray;
+            }
           }
         }
         .summary {
@@ -200,9 +343,6 @@ onMounted(() => {
       min-height: 200px;
       line-height: 36px;
       font-size: 20px;
-      &::first-letter {
-        font-size: 30px;
-      }
     }
     .detail {
       .bottom-text {
@@ -210,17 +350,55 @@ onMounted(() => {
         justify-content: space-between;
         align-items: center;
         .icon {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
           i {
             margin-left: 10px;
             font-size: 20px;
           }
         }
       }
+      .tags{
+        margin: 20px 0;
+      }
     }
     .comments {
       margin-top: 20px;
       .title {
         font-size: 30px;
+      }
+      .edit-part {
+        margin-top: 20px;
+        width: 100%;
+        height: 300px;
+        .up {
+          justify-content: space-between;
+          display: flex;
+        }
+        .main-content {
+          display: flex;
+          width: 100%;
+          .avatar {
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            background-color: antiquewhite;
+            border-radius: 50%;
+            overflow: hidden;
+            
+          }
+          .edit-area {
+            width: 100%;
+            margin-left: 30px;
+          }
+        }
+        .button {
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 20px;
+        }
       }
     }
   }
