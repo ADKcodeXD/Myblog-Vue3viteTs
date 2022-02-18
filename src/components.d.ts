@@ -5,8 +5,11 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Carousel: typeof import('./components/Carousel.vue')['default']
+    CommentItem: typeof import('./components/CommentItem.vue')['default']
+    Footer: typeof import('./components/Footer.vue')['default']
     TagsGroup: typeof import('./components/TagsGroup.vue')['default']
     TopNavBar: typeof import('./components/TopNavBar.vue')['default']
+    UploadAvatar: typeof import('./components/UploadAvatar.vue')['default']
     WelcomePage: typeof import('./components/WelcomePage.vue')['default']
   }
 }
