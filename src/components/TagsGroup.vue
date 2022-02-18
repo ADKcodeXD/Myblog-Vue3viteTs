@@ -18,7 +18,7 @@ export default defineComponent({
     },
   },
   setup(props,{emit}) {
-      const publishId=(id:string)=>{
+      const publishId=(id:number)=>{
           emit('tagId',id);
       }
       return {publishId}
