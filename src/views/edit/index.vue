@@ -296,8 +296,7 @@ const submitArticle = async () => {
       justify-content: center;
       align-items: flex-start;
     }
-    .publish {
-    }
+    
   }
 }
 </style>
