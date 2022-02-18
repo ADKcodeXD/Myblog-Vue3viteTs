@@ -68,6 +68,12 @@
                 prop="username"
               ></el-input>
             </el-form-item>
+            <el-form-item prop="nickname" label="昵称">
+              <el-input
+                v-model="registerForm.nickname"
+                prop="nickname"
+              ></el-input>
+            </el-form-item>
             <el-form-item prop="password" label="密码">
               <el-input
                 type="password"
@@ -100,9 +106,10 @@
 
 <script setup lang="ts">
 import { userLogin, userRegister } from "@/api/login";
+import { RegisterParams } from "@/interface/params";
 import { useStore } from "@/store/main";
 import { setItem } from "@/utils/storage";
-import { validatePassword, validateUsername } from "@/utils/validate";
+import { validateNickname, validatePassword, validateUsername } from "@/utils/validate";
 import { reactive, ref } from "@vue/reactivity";
 import { useMouse } from "@vueuse/core";
 import { ElForm, ElMessage } from "element-plus";
@@ -154,6 +161,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
 // 注册部分的逻辑
 const registerForm = reactive({
   username: "",
+  nickname:"",
   password: "",
   repassword: "",
 });
@@ -171,6 +179,7 @@ const validateRePassword = (rule: any, value: any, callback: any) => {
 // 注册表单校验规则
 const registerRules = reactive({
   username: [{ validator: validateUsername, trigger: "blur" }],
+  nickname:[{ validator: validateNickname, trigger: "blur" }],
   password: [{ validator: validatePassword, trigger: "blur" }],
   repassword: [{ validator: validateRePassword, trigger: "blur" }],
 });
@@ -178,11 +187,12 @@ const submitRegister = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate(async (valid) => {
     if (valid) {
-      const loginParams = {
+      const registerParams:RegisterParams = {
         username: registerForm.username,
         password: registerForm.password,
+        nickname:registerForm.nickname
       };
-      const result=await userRegister(loginParams);
+      const result=await userRegister(registerParams);
       if(result.data.code===200){
           userStore.user.token=result.data.data;
           setItem('user',userStore.user.token);
