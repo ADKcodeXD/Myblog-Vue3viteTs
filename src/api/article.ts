@@ -1,4 +1,4 @@
-import { pageParams } from '../interface/params';
+import { PageParams } from '../interface/params';
 import request from '@/utils/request'
 
 // 获取当前数据库中所有tags
@@ -20,7 +20,7 @@ export const publishArticle = (articleReqParams: any) => {
 
 // listARticle 获取文章列表
 // params : page pagesize
-export const listArticle = (pageParams: pageParams) => {
+export const listArticle = (pageParams: PageParams) => {
     return request({
         method: 'post',
         url: '/articles/articlelist',
@@ -57,7 +57,7 @@ export const getIndexBanner = () => {
 
 // listArticleWithCount 获取文章列表 并返回表中数据总数
 // params : page pagesize
-export const listArticleWithCount = (pageParams: pageParams) => {
+export const listArticleWithCount = (pageParams: PageParams) => {
     return request({
         method: 'post',
         url: '/articles/articlelistcount',
