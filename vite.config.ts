@@ -1,8 +1,10 @@
+import autoprefixer from 'autoprefixer';
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite';
+
 
 function resovePath(paths: string) {
   // 如何 __dirname 找不到 需要 yarn add @types/node --save-dev
@@ -10,13 +12,13 @@ function resovePath(paths: string) {
 }
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(),AutoImport({
-    dts:'src/auto-imports.d.ts',
-    imports:['vue','vue-router']
-  }),Components({
-    dirs:['src/components'],
-    extensions:['vue'],
-    dts:'src/components.d.ts'
+  plugins: [vue(), AutoImport({
+    dts: 'src/auto-imports.d.ts',
+    imports: ['vue', 'vue-router']
+  }), Components({
+    dirs: ['src/components'],
+    extensions: ['vue'],
+    dts: 'src/components.d.ts'
   })],
   resolve: {
     alias: {
@@ -33,9 +35,14 @@ export default defineConfig({
         additionalData: `@import "${resovePath('src/assets/styles/mixins.less')}";`
       },
     },
+    postcss: {
+      plugins: [
+        autoprefixer,
+      ]
+    }
   },
-  server:{
-    port:5000
+  server: {
+    port: 5000
   }
 })
 
