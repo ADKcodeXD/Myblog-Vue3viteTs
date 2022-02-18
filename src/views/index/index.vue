@@ -7,7 +7,7 @@
           <template #header>
             <div class="card-header">
               <span>近期更新文章</span>
-              <el-button class="button" type="text">查看更多</el-button>
+              <el-button @click="$router.push('/articlelist')" class="button" type="text">查看更多</el-button>
             </div>
           </template>
           <ArticleItem v-for="articleItem in articles" :key="articleItem.id" :articleItem="articleItem" />
