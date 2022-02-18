@@ -16,6 +16,7 @@
       <div class="box3"></div>
       <div class="box5"></div>
     </div>
+    <Footer/>
   </div>
 </template>
 
@@ -54,6 +55,13 @@ import TopNavBar from "@/components/TopNavBar.vue";
   min-height: 768px;
   height: 100%;
   .boxgroup {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
     .box {
       position: absolute;
       top: -360px;
@@ -77,8 +85,8 @@ import TopNavBar from "@/components/TopNavBar.vue";
     }
     .box3 {
       position: absolute;
-      bottom: -450px;
-      right: -682px;
+      top: 1300px;
+      left: 1782px;
       z-index: -10;
       width: 800px;
       height: 800px;
