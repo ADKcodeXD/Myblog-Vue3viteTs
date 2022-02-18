@@ -21,7 +21,16 @@ const routes =[
                 name:'articleList',
                 component:()=> import ('@/views/articlelist/index.vue')
             },
-            
+            {
+                path:'messageboard',
+                name:'messageboard',
+                component:()=> import ('@/views/messageboard/index.vue')
+            },
+            {
+                path:'home',
+                name:'home',
+                component:()=> import ('@/views/home/index.vue')
+            },
         ]
     },
     {

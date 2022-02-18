@@ -8,7 +8,10 @@ export const useUserStore = defineStore('user', {
                 id: '',
                 username: '',
                 avatar: '',
-                role: ''
+                role: '',
+                nickname:'',
+                banner:'',
+                introduce:''
             }
         }
     },
