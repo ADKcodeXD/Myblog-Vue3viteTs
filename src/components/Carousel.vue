@@ -1,6 +1,10 @@
 <template>
-  <el-carousel pause-on-hover v-loading="items.length === 0">
-    <el-carousel-item v-for="item in items" :key="item.id">
+  <el-carousel ref="carousel" pause-on-hover v-loading="items.length === 0">
+    <el-carousel-item
+      v-for="item in items"
+      style="display: block"
+      :key="item.id"
+    >
       <div class="content" @click="$router.push(`/article/${item.id}`)">
         <h2 class="title">{{ item.articleName }}</h2>
         <el-image :src="item.banner" fit="cover">
@@ -23,20 +27,19 @@ export default defineComponent({
       default: () => [],
     },
   },
-  setup(props) {},
+  setup(props) {
+    const carousel = ref(null);
+    onMounted(() => {
+      setTimeout(() => {
+        carousel.value?.setActiveItem(0);
+      }, 500);
+    });
+    return { carousel };
+  },
 });
 </script>
 
 <style lang="less" scoped>
-.el-carousel__item h3 {
-  color: #475669;
-  font-size: 18px;
-  opacity: 0.75;
-  line-height: 300px;
-  margin: 0;
-  text-align: center;
-}
-
 .el-carousel__item:nth-child(2n) {
   background-color: #99a9bf;
 }
