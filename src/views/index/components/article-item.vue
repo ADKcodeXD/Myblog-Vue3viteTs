@@ -17,7 +17,7 @@
       </div>
       <div class="down">
         <div class="leftcontent">
-          <p class="author">作者:{{ articleItem.author }}</p>
+          <p class="author">作者:{{ articleItem.authorVo.nickname }}</p>
           <i class="iconfont icon-yanjing">阅读:{{ articleItem.viewCounts }}</i>
           <i class="iconfont icon-pinglun">评论:{{ articleItem.commentCounts }}</i>
         </div>

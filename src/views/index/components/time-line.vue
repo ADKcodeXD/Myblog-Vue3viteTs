@@ -2,7 +2,7 @@
   <div class="timeline">
       <h2>时间归档</h2>
     <el-timeline>
-      <el-timeline-item v-for="i in 5" :key="i" timestamp="2022.2.13" placement="top">
+      <el-timeline-item v-for="i in 4" :key="i" timestamp="2022.2.13" placement="top">
           <el-card>
             <h4>测试文章测试</h4>
             <p>Tom committed 2018/4/12 20:46</p>
