@@ -57,7 +57,7 @@ export default defineComponent({
   margin: 10px 0;
   //   border-bottom: 1px solid rgb(216, 216, 216);
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   .image {
     flex-shrink: 0;
