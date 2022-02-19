@@ -3,7 +3,7 @@ import axios from 'axios'
 import JSONbig from 'json-bigint';
 
 const request: any = axios.create({
-    baseURL: "http://localhost:8888",
+    baseURL: "http://adkdream.top/",
     timeout: 5000,
     transformResponse: [function (data) {
         try {
