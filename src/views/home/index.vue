@@ -138,20 +138,21 @@
 <script setup lang="ts">
 import { uploadBanner } from "@/api/article";
 import { currentUserAll, currentUserApi, updateUserInfoApi } from "@/api/user";
+import { useUpload } from "@/hooks/upload";
 import { UpdateUserInfoParams } from "@/interface/params";
 import { UserAll } from "@/interface/user";
 import { useUserStore } from "@/store/user";
-import { isValidKey } from "@/utils/tools";
 import {
   validateEmail,
   validateJianjie,
   validateNickname,
 } from "@/utils/validate";
 import { ElForm, ElMessage } from "element-plus";
-import {
-  ElFile,
+import type {
   UploadFile,
-} from "element-plus/es/components/upload/src/upload.type";
+  ElUploadProgressEvent,
+  ElFile,
+} from 'element-plus/es/components/upload/src/upload.type'
 
 const userStore = useUserStore();
 let formAllinfo = reactive<UpdateUserInfoParams>({
@@ -179,12 +180,11 @@ let currentUser = reactive<UserAll>({
 const getAllinfo = async () => {
   const { data } = await currentUserAll();
   const obj = data.data;
-  for (let key in currentUser) {
-    if (isValidKey(key, currentUser)) {
-      currentUser[key] = obj[key];
-    }
-    currentUser.gender = obj.gender.toString();
-  }
+  const keys: any[] = Object.keys(currentUser);
+  keys.forEach((key) => {
+    currentUser[key] = obj[key];
+  });
+  currentUser.gender = obj.gender.toString();
   formAllinfo.email = obj.email ? obj.email : "未设置";
   formAllinfo.gender = obj.gender ? obj.gender.toString() : "1";
   formAllinfo.introduce = obj.introduce;
@@ -210,32 +210,16 @@ const changeAvatar = (link: string) => {
   updateUserInfo();
 };
 // 上传banner
-const beforeBannerUpload = async (file: ElFile) => {
-  const isImg = file.type === "image/jpeg" || file.type === "image/png";
-  const isLt5M = file.size / 1024 / 1024 < 5;
-
-  if (!isImg) {
-    ElMessage.error("请上传jpg或者png格式的图片");
-    return isImg;
+const beforeBannerUpload = async (file: UploadFile) => {
+  const url = await useUpload(file)
+  if(url==""){
+    return false;
   }
-  if (!isLt5M) {
-    ElMessage.error("请不要上传大于5MB的图片");
-    return isLt5M;
-  }
-  let flag = true;
-  // 上传到后端
-  const fd = new FormData();
-  fd.append("image", file);
-  const { data } = await uploadBanner(fd);
-  if (data.code !== 200) {
-    ElMessage.error(data.msg);
-    return flag;
-  } else {
-    formAllinfo.banner = data.data;
-    updateUserInfo();
-  }
-  return flag;
+  formAllinfo.banner = url;
+  updateUserInfo();
+  
 };
+
 const handleExceed = (files: FileList, fileList: UploadFile[]) => {
   ElMessage.warning("只能上传一张头图");
 };
@@ -251,7 +235,6 @@ type FormInstance = InstanceType<typeof ElForm>;
 const formInstance = ref<FormInstance>();
 // 完成资料  获取表单 校验 发布
 const formSubmit = (formEl: FormInstance | undefined) => {
-  console.log(formEl);
   if (!formEl) {
     return;
   }
@@ -259,9 +242,9 @@ const formSubmit = (formEl: FormInstance | undefined) => {
     if (vaild) {
       await updateUserInfo();
       await getAllinfo();
-      const {data} =await currentUserApi();
+      const { data } = await currentUserApi();
       userStore.setUser(data.data);
-      isEdit.value=false;
+      isEdit.value = false;
     } else {
       ElMessage.error("请校验表单");
       return false;
@@ -269,6 +252,7 @@ const formSubmit = (formEl: FormInstance | undefined) => {
   });
 };
 
+// 组件加载
 onMounted(() => {
   getAllinfo();
 });
