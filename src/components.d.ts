@@ -7,6 +7,7 @@ declare module 'vue' {
     Carousel: typeof import('./components/Carousel.vue')['default']
     CommentItem: typeof import('./components/CommentItem.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    Skin: typeof import('./components/Skin.vue')['default']
     TagsGroup: typeof import('./components/TagsGroup.vue')['default']
     TopNavBar: typeof import('./components/TopNavBar.vue')['default']
     UploadAvatar: typeof import('./components/UploadAvatar.vue')['default']

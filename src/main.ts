@@ -5,5 +5,6 @@ import { createPinia } from 'pinia';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import '@/assets/styles/iconfont.less'
+import 'amfe-flexible/index.js';
 
-createApp(App).use(ElementPlus).use(router).use(createPinia()).mount('#app')
+createApp(App).use(ElementPlus).use(createPinia()).use(router).mount('#app')

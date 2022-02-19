@@ -5,12 +5,13 @@
    }
    
    html {
+    min-width: 959px;
      height: 100%;
      font-size: 14px;
    }
    body {
+    min-width: 959px;
      
-     min-width: 1240px;
      margin: 0;
      font: 1em/1.4 'Microsoft Yahei', 'PingFang SC', 'Avenir', 'Segoe UI', 'Hiragino Sans GB', 'STHeiti', 'Microsoft Sans Serif', 'WenQuanYi Micro Hei', sans-serif
    }
@@ -60,6 +61,8 @@
     height: 100%;
     object-fit: cover;
   }
+
+  
 // 定义所有变量 
 @primaryBackGroundColor: var(--primaryBackGroundColor, rgb(255, 253, 253));
 @primaryTextColor: var(--primaryTextColor, rgb(8, 8, 8));
@@ -67,7 +70,11 @@
 @primaryTagTextColor: var(--primaryTagTextColor, rgb(255, 255, 255));
 @primarySubColor: var(--primarySubColor, rgb(87, 87, 87));
 @primaryTagBackGroundColor: var(--primaryTagBackGroundColor, rgb(4, 126, 0));
-@primaryActiveColor:var(--primaryTagBackGroundColor, rgb(250, 102, 43));
+@primaryActiveColor:var(--primaryActiveColor, rgb(250, 102, 43));
+@primaryActiveTextColor:var(--primaryActiveTextColor, rgb(250, 102, 43));
+@primaryHightlightColor:var(--primaryHightlightColor, rgb(250, 102, 43));
+@primaryLinkColor:var(--primaryLinkColor, rgb(250, 102, 43));
+@primaryHoverColor:var(--primaryHoverColor, rgb(250, 102, 43));
 // 导出变量
 :export {
     name: "less";
@@ -78,4 +85,8 @@
     primaryTagTextColor:@primaryTagTextColor;
     primarySubColor:@primarySubColor;
     primaryTagBackGroundColor:@primaryTagBackGroundColor;
+    primaryHightlightColor:@primaryHightlightColor;
+    primaryLinkColor:@primaryLinkColor;
+    primaryHoverColor:@primaryHoverColor;
+    primaryActiveTextColor:@primaryActiveTextColor;
 }
