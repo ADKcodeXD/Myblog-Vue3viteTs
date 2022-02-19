@@ -6,7 +6,7 @@
         <el-col :span="4">
           <div class="icon">
             <router-link to="/welcome">
-              <img src="@/assets/img/Web Blog .png"
+              <img src="@/assets/img/WebBlog.png"
             /></router-link>
           </div>
         </el-col>
@@ -127,7 +127,7 @@ const getUserInfo = () => {
 getUserInfo();
 
 
-
+// 退出登录
 const logout = (): void => {
   store.user.token = "";
   removeItem("user");
@@ -140,11 +140,6 @@ const logout = (): void => {
     banner: "",
     nickname: "",
   });
-  for (let key in userinfo) {
-    if (isValidKey(key, userinfo)) {
-      userinfo[key] = userStore.userinfo[key];
-    }
-  }
   ElMessage.success("退出登录成功！");
   infoShow.value = false;
 };

@@ -26,7 +26,7 @@ import {
   ElFile,
   UploadFile,
 } from "element-plus/es/components/upload/src/upload.type";
-import { uploadBanner } from "@/api/article";
+import { useUpload } from "@/hooks/upload";
 export default defineComponent({
   props: {
     size: {
@@ -48,34 +48,13 @@ export default defineComponent({
     const handleExceed = (files: FileList, fileList: UploadFile[]) => {
       ElMessage.warning("只能上传一张头图");
     };
-    const beforeAvatarUpload = async (file: ElFile) => {
-      const isImg = file.type === "image/jpeg" || file.type === "image/png";
-      const isLt5M = file.size / 1024 / 1024 < 5;
-
-      if (!isImg) {
-        ElMessage.error("请上传jpg或者png格式的图片");
-        return isImg;
-      }
-      if (!isLt5M) {
-        ElMessage.error("请不要上传大于5MB的图片");
-        return isLt5M;
-      }
-      let flag = true;
-      // 上传到后端
-      const fd = new FormData();
-      fd.append("image", file);
-      const { data } = await uploadBanner(fd);
-      console.log(data);
-      if (data.code !== 200) {
-        ElMessage.error(data.msg);
-        return flag;
-      } else {
-        ElMessage.success("上传成功");
-        avatarLink.value = data.data;
-        // 通知父组件 链接更改
+    const beforeAvatarUpload = async (file: UploadFile) => {
+      const url=await useUpload(file);
+      // 通知父组件 链接更改
+      if(url!==""){
+        avatarLink.value=url;
         emit("changeAvatar", avatarLink.value);
       }
-      return flag;
     };
     return { handleExceed, beforeAvatarUpload, avatarLink };
   },
@@ -87,7 +66,7 @@ export default defineComponent({
   display: flex;
   .avatar-uploader {
     display: flex;
-    
+
     .avatar {
       background-color: rgb(184, 183, 183);
       overflow: hidden;
