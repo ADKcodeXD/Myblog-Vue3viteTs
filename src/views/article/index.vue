@@ -176,7 +176,9 @@ let commentList = ref<CommentItemInfo[]>([]);
 // 计算属性 计算相对时间
 let time = computed(() => {
   article.value as ArticleItemInfo;
-  return getRealativeTime(article.value.createDate);
+  if(article.value){
+    return getRealativeTime(article.value.createDate);
+  }
 });
 
 

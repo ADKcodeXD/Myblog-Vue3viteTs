@@ -15,7 +15,6 @@
         :on-remove="handleRemove"
         :before-remove="beforeRemove"
         :before-upload="beforeBannerUpload"
-        :on-success="uploadSuccess"
         :show-file-list="true"
         :limit="1"
         accept=".png, .jpg, .jpeg"
@@ -91,6 +90,7 @@ import { useRouter } from "vue-router";
 import WangEditor from "wangeditor";
 import { Tag } from "@/interface/tag";
 import { ArticleReqParams, Content } from "@/interface/article";
+import { useUpload } from "@/hooks/upload";
 const store = useStore();
 const router = useRouter();
 let imglink = ref("");
@@ -111,7 +111,6 @@ onMounted(() => {
 });
 onBeforeUnmount(() => {
   instance.destroy();
-  instance = null;
 });
 //富文本编辑器
 
@@ -147,35 +146,14 @@ const beforeRemove = (file: UploadFile, fileList: UploadFile[]) => {
 const handleExceed = (files: FileList, fileList: UploadFile[]) => {
   ElMessage.warning("只能上传一张头图");
 };
-const uploadSuccess = (files: FileList, fileList: UploadFile[]) => {
-  ElMessage.success("上传成功");
-};
-const beforeBannerUpload = async (file: ElFile) => {
-  const isImg = file.type === "image/jpeg" || file.type === "image/png";
-  const isLt5M = file.size / 1024 / 1024 < 5;
-
-  if (!isImg) {
-    ElMessage.error("请上传jpg或者png格式的图片");
-    return isImg;
+const beforeBannerUpload = async (file: UploadFile) => {
+  console.log(file);
+  const link =await useUpload(file);
+  console.log(link);
+  if(link!==""){
+    imglink.value=link;
   }
-  if (!isLt5M) {
-    ElMessage.error("请不要上传大于5MB的图片");
-    return isLt5M;
-  }
-  let flag = true;
-  // 上传到后端
-  const fd = new FormData();
-  fd.append("image", file);
-  const { data } = await uploadBanner(fd);
-  console.log(data);
-  if (data.code !== 200) {
-    ElMessage.error(data.msg);
-    return flag;
-  } else {
-    ElMessage.success("上传成功");
-    imglink.value = data.data;
-  }
-  return flag;
+  return true;
 };
 
 // 提交逻辑
