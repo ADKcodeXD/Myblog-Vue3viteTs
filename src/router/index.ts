@@ -1,3 +1,5 @@
+import { getItem } from './../utils/storage';
+import { useStore } from '@/store/main';
 import {createRouter,createWebHashHistory} from 'vue-router';
 
 const routes =[
@@ -9,16 +11,19 @@ const routes =[
             {
                 path:'',
                 name:'index',
+                meta:{requireAuth:false},
                 component:()=> import ('@/views/index/index.vue')
             },
             {
                 path:'edit',
                 name:'edit',
+                meta:{requireAuth:true},
                 component:()=> import ('@/views/edit/index.vue')
             },
             {
                 path:'articlelist',
                 name:'articleList',
+                meta:{requireAuth:false},
                 component:()=> import ('@/views/articlelist/index.vue')
             },
             {
@@ -29,6 +34,7 @@ const routes =[
             {
                 path:'home',
                 name:'home',
+                meta:{requireAuth:true},
                 component:()=> import ('@/views/home/index.vue')
             },
         ]
@@ -46,6 +52,7 @@ const routes =[
     {
         path:'/login',
         name:'login',
+        meta:{requireAuth:false},
         component: ()=> import ('@/views/login/index.vue')
     },
     {
@@ -61,4 +68,16 @@ const router=createRouter({
     routes,
 })
 
+router.beforeEach((to, from,next)=> {
+    const token=getItem("user")
+    if(to.meta.requireAuth){
+        if(token){
+            next()
+        }else{
+            next({path:'/login'})
+        }
+    }else{
+       next()
+    }
+})
 export default router;
