@@ -19,6 +19,7 @@
 <script lang="ts">
 import { Banner } from "@/interface/article";
 import { PropType } from "@vue/runtime-core";
+import ElCarousel from "element-plus/es/components/carousel";
 
 export default defineComponent({
   props: {
@@ -28,7 +29,7 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const carousel = ref(null);
+    const carousel = ref<typeof ElCarousel>();
     onMounted(() => {
       setTimeout(() => {
         carousel.value?.setActiveItem(0);

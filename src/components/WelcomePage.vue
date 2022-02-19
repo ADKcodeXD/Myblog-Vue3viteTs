@@ -3,7 +3,7 @@
     <!-- 头部条 -->
     <div class="navbar">
       <div class="logo">
-        <img src="@/assets/img/Web Blog .png" alt="logo" />
+        <img src="@/assets/img/WebBlog.png" alt="logo" />
       </div>
       <ul class="detail">
         <li><a>文章</a></li>
