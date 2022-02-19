@@ -34,7 +34,7 @@
       <div class="main-content">
         <UploadAvatar
           :avatar="messageParams.avatar"
-          @changeAvatar="($event) => (messageParams.avatar = $event)"
+          @changeAvatar="changeAvatarParams"
         />
         <div class="edit-area">
           <el-input
@@ -156,11 +156,15 @@ export default defineComponent({
         body.value.scrollTo({ top: 0, behavior: 'smooth' })
       }
     };
+    const changeAvatarParams=(val:string)=>{
+      messageParams.avatar=val;
+    }
     onMounted(() => {
       getMessage(pageparams);
     });
 
     return {
+      changeAvatarParams,
       total,
       body,
       changePage,
