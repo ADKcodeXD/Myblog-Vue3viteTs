@@ -6,7 +6,7 @@ import request from '@/utils/request';
 export const addComment = (commentParams:CommentParams) => {
     return request({
         method: 'post',
-        url: '/comment/addcomment',
+        url: '/api/comment/addcomment',
         data: commentParams
     })
 }
@@ -14,6 +14,6 @@ export const addComment = (commentParams:CommentParams) => {
 export const getComments=(id:string)=>{
     return request({
         method: 'get',
-        url: `/comment/article/${id}`,
+        url: `/api/comment/article/${id}`,
     })
 }

@@ -7,7 +7,7 @@ import request from '@/utils/request';
 export const addMessageApi = (messageParams: MessageParamsForADK) => {
     return request({
         method: 'post',
-        url: '/message/addmsg',
+        url: '/api/message/addmsg',
         data: messageParams
     })
 }
@@ -15,7 +15,7 @@ export const addMessageApi = (messageParams: MessageParamsForADK) => {
 export const getMessageApi = (pageParams: PageParams) => {
     return request({
         method: 'post',
-        url: '/message/findmsg',
+        url: '/api/message/findmsg',
         data: pageParams
     })
 }

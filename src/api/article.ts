@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export const getTagList = () => {
     return request({
         method: 'get',
-        url: '/tags/all'
+        url: '/api/tags/all'
     })
 }
 
@@ -13,7 +13,7 @@ export const getTagList = () => {
 export const publishArticle = (articleReqParams: any) => {
     return request({
         method: 'post',
-        url: '/articles/publish',
+        url: '/api/articles/publish',
         data: articleReqParams
     })
 }
@@ -23,7 +23,7 @@ export const publishArticle = (articleReqParams: any) => {
 export const listArticle = (pageParams: PageParams) => {
     return request({
         method: 'post',
-        url: '/articles/articlelist',
+        url: '/api/articles/articlelist',
         data: pageParams
     })
 }
@@ -32,7 +32,7 @@ export const listArticle = (pageParams: PageParams) => {
 export const uploadBanner = (imgFile: any) => {
     return request({
         method: 'post',
-        url: '/upload/img',
+        url: '/api/upload/img',
         data: imgFile,
         header: {
             'Content-Type': 'multipart/form-data'
@@ -44,14 +44,14 @@ export const uploadBanner = (imgFile: any) => {
 export const getArticleItem = (id: number) => {
     return request({
         method: 'post',
-        url: `/articles/article/${id}`,
+        url: `/api/articles/article/${id}`,
     })
 }
 // 获取文章首页头图 默认最多获取四条数据
 export const getIndexBanner = () => {
     return request({
         method: 'get',
-        url: '/articles/indexbanner',
+        url: '/api/articles/indexbanner',
     })
 }
 
@@ -60,7 +60,7 @@ export const getIndexBanner = () => {
 export const listArticleWithCount = (pageParams: PageParams) => {
     return request({
         method: 'post',
-        url: '/articles/articlelistcount',
+        url: '/api/articles/articlelistcount',
         data: pageParams
     })
 }

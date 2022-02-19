@@ -4,7 +4,7 @@ import request from '@/utils/request'
 export const userLogin = (loginParams:any) => {
     return request({
         method: 'post',
-        url: '/login',
+        url: '/api/login',
         data:loginParams
     })
 }
@@ -12,7 +12,7 @@ export const userLogin = (loginParams:any) => {
 export const userRegister = (loginParams:any) => {
     return request({
         method: 'post',
-        url: '/register',
+        url: '/api/register',
         data:loginParams
     })
 }

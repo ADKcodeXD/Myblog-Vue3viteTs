@@ -6,7 +6,7 @@ import request from '@/utils/request'
 export const currentUserApi = () => {
     return request({
         method: 'get',
-        url: '/user/currentUser'
+        url: '/api/user/currentUser'
     })
 }
 
@@ -14,7 +14,7 @@ export const currentUserApi = () => {
 export const findUserById = (id: any) => {
     return request({
         method: 'get',
-        url: `/user/user?userId=${id}`
+        url: `/api/user/user?userId=${id}`
     })
 }
 
@@ -22,7 +22,7 @@ export const findUserById = (id: any) => {
 export const currentUserAll = () => {
     return request({
         method: 'get',
-        url: '/user/currentUserAll'
+        url: '/api/user/currentUserAll'
     })
 }
 
@@ -30,7 +30,7 @@ export const currentUserAll = () => {
 export const updateUserInfoApi = (updateParams: UpdateUserInfoParams) => {
     return request({
         method: 'post',
-        url: '/user/updateUserInfo',
+        url: '/api/user/updateUserInfo',
         data: updateParams
     })
 }
