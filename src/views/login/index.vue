@@ -210,9 +210,6 @@ const submitRegister = (formEl: FormInstance | undefined) => {
 </script>
 
 <style scoped lang="less">
-
-
-
 .switch-enter-from,
 .switch-leave-to{
    right: -600px;
@@ -246,7 +243,7 @@ const submitRegister = (formEl: FormInstance | undefined) => {
     right: 0;
     width: 20%;
     height: 100%;
-    background-color: #fff;
+    background-color: white;
     .loginform {
       position: absolute;
       width: 100%;
