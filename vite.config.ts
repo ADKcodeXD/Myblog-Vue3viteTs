@@ -12,6 +12,7 @@ function resovePath(paths: string) {
 }
 // https://vitejs.dev/config/
 export default defineConfig({
+  base:'/',
   plugins: [vue(), AutoImport({
     dts: 'src/auto-imports.d.ts',
     imports: ['vue', 'vue-router']
