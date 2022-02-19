@@ -228,7 +228,6 @@ const submitArticle = async () => {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 968px;
   p {
     color: rgb(107, 5, 5);
     margin: 20px 0;

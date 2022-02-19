@@ -146,6 +146,11 @@ const logout = (): void => {
 </script>
 
 <style lang="less" scoped>
+@media screen and(max-width:960px) {
+  .el-header{
+    display: none;
+  }
+}
 .infobox-enter-from,
 .infobox-leave-to {
   transform: translateY(-10%);

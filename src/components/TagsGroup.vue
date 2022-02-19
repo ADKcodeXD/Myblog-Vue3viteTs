@@ -30,17 +30,16 @@ export default defineComponent({
 .tags {
         display: flex;
         .tag {
-          height: 20px;
           padding: 12px;
           display: flex;
           cursor: pointer;
           align-items: center;
           text-align: center;
-          color: rgb(247, 240, 240);
+          color: rgb(@primaryTagTextColor);
           border-radius: 10px;
           font-size: 12px;
           margin-right: 10px;
-          background-color: rgb(14, 138, 14);
+          background-color: rgb(@primaryTagBackGroundColor);
         }
       }
 </style>

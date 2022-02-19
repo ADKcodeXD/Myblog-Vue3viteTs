@@ -11,7 +11,6 @@
 <style lang="less" scoped>
 .footer{
     width: 100%;
-    height: 80px;
     display: flex;
     flex-direction: column;
     color: #fff;

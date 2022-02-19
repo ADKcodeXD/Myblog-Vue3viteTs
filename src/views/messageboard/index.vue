@@ -39,7 +39,7 @@
         <div class="edit-area">
           <el-input
             v-model="messageParams.content"
-            :rows="6"
+            :rows="5"
             maxlength="256"
             show-word-limit
             resize="none"
@@ -85,7 +85,6 @@ import { addMessageApi, getMessageApi } from "@/api/message";
 import MessageItem from "./components/message-item.vue";
 import { MessageVo } from "@/interface/message";
 import { ElMessage } from "element-plus";
-import { useScroll } from "@vueuse/core";
 export default defineComponent({
   components: { MessageItem },
   setup() {
@@ -186,11 +185,13 @@ export default defineComponent({
   margin-top: 20px;
   padding: 30px;
   width: 100%;
-  min-height: 900px;
-  max-height: 900px;
+  min-height: 700px;
+  max-height:800px;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   transition: all 1s ease;
-  background-color: aliceblue;
+  background-color: rgb(@primaryBackGroundColor);
   .up-info {
     .title {
       font-size: 36px;
@@ -230,7 +231,7 @@ export default defineComponent({
         width: 60px;
         height: 60px;
         flex-shrink: 0;
-        background-color: antiquewhite;
+        background-color: rgb(@primaryTextColor);
         border-radius: 50%;
         overflow: hidden;
         img {
@@ -251,6 +252,7 @@ export default defineComponent({
     }
   }
   .paixu {
+    margin-top: 20px;
     display: flex;
     align-items: center;
     h2 {

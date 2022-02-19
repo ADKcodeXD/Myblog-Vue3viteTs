@@ -41,6 +41,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
+
 .el-carousel__item:nth-child(2n) {
   background-color: #99a9bf;
 }
@@ -48,6 +49,7 @@ export default defineComponent({
 .el-carousel__item:nth-child(2n + 1) {
   background-color: #d3dce6;
 }
+
 .content {
   height: 300px;
   display: flex;

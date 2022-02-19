@@ -260,16 +260,18 @@ onMounted(() => {
 
 
 <style lang="less" scoped>
+
 .my-info {
   width: 80%;
   margin: 0 auto;
   min-height: 600px;
-  background-color: white;
+  transition: all 0.8s ease;
+  background-color: rgb(@primaryBackGroundColor);
   .banner {
     position: relative;
     width: 100%;
     height: 300px;
-    background-color: aqua;
+    background-color: rgb(@primaryActiveColor);
     .upload {
       position: absolute;
       right: 20px;
@@ -322,6 +324,7 @@ onMounted(() => {
       width: 100%;
       display: flex;
       flex-direction: column;
+      color: rgb(@primaryTextColor);
       .top {
         display: flex;
         justify-content: space-between;
@@ -329,5 +332,10 @@ onMounted(() => {
       }
     }
   }
+}
+@media screen and(max-width:960px) {
+    .my-info{
+      width: 100%;
+    }
 }
 </style>

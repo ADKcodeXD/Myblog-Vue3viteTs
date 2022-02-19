@@ -68,7 +68,7 @@ export default defineComponent({
     display: flex;
 
     .avatar {
-      background-color: rgb(184, 183, 183);
+      background-color: rgb(@primaryTextColor);
       overflow: hidden;
       border-radius: 50%;
       margin: 0 auto;

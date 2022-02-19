@@ -160,6 +160,12 @@ onMounted(() => {
 .article-item-sub{
   transition: all 0.8s ease;
 }
+@media screen and(max-width:960px) {
+  .artilce-list {
+    width: 100%;
+    min-width: 960px;
+  }
+}
 .artilce-list {
   
   width: 80%;
@@ -171,10 +177,10 @@ onMounted(() => {
     width: 100%;
 
     padding: 16px;
-    background-color: white;
+    background-color: rgb(@primaryBackGroundColor);
     border-radius: 5px;
     margin-top: 10px;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
     .title {
       font-size: 36px;
       margin: 10px 0;
@@ -183,18 +189,18 @@ onMounted(() => {
       .alltag {
         display: block;
         text-align: center;
+        height: 20px;
         line-height: 20px;
         margin-right: 10px;
         padding: 0 8px;
         cursor: pointer;
-        color: rgb(65, 65, 65);
-        height: 20px;
+        color: rgb(@primaryTagTextColor);
         border-radius: 10px;
-        background-color: rgb(197, 224, 248);
+        background-color: rgb(@primaryTagBackGroundColor);
       }
       .active {
-        background-color: rgb(245, 73, 30);
-        color: white;
+        background-color: rgb(@primaryActiveColor);
+        color: rgb(@primaryActiveTextColor);
       }
       display: flex;
       flex-direction: column;
@@ -206,8 +212,7 @@ onMounted(() => {
       .orderByTag {
         display: flex;
         margin: 5px;
-        justify-content: space-between;
-        width: 320px;
+        justify-content:flex-start;
         .tags {
           display: flex;
           .tag {
@@ -217,16 +222,16 @@ onMounted(() => {
             cursor: pointer;
             align-items: center;
             text-align: center;
-            color: rgb(247, 240, 240);
+            color: rgb(@primaryTagTextColor);
             border-radius: 10px;
             font-size: 12px;
             margin-right: 10px;
-            background-color: rgb(14, 138, 14);
+            background-color: rgb(@primaryTagBackGroundColor);
           }
           .active {
-            color: rgb(90, 90, 90);
+            color: rgb(@primaryActiveTextColor);
 
-            background-color: rgb(82, 252, 243);
+            background-color: rgb(@primaryActiveColor);
           }
         }
       }
@@ -242,10 +247,10 @@ onMounted(() => {
     width: 100%;
     transition: all 0.8s ease;
     padding: 16px;
-    background-color: white;
+    background-color: rgb(@primaryBackGroundColor);
     border-radius: 5px;
     margin-top: 10px;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
   }
   .page {
     width: 100%;
@@ -254,10 +259,10 @@ onMounted(() => {
     justify-content: center;
     align-items: center;
     padding: 16px;
-    background-color: white;
+    background-color: rgb(@primaryBackGroundColor);
     border-radius: 5px;
     margin-top: 10px;
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
   }
 }
 </style>

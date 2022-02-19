@@ -1,27 +1,33 @@
 <template>
-  <div class="cotainer">
+  <div class="cotainer" ref="body">
     <!-- 头部 -->
     <TopNavBar />
     <!-- banner -->
-    <div class="main">
+    <div class="main" >
       <!-- 导航 -->
       <!-- routerview -->
+      <Skin  />
       <router-view></router-view>
     </div>
     <!-- 底部 -->
     <div class="boxgroup">
-      <div class="box"></div>
-      <div class="box2"></div>
-      <div class="box4"></div>
+      <!-- <div class="box"></div> -->
+      <!-- <div class="box2"></div> -->
+      <!-- <div class="box4"></div> -->
       <div class="box3"></div>
       <div class="box5"></div>
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
 import TopNavBar from "@/components/TopNavBar.vue";
+import { setTheme } from "@/theme/theme";
+
+onMounted(() => {
+  setTheme();
+});
 </script>
 
 <style scoped  lang="less">
@@ -45,15 +51,20 @@ import TopNavBar from "@/components/TopNavBar.vue";
     left: 1985px;
   }
 }
-#app{
+#app {
   height: 100%;
 }
+
 .cotainer {
   width: 100%;
   position: relative;
   overflow: hidden;
   min-height: 768px;
   height: 100%;
+  z-index: 1;
+  transition: 0.5s ease all;
+  background-color: rgb(@primaryBackGroundColor);
+
   .boxgroup {
     position: absolute;
     z-index: -1;
@@ -75,7 +86,7 @@ import TopNavBar from "@/components/TopNavBar.vue";
     .box2 {
       position: absolute;
       top: 735px;
-      left: 46px;
+      left: 120px;
       z-index: -10;
       width: 100px;
       height: 100px;
@@ -104,11 +115,17 @@ import TopNavBar from "@/components/TopNavBar.vue";
       background-color: #54b3fc;
       animation: rightboxin 1s cubic-bezier(0, 0.83, 0.34, 1) 0.3s both;
     }
-    
   }
 }
 .main {
   margin: 0 auto;
   width: 80%;
+  color: rgb(@primaryTextColor);
+}
+@media screen and(max-width:960px) {
+  .main {
+    width: 100%;
+    min-width: 960px;
+  }
 }
 </style>

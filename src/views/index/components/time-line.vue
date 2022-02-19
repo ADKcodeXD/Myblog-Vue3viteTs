@@ -1,14 +1,18 @@
 <template>
   <div class="timeline">
-      <h2>时间归档</h2>
+    <h2>时间归档</h2>
     <el-timeline>
-      <el-timeline-item v-for="i in 4" :key="i" timestamp="2022.2.13" placement="top">
-          <el-card>
-            <h4>测试文章测试</h4>
-            <p>Tom committed 2018/4/12 20:46</p>
+      <el-timeline-item
+        v-for="i in 4"
+        :key="i"
+        timestamp="2022.2.13"
+        placement="top"
+      >
+        <el-card>
+          <h4>测试文章测试</h4>
+          <p>Tom committed 2018/4/12 20:46</p>
         </el-card>
       </el-timeline-item>
-      
     </el-timeline>
   </div>
 </template>
@@ -22,11 +26,11 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.timeline{
-    margin-top: 20px;
-    background-color: rgb(255, 255, 255);
+.timeline {
+  margin-top: 20px;
+  transition: background-color 1s ease;
+  background-color: rgb(@primaryBackGroundColor);
   padding: 10px;
-  max-height: 1000px;
   overflow: hidden;
   margin-left: 10px;
   border-radius: 5px;

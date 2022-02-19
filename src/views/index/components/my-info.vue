@@ -48,8 +48,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .my-info {
-  background-color: rgb(255, 255, 255);
-  height: 320px;
+  background-color: rgb(@primaryBackGroundColor);
   padding: 10px;
   margin-left: 10px;
   border-radius: 5px;
@@ -87,7 +86,7 @@ export default defineComponent({
     .lianxiwo{
         margin-top: 10px;
         font-size: 20px;
-        color: gray;
+        color: rgb(@primaryTipColor);
         .jishuzhan{
             display: flex;
             ul{

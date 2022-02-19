@@ -51,12 +51,18 @@ export default defineComponent({
 
 
 <style lang="less" scoped>
+@media screen and(max-width:960px) {
+  .box{
+    justify-content: space-between;
+    height: auto;
+  }
+}
 .box {
-  height: 150px;
   padding: 5px;
   margin: 10px 0;
   //   border-bottom: 1px solid rgb(216, 216, 216);
   display: flex;
+  height: 8vw;
   justify-content: flex-start;
   align-items: center;
   .image {
@@ -77,19 +83,19 @@ export default defineComponent({
     width: 100%;
     .up {
       display: flex;
+      height: 50%;
       justify-content: space-between;
       .time {
         padding: 5px;
-      }
-      .time {
         justify-content: flex-end;
       }
+      
       .title {
         font-size: 32px;
       }
       .desc {
         margin-top: 5px;
-        color: gray;
+        color: rgb(@primarySubColor);
         font-size: 14px;
         word-break: break-all;
         text-overflow: ellipsis;
@@ -103,17 +109,17 @@ export default defineComponent({
       display: flex;
       justify-content: space-between;
       width: 100%;
-
+     
       .leftcontent {
         display: flex;
         align-items: center;
         .author {
-          color: rgb(16, 95, 119);
+          color: rgb(@primaryHightlightColor);
           font-size: 14px;
           margin-right: 10px;
         }
         i{
-          color: rgb(16, 95, 119);
+          color: rgb(@primaryHightlightColor);
           margin-right: 5px;
         }
       }
@@ -122,11 +128,8 @@ export default defineComponent({
     }
   }
   &:hover {
-    color: rgb(241, 201, 115);
-    background-color: rgb(248, 248, 248);
-    .desc {
-      color: rgb(241, 201, 115);
-    }
+    color: rgb(@primaryActiveTextColor);
+    background-color: rgb(@primaryActiveColor);
     cursor: pointer;
   }
 }

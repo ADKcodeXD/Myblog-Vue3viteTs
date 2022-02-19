@@ -1,16 +1,17 @@
 <template>
-  <div class="article">
+  <div class="article" >
     <div class="top">
       <TopNavBar :back-color="'rgba(0, 0, 0, 0.7)'" />
     </div>
-    <div class="main-body" v-if="article">
+    <Skin @top="goTop" />
+    <div class="main-body"  v-if="article">
       <!-- banner -->
-      <div class="banner">
+      <div class="banner" >
         <img :src="article.banner" alt="" />
       </div>
       <!-- 标题和摘要 -->
       <div class="title">
-        <div class="content">
+        <div class="content" >
           <div class="article-title">
             <h2>{{ article.articleName }}</h2>
           </div>
@@ -19,7 +20,6 @@
             <div class="author-info">
               <p class="author-name">{{ article.authorVo.nickname }}</p>
               <p class="introduce">{{ article.authorVo.introduce }}</p>
-              
             </div>
           </div>
           <div class="summary">
@@ -29,7 +29,7 @@
             </p>
           </div>
           <!-- 主体部分 -->
-          <div class="body">
+          <div class="body" >
             <div v-html="article.body?.html"></div>
           </div>
           <!-- 结束部分 显示查看数 点赞数 以及评论数 -->
@@ -41,30 +41,22 @@
             <div class="good"></div>
             <div class="bottom-text">
               <div class="left">
-                <p style="font-size: 18px; color: red">未经作者允许 禁止转载</p>
-                <p
-                  style="
-                    font-size: 14px;
-                    color: rgb(82, 82, 82);
-                    margin-top: 10px;
-                  "
-                >
-                  发布时间{{ time }}
-                </p>
-                
+                <p class="red">未经作者允许 禁止转载</p>
+                <p class="publishtime">发布时间{{ time }}</p>
               </div>
               <div class="icon">
                 <div class="icongroup">
                   <i class="iconfont icon-yanjing">{{ article.viewCounts }}</i>
-                <i class="iconfont icon-pinglun">{{ article.commentCounts }}</i>
+                  <i class="iconfont icon-pinglun">{{
+                    article.commentCounts
+                  }}</i>
                 </div>
-                
+
                 <p>发布于{{ article.createDate }}</p>
               </div>
-
             </div>
             <div class="tags">
-              <TagsGroup :tags="article.tags"/>
+              <TagsGroup :tags="article.tags" />
             </div>
           </div>
         </div>
@@ -78,7 +70,7 @@
 
         <div class="edit-part">
           <div class="up">
-            <h3>{{commentList.length}}条评论</h3>
+            <h3>{{ commentList.length }}条评论</h3>
             <h4>需要登录后才能评论哦~</h4>
           </div>
           <el-divider></el-divider>
@@ -145,6 +137,7 @@ import { CommentItemInfo } from "@/interface/comment";
 import { CommentParams } from "@/interface/params";
 import { UserEasy } from "@/interface/user";
 import { useUserStore } from "@/store/user";
+import { setTheme } from "@/theme/theme";
 import { getRealativeTime } from "@/utils/dayjs";
 import { ElMessage } from "element-plus";
 import { useRoute } from "vue-router";
@@ -155,13 +148,13 @@ const userStore = useUserStore();
 let comment = ref("");
 const user = userStore.userinfo;
 let currentUser = reactive<UserEasy>({
-  id:user.id,
-  role:user.role,
-  avatar:user.avatar,
-  username:user.username,
-  nickname:user.nickname,
-  introduce:user.introduce,
-  banner:user.banner
+  id: user.id,
+  role: user.role,
+  avatar: user.avatar,
+  username: user.username,
+  nickname: user.nickname,
+  introduce: user.introduce,
+  banner: user.banner,
 });
 let commentParams: CommentParams = reactive({
   articleId: route.params.id as string,
@@ -171,23 +164,20 @@ let commentParams: CommentParams = reactive({
 let article = ref<ArticleItemInfo>();
 let commentList = ref<CommentItemInfo[]>([]);
 
-
-
 // 计算属性 计算相对时间
 let time = computed(() => {
   article.value as ArticleItemInfo;
-  if(article.value){
+  if (article.value) {
     return getRealativeTime(article.value.createDate);
   }
 });
-
 
 // 方法区-----------------------
 const publishComment = async () => {
   const { data } = await addComment(commentParams);
   if (data.code === 200) {
     ElMessage.success("发布成功");
-    comment.value="";
+    comment.value = "";
     getAllComment();
   } else {
     ElMessage.error(data.msg);
@@ -207,7 +197,11 @@ const getAllComment = async () => {
   const { data } = await getComments(route.params.id as string);
   commentList.value = data.data;
 };
-
+// 滚动
+const body=ref<HTMLElement|null>();
+const goTop=()=>{
+  console.log(body.value?.scrollTop);
+}
 // 函数加载 挂载组件
 onMounted(() => {
   if (user) {
@@ -243,11 +237,13 @@ onMounted(() => {
 }
 .article {
   overflow-x: hidden;
-  position: absolute;
+  position: relative;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  transition: all 0.8s ease;
+  background-color: rgb(@primaryBackGroundColor);
   .top {
     position: absolute;
     right: 0;
@@ -261,7 +257,9 @@ onMounted(() => {
     margin: 0 auto;
     box-sizing: border-box;
     padding: 10px;
-    background-color: #fff;
+    transition: all 0.8s ease;
+
+    background-color: rgb(@primaryBackGroundColor);
     height: 100%;
     .banner {
       top: 0;
@@ -288,6 +286,7 @@ onMounted(() => {
       }
     }
     .title {
+      color: rgb(@primaryTextColor);
       .content {
         display: flex;
         flex-direction: column;
@@ -304,7 +303,7 @@ onMounted(() => {
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background-color: rgb(255, 223, 223);
+            background-color: rgb(@primaryBackGroundColor);
             object-fit: cover;
           }
           .author-info {
@@ -317,9 +316,9 @@ onMounted(() => {
               font-size: 18px;
               font-weight: 600;
             }
-            .introduce{
+            .introduce {
               font-size: 16px;
-              color: gray;
+              color: rgb(@primaryTipColor);
             }
           }
         }
@@ -330,12 +329,12 @@ onMounted(() => {
           font-size: 20px;
           .summary-subtitle {
             font-size: 22px;
-            color: rgb(48, 47, 47);
+            color: rgb(@primaryTipColor);
           }
           .summary-content {
             margin-top: 10px;
             font-size: 18px;
-            color: rgb(179, 179, 179);
+            color: rgb(@primaryTipColor);
           }
         }
       }
@@ -345,12 +344,24 @@ onMounted(() => {
       min-height: 200px;
       line-height: 36px;
       font-size: 20px;
+      color: rgb(@primaryTextColor);
     }
     .detail {
       .bottom-text {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        .left {
+          .publishtime {
+            font-size: 14px;
+            color: rgb(@primaryTipColor);
+            margin-top: 10px;
+          }
+          .red {
+            font-size: 18px;
+            color: rgb(@primaryHightlightColor);
+          }
+        }
         .icon {
           display: flex;
           flex-direction: column;
@@ -361,12 +372,13 @@ onMounted(() => {
           }
         }
       }
-      .tags{
+      .tags {
         margin: 20px 0;
       }
     }
     .comments {
       margin-top: 20px;
+      color: rgb(@primaryTextColor);
       .title {
         font-size: 30px;
       }
@@ -388,7 +400,6 @@ onMounted(() => {
             background-color: antiquewhite;
             border-radius: 50%;
             overflow: hidden;
-            
           }
           .edit-area {
             width: 100%;
