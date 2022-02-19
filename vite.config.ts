@@ -1,10 +1,9 @@
-import autoprefixer from 'autoprefixer';
+
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite';
-
 
 function resovePath(paths: string) {
   // 如何 __dirname 找不到 需要 yarn add @types/node --save-dev
@@ -12,7 +11,7 @@ function resovePath(paths: string) {
 }
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:'/',
+  base: '/',
   plugins: [vue(), AutoImport({
     dts: 'src/auto-imports.d.ts',
     imports: ['vue', 'vue-router']
@@ -38,12 +37,29 @@ export default defineConfig({
     },
     postcss: {
       plugins: [
-        autoprefixer,
+        require('autoprefixer'),
+        require('postcss-px-to-viewport')({
+          viewportWidth: 1920,
+          unitPrecision: 5,
+          viewportUnit: 'vw',
+          fontViewportUnit: "vw",
+          minPixelValue:30,
+          mediaQuery: false
+        })
       ]
     }
   },
   server: {
-    port: 5000
+    port: 5000,
+    proxy: {
+      // 选项写法
+      // 开发环境开启
+      // '/api': {
+      //   target: 'http://localhost:8888',
+      //   changeOrigin: true,
+      //   rewrite: path => path.replace(/^\/api/, '')
+      // }
+    }
   }
 })
 
