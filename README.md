@@ -1,16 +1,32 @@
-# Vue 3 + Typescript + Vite
+<p align="center">  
+    <img src="https://img.shields.io/badge/-Vue3-34495e?logo=vue.j" />
+    <img src="https://img.shields.io/badge/-Vite2.7-646cff?logo=vite&logoColor=white" />
+    <img src="https://img.shields.io/badge/-TypeScript-blue?logo=typescript&logoColor=white" />
+    <img src="https://img.shields.io/badge/-Pinia-yellow?logo=picpay&logoColor=white" />
+    <img src="https://img.shields.io/badge/-Axios-008fc7?logo=axios.js&logoColor=white" />
+    <img src="https://img.shields.io/badge/-Less-1D365D?logo=less&logoColor=white" alt="Less">
+<p>  
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
-
-## Type Support For `.vue` Imports in TS
-
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
 
 # Myblog-Vue3viteTs
 
 个人博客项目，目的是为了搭建一个供个人使用的简单易用的博客，支持简单的登录和注册功能。再加上留言功能。
+
+目前实现功能：发布文章，登录/注册，黑夜白天模式切换，浏览文章，文章排序，标签筛选，评论，留言，个人信息修改，自定义头图。
+
+## 2022.2.19
+
+网站正式上线：http://adkdream.top/
+
+## 本项目食用技巧：
+
+``` sh
+cd yourpath
+npm install
+npm run dev
+```
+
+后端暂不开源，涉及到一些秘钥和apikey  可以参考我之前的项目
+
+https://github.com/ADKcodeXD/Springboot-vue-Blog
 
