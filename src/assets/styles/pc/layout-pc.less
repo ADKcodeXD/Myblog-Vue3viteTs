@@ -1,0 +1,104 @@
+@keyframes leftboxin {
+    0% {
+      top: 1009px;
+      left: -248px;
+    }
+    100% {
+      top: 735px;
+      left: 46px;
+    }
+  }
+@keyframes rightboxin {
+0% {
+    top: 407px;
+    left: 2184px;
+}
+100% {
+    top: 560px;
+    left: 1985px;
+}
+}
+#app {
+height: 100%;
+}
+  
+.cotainer {
+width: 100%;
+position: relative;
+overflow: hidden;
+height: 100%;
+z-index: 1;
+transition: 0.5s ease all;
+background-color: rgb(@primaryBackGroundColor);
+
+.boxgroup {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    .box {
+    position: absolute;
+    top: -360px;
+    left: -682px;
+    z-index: -10;
+    width: 800px;
+    height: 800px;
+    transform: rotateZ(45deg) scale(1.8);
+    background-color: #989898;
+    }
+    .box2 {
+    position: absolute;
+    top: 735px;
+    left: 120px;
+    z-index: -10;
+    width: 100px;
+    height: 100px;
+    transform: rotateZ(45deg);
+    background-color: #54b3fc;
+    animation: leftboxin 1s cubic-bezier(0, 0.83, 0.34, 1) both;
+    }
+    .box3 {
+    position: absolute;
+    top: 1300px;
+    left: 1782px;
+    z-index: -10;
+    width: 800px;
+    height: 800px;
+    transform: rotateZ(45deg) scale(1.8);
+    background-color: #ff2960;
+    }
+    .box4 {
+    position: absolute;
+    top: 560px;
+    left: 1985px;
+    z-index: -10;
+    width: 100px;
+    height: 100px;
+    transform: rotateZ(45deg) scale(1.2);
+    background-color: #54b3fc;
+    animation: rightboxin 1s cubic-bezier(0, 0.83, 0.34, 1) 0.3s both;
+    }
+}
+}
+.main {
+    margin: 0 auto;
+    width: 80%;
+    color: rgb(@primaryTextColor);
+}
+@media screen and (min-width:320px) and (max-width:1440px){
+  .main {
+    margin: 0 auto;
+    width: 100%;
+    color: rgb(@primaryTextColor);
+}
+}
+@media screen and (min-width:1440px)  {
+  .main {
+    margin: 0 auto;
+    width: 80%;
+    color: rgb(@primaryTextColor);
+}
+}

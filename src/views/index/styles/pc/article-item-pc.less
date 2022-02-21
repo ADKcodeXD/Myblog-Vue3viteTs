@@ -1,0 +1,175 @@
+@media screen and (min-width:320px) and (max-width:768px){
+  .box {
+    padding: .3571rem;
+    margin: 10px 0;
+    //   border-bottom: 1px solid rgb(216, 216, 216);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    .image {
+      flex-shrink: 0;
+      margin-right: 0;
+      max-height: 30rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      img {
+        width: 100%;
+        height: auto;
+        margin: 5rem 0;
+        object-fit: contain;
+      }
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+      justify-content: space-between;
+      width: 100%;
+      .up {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .time {
+          padding: .3571rem;
+          justify-content: flex-end;
+        }
+        
+        .title {
+          font-size: 2.2857rem;
+          word-break: break-all;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
+        .desc {
+          margin-top: .3571rem;
+          color: rgb(@primarySubColor);
+          font-size: 1rem;
+          word-break: break-all;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
+      }
+      .down {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        justify-content: space-between;
+        width: 100%;
+        .leftcontent {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .author {
+            color: rgb(@primaryHightlightColor);
+            font-size: 1rem;
+            margin-right: .7143rem;
+          }
+          i{
+            color: rgb(@primaryHightlightColor);
+            margin-right: .3571rem;
+          }
+        }
+  
+        
+      }
+    }
+    &:active {
+      color: rgb(@primaryActiveTextColor);
+      background-color: rgb(@primaryActiveColor);
+      cursor: pointer;
+    }
+  }
+}
+@media screen and (min-width:768px){
+  .box {
+    padding: .3571rem;
+    margin: 10px 0;
+    //   border-bottom: 1px solid rgb(216, 216, 216);
+    display: flex;
+    
+    justify-content: flex-start;
+    align-items: center;
+    .image {
+      flex-shrink: 0;
+      margin-right: .7143rem;
+      img {
+        width: 10rem;
+        height: 10rem;
+        object-fit: cover;
+      }
+    }
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+      justify-content: space-between;
+      height: 10rem;
+      width: 100%;
+      .up {
+        display: flex;
+        height: 50%;
+        justify-content: space-between;
+        .time {
+          padding: .3571rem;
+          justify-content: flex-end;
+        }
+        
+        .title {
+          font-size: 2.2857rem;
+          word-break: break-all;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+        }
+        .desc {
+          margin-top: .3571rem;
+          color: rgb(@primarySubColor);
+          font-size: 1rem;
+          word-break: break-all;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+          overflow: hidden;
+        }
+      }
+      .down {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: flex-end;
+        .leftcontent {
+          display: flex;
+          align-items: center;
+          .author {
+            color: rgb(@primaryHightlightColor);
+            font-size: 1rem;
+            margin-right: .7143rem;
+          }
+          i{
+            color: rgb(@primaryHightlightColor);
+            margin-right: .3571rem;
+          }
+        }
+  
+        
+      }
+    }
+    &:hover {
+      color: rgb(@primaryActiveTextColor);
+      background-color: rgb(@primaryActiveColor);
+      cursor: pointer;
+    }
+  }
+}
+  

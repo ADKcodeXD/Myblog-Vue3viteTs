@@ -1,0 +1,224 @@
+.article-enter-to,
+.article-leave-from{
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.article-leave-active{
+  position: absolute;
+   transition: all 0.8s ease-in-out;
+}
+.article-move{
+  transition: all 0.8s ease;
+}
+.article-enter-from,
+.article-leave-to{
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.article-item-sub{
+  transition: all 0.8s ease;
+}
+@media screen and (min-width:320px) and (max-width:992px){
+    .artilce-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: 6.6429rem auto;
+        .top {
+          width: 100%;
+          padding: 1.4286rem;
+          background-color: rgb(@primaryBackGroundColor);
+          border-radius: .7143rem;
+          margin-top: .3571rem;
+          box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
+          .title {
+            font-size: 2.5714rem;
+            margin: 1.4286rem ;
+          }
+          .bottom {
+            .alltag {
+              display: block;
+              text-align: center;
+              height: 1.4286rem;
+              line-height: 1.4286rem;
+              margin-right: .7143rem;
+              padding: 0 .7143rem;
+              cursor: pointer;
+              color: rgb(@primaryTagTextColor);
+              border-radius: .7143rem;
+              background-color: rgb(@primaryTagBackGroundColor);
+            }
+            .active {
+              background-color: rgb(@primaryActiveColor);
+              color: rgb(@primaryActiveTextColor);
+            }
+            display: flex;
+            flex-direction: column;
+            font-size: 1.4286rem;
+            margin: .7143rem;
+            .orderBytime {
+              display: flex;
+              margin: .7143rem;
+              
+            }
+            .orderByTag {
+              display: flex;
+              margin: .7143rem;
+              justify-content:flex-start;
+              .tags {
+                display: flex;
+              
+
+                .tag {
+                  height: 1.4286rem;
+                  padding: .7143rem;
+                  display: flex;
+                  cursor: pointer;
+                  align-items: center;
+                  text-align: center;
+                  color: rgb(@primaryTagTextColor);
+                  border-radius: .7143rem;
+                  font-size: 1.4286rem;
+                  margin-right: .7143rem;
+                  background-color: rgb(@primaryTagBackGroundColor);
+                }
+                .active {
+                  color: rgb(@primaryActiveTextColor);
+      
+                  background-color: rgb(@primaryActiveColor);
+                }
+              }
+            }
+            .order {
+              display: flex;
+              margin: .7143rem;
+              align-items: center;
+            }
+          }
+        }
+        .main {
+          width: 100%;
+          transition: all 0.8s ease;
+          padding: .7143rem;
+          background-color: rgb(@primaryBackGroundColor);
+          border-radius: .7143rem;
+          margin-top: .7143rem;
+          box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
+        }
+        .page {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: .3571rem;
+          background-color: rgb(@primaryBackGroundColor);
+          border-radius: .7143rem;
+          margin-top: .7143rem;
+          box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
+        }
+    }
+}
+
+@media screen and (min-width:992px) {
+    .artilce-list {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        .top {
+          width: 100%;
+          padding: 0.2rem;
+          background-color: rgb(@primaryBackGroundColor);
+          border-radius: .0625rem;
+          margin-top: 0.125rem;
+          box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
+          .title {
+            font-size: 2.5714rem;
+            margin: 1.4286rem ;
+          }
+          .bottom {
+            .alltag {
+              display: block;
+              text-align: center;
+              height: 1.4286rem;
+              line-height: 1.4286rem;
+              margin-right: .7143rem;
+              padding: 0 .7143rem;
+              cursor: pointer;
+              color: rgb(@primaryTagTextColor);
+              border-radius: .7143rem;
+              background-color: rgb(@primaryTagBackGroundColor);
+            }
+            .active {
+              background-color: rgb(@primaryActiveColor);
+              color: rgb(@primaryActiveTextColor);
+            }
+            display: flex;
+            flex-direction: column;
+            font-size: 1.4286rem;
+            margin: .7143rem;
+            .orderBytime {
+              display: flex;
+              margin: .7143rem;
+              
+            }
+            .orderByTag {
+              display: flex;
+              margin: .7143rem;
+              justify-content:flex-start;
+              .tags {
+                display: flex;
+              
+
+                .tag {
+                  height: 1.4286rem;
+                  padding: .7143rem;
+                  display: flex;
+                  cursor: pointer;
+                  align-items: center;
+                  text-align: center;
+                  color: rgb(@primaryTagTextColor);
+                  border-radius: .7143rem;
+                  font-size: 1.4286rem;
+                  margin-right: .7143rem;
+                  background-color: rgb(@primaryTagBackGroundColor);
+                }
+                .active {
+                  color: rgb(@primaryActiveTextColor);
+      
+                  background-color: rgb(@primaryActiveColor);
+                }
+              }
+            }
+            .order {
+              display: flex;
+              margin: .7143rem;
+              align-items: center;
+            }
+          }
+        }
+        .main {
+          width: 100%;
+          transition: all 0.8s ease;
+          padding: .7143rem;
+          background-color: rgb(@primaryBackGroundColor);
+          border-radius: .7143rem;
+          margin-top: .7143rem;
+          box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
+        }
+        .page {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: .3571rem;
+          background-color: rgb(@primaryBackGroundColor);
+          border-radius: .7143rem;
+          margin-top: .7143rem;
+          box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
+        }
+    }
+}
