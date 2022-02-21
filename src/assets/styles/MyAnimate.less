@@ -1,0 +1,81 @@
+.toptodown-enter-from,
+  .toptodown-leave-to {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+  .toptodown-enter-to,
+  .toptodown-leave-from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .toptodown-enter-active,
+  .toptodown-leave-active {
+    transition: all 0.4s ease;
+  }
+// 左到右弹出
+  .righttoleft-enter-from,
+  .righttoleft-leave-to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  .righttoleft-enter-to,
+  .righttoleft-leave-from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  .righttoleft-enter-active,
+  .righttoleft-leave-active {
+    transition: all 0.2s ease;
+  }
+
+//   列表动画效果
+.list-enter-to,
+.list-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.list-leave-active {
+  position: absolute;
+  transition: all 0.8s ease-in-out;
+}
+.list-move {
+  transition: all 0.8s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.list-item {
+  transition: all 0.8s ease;
+}
+
+// 右出
+.rightout-enter-from,
+.rightout-leave-to{
+   right: -600px;
+   opacity: 0;
+}
+.rightout-enter-active,
+.rightout-leave-active{
+  transition: all 0.8s ease-in-out;
+}
+.rightout-enter-to,
+.rightout-leave-from{
+  opacity: 1;
+  right: 0;
+}
+
+.onlyopacity-enter-from,
+  .onlyopacity-leave-to {
+    opacity: 0;
+  }
+  .onlyopacity-enter-to,
+  .onlyopacity-leave-from {
+    opacity: 1;
+  }
+  .onlyopacity-enter-active,
+  .onlyopacity-leave-active {
+    transition: all 0.8s ease;
+  }
