@@ -1,14 +1,13 @@
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite';
-
 function resovePath(paths: string) {
   // 如何 __dirname 找不到 需要 yarn add @types/node --save-dev
   return resolve(__dirname, paths);
 }
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
@@ -37,15 +36,15 @@ export default defineConfig({
     },
     postcss: {
       plugins: [
-        require('autoprefixer'),
-        require('postcss-px-to-viewport')({
-          viewportWidth: 1920,
-          unitPrecision: 5,
-          viewportUnit: 'vw',
-          fontViewportUnit: "vw",
-          minPixelValue:30,
-          mediaQuery: false
-        })
+        require('autoprefixer')
+        // require('postcss-px-to-viewport')({
+        //   viewportWidth: 1920,
+        //   unitPrecision: 5,
+        //   viewportUnit: 'vw',
+        //   fontViewportUnit: "vw",
+        //   minPixelValue: 1,
+        //   mediaQuery: false
+        // }),
       ]
     }
   },
@@ -54,11 +53,11 @@ export default defineConfig({
     proxy: {
       // 选项写法
       // 开发环境开启
-      // '/api': {
-      //   target: 'http://localhost:8888',
-      //   changeOrigin: true,
-      //   rewrite: path => path.replace(/^\/api/, '')
-      // }
+      '/api': {
+        target: 'http://localhost:8888',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '')
+      }
     }
   }
 })
