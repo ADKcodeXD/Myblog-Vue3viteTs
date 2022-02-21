@@ -150,14 +150,11 @@ export default defineComponent({
     const changePage = (val: number) => {
       pageparams.page = val;
       getMessage(pageparams);
-      if(body.value){
-        //   使用这个控制动画效果  
-        body.value.scrollTo({ top: 0, behavior: 'smooth' })
-      }
+      document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
     };
-    const changeAvatarParams=(val:string)=>{
-      messageParams.avatar=val;
-    }
+    const changeAvatarParams = (val: string) => {
+      messageParams.avatar = val;
+    };
     onMounted(() => {
       getMessage(pageparams);
     });
@@ -181,94 +178,5 @@ export default defineComponent({
 
 
 <style lang="less" scoped>
-.message {
-  margin-top: 20px;
-  padding: 30px;
-  width: 100%;
-  min-height: 700px;
-  max-height:800px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  transition: all 1s ease;
-  background-color: rgb(@primaryBackGroundColor);
-  .up-info {
-    .title {
-      font-size: 36px;
-    }
-    .desc {
-      font-size: 20px;
-    }
-  }
-  .edit-part {
-    margin-top: 20px;
-    width: 100%;
-    height: 300px;
-    .liuyan-info {
-      display: flex;
-      .name {
-        display: flex;
-        align-items: center;
-        margin-right: 20px;
-        span {
-          display: flex;
-          flex-shrink: 0;
-          font-size: 16px;
-        }
-        .contact {
-          width: 300px;
-        }
-      }
-    }
-    .up {
-      justify-content: space-between;
-      display: flex;
-    }
-    .main-content {
-      display: flex;
-      width: 100%;
-      .avatar {
-        width: 60px;
-        height: 60px;
-        flex-shrink: 0;
-        background-color: rgb(@primaryTextColor);
-        border-radius: 50%;
-        overflow: hidden;
-        img {
-          object-fit: cover;
-        }
-      }
-      .edit-area {
-        width: 100%;
-        margin-left: 30px;
-      }
-    }
-
-    .button {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 20px;
-    }
-  }
-  .paixu {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    h2 {
-      margin: 0;
-    }
-    p {
-      align-self: flex-end;
-      margin-left: 10px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .active {
-      color: orange;
-    }
-  }
-  .message-part {
-  }
-}
+@import url(./styles/messageboard-pc.less);
 </style>

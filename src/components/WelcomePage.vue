@@ -6,9 +6,9 @@
         <img src="@/assets/img/WebBlog.png" alt="logo" />
       </div>
       <ul class="detail">
-        <li><a>文章</a></li>
+        <li><a href="/articlelist">文章</a></li>
         <li><a>关于我</a></li>
-        <li><a>项目地址</a></li>
+        <li><a href="https://github.com/ADKcodeXD/Myblog-Vue3viteTs">项目地址</a></li>
       </ul>
     </div>
     <div class="anime"></div>

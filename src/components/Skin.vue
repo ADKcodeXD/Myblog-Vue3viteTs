@@ -18,7 +18,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   setup(props, { emit }) {
     const top = () => {
-      emit("top");
+      document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
     };
     const changedark = () => {
       setTheme("dark");
@@ -47,27 +47,56 @@ export default defineComponent({
 
 
 <style lang="less" scoped>
+@media screen and (min-width:320px) and (max-width:992px){
 .list {
   position: fixed;
-  right: 50px;
-  bottom: 200px;
+  right: 3.5714rem;
+  bottom: 14.2857rem;
   z-index: 1;
   li {
     cursor: pointer;
-    height: 3vw;
-    width: 3vw;
+    height: 4.2857rem;
+    width: 4.2857rem;
     border-radius: 50%;
     color: rgb(@primaryTextColor);
     text-align: center;
-    line-height: 3vw;
-    margin-bottom: 1vw;
+    line-height: 4.2857rem;
+    margin-bottom: 1.4286rem;
+    transition: 0.3s all ease;
+    background-color: rgba(@primaryTipColor, 0.6);
+    &:active {
+      color: rgb(@primaryActiveTextColor);
+      background-color: rgba(@primaryActiveColor, 1);
+    }
+    &:hover{
+      
+    }
+  }
+}
+}
+@media screen and (min-width:992px){
+.list {
+  position: fixed;
+  right: 3.5714rem;
+  bottom: 14.2857rem;
+  z-index: 1;
+  li {
+    cursor: pointer;
+    height: 4.2857rem;
+    width: 4.2857rem;
+    border-radius: 50%;
+    color: rgb(@primaryTextColor);
+    text-align: center;
+    line-height: 4.2857rem;
+    margin-bottom: 1.4286rem;
     transition: 0.3s all ease;
     background-color: rgba(@primaryTipColor, 0.6);
     &:hover {
-      font-size: 20px;
       color: rgb(@primaryActiveTextColor);
       background-color: rgba(@primaryActiveColor, 1);
     }
   }
 }
+}
+
 </style>

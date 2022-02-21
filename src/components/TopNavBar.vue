@@ -8,6 +8,10 @@
             <router-link to="/welcome">
               <img src="@/assets/img/WebBlog.png"
             /></router-link>
+            <i
+              @click="isShow = !isShow"
+              class="iconfont icon-classification"
+            ></i>
           </div>
         </el-col>
         <el-col :span="16">
@@ -25,7 +29,9 @@
         </el-col>
         <el-col :span="4">
           <div class="right">
-            <p v-if="userStore.userinfo.id">{{ userStore.userinfo.nickname }} 你好</p>
+            <p v-if="userStore.userinfo.id">
+              {{ userStore.userinfo.nickname }} 你好
+            </p>
             <p v-else>
               访客你好 去<RouterLink
                 to="/login"
@@ -39,16 +45,21 @@
               @mouseleave="infoShow = false"
             >
               <div class="avatar">
-                <img v-if="userStore.userinfo.id" :src="userStore.userinfo.avatar" alt="" />
+                <img
+                  v-if="userStore.userinfo.id"
+                  :src="userStore.userinfo.avatar"
+                  alt=""
+                />
                 <img v-else src="@/assets/img/logo.png" alt="" />
               </div>
-              <transition name="infobox" mode="out-in">
-                <div
-                  v-show="infoShow"
-                  class="info-box"
-                  
-                >
-                  <div class="imgcontainer" :style="{ backgroundImage: `url(${userStore.userinfo.banner})` }"></div>
+              <transition name="toptodown" mode="out-in">
+                <div v-show="infoShow" class="info-box">
+                  <div
+                    class="imgcontainer"
+                    :style="{
+                      backgroundImage: `url(${userStore.userinfo.banner})`,
+                    }"
+                  ></div>
                   <div class="loginbox" v-if="userStore.userinfo.id">
                     <div class="up">
                       <div class="avatar">
@@ -79,6 +90,76 @@
         </el-col>
       </el-row>
     </el-header>
+    <transition name="righttoleft">
+      <div class="pollup" v-show="isShow" ref="pollup">
+        <div class="right">
+          <i class="iconfont icon-delete out" @click="isShow = false"></i>
+          <div class="container">
+            <div class="info-box">
+              <div
+                class="imgcontainer"
+                :style="{
+                  backgroundImage: `url(${userStore.userinfo.banner})`,
+                }"
+              ></div>
+              <div class="loginbox">
+                <div class="up">
+                  <div class="avatar">
+                    <img
+                      v-if="userStore.userinfo.id"
+                      :src="userStore.userinfo.avatar"
+                      alt=""
+                    />
+                    <img v-else src="@/assets/img/logo.png" alt="" />
+                  </div>
+                  <div class="info">
+                    <h2 v-if="userStore.userinfo.nickname">
+                      {{ userStore.userinfo.nickname }}
+                    </h2>
+                    <h2 v-else>欢迎您 尊敬的访客</h2>
+                    <div v-if="userStore.userinfo.introduce">
+                      {{ userStore.userinfo.introduce }}
+                    </div>
+                    <div v-else>登录后可以使用更多功能哦</div>
+                  </div>
+                </div>
+                <!-- <div class="button">
+                <el-button type="primary" @click="$router.push('/home')" round
+                  >编辑资料</el-button
+                >
+                <el-button type="danger" @click="logout" round
+                  >退出登录</el-button
+                >
+              </div> -->
+              </div>
+            </div>
+          </div>
+          <ul class="menu-list">
+            <li @click="$router.push('/');isShow=false"><a >首页</a></li>
+            <li @click="$router.push('/articlelist');isShow=false"><a>文章</a></li>
+            <li @click="$router.push('/messageboard');isShow=false"><a >留言板</a></li>
+            <li @click="$router.push('/project');isShow=false"><a >作品</a></li>
+            <li @click="$router.push('/edit')">
+              <el-button :icon="Edit" circle></el-button><a>我也要写</a>
+            </li>
+          </ul>
+          <div class="button-login" v-if="userStore.userinfo.id">
+            <el-button type="primary" @click="$router.push('/home');isShow=false" round
+              >编辑资料</el-button
+            >
+            <el-button type="danger" @click="logout" round>退出登录</el-button>
+          </div>
+          <div class="button-login" v-else>
+            <el-button type="success" @click="$router.push('/login');isShow=false" round
+              >去登录</el-button
+            >
+          </div>
+        </div>
+      </div>
+    </transition>
+    <transition>
+      <div class="mask" v-if="isShow"></div>
+    </transition>
   </div>
 </template>
 
@@ -89,7 +170,10 @@ import { Edit } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { currentUserApi } from "@/api/user";
 import { useUserStore } from "@/store/user";
-import { isValidKey } from "@/utils/tools";
+import {onClickOutside} from '@vueuse/core'
+import router from "@/router";
+let isShow = ref(false);
+let pollup=ref<HTMLElement|null>(null);
 const props = defineProps({
   backColor: {
     type: String,
@@ -124,8 +208,9 @@ const getUserInfo = () => {
     console.log("notoken");
   }
 };
-getUserInfo();
+onClickOutside(pollup, (event) => isShow.value=false)
 
+getUserInfo();
 
 // 退出登录
 const logout = (): void => {
@@ -142,146 +227,11 @@ const logout = (): void => {
   });
   ElMessage.success("退出登录成功！");
   infoShow.value = false;
+  isShow.value=false;
+  router.push('/login')
 };
 </script>
 
 <style lang="less" scoped>
-@media screen and(max-width:960px) {
-  .el-header{
-    display: none;
-  }
-}
-.infobox-enter-from,
-.infobox-leave-to {
-  transform: translateY(-10%);
-  opacity: 0;
-}
-.infobox-enter-to,
-.infobox-leave-from {
-  transform: translateY(0);
-  opacity: 1;
-}
-.infobox-enter-active,
-.infobox-leave-active {
-  transition: all 0.4s ease;
-}
-
-.el-header {
-  padding: 0;
-  height: 93px;
-
-  .el-row {
-    height: 100%;
-    padding: 10px;
-    align-items: center;
-    .icon {
-      img {
-        width: 70%;
-        height: auto;
-      }
-    }
-    .menu {
-      display: flex;
-      justify-content: center;
-      font-size: 28px;
-      .menu-list {
-        display: flex;
-        color: white;
-        li {
-          margin-right: 20px;
-          cursor: pointer;
-
-          .el-button {
-            background-color: rgb(102, 167, 253);
-            margin-right: 10px;
-            border: none;
-          }
-          &:hover {
-            color: rgb(140, 228, 255);
-          }
-        }
-      }
-    }
-    .right {
-      display: flex;
-      justify-content: space-between;
-      color: white;
-      font-size: 20px;
-      align-items: center;
-      position: relative;
-      .container {
-        .info-box {
-          position: absolute;
-          width: 329px;
-          top: 70px;
-          left: 16px;
-          display: flex;
-          z-index: 999;
-          background-color: rgb(253, 253, 253);
-          box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.3);
-          background-size: 100% auto;
-          .imgcontainer{
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: -5;
-            opacity: 0.8;
-            filter: blur(1px) brightness(0.6);
-            background-size: cover;
-            
-          }
-          .loginbox {
-            width: 100%;
-            display: flex;
-            color: rgb(250, 250, 250);
-            padding: 10px 0;
-            font-size: 14px;
-            flex-direction: column;
-            justify-content: space-between;
-            .up {
-              display: flex;
-              justify-content: space-around;
-              align-items: center;
-              h2 {
-                margin: 10px 0;
-                font-size: 20px;
-              }
-            }
-            .button {
-              display: flex;
-              justify-content: space-between;
-              width: 100%;
-              margin-top: 20px;
-              padding: 0 30px;
-            }
-          }
-          .nologin {
-            width: 100%;
-            align-self: center;
-            text-align: center;
-            justify-self: center;
-            color: gray;
-          }
-        }
-        .avatar {
-          width: 73px;
-          height: 73px;
-          border-radius: 50%;
-          overflow: hidden;
-          background-color: #fff;
-          z-index: 2;
-          transition: all ease 1s;
-          &:hover {
-          }
-
-          img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-          }
-        }
-      }
-    }
-  }
-}
+@import url("./styles/pc/TopNavBar-pc.less");
 </style>

@@ -47,56 +47,5 @@ export default defineComponent({
 
 
 <style lang="less" scoped>
-.my-info {
-  background-color: rgb(@primaryBackGroundColor);
-  padding: 10px;
-  margin-left: 10px;
-  border-radius: 5px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  .main {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .content {
-      display: flex;
-      .avatar {
-        width: 150px;
-        height: 150px;
-        flex-shrink: 0;
-        border-radius: 50%;
-        overflow: hidden;
-        img {
-          width: 150px;
-          height: 200px;
-          object-fit: cover;
-        }
-      }
-      .info {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        margin-left: 8px;
-        .name {
-          font-size: 20px;
-          font-weight: 600;
-        }
-      }
-    }
-    .lianxiwo{
-        margin-top: 10px;
-        font-size: 20px;
-        color: rgb(@primaryTipColor);
-        .jishuzhan{
-            display: flex;
-            ul{
-                display: flex;
-                li{
-                    margin-right: 5px;
-                }
-            }
-        }
-    }
-  }
-}
+@import url('../styles/pc/my-info-pc.less');
 </style>

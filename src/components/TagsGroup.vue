@@ -27,19 +27,5 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.tags {
-        display: flex;
-        .tag {
-          padding: 12px;
-          display: flex;
-          cursor: pointer;
-          align-items: center;
-          text-align: center;
-          color: rgb(@primaryTagTextColor);
-          border-radius: 10px;
-          font-size: 12px;
-          margin-right: 10px;
-          background-color: rgb(@primaryTagBackGroundColor);
-        }
-      }
+@import url(./styles/pc/TagsGroup-pc.less);
 </style>
