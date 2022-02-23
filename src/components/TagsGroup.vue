@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="tag" v-for="tag in tags" @click="publishId(tag.id)" :key="tag.id">
-      <span>{{ tag.tagName }}</span>
+      <el-tag  type="success">{{ tag.tagName }}</el-tag>
     </div>
   </div>
 </template>

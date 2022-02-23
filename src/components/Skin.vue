@@ -11,22 +11,26 @@
   </ul>
 </template>
 <script lang="ts">
+import { useThemeStore } from "@/store/theme";
 import { setTheme } from "@/theme/theme";
 import { getItem } from "@/utils/storage";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   setup(props, { emit }) {
+    const themeStore=useThemeStore();
     const top = () => {
       document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
     };
     const changedark = () => {
       setTheme("dark");
       isDark.value = true;
+      themeStore.setTheme("dark");
     };
     const chanegDefault = () => {
       setTheme("default");
       isDark.value = false;
+      themeStore.setTheme("default");
     };
     let isDark = ref(false);
     let theme = getItem("themeName");
