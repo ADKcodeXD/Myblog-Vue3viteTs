@@ -23,9 +23,10 @@
 
 <script setup lang="ts">
 import TopNavBar from "@/components/TopNavBar.vue";
+import { useThemeStore } from "@/store/theme";
 import { setTheme } from "@/theme/theme";
+
 onMounted(() => {
-  
   setTheme();
 });
 </script>

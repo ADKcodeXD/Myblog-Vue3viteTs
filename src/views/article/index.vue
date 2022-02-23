@@ -29,9 +29,9 @@
             </p>
           </div>
           <!-- 主体部分 -->
-          <div class="body" >
-            <div v-html="article.body?.html"></div>
-          </div>
+          <hljsVuePlugin >
+            <div v-html="article.body?.html"  class="markdown-body"></div>
+          </hljsVuePlugin>
           <!-- 结束部分 显示查看数 点赞数 以及评论数 -->
           <!-- 分割线 -->
           <div class="detail">
@@ -137,7 +137,6 @@ import { CommentItemInfo } from "@/interface/comment";
 import { CommentParams } from "@/interface/params";
 import { UserEasy } from "@/interface/user";
 import { useUserStore } from "@/store/user";
-import { setTheme } from "@/theme/theme";
 import { getRealativeTime } from "@/utils/dayjs";
 import { ElMessage } from "element-plus";
 import { useRoute } from "vue-router";
@@ -194,7 +193,8 @@ const getArticle = async (id: any) => {
 };
 // 获取评论
 const getAllComment = async () => {
-  const { data } = await getComments(route.params.id as string);
+  
+  const { data } = await getComments(route.params.id as string,{page:1,pagesize:10});
   commentList.value = data.data;
 };
 // 滚动
@@ -212,8 +212,8 @@ onMounted(() => {
 });
 </script>
 
-
 <style scoped lang="less" >
-@import url(./styles/article-pc.less);
 
+@import url(./styles/article-pc.less);
+@import url('@/assets/styles/MyAnimate.less');
 </style>
