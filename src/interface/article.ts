@@ -16,8 +16,8 @@ export interface ArticleReqParams {
 }
 
 export interface Content{
-    html:string|void,
-    text:string|void
+    html:string|undefined,
+    text:string|undefined
 }
 export interface ArticleItemInfo{
     articleName:string,

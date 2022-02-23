@@ -1,3 +1,4 @@
+import { PageParams } from './../interface/params';
 import { CommentParams } from '@/interface/params';
 import request from '@/utils/request';
 
@@ -11,9 +12,10 @@ export const addComment = (commentParams:CommentParams) => {
     })
 }
 // 获取所有评论信息 
-export const getComments=(id:string)=>{
+export const getComments=(id:string,pageParams:PageParams)=>{
     return request({
         method: 'get',
         url: `/api/comment/article/${id}`,
+        data:pageParams
     })
 }
