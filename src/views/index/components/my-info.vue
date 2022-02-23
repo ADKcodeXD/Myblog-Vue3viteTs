@@ -1,6 +1,6 @@
 <template>
   <div class="my-info">
-    <h2 style="font-size:20px">关于我</h2>
+    <h2 style="font-size:20px;font-weight:100;">关于我</h2>
     <hr />
     <div class="main">
       <div class="content">
