@@ -18,10 +18,16 @@
       <div class="down">
         <div class="leftcontent">
           <p class="author">作者:{{ articleItem.authorVo.nickname }}</p>
-          <i class="iconfont icon-yanjing">阅读:{{ articleItem.viewCounts }}</i>
-          <i class="iconfont icon-pinglun">评论:{{ articleItem.commentCounts }}</i>
+          <div class="icongroup">
+            <i class="iconfont icon-yanjing">{{ articleItem.viewCounts }}</i>
+            <i class="iconfont icon-pinglun">{{ articleItem.commentCounts }}</i>
+            <i class="iconfont icon-good">{{ articleItem.likeCounts }}</i>
+            <i class="iconfont icon-changyonggongneng">{{
+              articleItem.collectCounts
+            }}</i>
+          </div>
         </div>
-        <TagsGroup :tags="articleItem.tags"/>
+        <TagsGroup :tags="articleItem.tags" />
       </div>
     </div>
   </div>
@@ -33,23 +39,23 @@ import { getRealativeTime } from "@/utils/dayjs";
 import TagsGroup from "@/components/TagsGroup.vue";
 import { ArticleItemInfo } from "@/interface/article";
 export default defineComponent({
-    props: {
-        articleItem: {
-            type: Object as PropType<ArticleItemInfo>,
-            default: () => { },
-        },
+  props: {
+    articleItem: {
+      type: Object as PropType<ArticleItemInfo>,
+      default: () => {},
     },
-    setup(props) {
-        const time = computed(() => {
-            return getRealativeTime(props.articleItem.createDate);
-        });
-        return { time };
-    },
-    components: { TagsGroup }
+  },
+  setup(props) {
+    const time = computed(() => {
+      return getRealativeTime(props.articleItem.createDate);
+    });
+    return { time };
+  },
+  components: { TagsGroup },
 });
 </script>
 
 
 <style lang="less" scoped>
-@import url('../styles/pc/article-item-pc.less');
+@import url("../styles/pc/article-item-pc.less");
 </style>

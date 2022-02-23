@@ -1,17 +1,17 @@
 <template>
-  <div class="article" >
+  <div class="article">
     <div class="top">
       <TopNavBar :back-color="'rgba(0, 0, 0, 0.7)'" />
     </div>
     <Skin @top="goTop" />
-    <div class="main-body"  v-if="article">
+    <div class="main-body" v-if="article">
       <!-- banner -->
-      <div class="banner" >
+      <div class="banner">
         <img :src="article.banner" alt="" />
       </div>
       <!-- 标题和摘要 -->
       <div class="title">
-        <div class="content" >
+        <div class="content">
           <div class="article-title">
             <h2>{{ article.articleName }}</h2>
           </div>
@@ -29,16 +29,31 @@
             </p>
           </div>
           <!-- 主体部分 -->
-          <hljsVuePlugin >
-            <div v-html="article.body?.html"  class="markdown-body"></div>
-          </hljsVuePlugin>
+          <div>
+            <div v-html="article.body?.html" class="markdown-body"></div>
+          </div>
           <!-- 结束部分 显示查看数 点赞数 以及评论数 -->
           <!-- 分割线 -->
           <div class="detail">
+            <div class="good">
+              <!-- 点赞部分 -->
+              <i
+                class="iconfont icon-good"
+                :class="{ active: article.isLiked }"
+                @click="likedArticle"
+                ><span v-if="!article.isLiked">点赞</span><span v-else>已点赞</span></i
+              >
+              <i
+                class="iconfont icon-changyonggongneng"
+                :class="{ active: article.isCollected }"
+                @click="collectArticle"
+                ><span v-if="!article.isCollected">收藏</span><span v-else>已收藏</span></i
+              >
+            </div>
             <el-divider>
               <i class="iconfont icon-edit">文章就到这里结束啦</i>
             </el-divider>
-            <div class="good"></div>
+
             <div class="bottom-text">
               <div class="left">
                 <p class="red">未经作者允许 禁止转载</p>
@@ -121,6 +136,8 @@
               v-for="(commentitem, i) in commentList"
               :key="commentitem.id"
               :authorId="article.authorVo.id"
+              :articleId="article.id"
+              @publishSecond="publishSecond"
             />
           </transition-group>
         </div>
@@ -134,12 +151,18 @@ import { getArticleItem } from "@/api/article";
 import { addComment, getComments } from "@/api/comment";
 import { ArticleItemInfo } from "@/interface/article";
 import { CommentItemInfo } from "@/interface/comment";
-import { CommentParams } from "@/interface/params";
+import {
+  CommentParams,
+  LikeOrCollectParams,
+  PageParams,
+} from "@/interface/params";
 import { UserEasy } from "@/interface/user";
 import { useUserStore } from "@/store/user";
 import { getRealativeTime } from "@/utils/dayjs";
 import { ElMessage } from "element-plus";
 import { useRoute } from "vue-router";
+import _ from "lodash";
+import { userCollect, userLike } from "@/api/user";
 const route = useRoute();
 const userStore = useUserStore();
 
@@ -172,14 +195,19 @@ let time = computed(() => {
 });
 
 // 方法区-----------------------
+// 发送一级评论
 const publishComment = async () => {
-  const { data } = await addComment(commentParams);
-  if (data.code === 200) {
-    ElMessage.success("发布成功");
-    comment.value = "";
-    getAllComment();
+  if (commentParams.content != "") {
+    const { data } = await addComment(commentParams);
+    if (data.code === 200) {
+      ElMessage.success("发布成功");
+      comment.value = "";
+      getAllComment();
+    } else {
+      ElMessage.error(data.msg);
+    }
   } else {
-    ElMessage.error(data.msg);
+    ElMessage.error("内容不能为空");
   }
 };
 // 获取文章
@@ -191,17 +219,69 @@ const getArticle = async (id: any) => {
     ElMessage.error(data.msg);
   }
 };
+// 评论分页参数
+let pageparams: PageParams = reactive({
+  page: 1,
+  pagesize: 10,
+});
 // 获取评论
 const getAllComment = async () => {
-  
-  const { data } = await getComments(route.params.id as string,{page:1,pagesize:10});
+  console.log(pageparams);
+  const { data } = await getComments(route.params.id as string, pageparams);
   commentList.value = data.data;
 };
 // 滚动
-const body=ref<HTMLElement|null>();
-const goTop=()=>{
+const body = ref<HTMLElement | null>();
+const goTop = () => {
   console.log(body.value?.scrollTop);
-}
+};
+// 接受发送二级评论
+const publishSecond = () => {
+  ElMessage.success("发送成功");
+  getAllComment();
+};
+
+// loading
+let isLikedLoading = ref(false);
+let isCollectLoading = ref(false);
+// 喜欢文章
+const likedArticle = async () => {
+  isLikedLoading.value = true;
+  // 如果是登录状态下
+  if (user.id) {
+    let likedValue = !article.value?.isLiked;
+    if (article.value) {
+      let reqParams: LikeOrCollectParams = {
+        articleId: article.value.id,
+        flag: likedValue,
+      };
+      await userLike(reqParams);
+      article.value.isLiked = likedValue;
+    }
+  } else {
+    ElMessage.error("请先登录后点赞");
+  }
+  isLikedLoading.value = false;
+};
+
+// 收藏文章
+const collectArticle = async () => {
+  isCollectLoading.value = true;
+  if (user.id) {
+    let collectValue = !article.value?.isCollected;
+    if (article.value) {
+      let reqParams: LikeOrCollectParams = {
+        articleId: article.value.id,
+        flag: collectValue,
+      };
+      await userCollect(reqParams);
+      article.value.isCollected = collectValue;
+    }
+  } else {
+    ElMessage.error("请先登录后收藏");
+  }
+  isCollectLoading.value = false;
+};
 // 函数加载 挂载组件
 onMounted(() => {
   if (user) {
@@ -213,7 +293,10 @@ onMounted(() => {
 </script>
 
 <style scoped lang="less" >
-
 @import url(./styles/article-pc.less);
-@import url('@/assets/styles/MyAnimate.less');
+@import url("@/assets/styles/MyAnimate.less");
+.active {
+  background-color: rgb(@primaryActiveColor) !important;
+  color: white !important;
+}
 </style>
