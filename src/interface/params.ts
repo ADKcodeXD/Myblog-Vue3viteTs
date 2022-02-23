@@ -19,7 +19,8 @@ export interface CommentParams {
     articleId: string,
     toUid?: string,
     parentId?: string,
-    content: string
+    content: string,
+    authorId:string,
 }
 
 export interface MessageParamsForADK {
@@ -42,4 +43,9 @@ export interface UpdateUserInfoParams {
     banner: string,
     gender: string,
     email: string
+}
+
+export interface LikeOrCollectParams {
+    articleId:string,
+    flag:Boolean
 }

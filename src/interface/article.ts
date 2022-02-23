@@ -30,7 +30,11 @@ export interface ArticleItemInfo{
     id:string,
     summary:string,
     tags:Array<Tag>,
-    viewCounts:number
+    viewCounts:number,
+    isLiked:Boolean,
+    isCollected:Boolean,
+    likeCounts:Number,
+    collectCounts:Number
 }
 
 export interface Banner{
