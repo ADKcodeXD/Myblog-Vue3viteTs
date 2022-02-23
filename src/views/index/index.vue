@@ -29,6 +29,7 @@
       <div class="rightbox">
         <MyInfo />
         <TimeLine />
+        <TagsAll/>
       </div>
     </div>
   </div>
@@ -41,6 +42,7 @@ import { PageParams } from "@/interface/params";
 import ArticleItem from "./components/article-item.vue";
 import MyInfo from "./components/my-info.vue";
 import TimeLine from "./components/time-line.vue";
+import TagsAll from './components/tags-all.vue'
 
 // 获取首页文章 按照时间顺序 5篇
 let articles = ref<ArticleItemInfo[]>([]);
