@@ -1,5 +1,5 @@
 // user/currentUser
-import { UpdateUserInfoParams } from '@/interface/params'
+import { LikeOrCollectParams, UpdateUserInfoParams } from '@/interface/params'
 import request from '@/utils/request'
 
 // 获取当前user信息
@@ -32,5 +32,23 @@ export const updateUserInfoApi = (updateParams: UpdateUserInfoParams) => {
         method: 'post',
         url: '/api/user/updateUserInfo',
         data: updateParams
+    })
+}
+
+// 用户点赞功能
+export const userLike = (likeParams:LikeOrCollectParams) => {
+    return request({
+        method: 'post',
+        url: '/api/user/like',
+        data: likeParams
+    })
+}
+
+// 用户收藏功能
+export const userCollect = (collectParams:LikeOrCollectParams) => {
+    return request({
+        method: 'post',
+        url: '/api/user/collect',
+        data: collectParams
     })
 }

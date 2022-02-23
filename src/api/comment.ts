@@ -14,7 +14,7 @@ export const addComment = (commentParams:CommentParams) => {
 // 获取所有评论信息 
 export const getComments=(id:string,pageParams:PageParams)=>{
     return request({
-        method: 'get',
+        method: 'post',
         url: `/api/comment/article/${id}`,
         data:pageParams
     })
