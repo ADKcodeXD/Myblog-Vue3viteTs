@@ -1,5 +1,5 @@
 <template>
-  <div class="message" ref="body">
+  <el-scrollbar max-height="80vh"  class="message" ref="body">
     <div class="up-info">
       <p class="title">留言板</p>
       <p class="desc">输入你的昵称 联系方式 可以给我的网站留言哦~</p>
@@ -60,10 +60,17 @@
     <div class="paixu">
       <h2>留言列表</h2>
       <p :class="{ active: orderRole === 2 }" @click="order(2)">默认</p>
-      <p :class="{ active: orderRole === 1 }" @click="order(1)">最新</p>
+      <p :class="{ active: orderRole === 1 }" @click="order(1)">倒序</p>
     </div>
+
     <div class="message-part" v-if="messageList">
-      <MessageItem :message="item" v-for="item in messageList" :key="item.id" />
+      
+        <MessageItem
+          :message="item"
+          v-for="item in messageList"
+          :key="item.id"
+        />
+      
     </div>
     <el-empty v-else description="暂时没有留言哦~"></el-empty>
     <el-pagination
@@ -74,7 +81,7 @@
       :current-page="pageparams.page"
     >
     </el-pagination>
-  </div>
+  </el-scrollbar>
 </template>
 
 <script lang="ts">
@@ -84,7 +91,7 @@ import avatar from "@/assets/img/women.png";
 import { addMessageApi, getMessageApi } from "@/api/message";
 import MessageItem from "./components/message-item.vue";
 import { MessageVo } from "@/interface/message";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElScrollbar, ScrollbarEmits } from "element-plus";
 export default defineComponent({
   components: { MessageItem },
   setup() {
@@ -101,7 +108,7 @@ export default defineComponent({
     });
     let messageList = ref<MessageVo[]>();
     let total = ref(0);
-    const body = ref<HTMLElement | null>(null);
+    const body = ref<InstanceType<typeof ElScrollbar>>();
     // 排序规则
     let orderRole = ref(0);
     // 方法和逻辑区
@@ -150,7 +157,7 @@ export default defineComponent({
     const changePage = (val: number) => {
       pageparams.page = val;
       getMessage(pageparams);
-      document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+      body.value?.setScrollTop(0);
     };
     const changeAvatarParams = (val: string) => {
       messageParams.avatar = val;
@@ -179,4 +186,5 @@ export default defineComponent({
 
 <style lang="less" scoped>
 @import url(./styles/messageboard-pc.less);
+@import url(@/assets/styles/MyAnimate.less);
 </style>
