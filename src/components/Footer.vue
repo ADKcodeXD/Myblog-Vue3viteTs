@@ -1,8 +1,13 @@
 <template>
  <div class="footer">
-     <p class="one">Made by adk</p>
-     <p class="two">仅供学习使用 本博客为个人用途 无任何盈利用途</p>
-     <p class="three">如果你也喜欢我的博客 欢迎你访问我的github 希望能够给个star哦~</p>
+     <div class="left">
+         <p class="one">Made by adk</p>
+        <p class="two">仅供学习使用 本博客为个人用途 无任何盈利用途</p>
+     </div>
+     
+     <div class="right">
+         备案/许可证编号：粤ICP备2022022555号
+     </div>
  </div>
 </template>
 
@@ -12,10 +17,10 @@
 .footer{
     width: 100%;
     display: flex;
-    flex-direction: column;
     color: #fff;
     padding: 10px;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: flex-end;
     background-color: rgb(99, 99, 99);
     margin-top: 20px;
     .one{
