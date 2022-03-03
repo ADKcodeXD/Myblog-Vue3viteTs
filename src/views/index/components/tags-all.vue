@@ -1,7 +1,7 @@
 <template>
   <div class="tasall">
     <h2 class="title">所有标签</h2>
-    <tags-group :tags="tags"></tags-group>
+    <el-tag class="tag"  type="success" v-for="tag in tags" :key="tag.id">{{ tag.tagName }}</el-tag>
   </div>
 </template>
 
@@ -41,5 +41,9 @@ export default defineComponent({
   margin-left: 0.7143rem;
   border-radius: 0.3571rem;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  .tag{
+    margin-right: 10px;
+    margin-top: 5px;
+  }
 }
 </style>
