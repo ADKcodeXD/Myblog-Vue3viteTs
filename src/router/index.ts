@@ -1,10 +1,13 @@
 import { getItem } from './../utils/storage';
-import { useStore } from '@/store/main';
 import {createRouter,createWebHashHistory, createWebHistory} from 'vue-router';
 
 const routes =[
     {
         path:'/',
+        redirect:'/threeshow',
+    },
+    {
+        path:'/index',
         name:'Layout',
         component: ()=> import ('@/views/Layout.vue'),
         children:[
@@ -59,6 +62,11 @@ const routes =[
         path:'/article/:id',
         name:'articledetail',
         component:()=> import ('@/views/article/index.vue')
+    },
+    {
+        path:'/threeshow',
+        name:'threeshow',
+        component:()=> import ('@/views/threeshow/index.vue')
     },
 ]
 
