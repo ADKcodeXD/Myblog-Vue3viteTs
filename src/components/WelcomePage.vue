@@ -8,6 +8,7 @@
       <ul class="detail">
         <li><a href="/articlelist">文章</a></li>
         <li><a>关于我</a></li>
+        <li><a href="/threeshow">threejs介绍(测试)</a></li>
         <li><a href="https://github.com/ADKcodeXD/Myblog-Vue3viteTs">项目地址</a></li>
       </ul>
     </div>
@@ -23,7 +24,7 @@
       </p>
       <p class="sub-title">欢迎来到我的博客</p>
       <el-button
-        @click="$router.push('/')"
+        @click="$router.push('/index')"
         round
         type="success"
         size="large"
