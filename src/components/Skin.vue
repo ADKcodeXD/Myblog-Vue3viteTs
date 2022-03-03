@@ -1,6 +1,8 @@
 <template>
   <ul class="list">
-    <li @click="$router.push('/home')"><i class="iconfont icon-geren"></i></li>
+    <li @click="$router.push('/index/home')">
+      <i class="iconfont icon-geren"></i>
+    </li>
     <li @click="top"><i class="iconfont icon-huidaodingbu"></i></li>
     <li v-if="!isDark" @click="changedark">
       <i class="iconfont icon-dark"></i>
@@ -18,7 +20,7 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   setup(props, { emit }) {
-    const themeStore=useThemeStore();
+    const themeStore = useThemeStore();
     const top = () => {
       document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
     };
@@ -51,56 +53,54 @@ export default defineComponent({
 
 
 <style lang="less" scoped>
-@media screen and (min-width:320px) and (max-width:992px){
-.list {
-  position: fixed;
-  right: 3.5714rem;
-  bottom: 14.2857rem;
-  z-index: 1;
-  li {
-    cursor: pointer;
-    height: 4.2857rem;
-    width: 4.2857rem;
-    border-radius: 50%;
-    color: rgb(@primaryTextColor);
-    text-align: center;
-    line-height: 4.2857rem;
-    margin-bottom: 1.4286rem;
-    transition: 0.3s all ease;
-    background-color: rgba(@primaryTipColor, 0.6);
-    &:active {
-      color: rgb(@primaryActiveTextColor);
-      background-color: rgba(@primaryActiveColor, 1);
-    }
-    &:hover{
-      
-    }
-  }
-}
-}
-@media screen and (min-width:992px){
-.list {
-  position: fixed;
-  right: 3.5714rem;
-  bottom: 14.2857rem;
-  z-index: 1;
-  li {
-    cursor: pointer;
-    height: 4.2857rem;
-    width: 4.2857rem;
-    border-radius: 50%;
-    color: rgb(@primaryTextColor);
-    text-align: center;
-    line-height: 4.2857rem;
-    margin-bottom: 1.4286rem;
-    transition: 0.3s all ease;
-    background-color: rgba(@primaryTipColor, 0.6);
-    &:hover {
-      color: rgb(@primaryActiveTextColor);
-      background-color: rgba(@primaryActiveColor, 1);
+@media screen and (min-width: 320px) and (max-width: 992px) {
+  .list {
+    position: fixed;
+    right: 3.5714rem;
+    bottom: 14.2857rem;
+    z-index: 1;
+    li {
+      cursor: pointer;
+      height: 4.2857rem;
+      width: 4.2857rem;
+      border-radius: 50%;
+      color: rgb(@primaryTextColor);
+      text-align: center;
+      line-height: 4.2857rem;
+      margin-bottom: 1.4286rem;
+      transition: 0.3s all ease;
+      background-color: rgba(@primaryTipColor, 0.6);
+      &:active {
+        color: rgb(@primaryActiveTextColor);
+        background-color: rgba(@primaryActiveColor, 1);
+      }
+      &:hover {
+      }
     }
   }
 }
+@media screen and (min-width: 992px) {
+  .list {
+    position: fixed;
+    right: 3.5714rem;
+    bottom: 14.2857rem;
+    z-index: 1;
+    li {
+      cursor: pointer;
+      height: 4.2857rem;
+      width: 4.2857rem;
+      border-radius: 50%;
+      color: rgb(@primaryTextColor);
+      text-align: center;
+      line-height: 4.2857rem;
+      margin-bottom: 1.4286rem;
+      transition: 0.3s all ease;
+      background-color: rgba(@primaryTipColor, 0.6);
+      &:hover {
+        color: rgb(@primaryActiveTextColor);
+        background-color: rgba(@primaryActiveColor, 1);
+      }
+    }
+  }
 }
-
 </style>
