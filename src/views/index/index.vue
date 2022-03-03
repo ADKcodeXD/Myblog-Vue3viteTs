@@ -8,7 +8,7 @@
             <div class="card-header">
               <span>近期更新文章</span>
               <el-button
-                @click="$router.push('/articlelist')"
+                @click="$router.push('/index/articlelist')"
                 class="button"
                 type="text"
                 >查看更多</el-button
