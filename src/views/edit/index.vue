@@ -62,20 +62,48 @@
     <div class="tagandpublish">
       <div class="tag">
         <p>选择标签</p>
-        <el-select
-          style="width: 50%"
-          v-model="tags"
-          multiple
-          placeholder="请选择标签"
-        >
-          <el-option
-            v-for="item in options"
+        <div class="tagsgroup">
+          <el-tag
+            class="tag-item"
+            v-for="item in canChooseTags"
             :key="item.id"
-            :label="item.tagName"
-            :value="item.tagName"
+            type="success"
+            @click="addInTags(item)"
+            
+            >{{ item.tagName }}
+          </el-tag>
+          <el-input
+            v-if="inputVisible"
+            v-model="inputValue"
+            ref="inputref"
+            style=" width:5em"
+            size="small"
+            placeholder="标签名"
+            @keyup.enter="handleInputConfirm"
+            @blur="handleInputConfirm"
           >
-          </el-option>
-        </el-select>
+          </el-input>
+          <el-button
+            v-else
+            class="button-new-tag ml-1"
+            size="small"
+            @click="showInput"
+          >
+            + New Tag
+          </el-button>
+        </div>
+        <p>已选择标签</p>
+        <div class="choosed">
+          <el-tag
+            class="tag-item"
+            v-for="item in tags"
+            :key="item.id"
+            type="success"
+            @close="deleteTag(item)"
+            closable
+            >{{ item.tagName }}
+          </el-tag>
+        </div>
       </div>
       <div class="publish">
         <el-button
@@ -92,10 +120,10 @@
 </template>
 
 <script setup lang="ts">
-import { getTagList, publishArticle } from "@/api/article";
+import { addTag, getTagList, publishArticle } from "@/api/article";
 import type { UploadFile } from "element-plus/es/components/upload/src/upload.type";
 import { useStore } from "@/store/main";
-import { ElMessage, ElNotification } from "element-plus";
+import { ElInput, ElMessage, ElNotification } from "element-plus";
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { Tag } from "@/interface/tag";
@@ -168,7 +196,7 @@ const summary = ref("");
 let title = ref("这里输入标题");
 let styleChange = ref(false);
 // 选择tag
-let tags = ref<string[]>([]);
+let tags = ref<Tag[]>([]);
 let options = ref<Tag[]>([]);
 const getTag = async () => {
   const { data } = await getTagList();
@@ -238,16 +266,7 @@ const submitArticle = async () => {
       tags: [],
       banner: "",
     };
-    // 处理tag
-    // TODO 优化tags逻辑
-    let tagsReal = ref<Tag[]>([]);
-    for (let i = 0; i < tags.value.length; i++) {
-      options.value.forEach((item) => {
-        if (tags.value[i] === item.tagName) {
-          tagsReal.value.push(item);
-        }
-      });
-    }
+    
     // 赋值
     if (editorName.value === "tinymce") {
       // 不改表结构的情况下 让markdown存入contentHtml中 后续渲染可以直接不用动态切换
@@ -258,7 +277,7 @@ const submitArticle = async () => {
       articleReqParams.body.contentHtml = content.html;
     }
     articleReqParams.summary = summary.value;
-    articleReqParams.tags = tagsReal.value;
+    articleReqParams.tags = tags.value;
     articleReqParams.articleName = title.value;
     articleReqParams.banner = imglink.value;
     // 请求
@@ -271,6 +290,56 @@ const submitArticle = async () => {
     }, 2000);
   }
 };
+
+// 动态增加标签
+let inputVisible=ref(false);
+let inputValue=ref('');
+let inputref=ref<InstanceType<typeof ElInput>>()
+const showInput=()=>{
+  inputVisible.value=true;
+  // 由于dom还没渲染 在下一个异步任务队列当中 nexttick直接
+  // 跳到下一个异步任务
+   nextTick(() => {
+    inputref.value!.input!.focus()
+  })
+}
+// 添加标签触发的事件
+const handleInputConfirm=async ()=>{
+  if (inputValue.value) {
+    if(inputValue.value.length>8){
+      ElMessage.error('标签长度不能太长')
+    }else{
+      // 接口 调用 添加tag
+      await addTag(inputValue.value);
+      ElMessage.success('成功');
+      getTag();
+    }
+  }
+  inputVisible.value = false
+  inputValue.value = ''
+}
+// 增加标签
+const addInTags=(item:Tag)=>{
+  if(tags.value.length<=3){
+    tags.value.push(item);
+  }else{
+    ElMessage.error('最多只能选择4个标签')
+  }
+}
+// 删除标签
+const deleteTag=(item:Tag)=>{
+  tags.value.splice(tags.value.indexOf(item),1);
+}
+// 计算属性  移除已选择标签
+const canChooseTags=computed(()=>{
+  return options.value.filter(item=>{
+    let flag=true;
+    tags.value.forEach(tag=>{
+      if(tag.id===item.id)  flag=false
+    })
+    return flag;
+  })
+})
 </script>
 
 <style lang="less" scoped>
