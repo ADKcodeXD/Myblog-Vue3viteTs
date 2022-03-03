@@ -11,7 +11,7 @@
     <div class="jieshao" :style="{ top: isMobileLoginShow ? '20%' : '50%' }">
       <h2>基于Vue3+Vite的轻型博客</h2>
       <p>具体技术栈为：Vue3+TypeScript+Vite+pinia 后端采用Springboot构建</p>
-      <el-button type="primary" plain round @click="$router.push('/')"
+      <el-button type="primary" plain round @click="$router.push('/index')"
         >直接进入</el-button
       >
       <el-button
@@ -247,7 +247,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
       if (result.data.code === 200) {
         userStore.user.token = result.data.data;
         setItem("user", userStore.user.token);
-        router.push("/");
+        router.push("/index");
       } else {
         //   登录失败 提示msg
         ElMessage.error(result.data.msg);
@@ -297,7 +297,7 @@ const submitRegister = (formEl: FormInstance | undefined) => {
       if (result.data.code === 200) {
         userStore.user.token = result.data.data;
         setItem("user", userStore.user.token);
-        router.push("/");
+        router.push("/index");
       } else {
         //   注册失败 提示msg
         ElMessage.error(result.data.msg);

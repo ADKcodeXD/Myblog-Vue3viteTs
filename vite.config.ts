@@ -53,11 +53,11 @@ export default defineConfig({
     proxy: {
       // 选项写法
       // 开发环境开启
-      '/api': {
-        target: 'http://localhost:8888',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '')
-      }
+      // '/api': {
+      //   target: 'http://localhost:8888',
+      //   changeOrigin: true,
+      //   rewrite: path => path.replace(/^\/api/, '')
+      // }
     }
   }
 })
