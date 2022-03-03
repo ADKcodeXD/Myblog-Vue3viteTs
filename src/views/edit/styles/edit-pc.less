@@ -100,11 +100,23 @@
         background-color: #fff;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.452);
         .tag {
-        width: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            .tagsgroup{
+                .tag-item{
+                margin-right: 10px;
+                    cursor: pointer;
+                }
+            }
+            .choosed{
+                height: 30px;
+                .tag-item{
+                    margin-right: 10px;
+                }
+            }
         }
         
     }
