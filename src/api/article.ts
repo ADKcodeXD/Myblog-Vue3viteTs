@@ -64,3 +64,10 @@ export const listArticleWithCount = (pageParams: PageParams) => {
         data: pageParams
     })
 }
+// 添加tag
+export const addTag = (tagName: string) => {
+    return request({
+        method: 'get',
+        url: `/api/tags/add?tagName=${tagName}`,
+    })
+}
