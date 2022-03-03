@@ -17,11 +17,11 @@
         <el-col :span="16">
           <div class="menu">
             <ul class="menu-list" :style="{ color: fontColor }">
-              <li><a @click="$router.push('/')">首页</a></li>
-              <li><a @click="$router.push('/articlelist')">文章</a></li>
-              <li><a @click="$router.push('/messageboard')">留言板</a></li>
+              <li><a @click="$router.push('/index')">首页</a></li>
+              <li><a @click="$router.push('/index/articlelist')">文章</a></li>
+              <li><a @click="$router.push('/index/messageboard')">留言板</a></li>
               <li><a @click="$router.push('/project')">作品</a></li>
-              <li @click="$router.push('/edit')">
+              <li @click="$router.push('/index/edit')">
                 <el-button :icon="Edit" circle></el-button><a>我也要写</a>
               </li>
             </ul>
@@ -73,7 +73,7 @@
                     <div class="button">
                       <el-button
                         type="primary"
-                        @click="$router.push('/home')"
+                        @click="$router.push('/index/home')"
                         round
                         >编辑资料</el-button
                       >
@@ -135,16 +135,16 @@
             </div>
           </div>
           <ul class="menu-list">
-            <li @click="$router.push('/');isShow=false"><a >首页</a></li>
-            <li @click="$router.push('/articlelist');isShow=false"><a>文章</a></li>
-            <li @click="$router.push('/messageboard');isShow=false"><a >留言板</a></li>
+            <li @click="$router.push('/index');isShow=false"><a >首页</a></li>
+            <li @click="$router.push('/index/articlelist');isShow=false"><a>文章</a></li>
+            <li @click="$router.push('/index/messageboard');isShow=false"><a >留言板</a></li>
             <li @click="$router.push('/project');isShow=false"><a >作品</a></li>
-            <li @click="$router.push('/edit')">
+            <li @click="$router.push('/index/edit')">
               <el-button :icon="Edit" circle></el-button><a>我也要写</a>
             </li>
           </ul>
           <div class="button-login" v-if="userStore.userinfo.id">
-            <el-button type="primary" @click="$router.push('/home');isShow=false" round
+            <el-button type="primary" @click="$router.push('/index/home');isShow=false" round
               >编辑资料</el-button
             >
             <el-button type="danger" @click="logout" round>退出登录</el-button>
