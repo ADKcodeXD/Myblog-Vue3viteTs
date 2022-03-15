@@ -13,31 +13,32 @@ const routes =[
         children:[
             {
                 path:'',
-                name:'index',
-                meta:{requireAuth:false},
+                name:'Index',
+                meta:{requireAuth:false,keepAlive:true},
                 component:()=> import ('@/views/index/index.vue')
             },
             {
                 path:'edit',
-                name:'edit',
-                meta:{requireAuth:true},
+                name:'Edit',
+                meta:{requireAuth:true,keepAlive:false},
                 component:()=> import ('@/views/edit/index.vue')
             },
             {
                 path:'articlelist',
-                name:'articleList',
-                meta:{requireAuth:false},
+                name:'ArticleList',
+                meta:{requireAuth:false,keepAlive:true},
                 component:()=> import ('@/views/articlelist/index.vue')
             },
             {
                 path:'messageboard',
-                name:'messageboard',
+                name:'MessageBoard',
+                meta:{keepAlive:true},
                 component:()=> import ('@/views/messageboard/index.vue')
             },
             {
                 path:'home',
-                name:'home',
-                meta:{requireAuth:true},
+                name:'Home',
+                meta:{requireAuth:true,keepAlive:true},
                 component:()=> import ('@/views/home/index.vue')
             },
         ]
@@ -61,6 +62,7 @@ const routes =[
     {
         path:'/article/:id',
         name:'articledetail',
+        meta:{keepAlive:false},
         component:()=> import ('@/views/article/index.vue')
     },
     {
