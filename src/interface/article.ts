@@ -46,3 +46,7 @@ export interface ArticleListItem{
     articleVoList:Array<ArticleItemInfo>,
     length:number
 }
+export interface ArticleTime{
+    date:string,
+    num:number
+}
