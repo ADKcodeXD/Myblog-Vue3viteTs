@@ -242,7 +242,7 @@ const submitArticle = async () => {
     if (!summary.value) {
       ElMessage.error("请输入摘要");
       return;
-    } else if (!content.html) {
+    } else if ( editorName.value==="tinymce"? !contentRich.html : !content.html ) {
       ElMessage.error("请输入正文");
       return;
     } else if (!title.value) {
