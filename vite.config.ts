@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite';
+import viteCompression from 'vite-plugin-compression'
 function resovePath(paths: string) {
   // 如何 __dirname 找不到 需要 yarn add @types/node --save-dev
   return resolve(__dirname, paths);
@@ -18,7 +19,7 @@ export default defineConfig({
     dirs: ['src/components'],
     extensions: ['vue'],
     dts: 'src/components.d.ts'
-  })],
+  }),viteCompression(),],
   resolve: {
     alias: {
       "@": resolve(__dirname, 'src')
@@ -61,5 +62,4 @@ export default defineConfig({
     }
   }
 })
-
 
