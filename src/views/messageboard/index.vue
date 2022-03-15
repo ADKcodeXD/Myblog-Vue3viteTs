@@ -94,6 +94,7 @@ import { MessageVo } from "@/interface/message";
 import { ElMessage, ElScrollbar, ScrollbarEmits } from "element-plus";
 export default defineComponent({
   components: { MessageItem },
+  name:"MessageBoard",
   setup() {
     let comment = ref("");
     let messageParams: MessageParamsForADK = reactive({

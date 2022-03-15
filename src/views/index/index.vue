@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <Carousel :items="banenrList" />
+    <Carousel :items="bannerList" />
     <div class="view-content">
       <div class="article">
         <el-card class="box-card">
@@ -28,40 +28,47 @@
       </div>
       <div class="rightbox">
         <MyInfo />
+        <ArticleTimeLine/>
+        <TagsAll/> 
         <TimeLine />
-        <TagsAll/>
       </div>
     </div>
   </div>
 </template>
 
+
+<script lang="ts">
+export default { name: 'Index' }
+</script>
+
 <script setup lang="ts">
-import { getIndexBanner, listArticle } from "@/api/article";
+import { getIndexArticleApi, getIndexBanner, listArticle } from "@/api/article";
 import { ArticleItemInfo, Banner } from "@/interface/article";
 import { PageParams } from "@/interface/params";
 import ArticleItem from "./components/article-item.vue";
 import MyInfo from "./components/my-info.vue";
 import TimeLine from "./components/time-line.vue";
 import TagsAll from './components/tags-all.vue'
+import ArticleTimeLine from "./components/article-time-line.vue";
 
 // 获取首页文章 按照时间顺序 5篇
 let articles = ref<ArticleItemInfo[]>([]);
+let bannerList = ref<Banner[]>([]);
 let pageparams: PageParams = {
   page: 1,
   pagesize: 5,
 };
 // 获取文章列表
 const getIndexfive = async () => {
-  const { data } = await listArticle(pageparams);
-
+  const { data } = await getIndexArticleApi(pageparams);
   articles.value = data.data;
 };
 
-let banenrList = ref<Banner[]>([]);
+
 // 获取文章头图
 const getBannerList = async () => {
   const { data } = await getIndexBanner();
-  banenrList.value = data.data;
+  bannerList.value = data.data;
 };
 
 onMounted(() => {
