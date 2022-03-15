@@ -135,6 +135,10 @@
   </div>
 </template>
 
+
+<script lang="ts">
+export default { name: 'Home' }
+</script>
 <script setup lang="ts">
 import { uploadBanner } from "@/api/article";
 import { currentUserAll, currentUserApi, updateUserInfoApi } from "@/api/user";
