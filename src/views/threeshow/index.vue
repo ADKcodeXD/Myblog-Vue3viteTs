@@ -119,18 +119,7 @@
 import Base3D from "@/utils/Base3d";
 let loading = ref(true);
 let aboutmeref = ref<HTMLElement>();
-onMounted(async () => {
-  let base3d = new Base3D(".scene");
-  await base3d.addMesh("box");
-  await base3d.setEnvMap("je_gray_park_1k");
-  loading.value = false;
-  base3d.setChildRotationAnimation("圆环面");
-  base3d.setChildRotationAnimation("圆环面1");
-  base3d.setLabel("aboutme", "关于我");
-  base3d.setLabel("gotoblog", "进入博客");
-  base3d.setLabel("gotofirst", "欢迎(初版)");
-  base3d.setLabel("gotologin", "去登录");
-});
+
 const hideaboutme = () => {
   if (aboutmeref.value) {
     aboutmeref.value.style.opacity = "0";
@@ -141,6 +130,23 @@ const pushgithub = () => {
   window.location.href = "https://github.com/ADKcodeXD";
 };
 const loaded = () => {};
+let base3d:Base3D|null=null;
+onMounted(async () => {
+  base3d = new Base3D(".scene");
+  await base3d.addMesh("box");
+  await base3d.setEnvMap("je_gray_park_1k");
+  loading.value = false;
+  base3d.setChildRotationAnimation("圆环面");
+  base3d.setChildRotationAnimation("圆环面1");
+  base3d.setLabel("aboutme", "关于我",{x:20,y:16,z:13});
+  base3d.setLabel("gotoblog", "进入博客",{x:-15,y:16,z:-20});
+  base3d.setLabel("gotofirst", "欢迎(初版)",{x:20,y:-18,z:0});
+  base3d.setLabel("gotologin", "去登录",{x:-20,y:-20,z:15});
+});
+onBeforeUnmount(()=>{
+  base3d?.clear();
+  base3d=null;
+})
 </script>
 
 
