@@ -71,3 +71,39 @@ export const addTag = (tagName: string) => {
         url: `/api/tags/add?tagName=${tagName}`,
     })
 }
+
+// get 首页文章 单独新增一个接口 最多获取五篇文章 且都在articleIndex中间表中(可以后台管理)
+export const getIndexArticleApi = (pageparams: PageParams) => {
+    return request({
+        method: 'post',
+        url: '/api/articles/indexarticle',
+        data: pageparams
+    })
+}
+
+// 获取文章归档
+// get 首页文章 单独新增一个接口 最多获取五篇文章 且都在articleIndex中间表中(可以后台管理)
+export const getArticleGroupByTimeApi = () => {
+    return request({
+        method: 'get',
+        url: '/api/articles/articletime'
+    })
+}
+
+//获取指定数量的 tag taglist
+export const getTagListApi = (pageparams:PageParams) => {
+    return request({
+        method: 'post',
+        url: '/api/tags/taglist',
+        data:pageparams
+    })
+}
+// 搜索建议
+
+export const getSearchTipApi = (keyword:string) => {
+    return request({
+        method: 'get',
+        url: '/api/articles/searchtip',
+        params:{'keyword':keyword}
+    })
+}
