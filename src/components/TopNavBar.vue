@@ -20,9 +20,9 @@
               <li><a @click="$router.push('/index')">首页</a></li>
               <li><a @click="$router.push('/index/articlelist')">文章</a></li>
               <li><a @click="$router.push('/index/messageboard')">留言板</a></li>
-              <li><a @click="$router.push('/project')">作品</a></li>
+              <!-- <li><a @click="$router.push('/project')">作品</a></li> -->
               <li @click="$router.push('/index/edit')">
-                <el-button :icon="Edit" circle></el-button><a>我也要写</a>
+                <a>我也要写</a>
               </li>
             </ul>
           </div>
@@ -138,9 +138,8 @@
             <li @click="$router.push('/index');isShow=false"><a >首页</a></li>
             <li @click="$router.push('/index/articlelist');isShow=false"><a>文章</a></li>
             <li @click="$router.push('/index/messageboard');isShow=false"><a >留言板</a></li>
-            <li @click="$router.push('/project');isShow=false"><a >作品</a></li>
-            <li @click="$router.push('/index/edit')">
-              <el-button :icon="Edit" circle></el-button><a>我也要写</a>
+            <li @click="$router.push('/index/edit');isShow=false">
+              <el-button :icon="Edit"  circle style="margin-right:10px;"></el-button><a>我也要写</a>
             </li>
           </ul>
           <div class="button-login" v-if="userStore.userinfo.id">
