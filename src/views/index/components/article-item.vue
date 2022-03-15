@@ -27,7 +27,14 @@
             }}</i>
           </div>
         </div>
-        <TagsGroup :tags="articleItem.tags" />
+        <div>
+          <TagItem
+            v-for="tag in articleItem.tags"
+            :key="tag.id"
+            :tagId="tag.id"
+            :tagName="tag.tagName"
+          />
+        </div>
       </div>
     </div>
   </div>
