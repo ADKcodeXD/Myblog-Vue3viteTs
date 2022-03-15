@@ -41,13 +41,15 @@
                 class="iconfont icon-good"
                 :class="{ active: article.isLiked }"
                 @click="likedArticle"
-                ><span v-if="!article.isLiked">点赞</span><span v-else>已点赞</span></i
+                ><span v-if="!article.isLiked">点赞</span
+                ><span v-else>已点赞</span></i
               >
               <i
                 class="iconfont icon-changyonggongneng"
                 :class="{ active: article.isCollected }"
                 @click="collectArticle"
-                ><span v-if="!article.isCollected">收藏</span><span v-else>已收藏</span></i
+                ><span v-if="!article.isCollected">收藏</span
+                ><span v-else>已收藏</span></i
               >
             </div>
             <el-divider>
@@ -71,7 +73,12 @@
               </div>
             </div>
             <div class="tags">
-              <TagsGroup :tags="article.tags" />
+              <TagItem
+                v-for="tag in article.tags"
+                :key="tag.id"
+                :tagId="tag.id"
+                :tagName="tag.tagName"
+              />
             </div>
           </div>
         </div>
@@ -146,6 +153,11 @@
   </div>
 </template>
 
+
+<script lang="ts">
+// 定义组件名字 不然include 和keepalive 无法生效
+export default { name: 'Article' }
+</script>
 <script setup lang="ts">
 import { getArticleItem } from "@/api/article";
 import { addComment, getComments } from "@/api/comment";
