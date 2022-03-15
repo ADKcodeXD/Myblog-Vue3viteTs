@@ -74,7 +74,7 @@ export default defineComponent({
       margin: 0 auto;
       img {
         width: 100%;
-        height: auto;
+        height: 100%;
         object-fit: cover;
       }
     }
