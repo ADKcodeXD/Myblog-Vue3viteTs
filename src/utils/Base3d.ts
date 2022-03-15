@@ -62,7 +62,7 @@ class Base3d {
     }
     // 设置hdr图的函数
     setEnvMap(hdr: string) {
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             new RGBELoader().setPath('/hdr/').load(hdr + '.hdr', (texture) => {
                 texture.mapping = THREE.EquirectangularReflectionMapping;
                 this.scene.environment = texture;
@@ -158,7 +158,7 @@ class Base3d {
                 gltf.scene.scale.set(0.1, 0.1, 0.1)
                 this.scene.add(gltf.scene);
                 resolve(modelName + '模型添加成功');
-                
+
             });
         })
     }
@@ -225,10 +225,10 @@ class Base3d {
             if (name == 'gotoblog') {
                 window.location.href = '/index';
             }
-            if(name=='gotofirst'){
+            if (name == 'gotofirst') {
                 window.location.href = '/welcome';
             }
-            if(name=='gotologin'){
+            if (name == 'gotologin') {
                 window.location.href = '/login';
             }
             if (name == 'aboutme') {
@@ -278,7 +278,7 @@ class Base3d {
     }
 
     // 设置标签
-    setLabel(name: string, content: string) {
+    setLabel(name: string, content: string, position: { x: number, y: number, z: number }) {
         const labelDiv = document.createElement('canvas');
         labelDiv.width = 400;
         labelDiv.height = 400;
@@ -309,7 +309,7 @@ class Base3d {
 
         const label = new THREE.Sprite(spritMaterial);
 
-        label.position.set(random(15), random(10), random(15));
+        label.position.set(position.x, position.y, position.z);
         label.scale.set(10, 10, 1);
         label.name = name;
         // 绘制线条
@@ -330,11 +330,26 @@ class Base3d {
         this.scene.add(label);
         this.scene.add(line);
     }
+
+    // 清除内存 防止内存泄露
+    clear() {
+        try {
+            this.scene.clear();
+            this.renderer.dispose();
+            this.renderer.forceContextLoss();
+            let gl = this.renderer.domElement.getContext("webgl");
+            if (gl) {
+                gl.getExtension("WEBGL_lose_context")?.loseContext();
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }
 function random(startrange: number) {
     // 范围 -15 - -25 以及 15-25
     let flag = 0;
-    if (Math.floor(Math.random()*100)%2 !=0 ) {
+    if (Math.floor(Math.random() * 100) % 2 != 0) {
         flag = -1;
     } else {
         flag = 1;
