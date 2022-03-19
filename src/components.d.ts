@@ -4,6 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AnimeCard: typeof import('./components/Bangumimini/components/AnimeCard.vue')['default']
+    Bangumimini: typeof import('./components/Bangumimini/index.vue')['default']
     Carousel: typeof import('./components/Carousel.vue')['default']
     CommentItem: typeof import('./components/CommentItem.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
