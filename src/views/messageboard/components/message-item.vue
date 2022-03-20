@@ -1,7 +1,7 @@
 <template>
   <div class="comment-item">
     <div class="user-avatar">
-      <img :src="message.avatar" />
+      <img :src="message.avatar?message.avatar:'/src/assets/img/404img.jpg'" />
     </div>
     <!-- <el-avatar :size="60" :src="message.avatar"></el-avatar> -->
     <div class="content">

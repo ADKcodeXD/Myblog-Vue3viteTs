@@ -49,7 +49,7 @@
             display: flex;
             width: 100%;
             transition: all 0.6s ease;
-      
+            height: 100%;
             background-color: rgb(@primaryBackGroundColor);
             .box-card {
               width: 100%;
@@ -63,6 +63,7 @@
           }
           .rightbox {
             display: flex;
+            
             flex-direction: column;
           }
         }
@@ -82,10 +83,22 @@
           .article {
             width: 100%;
             transition: all 0.6s ease;
-      
             
+            flex:1;
+            :deep(.el-card){
+              height: 100%;
+              display: flex;
+              flex-direction: column;
+              .el-card__body{
+                display: flex;
+                height: 100%;
+                flex-direction: column;
+                justify-content: space-around;
+              }
+            }
             .box-card {
               width: 100%;
+              flex: 1;
               transition: all 0.6s ease;
               .card-header {
                 display: flex;
@@ -95,7 +108,7 @@
             }
           }
           .rightbox {
-            width: 30%;
+            width: 25%;
             display: flex;
             flex-direction: column;
           }

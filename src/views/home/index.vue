@@ -60,7 +60,7 @@
         <div class="top">
           <p style="font-size: 32px">详细信息</p>
           <div class="buttongroup">
-            <el-button type="primary" @click="changeIsEdit(true)" v-if="!isEdit"
+            <el-button type="primary" plain @click="changeIsEdit(true)" v-if="!isEdit"
               >编辑资料</el-button
             >
             <el-button type="primary" plain @click="changeIsEdit(false)" v-else
@@ -70,6 +70,7 @@
               type="success"
               @click="formSubmit(formInstance)"
               v-if="isEdit"
+              plain
               >完成</el-button
             >
           </div>

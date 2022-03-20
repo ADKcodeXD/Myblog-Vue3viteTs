@@ -33,6 +33,9 @@
         <TimeLine />
       </div>
     </div>
+    <div class="bangumi">
+      <Bangumimini/>
+    </div>
   </div>
 </template>
 

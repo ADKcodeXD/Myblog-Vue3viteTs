@@ -53,7 +53,7 @@
           </el-form>
           <div class="btn">
             <el-button round @click="isLogin = false">注册</el-button>
-            <el-button @click="submitForm(ruleFormRef)" type="success" round
+            <el-button @click="submitForm(ruleFormRef)" type="success" round plain
               >登录</el-button
             >
           </div>
@@ -103,6 +103,7 @@
               @click="submitRegister(registerFormRef)"
               type="success"
               round
+              plain
               >注册</el-button
             >
           </div>
