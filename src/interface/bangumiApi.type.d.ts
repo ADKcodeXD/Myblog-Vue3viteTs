@@ -1,4 +1,4 @@
-import { SortRole } from "./BangumiEnum"
+import { BroswerType, SortRole } from "./BangumiEnum"
 
 
 export interface WeekDay {
@@ -72,7 +72,7 @@ export interface SubjectInfoSmall extends AnimeInfoBase{
 export interface BroswerParams{
     sort?:SortRole,
     order?:string,
-    type?:string,
+    type?:BroswerType,
     page?:number,
     airtime?:string,
 }

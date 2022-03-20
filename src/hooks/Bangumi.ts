@@ -2,10 +2,10 @@ import { getCalendarApi } from "@/api/bangumi";
 import { CalendarItem } from "@/interface/bangumiApi.type";
 import { getFormatTime } from "@/utils/dayjs";
 export const useAnimeCalendar=async ()=>{
-  let weekDayList = ref<Array<CalendarItem>>();
+  let weekDayList = Array<CalendarItem>();
   const { data } = await getCalendarApi();
-  weekDayList.value = data;
-  return weekDayList
+  weekDayList = data;
+  return weekDayList;
 }
 export const useAnimeData = () => {
   let weekdayMap = [
@@ -50,9 +50,9 @@ export const useAnimeData = () => {
   // 获取今天星期几
   let day = ref('');
   let getToday = () => {
-    let day = new Date().getDay()
-    if (day === 0) return '7';
-    else return (day - 1).toString();
+    let day = new Date().getDay();
+    if (day === 0) return '6';
+    else return (day + 1).toString();
   }
 
   day.value = getToday();
