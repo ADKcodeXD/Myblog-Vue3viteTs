@@ -8,6 +8,7 @@
             v-model="pageparams.keyword"
             :size="'large'"
             placeholder="搜索"
+            
             class="iconfont input-search"
             style="width: 100%; margin-right: 1rem"
             :fetch-suggestions="querySearchAsync"
@@ -23,6 +24,7 @@
             :icon="Search"
             size="large"
             type="success"
+            plain
             @click="searchByKeyword"
           >
             搜索
