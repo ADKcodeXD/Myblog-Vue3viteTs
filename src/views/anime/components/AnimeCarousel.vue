@@ -1,11 +1,22 @@
 <template>
-  <div class="container tw-container tw-mt-10">
-    <div class="title tw-text-3xl tw-flex tw-justify-between tw-items-end">
+  <div class="container tw-mt-10">
+    <div class="title 
+    tw-text-3xl 
+    tw-flex 
+    tw-justify-between 
+    tw-items-end">
       <p>今日速递</p>
       <p class="tw-text-xl">今天是 {{ day }}</p>
     </div>
     <div class="carousel tw-mt-5">
-      <el-carousel  ref="carousel" :interval="5000" pause-on-hover arrow="always" height="28rem" v-loading="bannerLoading">
+      <el-carousel
+        ref="carousel"
+        :interval="5000"
+        pause-on-hover
+        arrow="always"
+        height="28rem"
+        v-loading="bannerLoading"
+      >
         <el-carousel-item v-for="item in bannerList" :key="item.id">
           <carousel-item :anime-info="item" />
         </el-carousel-item>
@@ -38,14 +49,17 @@ export default defineComponent({
     let weekDayList = ref<Array<CalendarItem>>();
     let bannerList = ref<Array<SubjectInfoSmall>>([]);
     const carousel = ref<typeof ElCarousel>();
-    
+
     let bannerLoading = ref(true);
     const getData = async () => {
       bannerLoading.value = true;
       let subjectIds = null;
-      weekDayList = await useAnimeCalendar();
+      weekDayList.value = await useAnimeCalendar();
       if (weekDayList.value) {
         const today = weekDayList.value.find((item) => {
+          if (date.getDay() == 0) {
+            return item.weekday.id === 7;
+          }
           return date.getDay() + 1 === item.weekday.id;
         });
         if (today) {
@@ -55,32 +69,36 @@ export default defineComponent({
         }
       }
       if (subjectIds) {
-        let getItemPromise = (id: number):Promise<SubjectInfoSmall> => {
+        let getItemPromise = (id: number): Promise<SubjectInfoSmall> => {
           return new Promise((resolve, rejected) => {
-            getSubjectInfoApi(id).then((data:any)=>{
-              let realdata:SubjectInfoSmall=data.data;
-              resolve(realdata)
-            }).catch((err: any)=>{
-              rejected(err)
-            })
+            getSubjectInfoApi(id)
+              .then((data: any) => {
+                let realdata: SubjectInfoSmall = data.data;
+                resolve(realdata);
+              })
+              .catch((err: any) => {
+                rejected(err);
+              });
           });
         };
-        let promises: Array<Promise<SubjectInfoSmall>>= [];
+        let promises: Array<Promise<SubjectInfoSmall>> = [];
         subjectIds.forEach((item) => {
           promises.push(getItemPromise(item));
         });
         // 通过allSettled 来判断每个请求是否成功和失败 并将结果push入bannerList
-        Promise.allSettled(promises).then(item=>{
-          item.forEach(obj=>{
-            if( obj.status === 'fulfilled' && obj.value){
-              bannerList.value.push(obj.value)
-            }
+        Promise.allSettled(promises)
+          .then((item) => {
+            item.forEach((obj) => {
+              if (obj.status === "fulfilled" && obj.value) {
+                bannerList.value.push(obj.value);
+              }
+            });
+            bannerLoading.value = false;
+            carousel.value?.setActiveItem(5);
           })
-          bannerLoading.value=false;
-          carousel.value?.setActiveItem(5);
-        }).catch(info=>{
-          console.log(info);
-        })
+          .catch((info) => {
+            console.log(info);
+          });
       }
     };
     const date = new Date();
@@ -91,7 +109,7 @@ export default defineComponent({
       day,
       bannerList,
       bannerLoading,
-      carousel
+      carousel,
     };
   },
   components: { CarouselItem },
@@ -99,8 +117,18 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
+@media screen and (min-width: 320px){
+  :deep(.el-carousel__indicators){
+    display: none;
+  }
+}
+@media screen and (min-width: 768px){
+  :deep(.el-carousel__indicators){
+    display: block;
+  }
+}
 :deep(.el-carousel__item) {
-  display: flex;
+  display: flex !important;
   justify-content: center;
   align-items: center;
 }

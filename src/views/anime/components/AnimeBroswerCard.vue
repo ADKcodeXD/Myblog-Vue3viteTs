@@ -2,13 +2,32 @@
   <div
     class="
       card-main
-      tw-mr-5 tw-mt-10
+      tw-mr-2 tw-mt-10
       hover:-tw-translate-y-5
       tw-transition-all tw-cursor-pointer
     "
     v-if="item"
   >
-    <div class="card">
+    <div class="card tw-relative">
+      <div
+        v-if="item.rank"
+        class="
+          round
+          tw-absolute
+          tw-top-0
+          tw-right-0
+          tw-z-50
+          tw-bg-red-600
+          tw-h-12
+          tw-p-3
+          tw-flex
+          tw-items-center
+        "
+      >
+        <p class="tw-text-2xl tw-font-bold tw-shrink-0 tw-text-orange-50">
+          #{{ item.rank }}
+        </p>
+      </div>
       <el-image
         :src="item.imageUrl"
         fit="cover"
@@ -33,12 +52,6 @@
     </div>
     <div class="tw-p-1 tw-flex tw-flex-col tw-justify-between tw-flex-1">
       <div class="title-part tw-flex">
-        <div>
-          <p class="tw-text-2xl tw-font-bold tw-shrink-0 tw-text-orange-500">
-            #{{ item.rank }}
-          </p>
-          <span></span>
-        </div>
         <div class="tw-flex tw-flex-col tw-flex-1 tw-ml-2">
           <p
             class="
@@ -49,11 +62,13 @@
           >
             {{ item.nameCn ? item.nameCn : item.name }}
           </p>
-          <p class="tw-text-xs tw-text-slate-400 ">{{ item.infoTip }}</p>
+          <p class="tw-text-xs tw-text-slate-400 tw-leading-5">
+            {{ item.infoTip }}
+          </p>
         </div>
       </div>
       <div class="raiting tw-flex tw-items-center tw-justify-between tw-p-1">
-        <small
+        <small class="tw-flex-shrink-0"
           >{{
             item.count && item.count > 10 ? item.count : "少于10"
           }}人评分</small
@@ -95,28 +110,72 @@ export default defineComponent({
 
 
 <style lang="less" scoped>
-.card-main {
-  height: 22rem;
-  width: 15rem;
-  border-radius: 0.6rem 0.6rem 0 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  background-color: rgb(255, 255, 255);
+@media screen and (min-width: 320px) {
+  .round {
+    border-radius: 0 0.6rem 0 1.5rem;
+  }
+  .card-main {
+    height: 24rem;
+    width: 48%;
+    border-radius: 0.6rem 0.6rem 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: rgb(255, 255, 255);
+  }
+  .title-part {
+    flex: 1;
+    max-height: 7rem;
+    overflow: hidden;
+  }
+  :deep(.el-rate__item) {
+    width: 10px;
+  }
+  :deep(.el-rate) {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: space-between;
+  }
 }
+@media screen  and (min-width: 768px){
+  :deep(.el-rate) {
+    flex-grow: 0;
+    flex-basis: auto;
+    width: 40%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .card-main {
+    height: 24rem;
+    width: 30%;
+  }
+  :deep(.el-rate) {
+      width: auto;
+  }
+}
+@media screen and (min-width: 1600px) {
+  .card-main {
+    height: 22rem;
+    width: 14rem;
+  }
+  .title-part {
+    flex: 1;
+    max-height: 5.5rem;
+    overflow: hidden;
+  }
+  :deep(.el-rate__item) {
+    width: 16px;
+  }
+}
+
 .card {
   width: 100%;
   height: 14rem;
 }
-.title-part{
-    max-height: 5.5714rem;
-    overflow: hidden;
-}
-:deep(.el-rate__item) {
-  width: 18px;
-}
+
 :deep(.el-rate--small) {
   height: 16px;
 }

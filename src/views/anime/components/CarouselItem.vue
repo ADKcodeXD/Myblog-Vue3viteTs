@@ -2,10 +2,13 @@
   <div
     class="
       content
-      tw-flex tw-justify-center tw-items-center tw-bg-black tw-relative
+      tw-flex 
+      tw-justify-center 
+      tw-items-center 
+      tw-bg-black tw-relative
     "
   >
-    <div class="info tw-w-2/5">
+    <div class="info tw-w-4/5 md:tw-w-2/5">
       <h3 class="tw-text-4xl tw-font-bold tw-text-slate-100">
         {{ animeInfo.name_cn ? animeInfo.name_cn : animeInfo.name }}
       </h3>
@@ -16,6 +19,9 @@
         class="
           detail
           tw-text-sm tw-text-slate-100 tw-break-words
+          tw-font-thin
+          tw-leading-6
+          md:tw-leading-4
           text-line-show-6
         "
       >
@@ -41,12 +47,11 @@
         >
           查看更多
         </div>
-        
       </div>
       <div>
-          <el-tag v-for="tag in tagsInfoThree" type="warning" class="tag-text">
-              {{tag.name}}
-          </el-tag>
+        <el-tag v-for="tag in tagsInfoThree" type="warning" class="tag-text">
+          {{ tag.name }}
+        </el-tag>
       </div>
     </div>
     <el-image
@@ -90,26 +95,32 @@ export default defineComponent({
     },
   },
   setup(props) {
-      const tagsInfoThree=computed(()=>{
-          let tags=[];
-          if(props.animeInfo.tags.length>3){
-              for(let i =0;i<3;i++){
-                  tags.push(props.animeInfo.tags[i]);
-              }
-          }else{
-              return props.animeInfo.tags;
-          }
-          return tags;
-      })
+    const tagsInfoThree = computed(() => {
+      let tags = [];
+      if (props.animeInfo.tags.length > 3) {
+        for (let i = 0; i < 3; i++) {
+          tags.push(props.animeInfo.tags[i]);
+        }
+      } else {
+        return props.animeInfo.tags;
+      }
+      return tags;
+    });
     return {
       Loading,
-      tagsInfoThree
+      tagsInfoThree,
     };
   },
 });
 </script>
 
 <style lang="less" scoped>
+@media screen and(min) {
+  
+}
+:deep(.el-carousel__indicators){
+  display: flex !important;
+}
 .content {
   width: 100%;
   height: 400%;
@@ -130,13 +141,13 @@ export default defineComponent({
   .button {
     border: rgba(255, 166, 1, 0.438) 1px solid;
     margin-top: 10px;
-    width: 6rem;
+    width: 7rem;
     border-radius: 5px;
     padding: 5px;
   }
-  .tag-text{
-      text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1) !important;
-      margin-right: 5px;
+  .tag-text {
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1) !important;
+    margin-right: 5px;
   }
 }
 

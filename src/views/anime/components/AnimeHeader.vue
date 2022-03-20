@@ -1,12 +1,15 @@
 <template>
   <div
     class="
-      tw-h-28
+      tw-h-48
       tw-mx-auto
       tw-bg-slate-50
       tw-flex
+      tw-flex-col
       tw-justify-between
       tw-mt-5
+      md:tw-flex-row
+      md:tw-h-28
     "
   >
     <div class="tw-flex">
@@ -27,14 +30,14 @@
         </p>
         <p class="tw-text-sm tw-text-white">AdkBlog 定制</p>
       </div>
-      <ul class="ul-item tw-flex tw-justify-evenly tw-items-center tw-mr-24">
+      <ul class="ul-item tw-flex tw-flex-1 tw-text-center  tw-justify-evenly tw-items-center tw-mr-24">
         <li>新番速看</li>
         <li>排行榜</li>
         <li>我的进度</li>
       </ul>
     </div>
 
-    <div class="tw-flex tw-items-center tw-w-1/3 tw-p-4">
+    <div class="tw-flex tw-items-center tw-w-fill  md:tw-flex-1 tw-p-4">
       <div class="right tw-flex tw-flex-1">
         <el-input
           placeholder="请输入内容搜索番剧"
@@ -67,9 +70,10 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.ul-item {
+@media screen and (min-width: 320px){
+    .ul-item {
   li {
-    font-size: 20px;
+    font-size: 14px;
     margin-right: 30px;
     font-weight: 600;
     transition: all ease 0.4s;
@@ -94,5 +98,9 @@ export default defineComponent({
 }
 :deep(.el-input__inner) {
   height: 40px;
+}
+}
+@media screen and (min-width: 768px){
+
 }
 </style>
