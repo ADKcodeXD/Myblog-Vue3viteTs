@@ -10,3 +10,7 @@ dayjs.locale('zh-cn')
 export const getRealativeTime = (value: string) => {
     return dayjs(value).from(dayjs())
 }
+
+export const getFormatTime = (value: string,format:string) => {
+    return dayjs(value).format(format)
+}
