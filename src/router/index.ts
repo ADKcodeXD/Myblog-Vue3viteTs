@@ -14,7 +14,7 @@ const routes =[
             {
                 path:'',
                 name:'Index',
-                meta:{requireAuth:false,keepAlive:true},
+                meta:{requireAuth:false,keepAlive:false},
                 component:()=> import ('@/views/index/index.vue')
             },
             {
@@ -40,6 +40,12 @@ const routes =[
                 name:'Home',
                 meta:{requireAuth:true,keepAlive:true},
                 component:()=> import ('@/views/home/index.vue')
+            },
+            {
+                path:'anime',
+                name:'Anime',
+                meta:{requireAuth:false,keepAlive:false},
+                component:()=> import ('@/views/anime/index.vue')
             },
         ]
     },
