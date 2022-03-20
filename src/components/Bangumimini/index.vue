@@ -87,13 +87,13 @@ export default defineComponent({
 
 
 <style lang="less" scoped>
-@media screen and (min-width: 320px) and (max-width: 1440px) {
+@media screen and (min-width: 320px) {
   .bangumi-mobile {
     margin-top: 10px;
     display: block;
     :deep(.el-tabs__nav-scroll){
       display: flex;
-      justify-content: space-around;
+      
     }
     :deep(.el-tabs__item) {
       justify-content: space-around;
@@ -117,9 +117,10 @@ export default defineComponent({
     display: none;
   }
   .bangumi {
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;
     :deep(.el-tabs__nav-scroll){
-      display: flex;
       height: 100%;
       justify-content: space-around;
     }
@@ -130,7 +131,12 @@ export default defineComponent({
   }
   .tab-inner {
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
     overflow: auto;
+    height: auto;
+    flex: unset;
   }
 }
 </style>

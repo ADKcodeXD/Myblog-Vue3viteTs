@@ -85,7 +85,7 @@ export default defineComponent({
 
 
 <style lang="less" scoped>
-@media screen and (min-width: 320px) and (max-width: 1440px) {
+@media screen and (min-width: 320px) {
   .anime-card {
     margin-right: 1rem;
     margin-top: 1rem;
@@ -96,7 +96,7 @@ export default defineComponent({
     width: 100%;
     .elimg {
       width: 100%;
-      height: 25rem;
+      height: 18rem;
     }
 
     .info {
@@ -104,7 +104,7 @@ export default defineComponent({
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 15rem;
+      height: 17rem;
       .top {
         flex: 1;
         display: flex;
@@ -158,7 +158,7 @@ export default defineComponent({
 @media screen and (min-width: 1440px) {
   .anime-card {
     margin-right: 1rem;
-    cursor: pointer;
+    width: 20rem;
     &:hover {
       :deep(.el-card) {
         transform: translateY(-5px);
@@ -167,64 +167,14 @@ export default defineComponent({
     }
   }
   .card {
+    width: 18rem;
     position: relative;
     .elimg {
       width: 18rem;
       height: 18rem;
     }
     .info {
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       height: 12rem;
-      .top {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        font-size: 0.75rem;
-        .title {
-          margin-top: 5px;
-          font-size: 1rem;
-          color: rgb(0, 126, 78);
-        }
-        .rating {
-          display: flex;
-          justify-content: space-between;
-          .rank {
-            color: rgb(255, 90, 40);
-          }
-          .man {
-            margin-bottom: 5px;
-          }
-        }
-      }
-      .bottom {
-        font-size: 0.8rem;
-        margin-top: 5px;
-        .rating-count {
-          .rank {
-            color: rgb(255, 90, 40);
-          }
-          display: flex;
-          justify-content: space-between;
-        }
-      }
-    }
-    .img {
-      width: 30rem;
-      height: 30rem;
-    }
-    .gray {
-      width: 100%;
-      height: 100%;
-      background-color: rgb(73, 72, 71);
-      display: flex;
-      flex-direction: column;
-      color: rgb(@primaryActiveTextColor);
-      justify-content: center;
-      align-items: center;
     }
   }
 }
