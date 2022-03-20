@@ -11,3 +11,11 @@ export enum Type {
     Game = 4,
     Real = 5
 }
+
+export enum BroswerType {
+    TV = "tv",
+    WEB = "web",
+    OVA = "ova",
+    MOVIE = "movie",
+    MISC = "misc"
+}
