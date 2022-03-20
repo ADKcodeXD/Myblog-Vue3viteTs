@@ -20,7 +20,7 @@
               <li><a @click="$router.push('/index')">首页</a></li>
               <li><a @click="$router.push('/index/articlelist')">文章</a></li>
               <li><a @click="$router.push('/index/messageboard')">留言板</a></li>
-              <!-- <li><a @click="$router.push('/project')">作品</a></li> -->
+              <li><a @click="$router.push('/index/anime')">动漫</a></li>
               <li @click="$router.push('/index/edit')">
                 <a>我也要写</a>
               </li>
@@ -138,18 +138,19 @@
             <li @click="$router.push('/index');isShow=false"><a >首页</a></li>
             <li @click="$router.push('/index/articlelist');isShow=false"><a>文章</a></li>
             <li @click="$router.push('/index/messageboard');isShow=false"><a >留言板</a></li>
+            <li @click="$router.push('/index/anime');isShow=false"><a >动漫</a></li>
             <li @click="$router.push('/index/edit');isShow=false">
               <el-button :icon="Edit"  circle style="margin-right:10px;"></el-button><a>我也要写</a>
             </li>
           </ul>
           <div class="button-login" v-if="userStore.userinfo.id">
-            <el-button type="primary" @click="$router.push('/index/home');isShow=false" round
+            <el-button type="primary" plain @click="$router.push('/index/home');isShow=false" round
               >编辑资料</el-button
             >
-            <el-button type="danger" @click="logout" round>退出登录</el-button>
+            <el-button type="danger" plain @click="logout" round>退出登录</el-button>
           </div>
           <div class="button-login" v-else>
-            <el-button type="success" @click="$router.push('/login');isShow=false" round
+            <el-button type="success" plain @click="$router.push('/login');isShow=false" round
               >去登录</el-button
             >
           </div>
