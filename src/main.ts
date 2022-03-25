@@ -11,7 +11,9 @@ import 'highlight.js/lib/common'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
 import 'highlight.js/styles/github.css'
 import '@/assets/styles/index.css'
+import * as echarts from 'echarts'
+import '@/assets/styles/preflight.css'
 
-createApp(App).use(ElementPlus,{locale: zhCn,}).use(createPinia()).use(router).use(hljsVuePlugin).mount('#app')
-
-
+const app=createApp(App).use(ElementPlus,{locale: zhCn,}).use(createPinia()).use(router).use(hljsVuePlugin)
+app.config.globalProperties.$echarts = echarts;
+app.mount('#app')
