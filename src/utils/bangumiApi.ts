@@ -1,12 +1,12 @@
 import { useStore } from './../store/main';
 import axios from 'axios'
 
-
 // bangumi api  
 const bangumiRequest: any = axios.create({
-    baseURL: "https://api.bgm.tv/", //bam api 参考github上的
+    //baseURL: "http://adkdream.top", //bam api 参考github上的
+    baseURL: "https://api.bgm.tv", //bam api 参考github上的
     timeout: 8000,
-    
+
 })
 //请求拦截器  发请求之前，拦截器可以监测到
 bangumiRequest.interceptors.request.use((config: any) => {
@@ -19,7 +19,7 @@ bangumiRequest.interceptors.request.use((config: any) => {
     return config;
 })
 
-bangumiRequest.interceptors.response.use((response: any)=>{
+bangumiRequest.interceptors.response.use((response: any) => {
     return response;
 })
 

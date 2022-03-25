@@ -3,8 +3,8 @@ import axios from 'axios'
 import JSONbig from 'json-bigint';
 
 const request: any = axios.create({
-    // baseURL: "http://adkdream.top", //生产环境
-    baseURL: "/", //开发环境 未备案状态
+    baseURL: "http://adkdream.top", //生产环境
+    // baseURL: "/", //开发环境 未备案状态
     timeout: 7000,
     transformResponse: [function (data) {
         try {
