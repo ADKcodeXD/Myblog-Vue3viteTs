@@ -116,11 +116,11 @@
                     <h2 v-if="userStore.userinfo.nickname">
                       {{ userStore.userinfo.nickname }}
                     </h2>
-                    <h2 v-else>欢迎您 尊敬的访客</h2>
+                    <h2 v-else class="tw-text-slate-800">欢迎您 尊敬的访客</h2>
                     <div v-if="userStore.userinfo.introduce">
                       {{ userStore.userinfo.introduce }}
                     </div>
-                    <div v-else>登录后可以使用更多功能哦</div>
+                    <div v-else class="tw-text-slate-800">登录后可以使用更多功能哦</div>
                   </div>
                 </div>
                 <!-- <div class="button">
