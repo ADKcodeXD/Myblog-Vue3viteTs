@@ -13,6 +13,8 @@
   </div>
 </template>
 
+
+
 <script lang="ts">
 import { defineComponent } from "vue";
 import AnimeHeader from "./components/AnimeHeader.vue";
@@ -21,10 +23,12 @@ import AnimeBroswer from "./components/AnimeBroswer.vue";
 import AnimeMinagamiteiru from "./components/AnimeMinagamiteiru.vue";
 
 export default defineComponent({
+  
   setup() {
     return {};
   },
   components: { AnimeHeader, AnimeCarousel, AnimeBroswer, AnimeMinagamiteiru },
+  name:'Anime'
 });
 </script>
 
