@@ -1,6 +1,6 @@
 <template>
   <div class="tasall">
-    <h2 class="title">所有标签</h2>
+    <h2 class="title tw-text-2xl">所有标签</h2>
     <TagItem
       v-for="tag in tags"
       :key="tag.id"

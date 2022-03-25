@@ -1,6 +1,6 @@
 <template>
   <div class="timeline">
-    <h2 class="title">最新留言</h2>
+    <h2 class="title tw-text-2xl">最新留言</h2>
     <el-timeline>
       <el-timeline-item
         v-for="item in result"

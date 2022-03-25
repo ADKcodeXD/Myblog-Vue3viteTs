@@ -1,7 +1,7 @@
 
 <template>
   <div class="box">
-    <h2 class="title">文章归档</h2>
+    <h2 class="title tw-text-2xl">文章归档</h2>
     <!-- 两栏 文章归档 -->
     <div class="item" @click="searchBytime(tag.date)" v-for="tag,index in tags" :key="index">
       <div class="date">{{tag.date}}</div>

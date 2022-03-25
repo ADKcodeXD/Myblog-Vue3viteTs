@@ -9,7 +9,7 @@
       }"
     ></div>
     <div class="jieshao" :style="{ top: isMobileLoginShow ? '20%' : '50%' }">
-      <h2>基于Vue3+Vite的轻型博客</h2>
+      <h2>ADKBlog轻型博客</h2>
       <p>具体技术栈为：Vue3+TypeScript+Vite+pinia 后端采用Springboot构建</p>
       <el-button type="primary" plain round @click="$router.push('/index')"
         >直接进入</el-button
@@ -140,7 +140,7 @@
             </el-form>
             <div class="btn">
               <el-button round @click="isLogin = false">注册</el-button>
-              <el-button @click="submitForm(ruleFormRef)" type="success" round
+              <el-button @click="submitForm(ruleFormRef)"  round
                 >登录</el-button
               >
             </div>
@@ -188,7 +188,6 @@
               <el-button round @click="isLogin = true">登录</el-button>
               <el-button
                 @click="submitRegister(registerFormRef)"
-                type="success"
                 round
                 >注册</el-button
               >
