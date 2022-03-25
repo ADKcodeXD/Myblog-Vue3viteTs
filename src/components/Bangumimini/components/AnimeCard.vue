@@ -1,5 +1,5 @@
 <template>
-  <div class="anime-card" v-if="animeInfo">
+  <div class="anime-card" v-if="animeInfo" @click="$router.push(`/index/animedetail/${animeInfo.id}`)">
     <el-row :gutter="10" :span="6">
       <el-card
         @mouseenter="detailInfoShow = true"

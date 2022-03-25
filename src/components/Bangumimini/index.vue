@@ -2,7 +2,7 @@
   <el-card class="bangumi">
     <template #header>
       <div class="card-header">
-        <h3 class="tw-text-2xl">每日更新Anime~</h3>
+        <p class="tw-text-2xl">每日更新Anime~</p>
         <p>今天是{{ today }}</p>
       </div>
     </template>
@@ -15,7 +15,7 @@
       <el-tab-pane
         :label="week.weekday.cn"
         v-for="(week, index) in weekDayList"
-        lazy
+        :key="index"
       >
         <div class="tab-inner myscrollbar">
           <anime-card
@@ -36,7 +36,7 @@
   <el-card class="bangumi-mobile">
     <template #header>
       <div class="card-header">
-        <h3>每日更新Anime~</h3>
+        <p class="tw-text-2xl">每日更新Anime~</p>
         <p>今天是{{ today }}</p>
       </div>
     </template>
@@ -48,7 +48,7 @@
       <el-tab-pane
         :label="week.weekday.cn"
         v-for="(week, index) in weekDayList"
-        lazy
+        :key="index"
       >
         <div class="tab-inner myscrollbar">
           <anime-card
