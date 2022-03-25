@@ -7,6 +7,7 @@
       tw-items-center 
       tw-bg-black tw-relative
     "
+    
   >
     <div class="info tw-w-4/5 md:tw-w-2/5">
       <h3 class="tw-text-4xl tw-font-bold tw-text-slate-100">
@@ -44,12 +45,13 @@
             tw-cursor-pointer
             hover:tw-bg-orange-500
           "
+          @click="$router.push(`/index/animedetail/${animeInfo.id}`)"
         >
           查看更多
         </div>
       </div>
       <div>
-        <el-tag v-for="tag in tagsInfoThree" type="warning" class="tag-text">
+        <el-tag v-for="tag,index in tagsInfoThree" :key="index" type="warning" class="tag-text" >
           {{ tag.name }}
         </el-tag>
       </div>

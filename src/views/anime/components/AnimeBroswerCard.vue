@@ -7,6 +7,7 @@
       tw-transition-all tw-cursor-pointer
     "
     v-if="item"
+     @click="$router.push(`/index/animedetail/${item.id}`)"
   >
     <div class="card tw-relative">
       <div

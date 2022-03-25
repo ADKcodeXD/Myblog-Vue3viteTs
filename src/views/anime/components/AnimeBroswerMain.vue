@@ -71,6 +71,7 @@ import { defineComponent, ref } from "vue";
 import Loading from "@/assets/img/loading.gif";
 import AnimeBroswerCard from "./AnimeBroswerCard.vue";
 import AnimeOrderMenu from "./AnimeOrderMenu.vue";
+import { useBroswer } from "@/hooks/Bangumi";
 
 export default defineComponent({
   setup() {
@@ -82,30 +83,7 @@ export default defineComponent({
       sort: SortRole.rank,
     });
     let isNextPageLoading = ref(false);
-    const getBroswer = async (broswerParams: BroswerParams) => {
-      if(broswerParams.page==1){
-        cardLoading.value=true
-      }
-      const { data } = await getBroswerDataApi(broswerParams);
-      if (data.code === 200) {
-        if (broswerParams.page == 1) {
-          animeInfoList.value = data.data.results;
-          page.value = data.data.pages;
-        } else {
-          animeInfoList.value=animeInfoList.value.concat([...data.data.results]);
-        }
-        cardLoading.value = false;
-      } else {
-        ElMessage.error("请求排行榜失败");
-        cardLoading.value = false;
-      }
-    };
-    const changeParams = (params: BroswerParams) => {
-      for (let key in params) {
-        mainParams[key] = params[key];
-      }
-      getBroswer(params);
-    };
+    const {getBroswer}=useBroswer(cardLoading,animeInfoList,page);
     const nextPage = () => {
       isNextPageLoading.value = true;
       if (mainParams.page && mainParams.page < page.value) {
@@ -118,6 +96,13 @@ export default defineComponent({
         isNextPageLoading.value = false;
       });
     };
+    const changeParams = (params: BroswerParams) => {
+      for (let key in params) {
+        mainParams[key] = params[key];
+      }
+      getBroswer(params);
+    };
+    getBroswer(mainParams);
     return {
       animeInfoList,
       page,

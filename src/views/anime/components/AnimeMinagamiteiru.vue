@@ -16,20 +16,9 @@
       <small>{{ today }} 为您推荐{{ season }}月番</small>
     </div>
     <el-divider></el-divider>
-    <div v-if="todayList" v-for="(item, index) in todayList" :key="index">
-      <div class="card-little tw-flex tw-mb-2">
-        <div class="img tw-w-2/5 tw-flex-shrink-0 tw-h-40 md:tw-h-24">
-          <MyElimage :img="item.images.medium" />
-        </div>
-        <div class="info tw-ml-2 tw-flex tw-flex-col tw-justify-between">
-          <p class="tw-font-extrabold tw-text-amber-900">
-            {{ item.name_cn ? item.name_cn : item.name }}
-          </p>
-          <p class="tw-text-sm tw-text-gray-400">
-            综合评分{{ item.rating.score }}
-          </p>
-          <p class="">{{ item.collection.doing }}人在看</p>
-        </div>
+    <div v-if="todayList">
+      <div v-for="(item, index) in todayList" :key="index">
+        <SmallAnimeItem :item="item"/>
       </div>
     </div>
   </div>
@@ -78,9 +67,8 @@ export default defineComponent({
             return 0;
           }
         });
-        console.log(res);
 
-        for (let i = 0; todayList.value.length<10; i++) {
+        for (let i = 0; todayList.value.length < 10; i++) {
           let year = new Date().getFullYear();
           // 看一下开播日期 如果不是今年（-1年）的直接扔掉
           if (Math.abs(parseInt(res[i].air_date.split("-")[0]) - year) > 1) {
