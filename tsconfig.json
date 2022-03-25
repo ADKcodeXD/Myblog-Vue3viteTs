@@ -36,7 +36,7 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue"
-  ],
+, "shims-echart.d.ts"  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

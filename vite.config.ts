@@ -38,7 +38,7 @@ export default defineConfig({
     postcss: {
       plugins: [
         require('autoprefixer'),
-        require('tailwindcss')
+        require('tailwindcss'),
         // require('postcss-px-to-viewport')({
         //   viewportWidth: 1920,
         //   unitPrecision: 5,
@@ -46,19 +46,25 @@ export default defineConfig({
         //   fontViewportUnit: "vw",
         //   minPixelValue: 1,
         //   mediaQuery: false
-        // }),
+        // }), 
       ]
-    }
+    },
+    
   },
   server: {
     port: 5000,
     proxy: {
       // 选项写法
       // 开发环境开启
-      '/api': {
-        target: 'http://localhost:8888',
+      // '/api': {
+      //   target: 'http://localhost:8888',
+      //   changeOrigin: true,
+      //   rewrite: path => path.replace(/^\/api/, '')
+      // },
+      '/bgm':{
+        target: 'https://api.bgm.tv',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '')
+        rewrite: path => path.replace(/^\/bgm/, '')
       }
     }
   }

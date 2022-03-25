@@ -1,8 +1,11 @@
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  options: {
-    safelist: ['h1', 'h2', 'h3','button'],
-  },
+  content: [
+    // Example content paths...
+    './public/**/*.html',
+    './src/**/*.{js,jsx,ts,tsx,vue}',
+  ],
+  whitelistPatterns:[/el-.+$/],
+  whitelistPatternsChildren: [/el-.+$/],
   theme: {
     extend: {},
   },
@@ -10,5 +13,8 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-  prefix: 'tw-'
+  prefix: 'tw-',
+  corePlugins: {
+    preflight: false,
+  }
 }

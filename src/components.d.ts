@@ -11,6 +11,7 @@ declare module 'vue' {
     Footer: typeof import('./components/Footer.vue')['default']
     MyElimage: typeof import('./components/MyElimage/index.vue')['default']
     Skin: typeof import('./components/Skin.vue')['default']
+    SmallAnimeItem: typeof import('./components/SmallAnimeItem/index.vue')['default']
     TagItem: typeof import('./components/TagItem.vue')['default']
     TagsGroup: typeof import('./components/TagsGroup.vue')['default']
     TopNavBar: typeof import('./components/TopNavBar.vue')['default']

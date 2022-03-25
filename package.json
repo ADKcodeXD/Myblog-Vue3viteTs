@@ -10,10 +10,12 @@
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",
     "@tinymce/tinymce-vue": "^4.0.6",
+    "@types/echarts": "^4.9.13",
     "ali-oss": "^6.17.1",
     "amfe-flexible": "^2.2.1",
     "axios": "^0.25.0",
     "dayjs": "^1.10.7",
+    "echarts": "^5.3.1",
     "element-plus": "^2.0.1",
     "esbuild-windows-64": "^0.14.21",
     "highlight.js": "^11.4.0",
@@ -36,6 +38,7 @@
   },
   "devDependencies": {
     "@types/ali-oss": "^6.16.2",
+    "@types/echarts": "^4.9.13",
     "@types/json-bigint": "^1.0.1",
     "@types/lodash": "^4.14.178",
     "@types/node": "^17.0.18",
