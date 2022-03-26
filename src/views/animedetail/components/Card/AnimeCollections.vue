@@ -41,11 +41,12 @@ export default defineComponent({
     },
   },
   setup(props) {
+    let collectionChart:echarts.ECharts;
     onMounted(() => {
       let domEl = document.getElementById("collectionCharts");
       if (domEl) {
         echarts.init(domEl).dispose();
-        let collectionChart = echarts.init(domEl);
+        collectionChart = echarts.init(domEl);
         collectionChart.clear();
         let data = [];
         for (let i in props.collectionData) {
@@ -106,6 +107,10 @@ export default defineComponent({
         };
       }
     });
+
+    onBeforeUnmount(()=>{
+      collectionChart.clear();
+    })
   },
 });
 </script>

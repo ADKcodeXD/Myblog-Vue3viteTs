@@ -76,6 +76,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    let ratingChart:echarts.ECharts;
     onMounted(() => {
       let countValue = props.animeDetail?.rating.count;
       let chartValue = [];
@@ -84,7 +85,7 @@ export default defineComponent({
       }
       let domRating = document.getElementById("raitingChart");
       if (domRating != null) {
-        let ratingChart = echarts.init(domRating);
+        ratingChart = echarts.init(domRating);
         const option = {
           grid: {
             left: "10%",
@@ -182,7 +183,10 @@ export default defineComponent({
       }
       return tag;
     });
-
+    
+    onBeforeUnmount(()=>{
+      ratingChart.clear();
+    })
     return {
       tags,
     };
