@@ -54,7 +54,7 @@
       class="tw-bg-gray-400 tw-w-1/6 tw-rounded-full tw-mt-5 tw-self-center"
     >
       <el-image
-        src="/src/assets/img/loading.gif"
+        :src="Loading"
         style="width: 100%; height: 100%"
       >
       </el-image>
@@ -63,10 +63,8 @@
 </template>
 
 <script lang="ts">
-import { getBroswerDataApi } from "@/api/bangumiMy";
 import { BroswerParams, BroswerResult } from "@/interface/bangumiApi.type";
 import { SortRole } from "@/interface/BangumiEnum";
-import { ElMessage } from "element-plus";
 import { defineComponent, ref } from "vue";
 import Loading from "@/assets/img/loading.gif";
 import AnimeBroswerCard from "./AnimeBroswerCard.vue";
