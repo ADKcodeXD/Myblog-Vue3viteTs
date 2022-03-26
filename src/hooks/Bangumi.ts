@@ -54,8 +54,8 @@ export const useAnimeData = () => {
   let day = ref('');
   let getToday = () => {
     let day = new Date().getDay();
-    if (day === 0) return '6';
-    else return (day + 1).toString();
+    if (day === 0) return '7';
+    else return (day-1).toString();
   }
 
   day.value = getToday();
