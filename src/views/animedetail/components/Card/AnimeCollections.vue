@@ -41,9 +41,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    let collectionChart:echarts.ECharts;
+    let collectionChart:any;
     onMounted(() => {
-      let domEl = document.getElementById("collectionCharts");
+      let domEl:HTMLElement|null = document.getElementById("collectionCharts");
       if (domEl) {
         echarts.init(domEl).dispose();
         collectionChart = echarts.init(domEl);
@@ -109,7 +109,8 @@ export default defineComponent({
     });
 
     onBeforeUnmount(()=>{
-      collectionChart.clear();
+      if(collectionChart)
+        collectionChart.clear();
     })
   },
 });

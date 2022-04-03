@@ -1,5 +1,5 @@
 <template>
-  <div class="tw-w-fill tw-px-5 tw-mt-28 lg:tw-w-4/5 lg:tw-mx-auto lg:tw-mt-0">
+  <div class="tw-w-fill tw-px-1 tw-mt-28 lg:tw-w-4/5 lg:tw-mx-auto lg:tw-mt-0">
     <AnimeHeader />
     <AnimeCarousel />
     <div class="tw-flex tw-mt-10 tw-flex-col md:tw-flex-row">

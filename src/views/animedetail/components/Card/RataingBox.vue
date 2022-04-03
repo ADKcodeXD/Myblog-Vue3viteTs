@@ -185,7 +185,8 @@ export default defineComponent({
     });
     
     onBeforeUnmount(()=>{
-      ratingChart.clear();
+      if(ratingChart)
+        ratingChart.clear();
     })
     return {
       tags,

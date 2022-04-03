@@ -9,7 +9,8 @@
           {{ role.role_name }}
         </p>
         <div class="imgcontainer tw-mt-2 tw-w-28 tw-h-28">
-          <MyElimage :img="role.images.small" />
+          <MyElimage :img="role.images.small" v-if="role.images.small" />
+          <MyElimage  v-else />
         </div>
         <p class="tw-text-stone-100 text-line-show-2 tw-font-thin">
           {{ role.name_cn ? role.name_cn : role.name }}
