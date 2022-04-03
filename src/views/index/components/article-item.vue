@@ -11,7 +11,7 @@
             {{ articleItem.summary }}
           </p>
         </div>
-        <div class="right">
+        <div class="right tw-flex-shrink-0">
           <p class="time">{{ time }}</p>
         </div>
       </div>

@@ -36,6 +36,7 @@
     <div class="bangumi">
       <Bangumimini/>
     </div>
+
   </div>
 </template>
 
@@ -61,6 +62,7 @@ let pageparams: PageParams = {
   page: 1,
   pagesize: 5,
 };
+let isChatRoomshow=ref(false);
 // 获取文章列表
 const getIndexfive = async () => {
   const { data } = await getIndexArticleApi(pageparams);
