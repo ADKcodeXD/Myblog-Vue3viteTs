@@ -6,7 +6,7 @@
         class="card"
         :body-style="{ padding: '0px' }"
       >
-        <el-image :src="animeInfo.images.large" fit="cover" class="elimg">
+        <el-image :src="animeInfo.images&&animeInfo.images.large" fit="cover" class="elimg">
           <template #placeholder>
             <div class="gray">
               <el-image :src="Loading">

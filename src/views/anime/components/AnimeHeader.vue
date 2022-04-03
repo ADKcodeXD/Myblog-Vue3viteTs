@@ -40,7 +40,7 @@
           tw-mr-24
         "
       >
-        <li>新番速看</li>
+        <li @click="$router.push('/index/animenew')">新番速看</li>
         <li>排行榜</li>
         <li>我的进度</li>
       </ul>

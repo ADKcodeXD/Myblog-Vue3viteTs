@@ -9,7 +9,7 @@
     "
     
   >
-    <div class="info tw-w-4/5 md:tw-w-2/5">
+    <div class="info tw-w-2/3 tw-break-all md:tw-w-2/5">
       <h3 class="tw-text-4xl tw-font-bold tw-text-slate-100">
         {{ animeInfo.name_cn ? animeInfo.name_cn : animeInfo.name }}
       </h3>
@@ -19,11 +19,11 @@
       <p
         class="
           detail
-          tw-text-sm tw-text-slate-100 tw-break-words
+          tw-text-sm tw-text-white tw-break-words
           tw-font-thin
           tw-leading-6
           md:tw-leading-4
-          text-line-show-6
+          text-line-show-3
         "
       >
         {{ animeInfo.summary }}
@@ -50,7 +50,7 @@
           查看更多
         </div>
       </div>
-      <div>
+      <div class="tw-my-2">
         <el-tag v-for="tag,index in tagsInfoThree" :key="index" type="warning" class="tag-text" >
           {{ tag.name }}
         </el-tag>
