@@ -41,13 +41,17 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-
-.el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+@media screen and(min-width:320px) {
+  :deep(.el-carousel__container) {
+    margin-top: 5rem;
+    height: 200px;
+  }
 }
-
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
+@media screen and(min-width:992px) {
+  :deep(.el-carousel__container) {
+    margin-top: 0;
+    height: 300px;
+  }
 }
 
 .content {
@@ -57,7 +61,7 @@ export default defineComponent({
   cursor: pointer;
   .el-image {
     width: 100%;
-    height: auto;
+    height: 100%;
     filter: brightness(0.7);
   }
   .title {

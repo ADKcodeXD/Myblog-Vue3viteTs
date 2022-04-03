@@ -165,7 +165,7 @@
 
 <script setup lang="ts">
 import { useStore } from "@/store/main";
-import { removeItem } from "@/utils/storage";
+import { removeItem, setItem } from "@/utils/storage";
 import { Edit } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { currentUserApi } from "@/api/user";
@@ -198,7 +198,7 @@ const getUserInfo = () => {
           ElMessage.error(data.msg);
           removeItem("user");
         } else {
-          userStore.setUser(data.data);
+          userStore.setUser(data.data); 
         }
       })
       .catch((error: any) => {
