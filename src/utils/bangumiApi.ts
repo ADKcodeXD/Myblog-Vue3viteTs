@@ -3,10 +3,8 @@ import axios from 'axios'
 
 // bangumi api  
 const bangumiRequest: any = axios.create({
-    //baseURL: "http://adkdream.top", //bam api 参考github上的
     baseURL: "https://api.bgm.tv", //bam api 参考github上的
     timeout: 8000,
-
 })
 //请求拦截器  发请求之前，拦截器可以监测到
 bangumiRequest.interceptors.request.use((config: any) => {

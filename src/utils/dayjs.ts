@@ -7,7 +7,7 @@ dayjs.extend(relativeTime)
 // 使用中文语言包
 dayjs.locale('zh-cn')
 
-export const getRealativeTime = (value: string) => {
+export const getRealativeTime = (value: string|number) => {
     return dayjs(value).from(dayjs())
 }
 

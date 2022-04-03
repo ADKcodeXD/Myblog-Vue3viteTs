@@ -59,6 +59,18 @@ const routes = [
                 meta: { requireAuth: false, keepAlive: false },
                 component: () => import('@/views/animesearch/index.vue')
             },
+            {
+                path: 'animeplay/:id',
+                name: 'AnimePlay',
+                meta: { requireAuth: true, keepAlive: false },
+                component: () => import('@/views/animeplay/index.vue')
+            },
+            {
+                path: 'animenew',
+                name: 'AnimeNew',
+                meta: { requireAuth: true, keepAlive: false },
+                component: () => import('@/views/animenew/index.vue')
+            },
         ]
     },
     {
@@ -66,11 +78,11 @@ const routes = [
         name: 'welcome',
         component: () => import('@/components/WelcomePage.vue')
     },
-    {
-        path: '/project',
-        name: 'project',
-        component: () => import('@/views/profile/index.vue')
-    },
+    // {
+    //     path: '/project',
+    //     name: 'project',
+    //     component: () => import('@/views/profile/index.vue')
+    // },
     {
         path: '/login',
         name: 'login',
@@ -87,6 +99,12 @@ const routes = [
         path: '/threeshow',
         name: 'threeshow',
         component: () => import('@/views/threeshow/index.vue')
+    },
+    {
+        path: '/play',
+        name: 'Player',
+        meta: { requireAuth: false, keepAlive: false },
+        component: () => import('@/views/animeplay/components/player.vue')
     },
 ]
 

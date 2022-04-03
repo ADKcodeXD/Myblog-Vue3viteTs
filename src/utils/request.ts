@@ -1,10 +1,10 @@
 import { useStore } from './../store/main';
 import axios from 'axios'
 import JSONbig from 'json-bigint';
-
+const baseUrl=process.env.VITE_BASE_API;
+console.log(baseUrl);
 const request: any = axios.create({
-    baseURL: "http://adkdream.top", //生产环境
-    // baseURL: "/", //开发环境 未备案状态
+    baseURL: baseUrl, //生产环境
     timeout: 7000,
     transformResponse: [function (data) {
         try {
@@ -13,7 +13,6 @@ const request: any = axios.create({
           return data
         }
     }]
-    
 })
 //请求拦截器  发请求之前，拦截器可以监测到
 request.interceptors.request.use((config: any) => {
