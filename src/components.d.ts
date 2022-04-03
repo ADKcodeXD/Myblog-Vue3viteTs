@@ -7,6 +7,7 @@ declare module 'vue' {
     AnimeCard: typeof import('./components/Bangumimini/components/AnimeCard.vue')['default']
     Bangumimini: typeof import('./components/Bangumimini/index.vue')['default']
     Carousel: typeof import('./components/Carousel.vue')['default']
+    ChatRoom: typeof import('./components/ChatRoom/index.vue')['default']
     CommentItem: typeof import('./components/CommentItem.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     MyElimage: typeof import('./components/MyElimage/index.vue')['default']
