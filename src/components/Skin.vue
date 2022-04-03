@@ -10,6 +10,13 @@
     <li v-else @click="chanegDefault">
       <i class="iconfont icon-tianqitaiyangqichuang"></i>
     </li>
+    <li
+      class="item-anime"
+      @click="isChatRoomshow = !isChatRoomshow"
+      :class="{ acti: isChatRoomshow }"
+    >
+      <i class="iconfont icon-pinglun"></i>
+    </li>
   </ul>
   <ul class="list-mobile">
     <transition-group mode="out-in" name="toptodown">
@@ -19,22 +26,39 @@
       <li class="item-anime" @click="isMobile = false" v-if="isMobile" :key="1">
         <i class="iconfont icon-under"></i>
       </li>
-      <li class="item-anime" @click="$router.push('/index/home')" v-if="isMobile" :key="3">
+      <li
+        class="item-anime"
+        @click="$router.push('/index/home')"
+        v-if="isMobile"
+        :key="3"
+      >
         <i class="iconfont icon-geren"></i>
       </li>
       <li class="item-anime" @click="top" v-if="isMobile" :key="4">
         <i class="iconfont icon-huidaodingbu"></i>
       </li>
-      <div  class="yejian item-anime" v-if="isMobile" :key="5">
+      <li
+        class="item-anime"
+        @click="isChatRoomshow = !isChatRoomshow"
+        :class="{ acti: isChatRoomshow }"
+        v-if="isMobile"
+        :key="4"
+      >
+        <i class="iconfont icon-pinglun"></i>
+      </li>
+      <div class="yejian item-anime" v-if="isMobile" :key="5">
         <li v-if="!isDark" @click="changedark">
           <i class="iconfont icon-dark"></i>
         </li>
-        <li v-else @click="chanegDefault" >
+        <li v-else @click="chanegDefault">
           <i class="iconfont icon-tianqitaiyangqichuang"></i>
         </li>
       </div>
     </transition-group>
   </ul>
+  <transition name="width-height" >
+    <ChatRoom v-if="isChatRoomshow"   @close="isChatRoomshow=false" />
+  </transition>
 </template>
 <script lang="ts">
 import { useThemeStore } from "@/store/theme";
@@ -45,6 +69,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   setup(props, { emit }) {
     const themeStore = useThemeStore();
+    let isChatRoomshow = ref(false);
     let isDark = ref(false);
     let theme = getItem("themeName");
     let isMobile = ref(false);
@@ -72,13 +97,29 @@ export default defineComponent({
       }
     });
 
-    return { top, changedark, chanegDefault, isDark, isMobile };
+    return { top, changedark, chanegDefault, isDark, isMobile, isChatRoomshow };
   },
 });
 </script>
 
 
 <style lang="less" scoped>
+.width-height-enter-from,
+.width-height-leave-to{
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  opacity: 0;
+}
+.width-height-enter-to,
+.width-height-leave-from {
+  transform: scaleY(1);
+  transform-origin: 50% 100%;
+  opacity: 1;
+}
+.width-height-enter-active ,
+.width-height-leave-active{
+  transition: all 0.5s ease;
+}
 .toptodown-enter-from,
 .toptodown-leave-to {
   transform: translateY(10%);
@@ -89,7 +130,7 @@ export default defineComponent({
   transform: translateY(0);
   opacity: 1;
 }
-.toptodown-enter-active{
+.toptodown-enter-active {
   transition: all 0.5s ease;
 }
 .toptodown-leave-active {
@@ -123,6 +164,10 @@ export default defineComponent({
       }
     }
   }
+  .acti {
+    color: rgb(@primaryActiveTextColor) !important;
+    background-color: rgba(@primaryActiveColor, 1) !important;
+  }
 }
 @media screen and (min-width: 750px) and (max-width: 992px) {
   .list {
@@ -150,6 +195,10 @@ export default defineComponent({
   .list-mobile {
     display: none;
   }
+  .acti {
+    color: rgb(@primaryActiveTextColor) !important;
+    background-color: rgba(@primaryActiveColor, 1) !important;
+  }
 }
 @media screen and (min-width: 992px) {
   .list {
@@ -176,6 +225,10 @@ export default defineComponent({
   }
   .list-mobile {
     display: none;
+  }
+  .acti {
+    color: rgb(@primaryActiveTextColor) !important;
+    background-color: rgba(@primaryActiveColor, 1) !important;
   }
 }
 </style>
