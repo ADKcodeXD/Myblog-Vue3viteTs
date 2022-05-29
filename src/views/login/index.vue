@@ -1,118 +1,114 @@
 <template>
   <div class="login">
-    <div
-      class="imgbox"
-      ref="target"
-      :style="{
-        backgroundPosition: `${x * -0.1}px ${y * -0.1}px`,
-        filter: isBlur ? 'brightness(0.6) blur(2px)' : 'brightness(0.9)',
-      }"
-    ></div>
-    <div class="jieshao" :style="{ top: isMobileLoginShow ? '20%' : '50%' }">
-      <h2>ADKBlog轻型博客</h2>
-      <p>具体技术栈为：Vue3+TypeScript+Vite+pinia 后端采用Springboot构建</p>
-      <el-button type="primary" plain round @click="$router.push('/index')"
-        >直接进入</el-button
-      >
-      <el-button
-        class="loginbtn-mobile"
-        type="success"
-        plain
-        round
-        @click="isMobileLoginShow = true"
-        >登录Blog</el-button
-      >
+    <!-- github 联系方式  -->
+    <ul class="tw-absolute tw-top-2 tw-left-2 tw-flex">
+      <li>
+        <a href="https://github.com/ADKcodeXD" target="_blank"><i class="iconfont icon-github"></i></a>
+      </li>
+      <li>
+        <a href="https://space.bilibili.com/2988768" target="_blank"><i class="iconfont icon-bilibili-line"></i></a>
+      </li>
+      <li>
+        <a href="https://twitter.com/ADKinsoMaD" target="_blank"><i class="iconfont icon-tuite"></i></a>
+      </li>
+    </ul>
+    
+    <!-- 背景放的那张图 -->
+    <div class="imgbox" ref="target" :style="{ transform: `rotateX(${-xrotate}deg) rotateY(${yrotate}deg)` }">
+      <!-- 介绍 -->
+      <div class="jieshao">
+        <MyElimage :img="Jieshao" />
+      </div>
     </div>
-    <div
-      class="login-box"
-      @mouseenter="isBlur = true"
-      @mouseleave="isBlur = false"
-    >
-      <transition-group name="rightout" mode="out-in">
-        <!-- 登录 -->
-        <div v-if="isLogin" :key="1" class="loginform">
-          <h2>登录blog</h2>
-          <p class="sub-title">登录即可使用评论留言等功能</p>
-          <el-form
-            label-position="left"
-            label-width="80px"
-            ref="ruleFormRef"
-            :rules="rules"
-            :model="form"
-          >
-            <el-form-item prop="username" label="用户名">
-              <el-input v-model="form.username"></el-input>
-            </el-form-item>
-            <el-form-item prop="password" label="密码">
-              <el-input
-                type="password"
-                v-model="form.password"
-                prop="password"
-              ></el-input>
-            </el-form-item>
-          </el-form>
-          <div class="btn">
-            <el-button round @click="isLogin = false">注册</el-button>
-            <el-button @click="submitForm(ruleFormRef)" type="success" round plain
-              >登录</el-button
-            >
-          </div>
-        </div>
-        <!-- 注册 共用一套样式 -->
 
-        <div v-else :key="2" class="loginform">
-          <h2>注册一个账户</h2>
-          <p class="sub-title">注册后即可使用本博客的一些功能</p>
-          <el-form
-            label-position="left"
-            label-width="80px"
-            ref="registerFormRef"
-            :rules="registerRules"
-            :model="registerForm"
-          >
-            <el-form-item prop="username" label="用户名">
-              <el-input
-                v-model="registerForm.username"
-                prop="username"
-              ></el-input>
-            </el-form-item>
-            <el-form-item prop="nickname" label="昵称">
-              <el-input
-                v-model="registerForm.nickname"
-                prop="nickname"
-              ></el-input>
-            </el-form-item>
-            <el-form-item prop="password" label="密码">
-              <el-input
-                type="password"
-                v-model="registerForm.password"
-                prop="password"
-              ></el-input>
-            </el-form-item>
-            <el-form-item prop="repassword" label="确认密码">
-              <el-input
-                type="password"
-                v-model="registerForm.repassword"
-                prop="repassword"
-              ></el-input>
-            </el-form-item>
-          </el-form>
-          <div class="btn">
-            <el-button round @click="isLogin = true">登录</el-button>
-            <el-button
-              @click="submitRegister(registerFormRef)"
-              type="success"
-              round
-              plain
-              >注册</el-button
-            >
+    <!-- 登录盒子 -->
+    <transition name="rightout" mode="out-in" @before-enter="beforeEnter" @enter="enter" @leave="leave" :css="false">
+      <div v-if="isLogin" :key="1" class="temp">
+        <div class="login-box">
+          <div class="loginform">
+            <div class="tw-w-48 tw-my-5">
+              <MyElimage :img="Login" />
+            </div>
+            <el-form label-position="left" ref="ruleFormRef" :rules="rules" :model="form">
+              <el-form-item prop="username">
+                <div class="tw-w-32 tw-h-10 tw-mr-5">
+                  <MyElimage :img="Username" />
+                </div>
+                <el-input v-model="form.username"></el-input>
+              </el-form-item>
+              <el-form-item prop="password">
+                <div class="tw-w-32 tw-h-10 tw-mr-5">
+                  <MyElimage :img="Password" />
+                </div>
+                <el-input type="password" v-model="form.password" prop="password"></el-input>
+              </el-form-item>
+            </el-form>
+            <div class="btn">
+              <div class="register-btn" @click="isLogin = false">
+              </div>
+              <div class="login-btn" @click="submitForm(ruleFormRef)">
+              </div>
+            </div>
+          </div>
+          <!-- logo -->
+          <div class="tw-w-72 tw-absolute tw-bottom-4 tw-left-4">
+            <MyElimage :img="Logo" />
+          </div>
+          <!-- 直接看看 -->
+          <div class="goin" @click="$router.push('/index')">
           </div>
         </div>
-      </transition-group>
-    </div>
+      </div>
+      <div v-else :key="2" class="temp">
+        <div class="login-box">
+          <div class="loginform">
+            <div class="tw-w-96 tw-my-5">
+              <MyElimage :img="Register" />
+            </div>
+            <el-form label-position="left" ref="registerFormRef" :rules="registerRules" :model="registerForm">
+              <el-form-item prop="username">
+                <div class="tw-w-32 tw-h-10 tw-mr-5">
+                  <MyElimage :img="Username" />
+                </div>
+                <el-input v-model="registerForm.username" prop="username"></el-input>
+              </el-form-item>
+              <el-form-item prop="nickname">
+                <div class="tw-w-32 tw-h-10 tw-mr-5">
+                  <MyElimage :img="Nickname" />
+                </div>
+                <el-input v-model="registerForm.nickname" prop="nickname"></el-input>
+              </el-form-item>
+              <el-form-item prop="password">
+                <div class="tw-w-32 tw-h-10 tw-mr-5">
+                  <MyElimage :img="Password" />
+                </div>
+                <el-input type="password" v-model="registerForm.password" prop="password"></el-input>
+              </el-form-item>
+              <el-form-item prop="repassword">
+                <div class="tw-w-32 tw-h-10 tw-mr-5">
+                  <MyElimage :img="RePassword" />
+                </div>
+                <el-input type="password" v-model="registerForm.repassword" prop="repassword"></el-input>
+              </el-form-item>
+            </el-form>
+            <div class="btn">
+              <div class="login-btn" @click="isLogin = true">
+              </div>
+              <div class="register-btn" @click="submitRegister(registerFormRef)">
+              </div>
+            </div>
+          </div>
+          <div class="tw-w-72 tw-absolute tw-bottom-4 tw-left-4">
+            <MyElimage :img="Logo" />
+          </div>
+          <!-- 直接看看 -->
+          <div class="goin" @click="$router.push('/index')">
+          </div>
+        </div>
+      </div>
+    </transition>
 
     <!-- 这是移动端的 -->
-
     <transition name="onlyopacity">
       <div class="login-box-mobile" v-if="isMobileLoginShow">
         <!-- 登录 -->
@@ -120,77 +116,41 @@
           <div v-if="isLogin" :key="1" class="loginform list-item">
             <h2>登录blog</h2>
             <p class="sub-title">登录即可使用评论留言等功能</p>
-            <el-form
-              label-position="left"
-              label-width="80px"
-              ref="ruleFormRef"
-              :rules="rules"
-              :model="form"
-            >
+            <el-form label-position="left" label-width="80px" ref="ruleFormRef" :rules="rules" :model="form">
               <el-form-item prop="username" label="用户名">
                 <el-input v-model="form.username"></el-input>
               </el-form-item>
               <el-form-item prop="password" label="密码">
-                <el-input
-                  type="password"
-                  v-model="form.password"
-                  prop="password"
-                ></el-input>
+                <el-input type="password" v-model="form.password" prop="password"></el-input>
               </el-form-item>
             </el-form>
             <div class="btn">
               <el-button round @click="isLogin = false">注册</el-button>
-              <el-button @click="submitForm(ruleFormRef)"  round
-                >登录</el-button
-              >
+              <el-button @click="submitForm(ruleFormRef)" round>登录</el-button>
             </div>
           </div>
           <!-- 注册 共用一套样式 -->
-
           <div v-else :key="2" class="loginform list-item">
             <h2>注册一个账户</h2>
             <p class="sub-title">注册后即可使用本博客的一些功能</p>
-            <el-form
-              label-position="left"
-              label-width="80px"
-              ref="registerFormRef"
-              :rules="registerRules"
-              :model="registerForm"
-            >
+            <el-form label-position="left" label-width="80px" ref="registerFormRef" :rules="registerRules"
+              :model="registerForm">
               <el-form-item prop="username" label="用户名">
-                <el-input
-                  v-model="registerForm.username"
-                  prop="username"
-                ></el-input>
+                <el-input v-model="registerForm.username" prop="username"></el-input>
               </el-form-item>
               <el-form-item prop="nickname" label="昵称">
-                <el-input
-                  v-model="registerForm.nickname"
-                  prop="nickname"
-                ></el-input>
+                <el-input v-model="registerForm.nickname" prop="nickname"></el-input>
               </el-form-item>
               <el-form-item prop="password" label="密码">
-                <el-input
-                  type="password"
-                  v-model="registerForm.password"
-                  prop="password"
-                ></el-input>
+                <el-input type="password" v-model="registerForm.password" prop="password"></el-input>
               </el-form-item>
               <el-form-item prop="repassword" label="确认密码">
-                <el-input
-                  type="password"
-                  v-model="registerForm.repassword"
-                  prop="repassword"
-                ></el-input>
+                <el-input type="password" v-model="registerForm.repassword" prop="repassword"></el-input>
               </el-form-item>
             </el-form>
             <div class="btn">
               <el-button round @click="isLogin = true">登录</el-button>
-              <el-button
-                @click="submitRegister(registerFormRef)"
-                round
-                >注册</el-button
-              >
+              <el-button @click="submitRegister(registerFormRef)" round>注册</el-button>
             </div>
           </div>
         </transition-group>
@@ -200,115 +160,75 @@
 </template>
 
 <script setup lang="ts">
-import { userLogin, userRegister } from "@/api/login";
-import { RegisterParams } from "@/interface/params";
-import { useStore } from "@/store/main";
-import { setItem } from "@/utils/storage";
 import {
-  validateNickname,
-  validatePassword,
-  validateUsername,
-} from "@/utils/validate";
-import { reactive, ref } from "@vue/reactivity";
-import { useMouse } from "@vueuse/core";
-import { ElForm, ElMessage } from "element-plus";
-import { useRouter } from "vue-router";
-// 公共部分
-const userStore = useStore();
-const router = useRouter();
-const isBlur = ref(false);
-const { x, y } = useMouse();
-let target = ref(null);
-// 控制移动端的登录显示
-let isMobileLoginShow = ref(false);
-// 做一个登录注册表单切换的按钮
-let isLogin = ref(true);
-// 登录部分的逻辑
-const form = reactive({
-  username: "",
-  password: "",
-});
+  useLoginMethod,
+  useLoginprop,
+  useRegisterMethod,
+  useRoles,
+} from "@/hooks/login";
+import Login from './imgs/login-logo.png'
+import Username from './imgs/username.png'
+import Password from './imgs/password.png'
+import RePassword from './imgs/repassword.png'
+import Nickname from './imgs/nickname.png'
+import Register from './imgs/register-logo.png';
+import Logo from '@/assets/img/new-logo.png';
+import Jieshao from './imgs/介绍.png';
+import gsap from 'gsap';
+import { CustomEase } from "gsap/CustomEase";
+gsap.registerPlugin(CustomEase);
+const {
+  registerFormRef,
+  registerForm,
+  ruleFormRef,
+  form,
+  isLogin,
+  isMobileLoginShow,
+  target,
+  x,
+  y,
+  router,
+  userStore,
+} = useLoginprop();
 
-type FormInstance = InstanceType<typeof ElForm>;
-const ruleFormRef = ref<FormInstance>();
-
-const rules = reactive({
-  username: [{ validator: validateUsername, trigger: "blur" }],
-  password: [{ validator: validatePassword, trigger: "blur" }],
-});
-
-const submitForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.validate(async (valid) => {
-    if (valid) {
-      const loginParams = { username: form.username, password: form.password };
-      const result = await userLogin(loginParams);
-      console.log(result);
-      if (result.data.code === 200) {
-        userStore.user.token = result.data.data;
-        setItem("user", userStore.user.token);
-        router.push("/index");
-      } else {
-        //   登录失败 提示msg
-        ElMessage.error(result.data.msg);
-      }
-    } else {
-      ElMessage.error("请校验表单！");
-      return false;
-    }
-  });
-};
-
-// 注册部分的逻辑
-const registerForm = reactive({
-  username: "",
-  nickname: "",
-  password: "",
-  repassword: "",
-});
-const registerFormRef = ref<FormInstance>();
-// 确认密码表单校验
-const validateRePassword = (rule: any, value: any, callback: any) => {
-  if (value === "") {
-    callback(new Error("请确认密码"));
-  } else if (value !== registerForm.password) {
-    callback(new Error("确认密码必须与密码一致"));
-  } else {
-    callback();
-  }
-};
-// 注册表单校验规则
-const registerRules = reactive({
-  username: [{ validator: validateUsername, trigger: "blur" }],
-  nickname: [{ validator: validateNickname, trigger: "blur" }],
-  password: [{ validator: validatePassword, trigger: "blur" }],
-  repassword: [{ validator: validateRePassword, trigger: "blur" }],
-});
-const submitRegister = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.validate(async (valid) => {
-    if (valid) {
-      const registerParams: RegisterParams = {
-        username: registerForm.username,
-        password: registerForm.password,
-        nickname: registerForm.nickname,
-      };
-      const result = await userRegister(registerParams);
-      if (result.data.code === 200) {
-        userStore.user.token = result.data.data;
-        setItem("user", userStore.user.token);
-        router.push("/index");
-      } else {
-        //   注册失败 提示msg
-        ElMessage.error(result.data.msg);
-      }
-    } else {
-      ElMessage.error("请校验表单！");
-      return false;
-    }
-  });
-};
+const { submitForm } = useLoginMethod(userStore, router, form);
+const { rules, registerRules } = useRoles(registerForm);
+const { submitRegister } = useRegisterMethod(userStore, router, registerForm);
+const beforeEnter = (el) => {
+  gsap.set(el, {
+    rotationY: 90,
+  })
+}
+const enter = (el, done) => {
+  gsap.to(el, {
+    duration: 1,
+    rotationY: 0,
+    ease: 'elastic.out(1, 0.5)',
+    onComplete: done
+  })
+}
+const leave = (el, done) => {
+  gsap.to(el, {
+    duration: 0.6,
+    rotationY: -90,
+    ease: CustomEase.create("custom", "M0,0 C0.5,0 0.607,-0.062 0.78,0.054 0.904,0.137 0.972,0.088 1,1 "),
+    onComplete: done
+  })
+}
+const yrotate = computed(() => {
+  let res = 0;
+  let halfVal = window.innerWidth / 2;
+  res = x.value - halfVal;
+  return res / 50;
+})
+const xrotate = computed(() => {
+  let res = 0;
+  let halfVal = window.innerHeight / 2;
+  res = y.value - halfVal;
+  return res / 50;
+})
 </script>
+
 
 <style scoped lang="less">
 @import url(./styles/login-pc.less);
