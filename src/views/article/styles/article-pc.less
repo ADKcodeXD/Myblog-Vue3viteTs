@@ -1,5 +1,5 @@
 @import url(../../../assets/styles/github-light.css);
-@media screen and (min-width:320px) and (max-width:992px){
+@media screen and (min-width:320px){
     .article {
         overflow-x: hidden;
         position: relative;
@@ -20,7 +20,6 @@
           box-sizing: border-box;
           padding: 10px;
           transition: all 0.8s ease;
-      
           background-color: rgb(@primaryBackGroundColor);
           height: 100%;
           .markdown-body{
@@ -40,7 +39,6 @@
               top: 0;
               left: 0;
               width: 100%;
-              
               height: 100%;
               max-height: 393px;
               object-fit: cover;
@@ -178,6 +176,7 @@
               margin-top: 20px;
               width: 100%;
               height: 300px;
+              position: relative;
               .up {
                 justify-content: space-between;
                 display: flex;
@@ -212,217 +211,22 @@
 
 @media screen and (min-width:992px){
     .article {
-        overflow-x: hidden;
-        position: relative;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        transition: all 0.8s ease;
-        background-color: rgb(@primaryBackGroundColor);
-        .top {
-          position: absolute;
-          right: 0;
-          left: 0;
-          z-index: 10;
-        }
         .main-body {
-          left: 0;
-          right: 0;
           width: 60%;
-          margin: 0 auto;
-          box-sizing: border-box;
-          padding: 10px;
-          transition: all 0.8s ease;
-      
-          background-color: rgb(@primaryBackGroundColor);
-          height: 100%;
-          // .markdown-body {
-          //   box-sizing: border-box;
-          //   padding: 20px;
-          // }
-          .markdown-body{
-            margin: 20px 0;
-            padding: 30px;
-          }
           .banner {
-            top: 0;
-            left: 0;
-            width: 100%;
-            min-height: 393px;
-      
-            max-height: 393px;
-      
-            z-index: -2;
-            overflow: hidden;
             img {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
               min-height: 393px;
-              width: 100%;
-              max-height: 393px;
-              object-fit: cover;
             }
-            &::before {
-              content: "";
-            }
-          }
-          .title {
-            color: rgb(@primaryTextColor);
-            .content {
-              display: flex;
-              flex-direction: column;
-              .article-title {
-                font-size: 32px;
-                h2 {
-                  margin: 20px 0;
-                }
-              }
-              .author {
-                display: flex;
-                height: 60px;
-                img {
-                  width: 60px;
-                  height: 60px;
-                  border-radius: 50%;
-                  background-color: rgb(@primaryBackGroundColor);
-                  object-fit: cover;
-                }
-                .author-info {
-                  height: 100%;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: space-between;
-                  margin-left: 12px;
-                  .author-name {
-                    font-size: 18px;
-                    font-weight: 600;
-                  }
-                  .introduce {
-                    font-size: 16px;
-                    color: rgb(@primaryTipColor);
-                  }
-                }
-              }
-              .summary {
-                padding: 10px;
-                border-left: rgb(87, 231, 30) 3px solid;
-                margin-top: 20px;
-                font-size: 20px;
-                .summary-subtitle {
-                  font-size: 22px;
-                  color: rgb(@primaryTipColor);
-                }
-                .summary-content {
-                  margin-top: 10px;
-                  font-size: 18px;
-                  color: rgb(@primaryTipColor);
-                }
-              }
-            }
-          }
-          .body {
-            padding: 20px;
-            min-height: 200px;
-            line-height: 36px;
-            font-size: 20px;
-            color: rgb(@primaryTextColor);
           }
           .detail {
-            display: flex;
-            flex-direction: column;
             .good{
-              display: flex;
-              align-self: center;
-              justify-content: space-between;
-              width: 30rem;
-              padding: 20px;
               i{
-                cursor: pointer;
-                display: flex;
-                flex-direction: column;
-                text-align: center;
-                justify-content: center;
                 width: 5rem;
                 height: 5rem;
-                transition: 0.4s all ease;
-                border-radius: 50%;
-                box-shadow: 1px 1px 5px rgb(@primaryTextColor,0.6);
-                color: rgb(@primaryHightlightColor);
-                background-color: rgb(@primaryBackGroundColor) ;
                 &:hover{
                   background-color: rgb(@primaryActiveColor) ;
                   color: white;
                 }
-                
-              }
-            }
-            .bottom-text {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              .left {
-                .publishtime {
-                  font-size: 14px;
-                  color: rgb(@primaryTipColor);
-                  margin-top: 10px;
-                }
-                .red {
-                  font-size: 18px;
-                  color: rgb(@primaryHightlightColor);
-                }
-              }
-              .icon {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                i {
-                  margin-left: 10px;
-                  font-size: 20px;
-                }
-              }
-            }
-            .tags {
-              margin: 20px 0;
-            }
-          }
-          .comments {
-            margin-top: 20px;
-            color: rgb(@primaryTextColor);
-            .title {
-              font-size: 30px;
-            }
-            .edit-part {
-              margin-top: 20px;
-              width: 100%;
-              height: 300px;
-              .up {
-                justify-content: space-between;
-                display: flex;
-              }
-              .main-content {
-                display: flex;
-                width: 100%;
-                .avatar {
-                  width: 60px;
-                  height: 60px;
-                  flex-shrink: 0;
-                  background-color: antiquewhite;
-                  border-radius: 50%;
-                  overflow: hidden;
-                }
-                .edit-area {
-                  width: 100%;
-                  margin-left: 30px;
-                }
-              }
-              .button {
-                width: 100%;
-                display: flex;
-                justify-content: flex-end;
-                margin-top: 20px;
               }
             }
           }

@@ -121,7 +121,7 @@
 
 <script setup lang="ts">
 import { addTag, getTagList, publishArticle } from "@/api/article";
-import type { UploadFile } from "element-plus/es/components/upload/src/upload.type";
+import type { ElFile, UploadFile } from "element-plus/es/components/upload/src/upload.type";
 import { useStore } from "@/store/main";
 import { ElInput, ElMessage, ElNotification } from "element-plus";
 import { ref, reactive } from "vue";
@@ -223,9 +223,7 @@ const handleExceed = (files: FileList, fileList: UploadFile[]) => {
   ElMessage.warning("只能上传一张头图");
 };
 const beforeBannerUpload = async (file: UploadFile) => {
-  console.log(file);
-  const link = await useUpload(file);
-  console.log(link);
+  const link = await useUpload(file as unknown as ElFile);
   if (link !== "") {
     imglink.value = link;
   }

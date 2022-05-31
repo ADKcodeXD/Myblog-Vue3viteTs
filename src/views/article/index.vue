@@ -89,7 +89,6 @@
         <div class="title">
           <p>评论区</p>
         </div>
-
         <div class="edit-part">
           <div class="up">
             <h3>{{ commentList.length }}条评论</h3>
@@ -112,6 +111,7 @@
                 v-model="comment"
                 :rows="6"
                 :limit="256"
+                @blur="handleInputBlur"
                 show-word-limit
                 resize="none"
                 type="textarea"
@@ -121,13 +121,29 @@
             </div>
           </div>
           <div class="button">
-            <el-button
-              @click="publishComment"
-              class="buttonself"
-              :disabled="currentUser?.id === ''"
-              type="success"
-              >发布评论</el-button
-            >
+            <el-button-group>
+              <el-button
+                @click="showEmoji = true"
+                class="buttonself"
+                :disabled="currentUser?.id === ''"
+                type="success"
+                >表情
+                <MyEmoji
+                  ref="emojiTarget"
+                  :comment="comment"
+                  v-show="showEmoji"
+                  @changeEmoji="changeEmoji"
+                  :cursorIndex="cursorIndex"
+                />
+              </el-button>
+              <el-button
+                @click="publishComment"
+                class="buttonself"
+                :disabled="currentUser?.id === ''"
+                type="success"
+                >发布评论</el-button
+              >
+            </el-button-group>
           </div>
         </div>
         <el-empty
@@ -138,9 +154,9 @@
           <transition-group name="list">
             <CommentItem
               class="list-item"
+              v-for="(commentitem, i) in commentList"
               :commentInfo="commentitem"
               :floor="i + 1"
-              v-for="(commentitem, i) in commentList"
               :key="commentitem.id"
               :authorId="article.authorVo.id"
               :articleId="article.id"
@@ -153,22 +169,31 @@
   </div>
 </template>
 
-
 <script lang="ts">
 // 定义组件名字 不然include 和keepalive 无法生效
-
-import { useArticle } from "@/hooks/Article";
-export default { name: "Article" };
+import { useArticle, useEmoji } from "@/hooks/Article";
+import { onClickOutside } from "@vueuse/core";
+// import picker compopnent
+import EmojiPicker from "vue3-emoji-picker";
+import "../../../node_modules/vue3-emoji-picker/dist/style.css";
+import '@/assets/styles/github-light.css';
+import 'highlight.js/styles/github.css'
+// import css
+export default {
+  name: "Article",
+  components: {
+    EmojiPicker,
+  },
+};
 </script>
+
+
 <script setup lang="ts">
 const {
   collectArticle,
   likedArticle,
-  isLikedLoading,
-  isCollectLoading,
   publishSecond,
   goTop,
-  getAllComment,
   publishComment,
   time,
   article,
@@ -176,7 +201,19 @@ const {
   currentUser,
   comment,
 } = useArticle();
-
+//  
+/**
+ * （备注）
+ * 使用emoji组件 需要用useEmoji()hooks 控制
+ * showEmoji,emojiTarget, handleInputBlur,cursorIndex需要使用这个四个参数
+ * 其中showEmoji用于控制组件的显示隐藏  组件需要绑定changeEmoji来接受参数 需要给input绑定handleInputBlur
+ * 使用onClickOutside来控制组件的隐藏
+ */
+const { showEmoji,emojiTarget, handleInputBlur,cursorIndex } = useEmoji();
+onClickOutside(emojiTarget, (event) => (showEmoji.value = false));
+const changeEmoji = (content: string) => {
+  comment.value = content;
+};
 </script>
 
 <style scoped lang="less" >
@@ -186,4 +223,5 @@ const {
   background-color: rgb(@primaryActiveColor) !important;
   color: white !important;
 }
+
 </style>

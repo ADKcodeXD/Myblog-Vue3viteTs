@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar max-height="80vh"  class="message" ref="body">
+  <el-scrollbar max-height="80vh" class="message" ref="body">
     <div class="up-info">
       <p class="title">留言板</p>
       <p class="desc">输入你的昵称 联系方式 可以给我的网站留言哦~</p>
@@ -8,51 +8,29 @@
       <div class="liuyan-info">
         <div class="name">
           <span>您的昵称：</span>
-          <el-input
-            size="large"
-            v-model="messageParams.authorName"
-            icon="EditPen"
-            show-word-limit
-            maxlength="16"
-          >
+          <el-input size="large" v-model="messageParams.authorName" icon="EditPen" show-word-limit maxlength="16">
           </el-input>
         </div>
         <div class="name">
           <span>您的联系方式：</span>
-          <el-input
-            class="contact"
-            size="large"
-            v-model="messageParams.contact"
-            icon="EditPen"
-            maxlength="64"
-          >
+          <el-input class="contact" size="large" v-model="messageParams.contact" icon="EditPen" maxlength="64">
           </el-input>
         </div>
       </div>
 
       <el-divider></el-divider>
       <div class="main-content">
-        <UploadAvatar
-          :avatar="messageParams.avatar"
-          @changeAvatar="changeAvatarParams"
-        />
+        <div class="msg-avatar">
+          <UploadAvatar :avatar="messageParams.avatar" @changeAvatar="changeAvatarParams" />
+        </div>
+
         <div class="edit-area">
-          <el-input
-            v-model="messageParams.content"
-            :rows="5"
-            maxlength="256"
-            show-word-limit
-            resize="none"
-            type="textarea"
-            style="font-size: 20px; line-height: 30px"
-            placeholder="在这里发布留言哦~"
-          />
+          <el-input v-model="messageParams.content" :rows="5" maxlength="256" show-word-limit resize="none"
+            type="textarea" style="font-size: 20px; line-height: 30px" placeholder="在这里发布留言哦~" />
         </div>
       </div>
       <div class="button">
-        <el-button @click="publishMessage" class="buttonself" type="success"
-          >发布留言</el-button
-        >
+        <el-button @click="publishMessage" class="buttonself" type="success">发布留言</el-button>
       </div>
     </div>
 
@@ -64,22 +42,13 @@
     </div>
 
     <div class="message-part" v-if="messageList">
-      
-        <MessageItem
-          :message="item"
-          v-for="item in messageList"
-          :key="item.id"
-        />
-      
+
+      <MessageItem :message="item" v-for="item in messageList" :key="item.id" />
+
     </div>
     <el-empty v-else description="暂时没有留言哦~"></el-empty>
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :page-count="Math.ceil(total / pageparams.pagesize)"
-      @current-change="changePage"
-      :current-page="pageparams.page"
-    >
+    <el-pagination background layout="prev, pager, next" :page-count="Math.ceil(total / pageparams.pagesize)"
+      @current-change="changePage" :current-page="pageparams.page">
     </el-pagination>
   </el-scrollbar>
 </template>
@@ -87,14 +56,14 @@
 <script lang="ts">
 import { MessageParamsForADK, PageParams } from "@/interface/params";
 import { defineComponent } from "vue";
-import avatar from "@/assets/img/women.png";
+import avatar from "@/assets/img/logo.png";
 import { addMessageApi, getMessageApi } from "@/api/message";
 import MessageItem from "./components/message-item.vue";
 import { MessageVo } from "@/interface/message";
-import { ElMessage, ElScrollbar, ScrollbarEmits } from "element-plus";
+import { ElMessage, ElScrollbar } from "element-plus";
 export default defineComponent({
   components: { MessageItem },
-  name:"MessageBoard",
+  name: "MessageBoard",
   setup() {
     let comment = ref("");
     let messageParams: MessageParamsForADK = reactive({
