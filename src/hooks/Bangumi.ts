@@ -1,6 +1,7 @@
+import { getSubjectInfoAllApi, getSubjectInfoApi } from './../api/bangumi';
 import { getCalendarApi } from "@/api/bangumi";
 import { getBroswerDataApi } from "@/api/bangumiMy";
-import { BroswerParams, BroswerResult, CalendarItem } from "@/interface/bangumiApi.type";
+import { AnimeItemInfo, BroswerParams, BroswerResult, CalendarItem } from "@/interface/bangumiApi.type";
 import { getFormatTime } from "@/utils/dayjs";
 import { ElMessage } from "element-plus";
 import { Ref } from "vue";
@@ -91,4 +92,26 @@ export const useBroswer = (Loading:Ref<Boolean>,
   return{
     getBroswer
   }
+}
+/**
+ * 根据id集合  获取每个subject的消息
+ * @param ids subject ids
+ * @returns Promise<PromiseSettledResult<AnimeItemInfo>[]> 一个promise.Seetled的结果集
+ */
+export const useSubjectInfo=(ids:number[]):Promise<PromiseSettledResult<AnimeItemInfo>[]>=>{
+  let promises:Promise<AnimeItemInfo>[]=[];
+  const getPromise=(id:number,type:'small'|'large'):Promise<AnimeItemInfo>=>{
+    return new Promise((resolve,reject)=>{
+      getSubjectInfoAllApi(id,type).then((result) => {
+        resolve(result.data)
+      }).catch((err) => {
+        reject(err)
+      });
+    })
+  }
+  for(let id of ids){
+   promises.push(getPromise(id,'small'))
+  }
+
+  return Promise.allSettled(promises)
 }
