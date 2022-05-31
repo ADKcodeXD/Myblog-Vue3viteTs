@@ -14,20 +14,11 @@
         </keep-alive>
       </router-view>
     </div>
-    <!-- 底部 -->
-    <div class="boxgroup">
-      <!-- <div class="box"></div> -->
-      <!-- <div class="box2"></div> -->
-      <!-- <div class="box4"></div> -->
-      <div class="box3"></div>
-      <div class="box5"></div>
-    </div>
     <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
-import TopNavBar from "@/components/TopNavBar.vue";
 import { useCacheStore } from "@/store/cache";
 import { setTheme } from "@/theme/theme";
 const cachePages = useCacheStore();
