@@ -1,0 +1,123 @@
+<template>
+  <div class="navbar">
+    <!-- 导航组件 -->
+    <!-- pc端的导航组件 -->
+    <el-header >
+      <el-row :gutter="20">
+        <!-- logo -->
+        <el-col :span="4">
+          <Logo @openPollup="isShow = true" />
+        </el-col>
+        <!-- list -->
+        <el-col :span="16">
+          <PcMenu />
+        </el-col>
+        <!-- myinfo -->
+        <el-col :span="4">
+          <RightInfoBox :userinfo="userStore.userinfo" @logout="logout" />
+        </el-col>
+      </el-row>
+    </el-header>
+    <!-- 这是移动端的 -->
+    <transition name="righttoleft">
+      <Pollup v-show="isShow" :userinfo="userStore.userinfo" @close="closePollup" @logout="logout" />
+    </transition>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useStore } from "@/store/main";
+import { removeItem } from "@/utils/storage";
+import { ElMessage } from "element-plus";
+import { currentUserApi } from "@/api/user";
+import { useUserStore } from "@/store/user";
+import router from "@/router";
+const props = defineProps({
+  backColor: {
+    type: String,
+    default: () => "rgb(248, 248, 248)",
+  },
+  fontColor: {
+    type: String,
+    default: () => "#fff",
+  },
+});
+
+let isShow = ref(false);
+const store = useStore();
+const userStore = useUserStore();
+const user = store.user;
+
+// 获取用户的信息
+const getUserInfo = () => {
+  if (user && user.token) {
+    // 获取信息
+    currentUserApi()
+      .then((result: any) => {
+        const { data } = result;
+        if (data.code === 10003) {
+          ElMessage.error(data.msg);
+          removeItem("user");
+        } else {
+          userStore.setUser(data.data);
+        }
+      })
+      .catch((error: any) => {
+        ElMessage.error("请求失败");
+      });
+  } else {
+    console.log("notoken");
+  }
+};
+// 关闭移动端弹出层
+const closePollup = () => {
+  isShow.value = false;
+}
+// 退出登录
+const logout = (): void => {
+  store.user.token = "";
+  removeItem("user");
+  userStore.setUser({
+    id: "",
+    username: "",
+    avatar: "",
+    role: "",
+    introduce: "",
+    banner: "",
+    nickname: "",
+  });
+  ElMessage.success("退出登录成功！");
+  isShow.value = false;
+  router.push("/login");
+};
+getUserInfo();
+</script>
+
+<style lang="less" scoped>
+@import url(@/assets/styles/MyAnimate.less);
+@media  screen and (min-width: 320px) { 
+  .el-header {
+    padding: 0;
+    height: 6.6429rem;
+    position: fixed;
+    z-index: 9999;
+    box-shadow:0px 2px 10px rgba(0, 0, 0, 0.3);
+    background-color: rgb(255, 24, 62);
+    left: 0;
+    right: 0;
+    .el-row {
+      height: 100%;
+      padding: .7143rem;
+      align-items: center;
+      
+    }
+  }
+  
+}
+@media  screen and (min-width: 992px) { 
+  .el-header {
+    position: relative;
+    background-color: rgb(247, 247, 247);
+  }
+}
+</style>
