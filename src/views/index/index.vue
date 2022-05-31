@@ -1,42 +1,47 @@
 <template>
   <div class="main">
+    <div class="sub-title">
+      <div class="content">
+        <div class="icon">
+          <div >
+            <img src="@/assets/img/logo-icon.png"/>
+          </div>
+          <p>最近更新</p>
+        </div>
+        <p class="right">欢迎你来到我的博客~</p>
+      </div>
+    </div>
     <Carousel :items="bannerList" />
     <div class="view-content">
       <div class="article">
         <el-card class="box-card">
           <template #header>
             <div class="card-header">
-              <span>近期更新文章</span>
-              <el-button
-                @click="$router.push('/index/articlelist')"
-                class="button"
-                type="text"
-                >查看更多</el-button
-              >
+              <div class="title">
+                <MyElimage :img="Jinqi" />
+              </div>
+              <AdkButton :x="8" :y="3.3" :mainTextsize="1.3" :subTextsize="0.7" @click="$router.push('/index/articlelist')">
+                更多
+                <template #endesc>
+                  more
+                </template>
+              </AdkButton>
             </div>
           </template>
-          <ArticleItem
-            v-for="articleItem in articles"
-            :key="articleItem.id"
-            :articleItem="articleItem"
-          />
-          <el-empty
-            v-if="articles.length === 0"
-            description="暂时没有文章发表哦~"
-          ></el-empty>
+          <ArticleItem v-for="articleItem in articles" :key="articleItem.id" :articleItem="articleItem" />
+          <el-empty v-if="articles.length === 0" description="暂时没有文章发表哦~"></el-empty>
         </el-card>
       </div>
-      <div class="rightbox">
-        <MyInfo />
-        <ArticleTimeLine/>
-        <TagsAll/> 
-        <TimeLine />
-      </div>
+      <ul class="rightbox" ref="rightUl">
+        <li><MyInfo /></li>
+        <li><ArticleTimeLine /></li>
+        <li><TagsAll /></li>
+        <li><TimeLine /></li>
+      </ul>
     </div>
     <div class="bangumi">
-      <Bangumimini/>
+      <Bangumimini />
     </div>
-
   </div>
 </template>
 
@@ -46,15 +51,16 @@ export default { name: 'Index' }
 </script>
 
 <script setup lang="ts">
-import { getIndexArticleApi, getIndexBanner, listArticle } from "@/api/article";
+import { getIndexArticleApi, getIndexBanner } from "@/api/article";
 import { ArticleItemInfo, Banner } from "@/interface/article";
 import { PageParams } from "@/interface/params";
-import ArticleItem from "./components/article-item.vue";
-import MyInfo from "./components/my-info.vue";
-import TimeLine from "./components/time-line.vue";
-import TagsAll from './components/tags-all.vue'
-import ArticleTimeLine from "./components/article-time-line.vue";
-
+import MyInfo from "./components/MyInfo.vue";
+import TimeLine from "./components/TimeLine.vue";
+import TagsAll from './components/TagsAll.vue';
+import ArticleTimeLine from "./components/ArticleTimeLine.vue";
+import Jinqi from '@/assets/img/近期更新.png';
+// Default SortableJS
+import Sortable from 'sortablejs';
 // 获取首页文章 按照时间顺序 5篇
 let articles = ref<ArticleItemInfo[]>([]);
 let bannerList = ref<Banner[]>([]);
@@ -62,13 +68,13 @@ let pageparams: PageParams = {
   page: 1,
   pagesize: 5,
 };
-let isChatRoomshow=ref(false);
+let isHover = ref(true)
 // 获取文章列表
 const getIndexfive = async () => {
   const { data } = await getIndexArticleApi(pageparams);
   articles.value = data.data;
 };
-
+const rightUl=ref<HTMLElement>();
 
 // 获取文章头图
 const getBannerList = async () => {
@@ -76,12 +82,21 @@ const getBannerList = async () => {
   bannerList.value = data.data;
 };
 
+// 拖拽
 onMounted(() => {
   getIndexfive();
   getBannerList();
+  new Sortable(rightUl.value,{
+    animation: 150,
+  })
 });
 </script>
 
 <style lang="less" scoped>
-@import url(./styles/pc/index-pc.less);
+@import url(./styles/index-pc.less);
+
+.title {
+  width: 160px;
+}
+
 </style>

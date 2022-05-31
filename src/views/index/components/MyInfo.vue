@@ -4,14 +4,14 @@
     @mouseenter="isInfoshow = true"
     @mouseleave="isInfoshow = false"
   >
-    <h2 style="font-size: 20px; font-weight: 100; text-align: center">
-      关于我
-    </h2>
-    <el-divider></el-divider>
+    <div class="tw-w-28 tw-my-2">
+      <MyElimage :img="Aboutme" />
+    </div>
+    <el-divider class="tw-my-5"></el-divider>
     <div class="main">
       <div class="content">
         <div class="avatar">
-          <img src="./img/touxiang.jpg" alt="" />
+          <img :src="Avatar" alt="" />
         </div>
         <p class="name">ADKcodeXD</p>
       </div>
@@ -52,18 +52,15 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from "vue";
+import Avatar from '@/assets/img/logo.png';
+import Aboutme from '@/assets/img/about-me.png';
 
-export default defineComponent({
-  setup() {
-    let isInfoshow = ref(false);
-    return { isInfoshow };
-  },
-});
+let isInfoshow = ref(false);
 </script>
 
 
 <style lang="less" scoped>
-@import url("../styles/pc/my-info-pc.less");
+@import url("../styles/my-info-pc.less");
 </style>

@@ -1,6 +1,9 @@
 <template>
   <div class="tasall">
-    <h2 class="title tw-text-2xl">所有标签</h2>
+    <div class="tw-w-32 tw-my-2">
+      <MyElimage :img="Alltag" />
+    </div>
+    <el-divider class="tw-my-4"></el-divider>
     <TagItem
       v-for="tag in tags"
       :key="tag.id"
@@ -10,14 +13,12 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { getTagList } from "@/api/article";
 import { Tag } from "@/interface/tag";
-import { defineComponent } from "vue";
+import Alltag from '@/assets/img/all-tag.png';
 
-export default defineComponent({
-  setup() {
-    let tags = ref<Tag[]>();
+let tags = ref<Tag[]>();
     const getTags = async () => {
       const { data } = await getTagList();
       tags.value = data.data;
@@ -25,9 +26,6 @@ export default defineComponent({
     onMounted(() => {
       getTags();
     });
-    return { tags };
-  },
-});
 </script>
 
 
@@ -38,12 +36,10 @@ export default defineComponent({
     margin: 0;
     font-weight: 100;
   }
-  margin-top: 1.4286rem;
   transition: background-color 1s ease;
   background-color: rgb(@primaryBackGroundColor);
   padding: 0.7143rem;
   overflow: hidden;
-  margin-left: 0.7143rem;
   border-radius: 0.3571rem;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   .tag {
