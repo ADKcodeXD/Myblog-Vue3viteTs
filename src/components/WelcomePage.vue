@@ -85,7 +85,6 @@
     transform: translateX(0);
   }
 }
-
 .container {
   width: 100%;
   height: 100%;
