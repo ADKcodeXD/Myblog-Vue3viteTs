@@ -43,7 +43,7 @@ export interface AnimeInfoBase {
     name_cn: string,
     images: Images,
     collection: Collection,
-    summary: string | undefined | void,
+    summary?: string | undefined | void,
     rating: Rating,
 }
 
@@ -53,11 +53,16 @@ export interface AnimeItemInfo extends AnimeInfoBase {
     air_date: string,
     air_weekday: number,
 }
+export interface AnimeItemInfoCollection extends AnimeItemInfo {
+    CollectionInfo: CollectionStatus
+}
 export interface CalendarItem {
     weekday: WeekDay,
     items: Array<AnimeItemInfo>
 }
-// 使用v0接口获取到的信息
+/**
+ * 使用v0接口获取到的信息
+ * */ 
 export interface SubjectInfoSmall extends AnimeInfoBase {
     date: string,
     platform: string,
@@ -190,7 +195,6 @@ export interface AnimeHuman extends Human {
 /**
  * 详细信息 类
  */
-
 export interface AnimeDeatilItem extends AnimeInfoBase {
     url: number,
     air_date: string
@@ -210,5 +214,70 @@ export interface SearchParamsBgm {
     type?: BangumiType,
     responseGroup?: ResponseGroup,
     start?: number,
-    max_results?:number
+    max_results?: number
+}
+
+/**
+ * 个人信息
+ * avatar只有Large Medium Small
+ */
+export interface BangumiMyInfo {
+    id: string,
+    url: string,
+    username: string,
+    nickname: string,
+    user_group: number,
+    avatar: Images,
+    sign: string
+}
+/**
+ * 用于正在追番的接口
+ */
+export interface SubjectSeeing extends AnimeInfoBase {
+    eps: number,
+    eps_count: number,
+    air_date: string,
+    air_weekday: number
+}
+/**
+ * 正在追番信息的类
+ */
+export interface MySeeing {
+    name: string,
+    subject_id: number,
+    /**
+     * 看番到第几集的状态
+     * */
+    ep_status: number,
+    /**
+     * 未知
+     */
+    vol_status: number,
+    /**
+     * 时间戳 最后操作时间
+     */
+    lasttouch: number,
+    subject: SubjectSeeing,
+}
+
+/**
+ * CollectionStatus 收藏的详细消息
+ */
+export interface CollectionStatus {
+    comment: string,
+    ep_status: number,
+    lasttouch: number,
+    private: number,
+    /**
+     * 我的评分
+     */
+    rating: number,
+    status:{
+        id:number,
+        type:"wish" | "collect" | "do" | "on_hold" | "dropped",
+        name:string
+    },
+    tag:string[],
+    user:Object,
+    vol_status:number
 }

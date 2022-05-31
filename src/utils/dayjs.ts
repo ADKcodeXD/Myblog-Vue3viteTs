@@ -11,6 +11,6 @@ export const getRealativeTime = (value: string|number) => {
     return dayjs(value).from(dayjs())
 }
 
-export const getFormatTime = (value: string,format:string) => {
+export const getFormatTime = (value: string|number,format:string) => {
     return dayjs(value).format(format)
 }

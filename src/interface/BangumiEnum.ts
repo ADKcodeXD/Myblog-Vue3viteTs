@@ -35,12 +35,11 @@ export enum CollectionType {
 
 
 export enum BangumiType {
-小说Book = 1,
-动漫Anime = 2,
-音乐Musci = 3,
-游戏Game = 4,
-三次元Real = 6,
-key
+    小说Book = 1,
+    动漫Anime = 2,
+    音乐Musci = 3,
+    游戏Game = 4,
+    三次元Real = 6,
 }
 export enum WeekDayType {
     星期天 = 7,
@@ -56,4 +55,12 @@ export enum ResponseGroup {
     Large = "large",
     Medium="medium",
     Small="small"
+}
+
+export enum CollectionTypeTwo {
+    do = "在看",
+    on_hold = "搁置",
+    wish = "想看",
+    collect = "看过",
+    dropped = "抛弃"
 }

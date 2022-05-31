@@ -1,8 +1,9 @@
+import { ElMessage } from 'element-plus';
 import { useStore } from './../store/main';
 import axios from 'axios'
 import JSONbig from 'json-bigint';
 const baseUrl=process.env.VITE_BASE_API;
-console.log(baseUrl);
+
 const request: any = axios.create({
     baseURL: baseUrl, //生产环境
     timeout: 7000,
@@ -25,7 +26,12 @@ request.interceptors.request.use((config: any) => {
 })
 
 request.interceptors.response.use((response: any)=>{
+    if(response.status>400){
+        ElMessage.error(response.message)
+    }
     return response;
+},(err:any)=>{
+    ElMessage.error('请求失败')
 })
 
 export default request;

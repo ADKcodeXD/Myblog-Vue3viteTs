@@ -9,13 +9,7 @@ export interface PageParams {
     keyword?:string
 }
 
-/**
- * private Long authorId;
-    private Long articleId;
-    private Long toUid;
-    private Long parentId;
-    private String content;
- */
+
 export interface CommentParams {
     articleId: string,
     toUid?: string,

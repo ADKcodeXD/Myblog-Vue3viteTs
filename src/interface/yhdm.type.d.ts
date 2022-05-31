@@ -4,8 +4,6 @@ export interface Epinfo{
 }
 
 export interface YhdmSearchInfo {
-    // private String title;
-    // private List<String> epUrl;
     title:string,
     epInfo:Array<Epinfo>
 }

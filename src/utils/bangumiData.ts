@@ -256,8 +256,6 @@ export const getSiteFromBGMId = (id: number, date: string) => {
             down--;
         }
         if(upDate.getMonth()!==targetDate.getMonth()&&downDate.getMonth() !== targetDate.getMonth()) break;
-        console.log(mid);
-
     }
     // 找到后 处理id和字符串
     if (findItem) {

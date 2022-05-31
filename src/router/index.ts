@@ -1,7 +1,8 @@
 import { getItem } from './../utils/storage';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { ElMessage, ElMessageBox } from 'element-plus';
 
-const routes = [
+const routes:RouteRecordRaw[] = [
     {
         path: '/',
         redirect: '/threeshow',
@@ -62,14 +63,20 @@ const routes = [
             {
                 path: 'animeplay/:id',
                 name: 'AnimePlay',
-                meta: { requireAuth: true, keepAlive: false },
+                meta: { requireAuth: false, keepAlive: false },
                 component: () => import('@/views/animeplay/index.vue')
             },
             {
                 path: 'animenew',
                 name: 'AnimeNew',
-                meta: { requireAuth: true, keepAlive: false },
+                meta: { requireAuth: false, keepAlive: false },
                 component: () => import('@/views/animenew/index.vue')
+            },
+            {
+                path: 'animebgminfo',
+                name: 'AnimeBgmInfo',
+                meta: { requireAuth: false, keepAlive: false },
+                component: () => import('@/views/animebgminfo/index.vue')
             },
         ]
     },
@@ -110,8 +117,9 @@ const routes = [
 
 
 const router = createRouter({
+    linkExactActiveClass:"router-active", 
     history: createWebHistory(),
-    routes,
+    routes
 })
 
 router.beforeEach((to, from, next) => {
@@ -120,7 +128,21 @@ router.beforeEach((to, from, next) => {
         if (token) {
             next()
         } else {
-            next({ path: '/login' })
+            ElMessageBox.confirm(
+                '该页面需要登录才能使用，请问是否跳转到登录页面？',
+                '登录提示',
+                {
+                  confirmButtonText: '确认',
+                  cancelButtonText: '我不去了',
+                  type: 'warning',
+                }
+              )
+                .then(() => {
+                    next({ path: '/login' })
+                })
+                .catch(() => {
+                  return
+                })
         }
     } else {
         next()

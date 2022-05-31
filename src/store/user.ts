@@ -1,3 +1,4 @@
+import { UserEasy } from '@/interface/user';
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
@@ -19,7 +20,7 @@ export const useUserStore = defineStore('user', {
     // state: () => ({ count: 0 })
     actions: {
         // 这里写方法action
-        setUser(user: any) {
+        setUser(user: UserEasy) {
             this.userinfo = user;
         }
     },
