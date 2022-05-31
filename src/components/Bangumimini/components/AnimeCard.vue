@@ -39,10 +39,10 @@
               </p>
             </div>
             <p class="title text-line-show-2" :alt="animeInfo.name">
-              作品名:{{ animeInfo.name }}
+              作品名:{{ animeInfo.name_cn?animeInfo.name_cn:animeInfo.name }}
             </p>
             <p v-if="animeInfo.name_cn" class="title-cn text-line-show-2">
-              中文译名:{{ animeInfo.name_cn }}
+              译名:{{ animeInfo.name }}
             </p>
           </div>
           <div class="bottom">
