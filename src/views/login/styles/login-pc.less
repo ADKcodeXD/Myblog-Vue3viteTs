@@ -1,57 +1,118 @@
-@import url(@/assets/styles/MyAnimate.less);
-@media screen and (min-width:320px) and(max-width:992px) {
+@media screen and (min-width:320px){
+    ul{
+      li{
+        margin: 1rem;
+      }
+      .iconfont{
+        color: #000;
+        font-size: 24px;
+        font-weight: 600;
+      }
+    }
     .login {
         position: absolute;
         width: 100%;
         height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         overflow: hidden;
+        perspective: 1000px;
+        .temp{
+          position: absolute;
+        }
         .imgbox {
           position: absolute;
-          width: 120%;
-          height: 120%;
+          width: 80%;
+          height: 80%;
           background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
           background-size: cover;
-          transition: all 1s ease;
+          .jieshao{
+            position: absolute;
+            width: 20rem;
+            bottom: -5rem;
+            left: 1rem;
+          }
         }
         .login-box {
           position: absolute;
           display: none;
           right: 0;
-          left: 0;
-          top: 0;
-          bottom: 0;
           width: 50%;
-          
-          background-color: #f68084;
-          margin: 0 auto;
+          border: 4px solid black;
+          box-shadow: 5px 5px 0px rgb(255, 15, 15);
+          border-radius: 30px;
           .loginform {
             position: absolute;
-            width: 100%;
-            top: 45%;
-            transform: translateY(-50%);
             padding: 10px;
-            h2 {
-              margin: 0;
-              font-size: 40px;
-            }
-            .sub-title {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            :deep(.el-form-item__content){
+              position: relative;
+              flex-wrap: nowrap;
+              font-family: 'Thinfont','幼圆';
+              font-weight: 600;
               margin: 10px 0;
-              color: gray;
+            }
+            :deep(.el-form-item__error){
+              font-family: 'Thinfont','幼圆';
+              font-weight: 600;
+              top: 110%;
             }
             .btn {
               margin-top: 20px;
               width: 100%;
               display: flex;
-              justify-content: space-around;
+              justify-content: space-between;
               align-items: center;
-              .el-button {
-                width: 40%;
+              .login-btn{
+                width: 35%;
+                height: 4.5rem;
+                background: url('../imgs/login-btn.png') no-repeat;
+                background-size: cover;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                &:hover{
+                  background: url('../imgs/login-btn-hover.png') no-repeat;
+                  background-size: cover;
+                  animation: jump 0.8s both;;
+                }
               }
+              .register-btn{
+                width: 35%;
+                height: 4.5rem;
+                background: url('../imgs/register-btn.png') no-repeat;
+                background-size: cover;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                &:hover{
+                  background: url('../imgs/register-btn-hover.png') no-repeat;
+                  background-size: cover;
+                  animation: jump 0.8s both;;
+                }
+              }
+            }
+          }
+          .goin{
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            width: 25%;
+            height: 3.8rem;
+            background: url('../imgs/直接看看.png') no-repeat;
+            background-size: cover;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover{
+              background: url('../imgs/直接看看-hover.png') no-repeat;
+              background-size: cover;
+              animation: jump 0.8s both;;
             }
           }
         }
         .login-box-mobile {
-            
             width: 70%;
             height: auto;
             position: absolute;
@@ -63,7 +124,6 @@
             border-radius: 1.4286rem;
             box-shadow: 1px 1px 10px rgba(0,0,0,.5);
             .loginform {
-              
               width: 100%;
               top: 45%;
               display: flex;
@@ -92,99 +152,78 @@
                 }
               }
             }
-          }
-        .jieshao {
-          color: #fff;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 70%;
-          text-align: center;
-          transition: all 1s ease;
-          transform: translateY(-50%) translateX(-50%);
-          
-          h2 {
-            font-size: 50px;
-            margin: 5px 0;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.644);
-          }
-          p {
-            font-size: 16px;
-            margin: 10px 0;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.644);
-          }
         }
+    }
+    .rightout{
+      &-enter-from{
+        transform: rotateY(90deg);
       }
+      &-enter-active{
+        transition: transform 1s cubic-bezier(.03,1.06,.46,1.11);
+      }
+      &-leave-active{
+        transition: transform 1s cubic-bezier(0,-0.23,.92,.12);
+      }
+      &-enter-to{
+        transform: rotateY(0);
+      }
+      &-leave-from{
+        transform: rotateY(0deg);
+      }
+      &-leave-to{
+        transform: rotateY(-90deg);
+      }
+    }
 }
 @media screen and (min-width:992px){
     .login {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
+        .temp{
+          width: 40rem;
+          height: 52rem;
+          left: 60%;
+          top: 50%;
+          transform-origin: 50%,0;
+        }
         .imgbox {
-          position: absolute;
-          width: 120%;
-          height: 120%;
-          background: url(../imgs/82104637_p0.jpg);
+          width:83rem;
+          height:45rem;
+          background: url(../imgs/login-bg.png) no-repeat ;
           background-size: cover;
-          background-position: -100px -100px;
-          transition: filter 1s ease;
+          transition: width height 0.3s ease;
         }
         .login-box {
-          position: absolute;
-          right: 0;
-          width: 20%;
-          height: 100%;
+          display: block;
+          width: 40rem;
+          height: 52rem;
+          transform:translateY(-50%);
           background-color: white;
-          .loginform {
-            position: absolute;
-            width: 100%;
-            top: 45%;
-            transform: translateY(-50%);
-            padding: 10px;
-            h2 {
-              margin: 0;
-              font-size: 40px;
-            }
-            .sub-title {
-              margin: 10px 0;
-              color: gray;
-            }
-            .btn {
-              margin-top: 20px;
-              width: 100%;
-              display: flex;
-              justify-content: space-around;
-              align-items: center;
-              .el-button {
-                width: 40%;
-              }
-            }
-          }
         }
         .login-box-mobile{
             display: none;
         }
-        .jieshao {
-          color: #fff;
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          left: 20px;
-          .loginbtn-mobile{
-              display: none;
-          }
-          h2 {
-            font-size: 50px;
-            margin: 5px 0;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.644);
-          }
-          p {
-            font-size: 16px;
-            margin: 10px 0;
-            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.644);
-          }
-        }
-      }
+    }
 }
+
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+  15% {
+    transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
+

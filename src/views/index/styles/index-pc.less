@@ -1,6 +1,39 @@
 
-@media screen and (min-width:320px)and (max-width:992px){
+@media screen and (min-width:320px){
     .main {
+        .sub-title{
+          font-family: 'urafont','幼圆';
+          font-weight: 600;
+          display: flex;
+          flex-direction: column;
+          margin-top: 7rem;
+          font-size: 2rem;
+          .content{
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            .icon{
+              display: flex;
+              align-items: flex-end;
+              img{
+                width: 3rem;
+                height: auto;
+              }
+            }
+            .right{
+              font-size: 1rem;
+            }
+          }
+          &::after{
+            content: '';
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+            height: 5px;
+            border-radius: 999px;
+            background-color: rgb(255, 22, 61);
+          }
+        }
         .el-card {
           background-color: rgb(@primaryBackGroundColor);
           color: rgb(@primaryTextColor);
@@ -23,48 +56,36 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                .more{
+                  width: 8rem;
+                  cursor: pointer;
+                  img{
+                    width: 100%;
+                    height: auto;
+                  }
+                }
               }
             }
           }
           .rightbox {
             display: flex;
             flex-direction: column;
+            li{
+              margin: 0.5rem 0;
+            }
           }
         }
       }
 }
 
-@media screen and (min-width:992px) and (max-width: 1440px) {
+@media screen and (min-width:992px){
     .main {
-        .el-card {
-          background-color: rgb(@primaryBackGroundColor);
-          color: rgb(@primaryTextColor);
+        .sub-title{
+          margin: 1.5rem 0;
         }
         .view-content {
-          display: flex;
-          flex-direction: column;
-          margin-top: 1.0714rem;
-          transition: all 0.6s ease;
           .article {
-            display: flex;
-            width: 100%;
-            transition: all 0.6s ease;
             height: 100%;
-            background-color: rgb(@primaryBackGroundColor);
-            .box-card {
-              width: 100%;
-              transition: all 0.6s ease;
-              .card-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-              }
-            }
-          }
-          .rightbox {
-            display: flex;
-            
-            flex-direction: column;
           }
         }
       }
@@ -72,18 +93,11 @@
 
 @media screen and (min-width:1440px)  {
     .main {
-        .el-card {
-          background-color: rgb(@primaryBackGroundColor);
-          color: rgb(@primaryTextColor);
-        }
         .view-content {
-          display: flex;
-          margin-top: 1.0714rem;
-          transition: all 0.6s ease;
+          flex-direction: row;
           .article {
             width: 100%;
             transition: all 0.6s ease;
-            
             flex:1;
             :deep(.el-card){
               height: 100%;
@@ -97,20 +111,18 @@
               }
             }
             .box-card {
-              width: 100%;
               flex: 1;
-              transition: all 0.6s ease;
-              .card-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-              }
             }
           }
           .rightbox {
             width: 25%;
-            display: flex;
-            flex-direction: column;
+            li{
+              margin: 1rem 0;
+              margin-left: 1rem;
+              &:first-child{
+                margin-top: 0;
+              }
+            }
           }
         }
       }
