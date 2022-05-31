@@ -1,3 +1,4 @@
+import { PageParams } from './../interface/params';
 // user/currentUser
 import { LikeOrCollectParams, UpdateUserInfoParams } from '@/interface/params'
 import request from '@/utils/request'
@@ -50,5 +51,39 @@ export const userCollect = (collectParams:LikeOrCollectParams) => {
         method: 'post',
         url: '/api/user/collect',
         data: collectParams
+    })
+}
+/**
+ * 获取当前登录用户的收藏 需要分页参数 默认是一页十条
+ * @param pageParams 
+ */
+export const getUserCollect =(pageParams:PageParams={page:1,pagesize:10})=>{
+    return request({
+        method: 'post',
+        url: '/api/userset/findmycollect',
+        data: pageParams
+    })
+}
+/**
+ * 获取当前用户的点赞 同样需要分页参数
+ * @param pageParams 
+ * @returns 
+ */
+export const getUserLiked =(pageParams:PageParams={page:1,pagesize:10})=>{
+    return request({
+        method: 'post',
+        url: '/api/userset/findmylike',
+        data: pageParams
+    })
+}
+/**
+ * 删除我的收藏的文章 需要一个文章id
+ * @param articleId 
+ * @returns 
+ */
+export const deleteUserCollect =(articleId:string)=>{
+    return request({
+        method: 'delete',
+        url: `/api/userset/deletemycollect/${articleId}`,
     })
 }

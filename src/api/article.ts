@@ -27,8 +27,13 @@ export const listArticle = (pageParams: PageParams) => {
         data: pageParams
     })
 }
-// uploadBanner 上传文章头图 获取图片oss地址
-// params : File
+
+
+/**
+ * uploadBanner 上传文章头图 获取图片oss地址
+ * @param imgFile 
+ * @returns 
+ */
 export const uploadBanner = (imgFile: any) => {
     return request({
         method: 'post',
@@ -39,15 +44,21 @@ export const uploadBanner = (imgFile: any) => {
         }
     })
 }
-// getArticleItem 获取文章详情 渲染文章
-// params : articleId 通过query获取 
+/**
+ * getArticleItem 获取文章详情 渲染文章
+ * @param id articleId 通过query获取 
+ * @returns 
+ */
 export const getArticleItem = (id: number) => {
     return request({
         method: 'post',
         url: `/api/articles/article/${id}`,
     })
 }
-// 获取文章首页头图 默认最多获取四条数据
+/**
+ * 获取文章首页头图 默认最多获取四条数据
+ * @returns 
+ */
 export const getIndexBanner = () => {
     return request({
         method: 'get',
@@ -99,7 +110,6 @@ export const getTagListApi = (pageparams:PageParams) => {
     })
 }
 // 搜索建议
-
 export const getSearchTipApi = (keyword:string) => {
     return request({
         method: 'get',

@@ -1,3 +1,4 @@
+import { encodeEmoji, decodeEmoji } from './../utils/emoji';
 import { getArticleItem } from "@/api/article";
 import { addComment, getComments } from "@/api/comment";
 import { ArticleItemInfo } from "@/interface/article";
@@ -52,6 +53,7 @@ export const useArticle = () => {
     // 发送一级评论
     const publishComment = async () => {
         if (commentParams.content != "") {
+            commentParams.content = encodeEmoji(commentParams.content);
             const { data } = await addComment(commentParams);
             if (data.code === 200) {
                 ElMessage.success("发布成功");
@@ -80,9 +82,17 @@ export const useArticle = () => {
     });
     // 获取评论
     const getAllComment = async () => {
-        console.log(pageparams);
         const { data } = await getComments(route.params.id as string, pageparams);
         commentList.value = data.data;
+        commentList.value.map(item => {
+            item.content = decodeEmoji(item.content);
+            if(item.childrens){
+                item.childrens.forEach(child=>{
+                    child.content=decodeEmoji(child.content);
+                })
+            }
+            return item
+        })
     };
     // 滚动
     const body = ref<HTMLElement | null>();
@@ -153,10 +163,53 @@ export const useArticle = () => {
         goTop,
         getAllComment,
         publishComment,
+        commentParams,
         time,
         article,
         commentList,
         currentUser,
         comment
+    }
+}
+/**
+ * 要求一个ref
+ * @returns 
+ */
+export const useEmoji = () => {
+    let showEmoji = ref(false);
+    let emojiTarget = ref(null);
+    let disabledGroup = ["travel_places",
+        "objects",
+        "symbols",
+        "flags"]
+    let groupName = {
+        "smileys_people": "经典黄豆",
+        "animals_nature": "动物 自然",
+        "food_drink": "食物饮料",
+        "activities": "活动~",
+    }
+    let cursorIndex = ref(0);
+    const selectEmoji = (emoji:any,emit:any,content:string,cursorIndex:number) => {
+        if (content.length < cursorIndex) {
+            content += emoji.i;
+        } else {
+            let s1 = content.substring(0, cursorIndex)
+            let s2 = content.substring(cursorIndex, content.length)
+            content = s1 + emoji.i + s2
+        }
+        emit('changeEmoji',content)
+    }
+    const handleInputBlur = (e: any) => {
+        // 记录离开焦点时的光标位置
+        cursorIndex.value = e.srcElement.selectionStart;
+    }
+    return {
+        showEmoji,
+        disabledGroup,
+        groupName,
+        selectEmoji,
+        handleInputBlur,
+        emojiTarget,
+        cursorIndex
     }
 }
