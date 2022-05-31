@@ -29,23 +29,32 @@
           >
           <!-- TODO 二级评论列表 -->
         </div>
-       
-          <div class="relpycontent" v-show="relpycontentShow">
+
+        <div class="relpycontent" v-show="relpycontentShow">
           <el-input
             :rows="2"
             type="textarea"
             v-model="reqCommentParams.content"
+            @blur="handleInputBlur"
           >
           </el-input>
           <el-button-group class="button">
-            <el-button type="success" plain>表情</el-button>
+            <el-button type="success" plain @click="showEmoji=true">
+              <MyEmoji
+                ref="emojiTarget"
+                :comment="reqCommentParams.content"
+                v-show="showEmoji"
+                @changeEmoji="changeEmoji"
+                :cursorIndex="cursorIndex"
+              />
+              表情</el-button
+            >
             <el-button type="success" plain @click="publishSubComment"
               >发送</el-button
             >
           </el-button-group>
         </div>
-       
-        
+
         <div
           class="second-comment"
           v-for="item in commentInfo.childrens"
@@ -60,9 +69,9 @@
                 {{ item.user.nickname
                 }}<span v-if="item.user.id === authorId">(博主)</span>
               </h3>
-              <p class="content">{{item.content}}</p>
+              <p class="content">{{ item.content }}</p>
             </div>
-            <p>发布于{{item.createDate}}</p>
+            <p>发布于{{ item.createDate }}</p>
           </div>
         </div>
       </div>
@@ -72,9 +81,12 @@
 
 <script lang="ts">
 import { addComment } from "@/api/comment";
+import { useEmoji } from "@/hooks/Article";
 import { CommentItemInfo } from "@/interface/comment";
 import { CommentParams } from "@/interface/params";
 import { useUserStore } from "@/store/user";
+import { encodeEmoji } from "@/utils/emoji";
+import { onClickOutside } from "@vueuse/core";
 import { ElMessage } from "element-plus";
 import { defineComponent, PropType } from "vue";
 
@@ -113,10 +125,11 @@ export default defineComponent({
     const publishSubComment = async () => {
       if (userStrore.userinfo.id) {
         if (reqCommentParams.content != "") {
+          reqCommentParams.content=encodeEmoji(reqCommentParams.content)
           const { data } = await addComment(reqCommentParams);
           emit("publishSecond");
-          reqCommentParams.content=""
-          relpycontentShow.value=false;
+          reqCommentParams.content = "";
+          relpycontentShow.value = false;
         } else {
           ElMessage.error("输入的内容不能为空");
         }
@@ -124,11 +137,22 @@ export default defineComponent({
         ElMessage.error("您当前未登录");
       }
     };
+    // emoji 表情组件
+    const { showEmoji, emojiTarget, handleInputBlur, cursorIndex } = useEmoji();
+    onClickOutside(emojiTarget, (event) => (showEmoji.value = false));
+    const changeEmoji = (content: string) => {
+      reqCommentParams.content = content;
+    };
     return {
       relpycontentShow,
       publishSubComment,
       secondCommentContent,
       reqCommentParams,
+      changeEmoji,
+      emojiTarget,
+      handleInputBlur,
+      cursorIndex,
+      showEmoji
     };
   },
 });
