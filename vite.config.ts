@@ -3,14 +3,17 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite';
-import viteCompression from 'vite-plugin-compression'
+import viteCompression from 'vite-plugin-compression';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 function resovePath(paths: string) {
   // 如何 __dirname 找不到 需要 yarn add @types/node --save-dev
   return resolve(__dirname, paths);
 }
 // https://vitejs.dev/config/
 export default ({ mode }) => {
+  // 用于导入生产和开发环境的配置
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+
   return defineConfig({
     base: '/',
     plugins: [vue(), AutoImport({
@@ -20,14 +23,19 @@ export default ({ mode }) => {
       dirs: ['src/components'],
       extensions: ['vue'],
       dts: 'src/components.d.ts'
-    }), viteCompression(),],
+    }), viteCompression(), createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
+      // 指定symbolId格式
+      symbolId: 'icon-[dir]-[name]',
+    }),],
     resolve: {
       alias: {
         "@": resolve(__dirname, 'src')
       }
     },
-    define:{
-      'process.env':process.env
+    define: {
+      'process.env': process.env
     },
     // css
     css: {
@@ -54,6 +62,11 @@ export default ({ mode }) => {
           target: 'http://localhost:8888',
           changeOrigin: true,
           rewrite: path => path.replace(/^\/api/, '')
+        },
+        '/bgmtv': {
+          target: 'https://bgm.tv',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/bgm/, '')
         },
         '/bgm': {
           target: 'https://api.bgm.tv',
