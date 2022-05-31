@@ -12,7 +12,7 @@
         <a href="https://twitter.com/ADKinsoMaD" target="_blank"><i class="iconfont icon-tuite"></i></a>
       </li>
     </ul>
-    
+
     <!-- 背景放的那张图 -->
     <div class="imgbox" ref="target" :style="{ transform: `rotateX(${-xrotate}deg) rotateY(${yrotate}deg)` }">
       <!-- 介绍 -->
@@ -22,7 +22,7 @@
     </div>
 
     <!-- 登录盒子 -->
-    <transition name="rightout" mode="out-in" @before-enter="beforeEnter" @enter="enter" @leave="leave" :css="false">
+    <transition name="rightout" mode="out-in" @before-enter="beforeEnter" @enter="rotateYenter" @leave="rotateYleave" :css="false">
       <div v-if="isLogin" :key="1" class="temp">
         <div class="login-box">
           <div class="loginform">
@@ -176,6 +176,7 @@ import Logo from '@/assets/img/new-logo.png';
 import Jieshao from './imgs/介绍.png';
 import gsap from 'gsap';
 import { CustomEase } from "gsap/CustomEase";
+import { useAnime } from "@/hooks/Anime";
 gsap.registerPlugin(CustomEase);
 const {
   registerFormRef,
@@ -195,26 +196,12 @@ const { submitForm } = useLoginMethod(userStore, router, form);
 const { rules, registerRules } = useRoles(registerForm);
 const { submitRegister } = useRegisterMethod(userStore, router, registerForm);
 const beforeEnter = (el) => {
-  gsap.set(el, {
-    rotationY: 90,
-  })
+    gsap.set(el, {
+      rotationY: 90,
+    })
 }
-const enter = (el, done) => {
-  gsap.to(el, {
-    duration: 1,
-    rotationY: 0,
-    ease: 'elastic.out(1, 0.5)',
-    onComplete: done
-  })
-}
-const leave = (el, done) => {
-  gsap.to(el, {
-    duration: 0.6,
-    rotationY: -90,
-    ease: CustomEase.create("custom", "M0,0 C0.5,0 0.607,-0.062 0.78,0.054 0.904,0.137 0.972,0.088 1,1 "),
-    onComplete: done
-  })
-}
+const {rotateYenter,
+        rotateYleave}=useAnime();
 const yrotate = computed(() => {
   let res = 0;
   let halfVal = window.innerWidth / 2;
@@ -228,7 +215,6 @@ const xrotate = computed(() => {
   return res / 50;
 })
 </script>
-
 
 <style scoped lang="less">
 @import url(./styles/login-pc.less);
