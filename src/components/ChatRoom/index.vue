@@ -111,7 +111,6 @@ import { getRealativeTime } from "@/utils/dayjs";
 import { UserEasy } from "@/interface/user";
 import { useMouseInElement, useElementSize } from "@vueuse/core";
 import { isMobile } from "@/utils/mobile";
-import ElScrollbar from "element-plus/es/components/scrollbar";
 let wsUrl = process.env.VITE_APP_WEB_SOCKET_API;
 interface Msg {
   type: number;
