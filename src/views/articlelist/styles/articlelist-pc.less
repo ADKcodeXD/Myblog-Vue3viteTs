@@ -23,160 +23,88 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        margin: 6.6429rem auto;
+        margin-top: 6.6rem;
         .top {
           width: 100%;
           padding: 1.4286rem;
-          background-color: rgb(@primaryBackGroundColor);
-          border-radius: .7143rem;
+          border-radius: 2rem;
           margin-top: .3571rem;
-          box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
+          border: 3px black solid;
+          background-color: rgb(@primaryBackGroundColor);
+          box-shadow: 5px 5px 0 rgb(255, 0, 43);
           .top-bar{
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
             align-items: center;
             .search{
-              display: flex;
-              padding: 1rem;
-              width: 60%;
-              .input-search{
-                margin-right: 1rem;
-              }
+              width: 100%;
             }
-            
           }
           .title {
-            font-size: 2.5714rem;
+            font-family: 'urafont','幼圆';
             margin: 1.4286rem ;
-          }
-          .bottom {
             display: flex;
-            flex-direction: column;
-            font-size: 1rem;
-            margin: 1rem;
-            .alltag {
-              display: block;
-              text-align: center;
-              height: 1.5rem;
-              line-height: 1.5rem;
-              margin-right: 1rem;
-              margin-top: 0.5rem;
-              padding: 0 .7143rem;
-              cursor: pointer;
-              color: rgb(@primaryTagTextColor);
-              border-radius: .7143rem;
-              background-color: rgb(@primaryTagBackGroundColor);
+            flex-shrink: 0;
+            align-items: center;
+            i{
+              font-size: 4.5rem;
+              color: rgb(255, 37, 139);
             }
-            .active {
-              background-color: rgb(@primaryActiveColor);
-              color: rgb(@primaryActiveTextColor);
+            p{
+              font-size: 2.5rem;
             }
-            .orderBytime {
-              display: flex;
-              align-items: center;
-              margin: .7143rem;
-            }
-            .orderByTag {
-              display: flex;
-              flex-direction: column;
-              flex-shrink: 0;
-              margin: .7143rem;
-              align-items: flex-start;
-              justify-content:space-between;
-              p{
-                flex-shrink: 0;
-              }
-              .left{
-                display: flex;
-              }
-              .right{
-                display: flex;
-                align-items: center;
-              }
-              .change-tag{
-                display: flex;
-                align-items: center;
-                .ball{
-                  margin-left: 10px;
-                  cursor: pointer;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  color: rgb(@primaryActiveTextColor);
-                  border-radius: 50%;
-                  width: 2rem;
-                  height: 2rem;
-                  background-color: rgba(@primaryActiveColor);
-                }
-              }
-              .tags {
-                display: flex;
-                align-items: center;
-                flex-wrap: wrap;
-                .active {
-                  color: rgb(@primaryActiveTextColor);
-                  background-color: rgb(@primaryActiveColor);
-                }
-              }
-            }
-            .order {
-              display: flex;
-              margin: .7143rem;
-              align-items: center;
-              flex-wrap: wrap;
-            }
-            .label{
-              margin-right: 20px;
-              flex-shrink: 0;
+            span{
+              font-size: 1.3rem;
+              margin-left: 0.4rem;
             }
           }
-        }
-        .main {
-          width: 100%;
-          transition: all 0.4s ease;
-          padding: .7143rem;
-          background-color: rgb(@primaryBackGroundColor);
-          border-radius: .7143rem;
-          margin-top: .7143rem;
-          box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
+          .main {
+            width: 100%;
+            transition: all 0.4s ease;
+            .article-item-sub{
+              margin: 2.5rem 0 !important;
+            }
+          }
+          .tip{
+            font-family: 'Thinfont','幼圆';
+            font-weight: 600;
+          }
         }
         .page {
+          font-family:'Thinfont', '幼圆';
+          font-weight: 600;
+          font-size: 16px;
+          padding: 5px;
           width: 100%;
           display: flex;
           flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          padding: .3571rem;
-          background-color: rgb(@primaryBackGroundColor);
-          border-radius: .7143rem;
-          margin-top: .7143rem;
-          box-shadow: 1px 1px 6px rgba(@primaryTextColor, 0.5);
+          margin-top: 1rem;
+          .border-pinkline(1rem,0px);
+          background-color: #fff;
+          box-shadow: 4px 4px 0px rgb(255, 19, 78);
         }
     }
 }
-
+@media screen and (min-width:640px) {
+  .top-bar{
+    flex-direction: row !important;
+    .search{
+      width: 70%;
+    }
+  }
+}
 @media screen and (min-width:992px) {
     .artilce-list {
         width: 80%;
         margin: 0 auto;
         .top {
-          padding: 0.2rem;
-          border-radius: .0625rem;
-          margin-top: .5rem;
+          padding: 1rem;
+          border-radius: 2rem;
+          margin-top: 1rem;
           .top-bar{
             .search{
-              width: 30%;
-            }
-          }
-          .bottom {
-            .active {
-              background-color: rgb(@primaryActiveColor);
-              color: rgb(@primaryActiveTextColor);
-            }
-            .orderByTag {
-              display: flex;
-              align-items: flex-start;
-
+              width: 35%;
             }
           }
           .tip{
