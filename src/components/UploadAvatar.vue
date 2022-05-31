@@ -1,18 +1,10 @@
 <template>
   <div class="upload">
-    <el-upload
-      class="avatar-uploader"
-      action=""
-      :show-file-list="false"
-      :limit="1"
-      accept=".png, .jpg, .jpeg"
-      :on-exceed="handleExceed"
-      :before-upload="beforeAvatarUpload"
-    >
-      <div class="avatar" :style="{ width: `${size}px`, height: `${size}px` }">
-        <img :src="avatar ? avatar : 'src/assets/img/logo.png'" />
+    <el-upload class="avatar-uploader" action="noaction" :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg"
+      :on-exceed="handleExceed" :before-upload="beforeAvatarUpload">
+      <div class="avatar">
+        <img :src="avatar ? avatar : 'src/assets/img/logo.png'" onerror="javascript:this.src='src/assets/img/logo.png';"/>
       </div>
-
       <p style="font-size: 12px" v-if="isShow">点此上传头像</p>
     </el-upload>
   </div>
@@ -49,12 +41,9 @@ export default defineComponent({
       ElMessage.warning("只能上传一张头图");
     };
     const beforeAvatarUpload = async (file: UploadFile) => {
-      const url=await useUpload(file);
-      // 通知父组件 链接更改
-      if(url!==""){
-        avatarLink.value=url;
-        emit("changeAvatar", avatarLink.value);
-      }
+      const url = await useUpload(file as unknown as ElFile);
+      if (url == "") return false;
+      emit("changeAvatar", url);
     };
     return { handleExceed, beforeAvatarUpload, avatarLink };
   },
@@ -64,14 +53,20 @@ export default defineComponent({
 <style lang="less" scoped>
 .upload {
   display: flex;
+  width: 100%;
+  height: 100%;
+
   .avatar-uploader {
     display: flex;
+    width: 100%;
+    height: 100%;
 
     .avatar {
       background-color: rgb(@primaryTextColor);
       overflow: hidden;
       border-radius: 50%;
       margin: 0 auto;
+
       img {
         width: 100%;
         height: 100%;

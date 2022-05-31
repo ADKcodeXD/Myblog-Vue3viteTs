@@ -144,8 +144,8 @@ export default defineComponent({
   .list-mobile {
     display: block;
     position: fixed;
-    right: 3.5714rem;
-    bottom: 14.2857rem;
+    right: 1rem;
+    bottom: 10rem;
     z-index: 9999;
     li {
       cursor: pointer;
