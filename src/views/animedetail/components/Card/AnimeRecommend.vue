@@ -75,8 +75,7 @@ import {
   BroswerResult,
 } from "@/interface/bangumiApi.type";
 import { SortRole } from "@/interface/BangumiEnum";
-import { emit } from "process";
-import { defineComponent, PropType, Ref } from "vue";
+import { defineComponent, PropType } from "vue";
 
 export default defineComponent({
   props: {

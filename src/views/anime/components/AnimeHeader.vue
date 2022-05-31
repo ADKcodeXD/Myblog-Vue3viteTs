@@ -77,6 +77,7 @@
           tw-h-16
           tw-object-cover
         "
+        @click="$router.push('/index/animebgminfo')"
       >
         <el-image fit="cover" src="@/assets/logo.png"> </el-image>
       </div>

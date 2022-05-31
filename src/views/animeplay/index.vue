@@ -44,7 +44,6 @@
 </template>
 
 <script lang="ts">
-import "mui-player/dist/mui-player.min.css";
 // 使用字节跳动的西瓜播放器
 import { defineComponent } from "vue";
 import { getYhdmAnimeVideoInfo } from "@/api/YhdmApi";

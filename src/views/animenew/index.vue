@@ -6,7 +6,10 @@
         @back="$router.push('/index/anime')"
       />
     </div>
-    <h1>新番速递</h1>
+    <div class="tw-flex tw-items-center">
+      <SvgIcon name="bofang" class="tw-w-10 tw-h-10" />
+      <h1>新番速递</h1>
+    </div>
     <p>{{ today }} 为你推荐{{ season }}月番剧</p>
     <div v-for="(weekDay, index) in weekDayList" :key="index" class="tw-my-5">
       <h1 :class="weekDay.weekday.en">

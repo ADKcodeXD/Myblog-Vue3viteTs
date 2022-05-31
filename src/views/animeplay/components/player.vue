@@ -1,6 +1,6 @@
 <template>
-  <div >
-    <div id="xgplayer" v-loading="loading"></div>
+  <div>
+    <div id="xgplayer" v-loading="loading"></div>  
   </div>
 </template>
 
@@ -10,20 +10,20 @@ import Player from "xgplayer";
 import HlsJsPlayer from "xgplayer-hls.js";
 
 export default defineComponent({
-  props:{
-    videoUrl:{
-      type:String,
-      default:'',
-    }
+  props: {
+    videoUrl: {
+      type: String,
+      default: "",
+    },
   },
   setup(props) {
     //接受路由传参 把视频地址获取 ，然后这个页面可以跨域
     // const route = useRoute();
-    let url = ref('');
-    if(props.videoUrl!==''){
-      url.value=props.videoUrl
+    let url = ref("");
+    if (props.videoUrl !== "") {
+      url.value = props.videoUrl;
     }
-    let mp: HlsJsPlayer | Player |null;
+    let mp: HlsJsPlayer | Player | null;
     let loading = ref(true);
     const getVideo = () => {
       let config = {
@@ -36,12 +36,12 @@ export default defineComponent({
         defaultPlaybackRate: 1,
         useHls: true,
         lang: "zh-cn",
-        closeVideoClick:true,
+        closeVideoClick: true,
         videoInit: true,
-        volume: 1
+        volume: 1,
       };
       // 判断是否m3u8
-      
+
       let houzhui = url.value?.split(".");
       if (houzhui && houzhui[houzhui.length - 1] === "m3u8") {
         mp = new HlsJsPlayer(config);
@@ -50,27 +50,29 @@ export default defineComponent({
       }
       loading.value = false;
       mp.on("requestFullscreen", function () {
-        //事件名称可以在上述查询
         window.screen.orientation.lock("landscape-primary");
       });
       mp.on("exitFullscreen", function () {
-        //事件名称可以在上述查询
         window.screen.orientation.unlock();
       });
-    }
-    
-    watch(props,(newval)=>{
-      url.value=props.videoUrl;
-      if(mp){
-        // 为什么重新加载 因为我不能保证视频源是否是m3u8或是其他 如果是m3u8需要新建hls播放器
-        mp.destroy();
-        mp=null;
-      }
-      getVideo();
-    },{deep:true})
-    onMounted(()=>{
+    };
+
+    watch(
+      props,
+      (newval) => {
+        url.value = props.videoUrl;
+        if (mp) {
+          // 为什么重新加载 因为我不能保证视频源是否是m3u8或是其他 如果是m3u8需要新建hls播放器
+          mp.destroy(false);
+          mp = null;
+        }
         getVideo();
-    })
+      },
+      { deep: true }
+    );
+    onMounted(() => {
+      getVideo();
+    });
     return {
       loading,
     };
@@ -80,15 +82,7 @@ export default defineComponent({
 
 
 <style lang="less" scoped>
-.xgplayer-volume{
-  &:hover{
-
-  }
-}
-#xgplayer{
-    background-color: rgb(0, 0, 0);
-}
-.xgplayer-skin-default.xgplayer-rotate-fullscreen {
-  z-index: 99999;
+#xgplayer {
+  background-color: rgb(0, 0, 0);
 }
 </style>

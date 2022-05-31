@@ -31,7 +31,6 @@ import { getSubjectInfoApi } from "@/api/bangumi";
 import { useAnimeCalendar } from "@/hooks/Bangumi";
 import { CalendarItem, SubjectInfoSmall } from "@/interface/bangumiApi.type";
 import { ElCarousel } from "element-plus";
-import { resolve } from "path";
 import { defineComponent } from "vue";
 import CarouselItem from "./CarouselItem.vue";
 
