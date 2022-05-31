@@ -25,10 +25,16 @@ import { defineComponent } from 'vue'
 import Loading from '@/assets/img/loading.gif'
 export default defineComponent({
     props:{
+      /**
+       * 传入图片链接url
+       */
         img:{
             type:String,
             require:true
         },
+        /**
+         * 加载失败要显示图片 默认是1:1的方形图 可选3:4 3:1 fang 
+         */
         notFoundType:{
             type:String,
             default:'fang'
