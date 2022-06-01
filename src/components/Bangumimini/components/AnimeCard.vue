@@ -1,85 +1,126 @@
 <template>
-  <div class="anime-card" v-if="animeInfo" @click="$router.push(`/index/animedetail/${animeInfo.id}`)">
-    <el-row :gutter="10" :span="6">
-      <el-card
-        @mouseenter="detailInfoShow = true"
-        class="card"
-        :body-style="{ padding: '0px' }"
-      >
-        <el-image :src="animeInfo.images&&animeInfo.images.large" fit="cover" class="elimg">
-          <template #placeholder>
-            <div class="gray">
-              <el-image :src="Loading">
-                <template #placeholder>
-                  <p>正在努力加载</p>
-                </template>
-              </el-image>
-              <span>图片努力加载中~</span>
-            </div>
-          </template>
-          <template #error>
-                <div class="tw-w-fill">
-                  <img
-                    class="tw-w-fill tw-h-fill"
-                    src="@/assets/img/404img.jpg"
-                  />
-                </div>
-          </template>
-        </el-image>
-        <div class="info">
-          <div class="top">
-            <div class="rating">
-              <p class="man" v-if="animeInfo.collection">
-                {{ animeInfo.collection.doing }}人在看
-              </p>
-              <p>
-                bgm排名:<span class="rank">{{
-                  animeInfo.rank ? animeInfo.rank : "暂无数据"
-                }}</span>
-              </p>
-            </div>
-            <p class="title text-line-show-2" :alt="animeInfo.name">
-              作品名:{{ animeInfo.name_cn?animeInfo.name_cn:animeInfo.name }}
-            </p>
-            <p v-if="animeInfo.name_cn" class="title-cn text-line-show-2">
-              译名:{{ animeInfo.name }}
-            </p>
+  <div class="anime-card" v-if="animeInfo" @click="$router.push(`/index/animedetail/${animeInfo.id}`)"
+    @mouseenter="requestInfo" @mouseleave="detailInfoShow = false">
+    <div class="card">
+      <el-image :src="animeInfo.images && animeInfo.images.large" fit="cover" class="elimg">
+        <template #placeholder>
+          <div class="gray">
+            正在加载中……
           </div>
-          <div class="bottom">
-            <p>开播日期:{{ animeInfo.air_date }}</p>
-            <div class="rating-count">
-              <p>
-                综合评分:<span class="rank">{{
-                  animeInfo.rating && animeInfo.rating.score
-                }}</span>
-              </p>
-              <p>评分人数:{{ animeInfo.rating && animeInfo.rating.total }}</p>
-            </div>
+        </template>
+        <template #error>
+          <div class="tw-w-fill">
+            <img class="tw-w-fill tw-h-fill" src="@/assets/img/404img.jpg" />
+          </div>
+        </template>
+      </el-image>
+      <transition @enter="translateYenter" @leave="translateYleave">
+        <div class="info" v-if="!detailInfoShow">
+          <p class="title text-line-show-2" :alt="animeInfo.name">
+            {{ animeInfo.name_cn ? animeInfo.name_cn : animeInfo.name }}
+          </p>
+          <div class="rating">
+            <p class="man" v-if="animeInfo.collection">
+              {{ animeInfo.collection.doing }}人在看
+            </p>
+            <p>
+              #<span class="rank">{{
+                  animeInfo.rank ? animeInfo.rank : "暂无数据"
+              }}</span>
+            </p>
           </div>
         </div>
-      </el-card>
-    </el-row>
+      </transition>
+
+      <transition @enter="infoXenter" @leave="infoXleave">
+        <div v-if="detailInfoShow" class="tw-flex-1">
+          <transition  @enter="infoXenter" @leave="infoXleave">
+            <div v-if="animeDetailData" class="info-detail">
+              <div :key="1" :data-index="0">
+                <div class="tw-flex tw-justify-between">
+                  <p class="title text-line-show-2">
+                    {{ animeInfo.name_cn ? animeInfo.name_cn : animeInfo.name }}
+                  </p>
+                  <p class="tw-shrink-0">
+                    排名:<span class="rank tw-text-blue-600">{{
+                        animeInfo.rank ? animeInfo.rank : "暂无数据"
+                    }}</span>
+                  </p>
+                </div>
+                <p class="hanyaku text-line-show-2" v-if="animeInfo.name_cn">
+                  {{ animeInfo.name }}
+                </p>
+                <p>开播日期:{{ animeInfo.air_date }}</p>
+              </div>
+              <p class="desc" :key="2" :data-index="1">简介:{{ animeDetailData.summary }}</p>
+              <div :key="3" :data-index="2">
+                <p class="tw-mt-1">总集数:{{ animeDetailData.eps }}</p>
+                <p class="tw-text-red-500">评分:{{ animeInfo.rating.score ? animeInfo.rating.score : '暂无评分'
+                }}&nbsp;<span>({{ animeInfo.rating.total
+}}人参加评分)</span></p>
+
+                <div class="tw-flex tw-items-center">
+                  相关tag:
+                  <ElTag v-for="tag in tagsInfoThree" effect="dark" class="tw-m-1">
+                    {{ tag.name }}
+                  </ElTag>
+                </div>
+              </div>
+            </div>
+            <div v-else class="tw-flex tw-w-full tw-h-full tw-items-center tw-justify-center">
+              <div class="box" style="--i:1;"></div>
+              <div class="box" style="--i:2;"></div>
+              <div class="box" style="--i:3;"></div>
+            </div>
+          </transition>
+          
+        </div>
+      </transition>
+    </div>
   </div>
 </template>
 
-<script lang="ts">
-import { AnimeItemInfo } from "@/interface/bangumiApi.type";
-import { defineComponent, PropType } from "vue";
-import Loading from "@/assets/img/loading.gif";
-export default defineComponent({
-  props: {
-    animeInfo: {
-      type: Object as PropType<AnimeItemInfo>,
-      default: {},
-    },
+<script lang="ts" setup>
+import { getSubjectInfoApi } from "@/api/bangumi";
+import { useAnime } from "@/hooks/Anime";
+import { AnimeItemInfo, SubjectInfoSmall } from "@/interface/bangumiApi.type";
+import { PropType } from "vue";
+const props = defineProps({
+  animeInfo: {
+    type: Object as PropType<AnimeItemInfo>,
+    default: {},
   },
-  setup(props) {
-    let detailInfoShow = ref(false);
-    return {
-      Loading,
-      detailInfoShow,
-    };
-  },
+});
+const {
+  translateYleave,
+  translateYenter,
+  infoXenter,
+  infoXleave,
+} = useAnime();
+let detailInfoShow = ref(false);
+let animeDetailData = ref<null | SubjectInfoSmall>();
+const getSubjectInfo = async (id: number) => {
+  const { data } = await getSubjectInfoApi(id);
+  animeDetailData.value = data;
+}
+const requestInfo = async () => {
+  detailInfoShow.value = true;
+  if (!animeDetailData.value) {
+    getSubjectInfo(props.animeInfo.id);
+  } else {
+    return;
+  }
+}
+const tagsInfoThree = computed(() => {
+  let tags = [];
+  if (animeDetailData.value && animeDetailData.value.tags.length > 3) {
+    for (let i = 0; i < 3; i++) {
+      tags.push(animeDetailData.value.tags[i]);
+    }
+  } else {
+    return animeDetailData.value.tags;
+  }
+  return tags;
 });
 </script>
 
@@ -89,93 +130,124 @@ export default defineComponent({
   .anime-card {
     margin-right: 1rem;
     margin-top: 1rem;
+    height: 30rem;
     width: 47%;
     cursor: pointer;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 3px solid rgb(255, 87, 115);
+    background-color: white;
   }
+
   .card {
+    height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.5s ease;
+    position: relative;
+    font-family: 'Thinfont', '幼圆';
+    font-weight: 600;
+
     .elimg {
       width: 100%;
       height: 18rem;
+      flex-shrink: 0;
+      transition: all 0.5s ease;
+    }
+
+    .title {
+      font-size: 1.4rem;
     }
 
     .info {
       padding: 10px;
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 17rem;
-      .top {
-        flex: 1;
+
+      .rating {
         display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        font-size: 0.75rem;
-        .title {
-          margin-top: 5px;
-          font-size: 1rem;
-          color: rgb(0, 126, 78);
-        }
-        .rating {
-          display: flex;
-          justify-content: space-between;
-          .rank {
-            color: rgb(255, 90, 40);
-          }
-          .man {
-            margin-bottom: 5px;
-          }
-        }
+        justify-content: space-between;
       }
-      .bottom {
-        font-size: 0.8rem;
-        margin-top: 5px;
-        .rating-count {
-          .rank {
-            color: rgb(255, 90, 40);
-          }
-          display: flex;
-          justify-content: space-between;
-        }
+
+      .rank {
+        color: rgb(0, 60, 255);
       }
     }
-    .img {
-      width: 30rem;
-      height: 30rem;
-    }
-    .gray {
-      width: 100%;
-      height: 100%;
-      background-color: rgb(73, 72, 71);
+
+    .info-detail {
+      padding: 1rem;
       display: flex;
       flex-direction: column;
-      color: rgb(@primaryActiveTextColor);
-      justify-content: center;
-      align-items: center;
+      justify-content: space-between;
+      color: rgb(0, 0, 0);
+      height: 100%;
+      .hanyaku {
+        font-family: '黑体';
+      }
+
+      .desc {
+        .text-line-show(8);
+        margin-bottom: 0.3rem;
+      }
     }
   }
 }
+
+@keyframes uptodown {
+
+  0%,
+  50%,
+  100% {
+    transform: translateY(0);
+  }
+
+  25% {
+    transform: translateY(-15px);
+  }
+
+  75% {
+    transform: translateY(15px);
+  }
+}
+
 @media screen and (min-width: 1440px) {
   .anime-card {
     margin-right: 1rem;
+    height: 26rem;
     width: 20rem;
+    flex-shrink: 0;
+    transition: all 0.5s ease;
+
     &:hover {
-      :deep(.el-card) {
-        transform: translateY(-5px);
-        background-color: rgb(255, 251, 234);
+      width: 50rem;
+      background-color: rgb(255, 255, 255);
+
+      .card {
+        flex-direction: row;
       }
+
+      .elimg {
+        width: 20rem;
+        height: 100%;
+      }
+
     }
   }
+
   .card {
-    width: 18rem;
-    position: relative;
     .elimg {
-      width: 18rem;
-      height: 18rem;
+      width: 100%;
     }
-    .info {
-      height: 12rem;
-    }
+
+  }
+
+  .box {
+    .ball(1rem, #fc566c);
+    margin: 1rem;
+    animation: uptodown 1s linear calc(var(--i)*0.15s) infinite both;
   }
 }
 </style>
