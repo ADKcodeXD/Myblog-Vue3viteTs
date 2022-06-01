@@ -38,10 +38,72 @@ export const useAnime=()=>{
             onComplete: done
         })
     }
-    return{
+    // Y轴进 下往上
+    const translateYenter = (el, done) => {
+        gsap.set(el,{
+           y:100,
+           opacity:0,
+           position:'absolute'
+        })
+        gsap.to(el, {
+            duration: 0.4,
+            position:'static',
+            y: 0,
+            opacity:1,
+            ease: 'circ.out',
+            onComplete: done
+        })
+    }
+    // Y轴出 上往下
+    const translateYleave = (el, done) => {
+        gsap.set(el,{
+            position:'absolute',
+            bottom: 0,
+        })
+        gsap.to(el, {
+            duration: 0.2,
+            bottom: -100,
+            width:'100%',
+            opacity:0,
+            ease: 'power1.inOut',
+            onComplete: done
+        })
+    }
+    // list 延迟入场
+    const infoXenter =(el,done)=>{
+        gsap.set(el,{
+            x:-20,
+            opacity:0,
+            position:'absolute'
+        })
+        gsap.to(el, {
+            opacity: 1,
+            duration:0.6,
+            x:0,
+            position:'static',
+            ease: 'power1.inOut',
+            delay:0.3,
+            onComplete: done
+        })
+    }
+    // info 出场
+    const infoXleave =(el,done)=>{
+        gsap.to(el, {
+            opacity: 0,
+            duration:0.3,
+            x:30,
+            ease: 'power1.inOut',
+            onComplete: done
+        })
+    }
+    return {
         rotateYenter,
         rotateYleave,
         translateXenter,
-        translateXleave
+        translateXleave,
+        translateYenter,
+        translateYleave,
+        infoXenter,
+        infoXleave,
     }
 }
