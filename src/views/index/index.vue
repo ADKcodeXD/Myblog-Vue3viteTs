@@ -1,17 +1,22 @@
 <template>
   <div class="main">
-    <div class="sub-title">
-      <div class="content">
-        <div class="icon">
-          <div >
-            <img src="@/assets/img/logo-icon.png"/>
-          </div>
-          <p>最近更新</p>
-        </div>
-        <p class="right">欢迎你来到我的博客~</p>
-      </div>
-    </div>
+    <div class="tw-h-24 ghost"></div>
+    <SubTitle>
+      最近更新
+      <template #right>
+        welcome to Adkblog
+      </template>
+    </SubTitle>
     <Carousel :items="bannerList" />
+    <SubTitle>
+      看看新番
+    </SubTitle>
+    <div class="bangumi">
+      <Bangumimini />
+    </div>
+    <SubTitle>
+      我的文章
+    </SubTitle>
     <div class="view-content">
       <div class="article">
         <el-card class="box-card">
@@ -39,9 +44,7 @@
         <li><TimeLine /></li>
       </ul>
     </div>
-    <div class="bangumi">
-      <Bangumimini />
-    </div>
+    
   </div>
 </template>
 
@@ -61,6 +64,7 @@ import ArticleTimeLine from "./components/ArticleTimeLine.vue";
 import Jinqi from '@/assets/img/近期更新.png';
 // Default SortableJS
 import Sortable from 'sortablejs';
+import SubTitle from "./components/SubTitle.vue";
 // 获取首页文章 按照时间顺序 5篇
 let articles = ref<ArticleItemInfo[]>([]);
 let bannerList = ref<Banner[]>([]);

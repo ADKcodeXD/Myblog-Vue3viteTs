@@ -62,11 +62,7 @@
     >
       <template #placeholder>
         <div class="tw-h-fill tw-w-fill tw-self-center">
-          <el-image :src="Loading">
-            <template #placeholder>
-              <p>正在努力加载</p>
-            </template>
-          </el-image>
+          <p>正在努力加载</p>
           <span>图片努力加载中~</span>
         </div>
       </template>
