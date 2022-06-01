@@ -72,7 +72,7 @@ img {
   object-fit: cover;
 }
 
-.text-line-show(@line){
+.text-line-show(@line) {
   word-break: break-all;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -80,15 +80,19 @@ img {
   -webkit-line-clamp: @line;
   overflow: hidden;
 }
+
 .text-line-show-1 {
   .text-line-show(1)
 }
+
 .text-line-show-2 {
   .text-line-show(2)
 }
+
 .text-line-show-3 {
   .text-line-show(3)
 }
+
 .text-line-show-6 {
   .text-line-show(6)
 }
@@ -116,23 +120,32 @@ img {
       transparent 75%,
       transparent)
 }
+
 // 动画
 @keyframes leftmove-loop {
-  0%,100%{
+
+  0%,
+  100% {
     transform: translateX(0px) translateY(-50%);
   }
-  50%{
+
+  50% {
     transform: translateX(-15px) translateY(-50%);
   }
 }
+
 @keyframes rightmove-loop {
-  0%,100%{
+
+  0%,
+  100% {
     transform: translateX(0px) translateY(-50%);
   }
-  50%{
+
+  50% {
     transform: translateX(15px) translateY(-50%);
   }
 }
+
 // 自定义字体
 @font-face {
   font-family: 'Cartoonfont';
@@ -184,44 +197,57 @@ img {
     }
   }
 }
+
 // 重置轮播图的箭头样式
-:deep(.el-carousel__arrow){
-  .el-icon{
+:deep(.el-carousel__arrow) {
+  .el-icon {
     display: none;
   }
 }
-:deep(.el-carousel__arrow--left){
+
+:deep(.el-carousel__arrow--left) {
   background-color: unset;
   border-radius: unset;
   background: url(../img/leftarrow.png) no-repeat;
   background-size: contain;
-  &:hover{
-    animation: leftmove-loop 0.5s both  ease-in-out;
+
+  &:hover {
+    animation: leftmove-loop 0.5s both ease-in-out;
   }
 }
-:deep(.el-carousel__arrow--right){
+
+:deep(.el-carousel__arrow--right) {
   background-color: unset;
   border-radius: unset;
   background: url(../img/rightarrow.png) no-repeat;
   background-size: contain;
-  &:hover{
-    animation: rightmove-loop 0.5s both  ease-in-out;
+
+  &:hover {
+    animation: rightmove-loop 0.5s both ease-in-out;
   }
 }
+
 // 重置轮播图的下面的水平线样式
-:deep(.el-carousel__indicators){
-  .el-carousel__button{
+:deep(.el-carousel__indicators) {
+  .el-carousel__button {
     width: 30px;
     height: 30px;
     background: url(../img/lunbo.png) no-repeat;
     background-size: cover;
   }
-  .is-active{
-    .el-carousel__button{
+
+  .is-active {
+    .el-carousel__button {
       background: url(../img/lunbo-active.png) no-repeat;
       background-size: cover;
     }
   }
+}
+
+// 重置el-card
+:deep(.el-card) {
+  border: 3px solid #000000;
+  border-radius: 10px;
 }
 
 // 定义几个边框图片 
@@ -241,12 +267,21 @@ img {
   border-image: url(@/assets/img/border-line.png) 20 24 17 25;
   border-image-outset: @outset;
 }
+
 // 3、街角魔族类型的图片边框 
-.border-pinkline(@width, @outset){
+.border-pinkline(@width, @outset) {
   border: @width solid transparent;
   border-radius: @width;
   border-image: url(@/assets/img/page.png) 25 repeat;
   border-image-outset: @outset;
+}
+
+// 定义一个球
+.ball(@size,@color){
+  width: @size;
+  height: @size;
+  border-radius: 50%;
+  background-color: @color;
 }
 // 定义所有变量 
 @primaryBackGroundColor: var(--primaryBackGroundColor, rgb(255, 253, 253));
