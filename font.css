@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'urafont';
+    src: url('./src/assets/fonts/uzura.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+#h {
+    font-family: 'urafont';
+}
