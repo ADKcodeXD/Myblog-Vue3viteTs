@@ -78,7 +78,7 @@ export default defineComponent({
 
     .title {
         position: absolute;
-        bottom: 1.0714rem;
+        top: 70%;
         left: 1.4286rem;
         text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
         font-size: 2.8571rem;

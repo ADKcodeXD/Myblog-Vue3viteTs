@@ -1,6 +1,6 @@
 <template >
     <div class="icon">
-        <router-link to="/threeshow">
+        <router-link to="/welcome">
             <img src="@/assets/img/new-logo.png" />
         </router-link>
         <i @click="openPollup" class="iconfont icon-classification"></i>

@@ -5,7 +5,7 @@ import { ElMessage, ElMessageBox } from 'element-plus';
 const routes:RouteRecordRaw[] = [
     {
         path: '/',
-        redirect: '/threeshow',
+        redirect: '/welcome',
     },
     {
         path: '/index',
@@ -83,7 +83,7 @@ const routes:RouteRecordRaw[] = [
     {
         path: '/welcome',
         name: 'welcome',
-        component: () => import('@/components/WelcomePage.vue')
+        component: () => import('@/views/newindex/index.vue')
     },
     // {
     //     path: '/project',
