@@ -172,6 +172,7 @@ const yPos = computed(() => {
 <style lang="less" scoped>
 @size: 200px;
 @color :rgb(252, 252, 252);
+
 @media screen and(min-width:320px) {
     .logo {
         width: 100%;
@@ -188,11 +189,13 @@ const yPos = computed(() => {
         // right: 20px;
         top: 50%;
         transform: translateY(-50%);
-        img{
+
+        img {
             width: 300px;
         }
     }
 }
+
 @media screen and(min-width:960px) {
     .logo {
         width: 300px;
@@ -202,6 +205,7 @@ const yPos = computed(() => {
         background-color: unset;
     }
 }
+
 .mian(@color, @size) {
     position: absolute;
     border-radius: 10px;
@@ -257,7 +261,7 @@ const yPos = computed(() => {
     height: 98vh;
     perspective: 1200px;
     perspective-origin: 581px 476px;
-    transition: 0.4s all cubic-bezier(0,.71,.63,.65);
+    // transition: 0.4s perspective-origin cubic-bezier(0,.71,.63,.65);
     overflow: hidden;
     border-radius: 20px;
     background-color: rgb(255, 255, 255);

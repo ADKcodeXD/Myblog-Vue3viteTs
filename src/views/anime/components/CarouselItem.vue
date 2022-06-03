@@ -82,7 +82,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import Loading from "@/assets/img/loading.gif";
+import Loading from "@/assets/img/404img.jpg";
 import { SubjectInfoSmall } from "@/interface/bangumiApi.type";
 
 export default defineComponent({
