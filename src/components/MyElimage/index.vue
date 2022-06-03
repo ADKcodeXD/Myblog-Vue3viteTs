@@ -1,13 +1,8 @@
 <template>
-  <el-image :src="img" fit="cover" style="width: 100%; height: 100%; ">
+  <el-image :src="img" fit="cover" style="width: 100%; height: 100%; " lazy>
     <template #placeholder>
       <div class="gray" style="width: 100%; height: 100%; ">
-        <el-image :src="Loading" >
-          <template #placeholder>
-            <p>正在努力加载</p>
-          </template>
-        </el-image>
-        <span class="tw-text-xs">图片努力加载中~</span>
+        <LoadingAnime />
       </div>
     </template>
     <template #error>
@@ -22,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import Loading from '@/assets/img/loading.gif'
+import Loading from '@/assets/img/404img.jpg';
 export default defineComponent({
     props:{
       /**
@@ -53,7 +48,7 @@ export default defineComponent({
 .gray {
     width: 100%;
     height: 100%;
-    background-color: rgb(73, 72, 71);
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     color: rgb(@primaryActiveTextColor);
