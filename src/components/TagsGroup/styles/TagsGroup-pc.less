@@ -1,0 +1,33 @@
+@media screen and (min-width:320px) and (max-width:768px){
+    .tags {
+        display: flex;
+        margin-top: .7143rem;
+        height: 100%;
+        width: 100%;
+        flex-wrap: wrap;
+        .tag {
+          display: flex;
+          cursor: pointer;
+          align-items: center;
+          text-align: center;
+          color: rgb(@primaryTagTextColor);
+          border-radius: 10px;
+          font-size: .8571rem;
+          margin-right: .7143rem;
+        }
+      }
+}
+@media screen and (min-width:768px){
+    .tags {
+        display: flex;
+        .tag {
+          display: flex;
+          cursor: pointer;
+          align-items: center;
+          text-align: center;
+          color: rgb(@primaryTagTextColor);
+          font-size: .8571rem;
+          margin-right: .7143rem;
+        }
+      }
+}

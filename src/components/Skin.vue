@@ -4,12 +4,6 @@
       <i class="iconfont icon-geren"></i>
     </li>
     <li @click="top"><i class="iconfont icon-huidaodingbu"></i></li>
-    <li v-if="!isDark" @click="changedark">
-      <i class="iconfont icon-dark"></i>
-    </li>
-    <li v-else @click="chanegDefault">
-      <i class="iconfont icon-tianqitaiyangqichuang"></i>
-    </li>
     <li
       class="item-anime"
       @click="isChatRoomshow = !isChatRoomshow"
@@ -46,14 +40,6 @@
       >
         <i class="iconfont icon-pinglun"></i>
       </li>
-      <div class="yejian item-anime" v-if="isMobile" :key="5">
-        <li v-if="!isDark" @click="changedark">
-          <i class="iconfont icon-dark"></i>
-        </li>
-        <li v-else @click="chanegDefault">
-          <i class="iconfont icon-tianqitaiyangqichuang"></i>
-        </li>
-      </div>
     </transition-group>
   </ul>
   <transition name="width-height" >
