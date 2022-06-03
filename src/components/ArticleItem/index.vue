@@ -1,7 +1,7 @@
 <template>
   <div class="box" @click="$router.push(`/article/${articleItem.id}`)">
     <div class="image">
-      <img :src="articleItem.banner" alt="" />
+      <MyElimage :img="articleItem.banner" alt="" />
     </div>
     <div class="content">
       <div class="up">

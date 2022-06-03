@@ -4,13 +4,7 @@
             <el-carousel-item v-for="item in items" style="display: block" :key="item.id">
                 <div class="content" @click="$router.push(`/article/${item.id}`)">
                     <h2 class="title">{{ item.articleName }}</h2>
-                    <el-image :src="item.banner" fit="cover">
-                        <template #placeholder>
-                            <div class="image-slot">
-                                <img src="@/assets/img/404img1200.jpg" />
-                            </div>
-                        </template>
-                    </el-image>
+                    <MyElimage :src="item.banner" notFoundType="3:1" />
                 </div>
             </el-carousel-item>
         </el-carousel>
