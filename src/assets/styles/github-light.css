@@ -47,13 +47,14 @@
   
   .markdown-body a {
     background-color: transparent;
-    color: #0969da;
+    color: #000000;
     text-decoration: none;
   }
   
   .markdown-body a:active,
   .markdown-body a:hover {
     outline-width: 0;
+    text-decoration: none;
   }
   
   .markdown-body abbr[title] {
