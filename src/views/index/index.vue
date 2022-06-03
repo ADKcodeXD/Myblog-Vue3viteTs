@@ -44,7 +44,6 @@
         <li><TimeLine /></li>
       </ul>
     </div>
-    
   </div>
 </template>
 
@@ -90,9 +89,9 @@ const getBannerList = async () => {
 onMounted(() => {
   getIndexfive();
   getBannerList();
-  new Sortable(rightUl.value,{
-    animation: 150,
-  })
+  // new Sortable(rightUl.value,{
+  //   animation: 150,
+  // })
 });
 </script>
 

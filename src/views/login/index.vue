@@ -51,7 +51,7 @@
             </div>
           </div>
           <!-- logo -->
-          <div class="tw-w-72 tw-absolute tw-bottom-4 tw-left-4">
+          <div class="tw-w-40 md:tw-w-72 tw-absolute tw-bottom-4 tw-left-4">
             <MyElimage :img="Logo" />
           </div>
           <!-- 直接看看 -->
@@ -62,7 +62,7 @@
       <div v-else :key="2" class="temp">
         <div class="login-box">
           <div class="loginform">
-            <div class="tw-w-96 tw-my-5">
+            <div class="tw-w-72 md:tw-w-96 tw-my-5">
               <MyElimage :img="Register" />
             </div>
             <el-form label-position="left" ref="registerFormRef" :rules="registerRules" :model="registerForm">
@@ -98,62 +98,13 @@
               </div>
             </div>
           </div>
-          <div class="tw-w-72 tw-absolute tw-bottom-4 tw-left-4">
+          <div class="tw-w-40 md:tw-w-72 tw-absolute tw-bottom-4 tw-left-4">
             <MyElimage :img="Logo" />
           </div>
           <!-- 直接看看 -->
           <div class="goin" @click="$router.push('/index')">
           </div>
         </div>
-      </div>
-    </transition>
-
-    <!-- 这是移动端的 -->
-    <transition name="onlyopacity">
-      <div class="login-box-mobile" v-if="isMobileLoginShow">
-        <!-- 登录 -->
-        <transition-group name="list" mode="in-out">
-          <div v-if="isLogin" :key="1" class="loginform list-item">
-            <h2>登录blog</h2>
-            <p class="sub-title">登录即可使用评论留言等功能</p>
-            <el-form label-position="left" label-width="80px" ref="ruleFormRef" :rules="rules" :model="form">
-              <el-form-item prop="username" label="用户名">
-                <el-input v-model="form.username"></el-input>
-              </el-form-item>
-              <el-form-item prop="password" label="密码">
-                <el-input type="password" v-model="form.password" prop="password"></el-input>
-              </el-form-item>
-            </el-form>
-            <div class="btn">
-              <el-button round @click="isLogin = false">注册</el-button>
-              <el-button @click="submitForm(ruleFormRef)" round>登录</el-button>
-            </div>
-          </div>
-          <!-- 注册 共用一套样式 -->
-          <div v-else :key="2" class="loginform list-item">
-            <h2>注册一个账户</h2>
-            <p class="sub-title">注册后即可使用本博客的一些功能</p>
-            <el-form label-position="left" label-width="80px" ref="registerFormRef" :rules="registerRules"
-              :model="registerForm">
-              <el-form-item prop="username" label="用户名">
-                <el-input v-model="registerForm.username" prop="username"></el-input>
-              </el-form-item>
-              <el-form-item prop="nickname" label="昵称">
-                <el-input v-model="registerForm.nickname" prop="nickname"></el-input>
-              </el-form-item>
-              <el-form-item prop="password" label="密码">
-                <el-input type="password" v-model="registerForm.password" prop="password"></el-input>
-              </el-form-item>
-              <el-form-item prop="repassword" label="确认密码">
-                <el-input type="password" v-model="registerForm.repassword" prop="repassword"></el-input>
-              </el-form-item>
-            </el-form>
-            <div class="btn">
-              <el-button round @click="isLogin = true">登录</el-button>
-              <el-button @click="submitRegister(registerFormRef)" round>注册</el-button>
-            </div>
-          </div>
-        </transition-group>
       </div>
     </transition>
   </div>
@@ -184,7 +135,6 @@ const {
   ruleFormRef,
   form,
   isLogin,
-  isMobileLoginShow,
   target,
   x,
   y,
