@@ -20,7 +20,7 @@ export default ({ mode }) => {
     plugins: [
       vue(), 
       AutoImport({
-        dts: 'src/auto-imports.d.ts',
+        dts: true,
         imports: ['vue', 'vue-router'],
         resolvers: [ElementPlusResolver()],
       }), 
