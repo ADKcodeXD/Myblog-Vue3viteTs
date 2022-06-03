@@ -15,32 +15,30 @@ import { ElMessage } from "element-plus";
 import { useRoute } from "vue-router";
 import _ from "lodash";
 import { userCollect, userLike } from "@/api/user";
+import { storeToRefs } from 'pinia';
 
 export const useArticle = () => {
-
     const route = useRoute();
     const userStore = useUserStore();
-
+    let user=storeToRefs(userStore).userinfo;
+    let emoji=ref();
     // 定义所有使用到的变量
     let comment = ref("");
-    const user = userStore.userinfo;
-    let currentUser = reactive<UserEasy>({
-        id: user.id,
-        role: user.role,
-        avatar: user.avatar,
-        username: user.username,
-        nickname: user.nickname,
-        introduce: user.introduce,
-        banner: user.banner,
-    });
     let commentParams: CommentParams = reactive({
         articleId: route.params.id as string,
-        authorId: currentUser.id,
+        authorId: user.value.id,
         content: comment,
     });
     let article = ref<ArticleItemInfo>();
     let commentList = ref<CommentItemInfo[]>([]);
-
+    // loading
+    let isLikedLoading = ref(false);
+    let isCollectLoading = ref(false);
+    // 评论分页参数
+    let pageparams: PageParams = reactive({
+        page: 1,
+        pagesize: 10,
+    });
     // 计算属性 计算相对时间
     let time = computed(() => {
         article.value as ArticleItemInfo;
@@ -57,7 +55,7 @@ export const useArticle = () => {
             const { data } = await addComment(commentParams);
             if (data.code === 200) {
                 ElMessage.success("发布成功");
-                comment.value = "";
+                emoji.value.clearInput();
                 getAllComment();
             } else {
                 ElMessage.error(data.msg);
@@ -75,11 +73,9 @@ export const useArticle = () => {
             ElMessage.error(data.msg);
         }
     };
-    // 评论分页参数
-    let pageparams: PageParams = reactive({
-        page: 1,
-        pagesize: 10,
-    });
+    const changeComment=(content: string)=>{
+        comment.value = content;
+    }
     // 获取评论
     const getAllComment = async () => {
         const { data } = await getComments(route.params.id as string, pageparams);
@@ -104,15 +100,11 @@ export const useArticle = () => {
         ElMessage.success("发送成功");
         getAllComment();
     };
-
-    // loading
-    let isLikedLoading = ref(false);
-    let isCollectLoading = ref(false);
     // 喜欢文章
     const likedArticle = async () => {
         isLikedLoading.value = true;
         // 如果是登录状态下
-        if (user.id) {
+        if (user.value.id) {
             let likedValue = !article.value?.isLiked;
             if (article.value) {
                 let reqParams: LikeOrCollectParams = {
@@ -127,11 +119,10 @@ export const useArticle = () => {
         }
         isLikedLoading.value = false;
     };
-
     // 收藏文章
     const collectArticle = async () => {
         isCollectLoading.value = true;
-        if (user.id) {
+        if (user.value.id) {
             let collectValue = !article.value?.isCollected;
             if (article.value) {
                 let reqParams: LikeOrCollectParams = {
@@ -148,9 +139,6 @@ export const useArticle = () => {
     };
     // 函数加载 挂载组件
     onMounted(() => {
-        if (user) {
-            currentUser = user;
-        }
         getArticle(route.params.id);
         getAllComment();
     });
@@ -167,8 +155,10 @@ export const useArticle = () => {
         time,
         article,
         commentList,
-        currentUser,
-        comment
+        user,
+        comment,
+        changeComment,
+        emoji
     }
 }
 /**
@@ -189,16 +179,6 @@ export const useEmoji = () => {
         "activities": "活动~",
     }
     let cursorIndex = ref(0);
-    const selectEmoji = (emoji:any,emit:any,content:string,cursorIndex:number) => {
-        if (content.length < cursorIndex) {
-            content += emoji.i;
-        } else {
-            let s1 = content.substring(0, cursorIndex)
-            let s2 = content.substring(cursorIndex, content.length)
-            content = s1 + emoji.i + s2
-        }
-        emit('changeEmoji',content)
-    }
     const handleInputBlur = (e: any) => {
         // 记录离开焦点时的光标位置
         cursorIndex.value = e.srcElement.selectionStart;
@@ -207,7 +187,6 @@ export const useEmoji = () => {
         showEmoji,
         disabledGroup,
         groupName,
-        selectEmoji,
         handleInputBlur,
         emojiTarget,
         cursorIndex
