@@ -85,11 +85,6 @@ const routes:RouteRecordRaw[] = [
         name: 'welcome',
         component: () => import('@/views/newindex/index.vue')
     },
-    // {
-    //     path: '/project',
-    //     name: 'project',
-    //     component: () => import('@/views/profile/index.vue')
-    // },
     {
         path: '/login',
         name: 'login',

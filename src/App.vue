@@ -1,20 +1,16 @@
 <template>
-
-  <router-view></router-view>
-
+  <el-config-provider :locale="zhCn">
+    <router-view></router-view>
+  </el-config-provider>
+  
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import {useCacheStore}  from '@/store/cache'
-export default defineComponent({
-  setup() {
-    const cacheStore=useCacheStore();
-    const pages=cacheStore.cachePages;
-    return {
-      pages
-    }
-  },
-})
+<script lang="ts" setup>
+import { useCacheStore } from '@/store/cache'
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+import { ElConfigProvider } from 'element-plus'
+
+const cacheStore = useCacheStore();
+const pages = cacheStore.cachePages;
 </script>
 
