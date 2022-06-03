@@ -42,29 +42,25 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { computed, defineComponent, PropType } from "vue";
 import { getRealativeTime } from "@/utils/dayjs";
-import TagsGroup from "@/components/TagsGroup.vue";
 import { ArticleItemInfo } from "@/interface/article";
-export default defineComponent({
-  props: {
-    articleItem: {
-      type: Object as PropType<ArticleItemInfo>,
-      default: () => { },
-    },
+
+const props = defineProps({
+  articleItem: {
+    type: Object as PropType<ArticleItemInfo>,
+    default: () => { },
   },
-  setup(props) {
-    const time = computed(() => {
-      return getRealativeTime(props.articleItem.createDate);
-    });
-    return { time };
-  },
-  components: { TagsGroup },
+});
+
+const time = computed(() => {
+  return getRealativeTime(props.articleItem.createDate);
 });
 </script>
 <style lang="less" scoped>
 @import url("./style.less");
+
 .tag {
   margin-top: unset;
 }

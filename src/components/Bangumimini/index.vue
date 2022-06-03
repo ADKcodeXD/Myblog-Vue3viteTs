@@ -6,18 +6,19 @@
           <img src="@/assets/img/每日番剧-logo.png" />
         </div>
         <ul class="week">
-          <li v-for="(week, index) in weekDayList" :key="index" @click="changeDay(week.weekday.id)">
+          <li v-for="(week, index) in weekDayList" :key="index" @click="changeDay(week.weekday.id)"
+            :class="{ active: week.weekday.id === nowDay }">
             {{ week.weekday.ja }}
-            <span>{{week.weekday.en}}</span>
+            <span>{{ week.weekday.en }}</span>
           </li>
-          <div class="switch-ball" :style="{left:ballXpos}">
+          <div class="switch-ball" :style="{ left: ballXpos }">
           </div>
         </ul>
       </div>
     </template>
     <!-- 自制的tabs -->
     <div v-for="(week, index) in weekDayList" :key="index">
-      <div class="tab-inner myscrollbar" v-if="week.weekday.id===nowDay" >
+      <div class="tab-inner myscrollbar" v-if="week.weekday.id === nowDay">
         <anime-card :anime-info="item" v-for="(item, index) in week.items" :key="index">
         </anime-card>
         <el-empty v-if="week.items.length == 0" description="网络错误 获取不到数据~"></el-empty>
@@ -33,26 +34,27 @@ import { useAnimeData } from "@/hooks/Bangumi";
 import AnimeCard from "./components/AnimeCard.vue";
 
 const { today, weekDayList, day } = useAnimeData();
-let nowDay=ref(0);
-nowDay.value=Number(day.value)+1;
-const changeDay=(day:number|string)=>{
-  nowDay.value=Number(day);
+let nowDay = ref(0);
+nowDay.value = Number(day.value) + 1;
+const changeDay = (day: number | string) => {
+  nowDay.value = Number(day);
 }
-const ballXpos=computed(()=>{
-  let num=Number(nowDay.value-1)*5.64+2.35;
+const ballXpos = computed(() => {
+  let num = Number(nowDay.value - 1) * 5.64 + 2.35;
   console.log(num);
-  return num+'rem'
+  return num + 'rem'
 })
 
 </script>
 
 
 <style lang="less" scoped>
-.tip{
+.tip {
   font-family: 'urafont';
   font-weight: 600;
   font-size: 20px;
 }
+
 @media screen and (min-width: 320px) {
   .card-header {
     font-family: 'urafont', '幼圆';
@@ -61,6 +63,7 @@ const ballXpos=computed(()=>{
     justify-content: space-between;
     flex-direction: column;
     color: #135BFF;
+
     .anime-logo {
       width: 15rem;
       height: auto;
@@ -68,23 +71,29 @@ const ballXpos=computed(()=>{
 
     .week {
       display: flex;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       position: relative;
+      margin-top: 1rem;
+      overflow: auto;
       li {
         display: flex;
         flex-direction: column;
         align-items: center;
+        flex-shrink: 0;
         margin: 0 0.3rem;
         width: 5rem;
         cursor: pointer;
-        span{
+        span {
           font-size: 1rem;
         }
+        &.active {
+          color: #fc566c
+        }
       }
-      .switch-ball{
-        .ball(0.85rem,#fc566c);
+      .switch-ball {
+        .ball(0.85rem, #fc566c);
         top: -10px;
-        z-index: 0;
+        z-index: -1;
         position: absolute;
         transition: 0.4s left ease-in-out;
       }
@@ -103,26 +112,20 @@ const ballXpos=computed(()=>{
 }
 
 @media screen and (min-width: 1440px) {
-  .bangumi-mobile {
-    display: none;
-  }
 
   .bangumi {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    .card-header{
+
+    .card-header {
       flex-direction: row;
       align-items: flex-end;
-    }
-    :deep(.el-tabs__nav-scroll) {
-      height: 100%;
-      justify-content: space-around;
-    }
-
-    :deep(.el-tabs__item) {
-      height: 50px;
-      color: rgb(@primaryTextColor) !important;
+      .week {
+        font-size: 1.5rem;
+        margin-top: 0rem;
+        overflow: unset;
+      }
     }
   }
 

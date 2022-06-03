@@ -1,8 +1,8 @@
 <template>
-  <div class="anime-card" v-if="animeInfo" @click="$router.push(`/index/animedetail/${animeInfo.id}`)"
-    @mouseenter="requestInfo" @mouseleave="detailInfoShow = false">
+  <div class="anime-card" v-if="animeInfo" @mouseenter="requestInfo" @mouseleave="detailInfoShow = false">
     <div class="card">
-      <el-image :src="animeInfo.images && animeInfo.images.large" fit="cover" class="elimg">
+      <el-image :src="animeInfo.images && animeInfo.images.large" fit="cover" class="elimg"
+        @click="$router.push(`/index/animedetail/${animeInfo.id}`)">
         <template #placeholder>
           <div class="tw-w-full tw-h-full tw-bg-white">
             <LoadingAnime />
@@ -34,7 +34,7 @@
 
       <transition @enter="infoXenter" @leave="infoXleave">
         <div v-if="detailInfoShow" class="tw-flex-1">
-          <transition  @enter="infoXenter" @leave="infoXleave">
+          <transition @enter="infoXenter" @leave="infoXleave">
             <div v-if="animeDetailData" class="info-detail">
               <div :key="1" :data-index="0">
                 <div class="tw-flex tw-justify-between">
@@ -58,13 +58,19 @@
                 <p class="tw-text-red-500">评分:{{ animeInfo.rating.score ? animeInfo.rating.score : '暂无评分'
                 }}&nbsp;<span>({{ animeInfo.rating.total
 }}人参加评分)</span></p>
-
-                <div class="tw-flex tw-items-center">
-                  相关tag:
-                  <ElTag v-for="tag in tagsInfoThree" effect="dark" class="tw-m-1">
-                    {{ tag.name }}
-                  </ElTag>
+                <div class="tw-flex tw-justify-between tw-items-end tw-flex-wrap">
+                  <div class="tw-flex tw-items-center tw-flex-shrink-0">
+                    相关tag:
+                    <ElTag v-for="tag in tagsInfoThree" effect="dark" class="tw-m-1">
+                      {{ tag.name }}
+                    </ElTag>
+                  </div>
+                  <div class="tw-text-blue-500 tw-cursor-pointer tw-underline tw-font-bold tw-text-xl tw-flex-shrink-0"
+                    @click="$router.push(`/index/animedetail/${animeInfo.id}`)">
+                    查看更多
+                  </div>
                 </div>
+
               </div>
             </div>
             <LoadingAnime v-else />
@@ -126,12 +132,26 @@ const tagsInfoThree = computed(() => {
     margin-right: 1rem;
     margin-top: 1rem;
     height: 30rem;
-    width: 47%;
-    cursor: pointer;
+    width: 98%;
     border-radius: 20px;
     overflow: hidden;
     border: 3px solid rgb(255, 87, 115);
     background-color: white;
+
+    &:hover {
+
+      background-color: rgb(255, 255, 255);
+
+      .card {
+        flex-direction: row;
+      }
+
+      .elimg {
+        cursor: pointer;
+        width: 0rem;
+        height: 100%;
+      }
+    }
   }
 
   .card {
@@ -179,6 +199,7 @@ const tagsInfoThree = computed(() => {
       justify-content: space-between;
       color: rgb(0, 0, 0);
       height: 100%;
+
       .hanyaku {
         font-family: '黑体';
       }
@@ -191,9 +212,23 @@ const tagsInfoThree = computed(() => {
   }
 }
 
+@media screen and (min-width: 768px) {
+  .anime-card {
+    height: 34rem;
 
+    &:hover {
+      width: 98%;
+      background-color: rgb(255, 255, 255);
+      .elimg {
+        cursor: pointer;
+        width: 20rem;
+        height: 100%;
+      }
+    }
+  }
+}
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1280px) {
   .anime-card {
     margin-right: 1rem;
     height: 26rem;
@@ -208,12 +243,6 @@ const tagsInfoThree = computed(() => {
       .card {
         flex-direction: row;
       }
-
-      .elimg {
-        width: 20rem;
-        height: 100%;
-      }
-
     }
   }
 
@@ -224,6 +253,6 @@ const tagsInfoThree = computed(() => {
 
   }
 
-  
+
 }
 </style>
