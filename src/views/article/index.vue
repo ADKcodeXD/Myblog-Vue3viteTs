@@ -86,63 +86,27 @@
 
       <!-- 评论区 -->
       <div class="comments">
-        <div class="title">
-          <p>评论区</p>
-        </div>
         <div class="edit-part">
-          <div class="up">
-            <h3>{{ commentList.length }}条评论</h3>
-            <h4>需要登录后才能评论哦~</h4>
+          <div class="title">
+            <p>{{ commentList.length }}条评论</p>
           </div>
           <el-divider></el-divider>
           <div class="main-content">
             <div class="avatar">
-              <img
-                :src="
-                  currentUser?.avatar === ''
-                    ? '/static/img/logo.png'
-                    : currentUser?.avatar
-                "
-                alt=""
-              />
+              <MyElimage :img="user?.avatar"/>
             </div>
             <div class="edit-area">
-              <el-input
-                v-model="comment"
-                :rows="6"
-                :limit="256"
-                @blur="handleInputBlur"
-                show-word-limit
-                resize="none"
-                type="textarea"
-                style="font-size: 20px; line-height: 30px"
-                placeholder="在这里可以发布评论哦~"
-              />
+              <MyEmoji @changeText="changeComment" ref="emoji"/>
             </div>
           </div>
           <div class="button">
             <el-button-group>
               <el-button
-                @click="showEmoji = true"
-                class="buttonself"
-                :disabled="currentUser?.id === ''"
-                type="success"
-                >表情
-                <MyEmoji
-                  ref="emojiTarget"
-                  :comment="comment"
-                  v-show="showEmoji"
-                  @changeEmoji="changeEmoji"
-                  :cursorIndex="cursorIndex"
-                />
-              </el-button>
-              <el-button
                 @click="publishComment"
                 class="buttonself"
-                :disabled="currentUser?.id === ''"
+                :disabled="user?.id === ''"
                 type="success"
-                >发布评论</el-button
-              >
+                >发布评论</el-button>
             </el-button-group>
           </div>
         </div>
@@ -165,29 +129,23 @@
           </transition-group>
         </div>
       </div>
+
+      <ElPagination background layout="prev, pager, next"/>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 // 定义组件名字 不然include 和keepalive 无法生效
-import { useArticle, useEmoji } from "@/hooks/Article";
-import { onClickOutside } from "@vueuse/core";
-// import picker compopnent
-import EmojiPicker from "vue3-emoji-picker";
+import { useArticle } from "@/hooks/Article";
 import "../../../node_modules/vue3-emoji-picker/dist/style.css";
 import '@/assets/styles/github-light.css';
-import 'highlight.js/styles/github.css'
+import 'highlight.js/styles/github.css';
 // import css
 export default {
   name: "Article",
-  components: {
-    EmojiPicker,
-  },
 };
 </script>
-
-
 <script setup lang="ts">
 const {
   collectArticle,
@@ -198,22 +156,10 @@ const {
   time,
   article,
   commentList,
-  currentUser,
-  comment,
+  user,
+  changeComment,
+  emoji
 } = useArticle();
-//  
-/**
- * （备注）
- * 使用emoji组件 需要用useEmoji()hooks 控制
- * showEmoji,emojiTarget, handleInputBlur,cursorIndex需要使用这个四个参数
- * 其中showEmoji用于控制组件的显示隐藏  组件需要绑定changeEmoji来接受参数 需要给input绑定handleInputBlur
- * 使用onClickOutside来控制组件的隐藏
- */
-const { showEmoji,emojiTarget, handleInputBlur,cursorIndex } = useEmoji();
-onClickOutside(emojiTarget, (event) => (showEmoji.value = false));
-const changeEmoji = (content: string) => {
-  comment.value = content;
-};
 </script>
 
 <style scoped lang="less" >
