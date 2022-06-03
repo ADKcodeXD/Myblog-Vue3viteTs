@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import img from "@/assets/img/women.png";
+import img from "@/assets/logo.png";
 import { ElMessage } from "element-plus";
 import {
   ElFile,

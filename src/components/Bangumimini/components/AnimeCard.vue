@@ -4,8 +4,8 @@
     <div class="card">
       <el-image :src="animeInfo.images && animeInfo.images.large" fit="cover" class="elimg">
         <template #placeholder>
-          <div class="gray">
-            正在加载中……
+          <div class="tw-w-full tw-h-full tw-bg-white">
+            <LoadingAnime />
           </div>
         </template>
         <template #error>
@@ -67,13 +67,8 @@
                 </div>
               </div>
             </div>
-            <div v-else class="tw-flex tw-w-full tw-h-full tw-items-center tw-justify-center">
-              <div class="box" style="--i:1;"></div>
-              <div class="box" style="--i:2;"></div>
-              <div class="box" style="--i:3;"></div>
-            </div>
+            <LoadingAnime v-else />
           </transition>
-          
         </div>
       </transition>
     </div>
@@ -196,22 +191,7 @@ const tagsInfoThree = computed(() => {
   }
 }
 
-@keyframes uptodown {
 
-  0%,
-  50%,
-  100% {
-    transform: translateY(0);
-  }
-
-  25% {
-    transform: translateY(-15px);
-  }
-
-  75% {
-    transform: translateY(15px);
-  }
-}
 
 @media screen and (min-width: 1440px) {
   .anime-card {
@@ -244,10 +224,6 @@ const tagsInfoThree = computed(() => {
 
   }
 
-  .box {
-    .ball(1rem, #fc566c);
-    margin: 1rem;
-    animation: uptodown 1s linear calc(var(--i)*0.15s) infinite both;
-  }
+  
 }
 </style>
