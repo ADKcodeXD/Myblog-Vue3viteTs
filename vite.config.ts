@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite';
 import viteCompression from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 function resovePath(paths: string) {
   // 如何 __dirname 找不到 需要 yarn add @types/node --save-dev
   return resolve(__dirname, paths);
@@ -16,19 +17,27 @@ export default ({ mode }) => {
 
   return defineConfig({
     base: '/',
-    plugins: [vue(), AutoImport({
-      dts: 'src/auto-imports.d.ts',
-      imports: ['vue', 'vue-router']
-    }), Components({
-      dirs: ['src/components'],
-      extensions: ['vue'],
-      dts: 'src/components.d.ts'
-    }), viteCompression(), createSvgIconsPlugin({
-      // 指定需要缓存的图标文件夹
-      iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
-      // 指定symbolId格式
-      symbolId: 'icon-[dir]-[name]',
-    }),],
+    plugins: [
+      vue(), 
+      AutoImport({
+        dts: 'src/auto-imports.d.ts',
+        imports: ['vue', 'vue-router'],
+        resolvers: [ElementPlusResolver()],
+      }), 
+      Components({
+        dirs: ['src/components'],
+        extensions: ['vue'],
+        dts: true,
+        resolvers: [ElementPlusResolver()],
+      }), 
+      viteCompression(), 
+      createSvgIconsPlugin({
+        // 指定需要缓存的图标文件夹
+        iconDirs: [resolve(process.cwd(), 'src/assets/icons')],
+        // 指定symbolId格式
+        symbolId: 'icon-[dir]-[name]',
+      }),
+    ],
     resolve: {
       alias: {
         "@": resolve(__dirname, 'src')

@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+compnents.d.ts
+auto-imports.d.ts
