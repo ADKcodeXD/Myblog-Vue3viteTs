@@ -1,0 +1,49 @@
+.user-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background-color: antiquewhite;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.username {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+
+
+    .username-time {
+        h3 {
+            font-size: 20px;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+            .tag {
+                height: 100%;
+                font-size: 12px;
+                color: white;
+                padding: 0 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 2px;
+                border-radius: 20px;
+                background-color: rgb(255, 43, 43);
+
+                &2 {
+                    background-color: rgb(0, 104, 165);
+                }
+            }
+        }
+
+        p {
+            margin-top: 5px;
+        }
+    }
+
+}
