@@ -44,9 +44,7 @@
       <MessageItem :message="item" v-for="item in messageList" :key="item.id" />
     </div>
     <ElEmpty v-else description="暂时没有留言哦~"></ElEmpty>
-    <ElPagination background layout="prev, pager, next" :page-count="Math.ceil(total / pageparams.pagesize)"
-      @current-change="changePage" :current-page="pageparams.page">
-    </ElPagination>
+    <MyPagination :pageparams="pageparams" @changePage="changePage" :total="total" />
   </ElScrollbar>
 </template>
 
@@ -59,7 +57,7 @@ export default {
 <script lang="ts" setup>
 import avatar from "@/assets/img/logo.png";
 import { addMessageApi, getMessageApi } from "@/api/message";
-import MessageItem from "./components/message-item.vue";
+import MessageItem from "./components/MessageItem.vue";
 import { ElMessage, ElScrollbar } from "element-plus";
 
 let comment = ref("");
@@ -121,8 +119,7 @@ const order = (val: number) => {
 };
 // 控制滚动条
 
-const changePage = (val: number) => {
-  pageparams.page = val;
+const changePage = () => {
   getMessage(pageparams);
   body.value?.setScrollTop(0);
 };

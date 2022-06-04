@@ -88,9 +88,9 @@
       <div class="comments">
         <div class="edit-part">
           <div class="title">
-            <p>{{ commentList.length }}条评论</p>
+            <p>{{ totalComment}}条评论</p>
           </div>
-          <el-divider></el-divider>
+          <ElDivider/>
           <div class="main-content">
             <div class="avatar">
               <MyElimage :img="user?.avatar"/>
@@ -124,13 +124,12 @@
               :key="commentitem.id"
               :authorId="article.authorVo.id"
               :articleId="article.id"
-              @publishSecond="publishSecond"
+              @published="publishSecond"
             />
           </transition-group>
         </div>
       </div>
-
-      <ElPagination background layout="prev, pager, next"/>
+      <MyPagination :pageparams="pageparams" :total="totalComment" @changePage="changePage" class="page"/>
     </div>
   </div>
 </template>
@@ -157,8 +156,11 @@ const {
   article,
   commentList,
   user,
+  totalComment,
   changeComment,
-  emoji
+  emoji,
+  pageparams,
+  changePage
 } = useArticle();
 </script>
 
@@ -169,5 +171,7 @@ const {
   background-color: rgb(@primaryActiveColor) !important;
   color: white !important;
 }
-
+.page{
+  margin: 30px 0;
+}
 </style>
