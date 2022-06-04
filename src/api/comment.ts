@@ -1,5 +1,3 @@
-import { PageParams } from './../interface/params';
-import { CommentParams } from '@/interface/params';
 import request from '@/utils/request';
 
 

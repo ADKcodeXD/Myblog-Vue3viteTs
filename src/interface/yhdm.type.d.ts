@@ -1,17 +1,15 @@
-export interface Epinfo{
+declare interface Epinfo{
     epTitle:string,
     epUrl:string
 }
 
-export interface YhdmSearchInfo {
+declare interface YhdmSearchInfo{
     title:string,
-    epInfo:Array<Epinfo>
+    epInfo:Epinfo[]
 }
 
-export interface YhdmVideoInfo {
-    // private String title;
-    // private List<String> epUrl;
+declare interface YhdmVideoInfo{
     title:string,
-    epInfo:Array<Epinfo>,
+    epInfo:Epinfo[],
     videoUrl:string,
 }

@@ -54,31 +54,24 @@
   </el-popover>
 </template>
 
-<script lang="ts">
-import { AnimeHuman } from "@/interface/bangumiApi.type";
+<script lang="ts" setup>
 import { isMobile } from "@/utils/mobile";
-import { defineComponent, PropType } from "vue";
+import {  PropType } from "vue";
 
-export default defineComponent({
-  props: {
+defineProps({
     role: {
-      type: Object as PropType<AnimeHuman>,
+      type: Object as PropType<Bangumi.AnimeHuman>,
       default: {},
     },
-  },
-  setup() {
-    let popType=ref('')
+  });
+
+let popType=ref('')
     // 判断设备
     if(isMobile()){
       popType.value='click'
     }else{
       popType.value='hover'
     }
-    return{
-      popType
-    }
-  },
-});
 </script>
 
 <style lang="less" scoped>

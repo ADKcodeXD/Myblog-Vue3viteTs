@@ -123,14 +123,10 @@
 import { addTag, getTagList, publishArticle } from "@/api/article";
 import type { ElFile, UploadFile } from "element-plus/es/components/upload/src/upload.type";
 import { useStore } from "@/store/main";
-import { ElInput, ElMessage, ElNotification } from "element-plus";
-import { ref, reactive } from "vue";
-import { useRouter } from "vue-router";
-import { Tag } from "@/interface/tag";
-import { ArticleReqParams, Content } from "@/interface/article";
 import { useUpload } from "@/hooks/upload";
 import MyEditor from "./components/MyEditor.vue";
 import { getItem, removeItem, setItem } from "@/utils/storage";
+import { ElInput, ElMessage, ElNotification } from "element-plus";
 // 定义组件名
 const store = useStore();
 const router = useRouter();

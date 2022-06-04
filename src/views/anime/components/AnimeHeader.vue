@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="
+  <div class="
       tw-h-48
       tw-mx-auto
       tw-bg-slate-50
@@ -9,11 +8,9 @@
       tw-justify-between
       tw-mt-5
       md:tw-flex-row md:tw-h-28
-    "
-  >
+    ">
     <div class="tw-flex">
-      <div
-        class="
+      <div class="
           tw-flex
           tw-flex-col
           tw-justify-start
@@ -22,15 +19,13 @@
           tw-p-5
           tw-bg-purple-400
           tw-mr-10
-        "
-      >
+        ">
         <p class="tw-text-2xl tw-text-white">
           <span class="tw-text-3xl">Ban</span>gumi
         </p>
         <p class="tw-text-sm tw-text-white">AdkBlog 定制</p>
       </div>
-      <ul
-        class="
+      <ul class="
           ul-item
           tw-flex
           tw-flex-1
@@ -38,8 +33,7 @@
           tw-justify-evenly
           tw-items-center
           tw-mr-24
-        "
-      >
+        ">
         <li @click="$router.push('/index/animenew')">新番速看</li>
         <li>排行榜</li>
         <li>我的进度</li>
@@ -48,24 +42,14 @@
 
     <div class="tw-flex tw-items-center tw-w-fill md:tw-flex-1 tw-p-4">
       <div class="right tw-flex tw-flex-1">
-        <el-input
-          v-model="searchKw"
-          placeholder="请输入内容搜索番剧"
-          class="tw-text-xl iconfont input-search"
-        >
+        <el-input v-model="searchKw" placeholder="请输入内容搜索番剧" class="tw-text-xl iconfont input-search">
         </el-input>
-        <el-button
-          type="success"
-          size="large"
-          :icon="Search"
-          plain
-          @click="$router.push(`/index/animesearch?keywords=${searchKw}`)"
-        >
+        <el-button type="success" size="large" :icon="Search" plain
+          @click="$router.push(`/index/animesearch?keywords=${searchKw}`)">
           搜索
         </el-button>
       </div>
-      <div
-        class="
+      <div class="
           avatar
           tw-rounded-full
           tw-flex
@@ -76,27 +60,17 @@
           tw-w-16
           tw-h-16
           tw-object-cover
-        "
-        @click="$router.push('/index/animebgminfo')"
-      >
+        " @click="$router.push('/index/animebgminfo')">
         <el-image fit="cover" src="@/assets/logo.png"> </el-image>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
 import { Search } from "@element-plus/icons-vue";
-export default defineComponent({
-  setup() {
-    let searchKw = ref("");
-    return {
-      Search,
-      searchKw,
-    };
-  },
-});
+
+let searchKw = ref("");
 </script>
 
 <style lang="less" scoped>
@@ -109,6 +83,7 @@ export default defineComponent({
       transition: all ease 0.4s;
 
       cursor: pointer;
+
       &::after {
         content: "";
         display: block;
@@ -118,18 +93,21 @@ export default defineComponent({
         margin-top: 5px;
         background-color: rgb(252, 54, 19);
       }
+
       &:hover {
         color: orange;
+
         &::after {
           width: 100%;
         }
       }
     }
   }
+
   :deep(.el-input__inner) {
     height: 40px;
   }
 }
-@media screen and (min-width: 768px) {
-}
+
+@media screen and (min-width: 768px) {}
 </style>

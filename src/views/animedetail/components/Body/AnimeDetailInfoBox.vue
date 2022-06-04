@@ -20,18 +20,8 @@
   </el-descriptions>
 </template>
 
-<script lang="ts">
-import { InfoBoxItem } from "@/interface/bangumiApi.type";
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  setup() {
-    const infoboxVal: Array<InfoBoxItem> | undefined = inject("infoboxVal");
-    return {
-      infoboxVal,
-    };
-  },
-});
+<script lang="ts" setup>
+const infoboxVal: Array<Bangumi.InfoBoxItem> | undefined = inject("infoboxVal");
 </script>
 
 

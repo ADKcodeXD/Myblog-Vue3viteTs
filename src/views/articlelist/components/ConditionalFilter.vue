@@ -76,7 +76,6 @@
 </template>
 <script setup lang="ts">
 import { useArticleListConditional } from '@/hooks/ArticleList';
-import { PageParams } from '@/interface/params';
 import { PropType } from 'vue';
 import gsap from 'gsap';
 import { useAnime } from '@/hooks/Anime';

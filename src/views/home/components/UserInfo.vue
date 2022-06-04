@@ -34,7 +34,6 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { UserAll } from '@/interface/user';
 import { PropType } from 'vue';
 
 const props = defineProps({

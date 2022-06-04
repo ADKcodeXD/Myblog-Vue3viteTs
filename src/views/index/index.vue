@@ -54,7 +54,6 @@ export default { name: 'Index' }
 
 <script setup lang="ts">
 import { getIndexArticleApi, getIndexBanner } from "@/api/article";
-import { ArticleItemInfo, Banner } from "@/interface/article";
 import { PageParams } from "@/interface/params";
 import MyInfo from "./components/MyInfo.vue";
 import TimeLine from "./components/TimeLine.vue";

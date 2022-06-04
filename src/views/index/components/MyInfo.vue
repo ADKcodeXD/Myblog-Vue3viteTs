@@ -53,7 +53,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import Avatar from '@/assets/img/logo.png';
 import Aboutme from '@/assets/img/about-me.png';
 

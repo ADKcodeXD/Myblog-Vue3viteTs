@@ -22,7 +22,7 @@
       </div>
       <AdkDivider />
       <div class="main" v-loading="articlesLoading" v-if="articles">
-        <transition-group name="article" mode="out-in">
+        <transition-group name="article" >
           <ArticleItem class="article-item-sub" :article-item="item" :key="item.id"
             v-for="item in articles.articleVoList" />
         </transition-group>
@@ -46,8 +46,6 @@ export default { name: "ArticleList" };
 </script>
 <script setup lang="ts">
 import { listArticleWithCount } from "@/api/article";
-import { ArticleListItem } from "@/interface/article";
-import { PageParams } from "@/interface/params";
 import Search from "./components/Search.vue";
 import ConditionalFilter from "./components/ConditionalFilter.vue";
 

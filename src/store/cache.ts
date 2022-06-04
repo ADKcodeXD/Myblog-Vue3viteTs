@@ -1,4 +1,3 @@
-import { getItem } from '@/utils/storage';
 import { defineStore } from 'pinia'
 
 export const useCacheStore = defineStore('cache', {

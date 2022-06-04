@@ -24,7 +24,6 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Content } from "@/interface/article";
 
 // 引入tinymce富文本编辑器
 import Editor from "@tinymce/tinymce-vue";
@@ -33,7 +32,6 @@ import { uploadBanner } from "@/api/article";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { useThemeStore } from "@/store/theme";
-import { useUpload } from "@/hooks/upload";
 
 export default defineComponent({
   components: {

@@ -1,4 +1,3 @@
-import { UserEasy } from '@/interface/user';
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {

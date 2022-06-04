@@ -69,7 +69,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import { UserEasy } from '@/interface/user';
 import { PropType } from 'vue';
 
 const props = defineProps({

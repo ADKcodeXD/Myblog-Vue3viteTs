@@ -24,19 +24,15 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
-import { MessageVo } from "@/interface/message";
+<script lang="ts" setup>
+import { PropType } from "vue";
 
-export default defineComponent({
-  props: {
+defineProps({
     message: {
       type: Object as PropType<MessageVo>,
       default: () => {},
     },
-  },
-  setup() {},
-});
+  });
 </script>
 
 

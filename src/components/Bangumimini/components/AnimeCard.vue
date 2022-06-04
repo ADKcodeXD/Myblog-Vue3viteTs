@@ -84,11 +84,10 @@
 <script lang="ts" setup>
 import { getSubjectInfoApi } from "@/api/bangumi";
 import { useAnime } from "@/hooks/Anime";
-import { AnimeItemInfo, SubjectInfoSmall } from "@/interface/bangumiApi.type";
 import { PropType } from "vue";
 const props = defineProps({
   animeInfo: {
-    type: Object as PropType<AnimeItemInfo>,
+    type: Object as PropType<Bangumi.AnimeItemInfo>,
     default: {},
   },
 });
@@ -99,7 +98,7 @@ const {
   infoXleave,
 } = useAnime();
 let detailInfoShow = ref(false);
-let animeDetailData = ref<null | SubjectInfoSmall>();
+let animeDetailData = ref<null | Bangumi.SubjectInfoSmall>();
 const getSubjectInfo = async (id: number) => {
   const { data } = await getSubjectInfoApi(id);
   animeDetailData.value = data;

@@ -1,4 +1,3 @@
-import { SearchParamsBgm } from '@/interface/bangumiApi.type';
 import bangumiRequest from '@/utils/bangumiApi';
 import axios from 'axios';
 import qs from 'qs';
@@ -40,7 +39,7 @@ export const getSubjectInfoAllApi = (subjectId: number, responseGroup?: string,t
 }
 
 // 获取搜索结果
-export const getSubjectSeachApi = (searchParams: SearchParamsBgm) => {
+export const getSubjectSeachApi = (searchParams: Bangumi.SearchParamsBgm) => {
     return bangumiRequest({
         method: 'get',
         url: PROXY + `/search/subject/${searchParams.keywords}`,

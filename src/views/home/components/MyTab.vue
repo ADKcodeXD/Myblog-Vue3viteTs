@@ -40,7 +40,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ArticleItemInfo } from '@/interface/article';
 import { PropType } from 'vue';
 
 const props = defineProps({

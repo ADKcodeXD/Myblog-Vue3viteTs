@@ -1,41 +1,35 @@
 <template>
-  <div
-    class="
+  <div class="
       content
       tw-flex 
       tw-justify-center 
       tw-items-center 
       tw-bg-black tw-relative
-    "
-    
-  >
+    ">
     <div class="info tw-w-2/3 tw-break-all md:tw-w-2/5">
       <h3 class="tw-text-4xl tw-font-bold tw-text-slate-100">
         {{ animeInfo.name_cn ? animeInfo.name_cn : animeInfo.name }}
       </h3>
       <small class="tw-text-xl tw-font-bold tw-text-orange-300">{{
-        animeInfo.name_cn ? animeInfo.name : ""
+          animeInfo.name_cn ? animeInfo.name : ""
       }}</small>
-      <p
-        class="
+      <p class="
           detail
           tw-text-sm tw-text-white tw-break-words
           tw-font-thin
           tw-leading-6
           md:tw-leading-4
           text-line-show-3
-        "
-      >
+        ">
         {{ animeInfo.summary }}
       </p>
       <div class="tw-flex tw-justify-between tw-items-center">
         <p class="detail tw-text-slate-100">
           总集数:{{ animeInfo.eps ? animeInfo.eps : "暂无数据" }} 评分:{{
-            animeInfo.rating && animeInfo.rating.score
+              animeInfo.rating && animeInfo.rating.score
           }}
         </p>
-        <div
-          class="
+        <div class="
             button
             tw-text-xl
             tw-font-bold
@@ -44,22 +38,17 @@
             tw-transition-all
             tw-cursor-pointer
             hover:tw-bg-orange-500
-          "
-          @click="$router.push(`/index/animedetail/${animeInfo.id}`)"
-        >
+          " @click="$router.push(`/index/animedetail/${animeInfo.id}`)">
           查看更多
         </div>
       </div>
       <div class="tw-my-2">
-        <el-tag v-for="tag,index in tagsInfoThree" :key="index" type="warning" class="tag-text" >
+        <el-tag v-for="tag, index in tagsInfoThree" :key="index" type="warning" class="tag-text">
           {{ tag.name }}
         </el-tag>
       </div>
     </div>
-    <el-image
-      class="tw-opacity-60 tw-self-center"
-      :src="animeInfo.images.large"
-    >
+    <el-image class="tw-opacity-60 tw-self-center" :src="animeInfo.images.large">
       <template #placeholder>
         <div class="tw-h-fill tw-w-fill tw-self-center">
           <p>正在努力加载</p>
@@ -69,10 +58,7 @@
       <template #error>
         <div>
           <div class="tw-w-fill tw-h-fill">
-            <img
-              class="tw-w-fill tw-h-fill"
-              src="@/assets/img/404img1200.jpg"
-            />
+            <img class="tw-w-fill tw-h-fill" src="@/assets/img/404img1200.jpg" />
           </div>
         </div>
       </template>
@@ -80,45 +66,36 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, PropType } from "vue";
-import Loading from "@/assets/img/404img.jpg";
-import { SubjectInfoSmall } from "@/interface/bangumiApi.type";
+<script lang="ts" setup>
+import { PropType } from "vue";
 
-export default defineComponent({
-  props: {
-    animeInfo: {
-      type: Object as PropType<SubjectInfoSmall>,
-      default: {},
-    },
+const props = defineProps({
+  animeInfo: {
+    type: Object as PropType<Bangumi.SubjectInfoSmall>,
+    default: {},
   },
-  setup(props) {
-    const tagsInfoThree = computed(() => {
-      let tags = [];
-      if (props.animeInfo.tags.length > 3) {
-        for (let i = 0; i < 3; i++) {
-          tags.push(props.animeInfo.tags[i]);
-        }
-      } else {
-        return props.animeInfo.tags;
-      }
-      return tags;
-    });
-    return {
-      Loading,
-      tagsInfoThree,
-    };
-  },
+});
+
+const tagsInfoThree = computed(() => {
+  let tags = [];
+  if (props.animeInfo.tags.length > 3) {
+    for (let i = 0; i < 3; i++) {
+      tags.push(props.animeInfo.tags[i]);
+    }
+  } else {
+    return props.animeInfo.tags;
+  }
+  return tags;
 });
 </script>
 
 <style lang="less" scoped>
-@media screen and(min) {
-  
-}
-:deep(.el-carousel__indicators){
+@media screen and(min) {}
+
+:deep(.el-carousel__indicators) {
   display: flex !important;
 }
+
 .content {
   width: 100%;
   height: 400%;
@@ -127,15 +104,18 @@ export default defineComponent({
   right: 0;
   overflow: hidden;
 }
+
 .info {
   position: absolute;
   left: 30px;
   top: 42%;
   z-index: 10;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+
   .detail {
     margin-top: 5px;
   }
+
   .button {
     border: rgba(255, 166, 1, 0.438) 1px solid;
     margin-top: 10px;
@@ -143,6 +123,7 @@ export default defineComponent({
     border-radius: 5px;
     padding: 5px;
   }
+
   .tag-text {
     text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1) !important;
     margin-right: 5px;

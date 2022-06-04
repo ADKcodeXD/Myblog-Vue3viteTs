@@ -14,7 +14,6 @@ function resovePath(paths: string) {
 export default ({ mode }) => {
   // 用于导入生产和开发环境的配置
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-
   return defineConfig({
     base: '/',
     plugins: [
@@ -52,7 +51,7 @@ export default ({ mode }) => {
         less: {
           charset: false,
           javascriptEnabled: true,
-          // 这样就能全局使用 src/assets/styles/base.less 定义的 变量
+          // 这样就能全局使用 src/assets/styles/mixins.less 定义的 变量
           additionalData: `@import "${resovePath('src/assets/styles/mixins.less')}";`
         },
       },

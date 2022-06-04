@@ -15,7 +15,6 @@
 
 <script lang="ts" setup>
 import { getTagList } from "@/api/article";
-import { Tag } from "@/interface/tag";
 import Alltag from '@/assets/img/all-tag.png';
 
 let tags = ref<Tag[]>();

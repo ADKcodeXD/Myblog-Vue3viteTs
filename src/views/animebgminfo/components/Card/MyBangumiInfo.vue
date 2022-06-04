@@ -23,9 +23,8 @@
 
 <script setup lang="ts">
 import { getMyBangumiInfo } from "@/api/bangumi";
-import { BangumiMyInfo } from "@/interface/bangumiApi.type";
 import { useBangumiUser } from "@/store/bangumiUser";
-let myinfo = ref<BangumiMyInfo>();
+let myinfo = ref<Bangumi.BangumiMyInfo>();
 const user = useBangumiUser();
 if (!user.bgm_user_info) {
   getMyBangumiInfo()

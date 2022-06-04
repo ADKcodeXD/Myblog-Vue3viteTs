@@ -1,12 +1,11 @@
-import { getSubjectInfoAllApi, getSubjectInfoApi } from './../api/bangumi';
+import { getSubjectInfoAllApi} from './../api/bangumi';
 import { getCalendarApi } from "@/api/bangumi";
 import { getBroswerDataApi } from "@/api/bangumiMy";
-import { AnimeItemInfo, BroswerParams, BroswerResult, CalendarItem } from "@/interface/bangumiApi.type";
 import { getFormatTime } from "@/utils/dayjs";
 import { ElMessage } from "element-plus";
 import { Ref } from "vue";
 export const useAnimeCalendar = async () => {
-  let weekDayList = Array<CalendarItem>();
+  let weekDayList = Array<Bangumi.CalendarItem>();
   const { data } = await getCalendarApi();
   weekDayList = data;
   return weekDayList;
@@ -21,7 +20,7 @@ export const useAnimeData = () => {
     '星期五',
     '星期六',
   ]
-  let weekDayList = ref<Array<CalendarItem>>();
+  let weekDayList = ref<Array<Bangumi.CalendarItem>>();
   const getWeekData = async () => {
     const { data } = await getCalendarApi();
     weekDayList.value = data;
@@ -70,8 +69,8 @@ export const useAnimeData = () => {
 }
 
 export const useBroswer = (Loading:Ref<Boolean>,
-  animeInfoList:Ref<Array<BroswerResult>>,page:Ref<number>) => {
-  const getBroswer = async (broswerParams: BroswerParams) => {
+  animeInfoList:Ref<Array<Bangumi.BroswerResult>>,page:Ref<number>) => {
+  const getBroswer = async (broswerParams: Bangumi.BroswerParams) => {
     if (broswerParams.page == 1) {
       Loading.value = true
     }
@@ -98,9 +97,9 @@ export const useBroswer = (Loading:Ref<Boolean>,
  * @param ids subject ids
  * @returns Promise<PromiseSettledResult<AnimeItemInfo>[]> 一个promise.Seetled的结果集
  */
-export const useSubjectInfo=(ids:number[]):Promise<PromiseSettledResult<AnimeItemInfo>[]>=>{
-  let promises:Promise<AnimeItemInfo>[]=[];
-  const getPromise=(id:number,type:'small'|'large'):Promise<AnimeItemInfo>=>{
+export const useSubjectInfo=(ids:number[]):Promise<PromiseSettledResult<Bangumi.AnimeItemInfo>[]>=>{
+  let promises:Promise<Bangumi.AnimeItemInfo>[]=[];
+  const getPromise=(id:number,type:'small'|'large'):Promise<Bangumi.AnimeItemInfo>=>{
     return new Promise((resolve,reject)=>{
       getSubjectInfoAllApi(id,type).then((result) => {
         resolve(result.data)

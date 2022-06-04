@@ -1,6 +1,4 @@
 import { currentUserAll, currentUserApi, updateUserInfoApi } from "@/api/user";
-import { UpdateUserInfoParams } from "@/interface/params";
-import { UserAll } from "@/interface/user";
 import { useUserStore } from "@/store/user";
 import { ElMessage,ElForm } from "element-plus";
 import { validateEmail, validateJianjie, validateNickname } from '@/utils/validate';

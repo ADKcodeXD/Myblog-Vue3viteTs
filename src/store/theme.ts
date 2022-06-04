@@ -1,5 +1,4 @@
 import { getItem } from '@/utils/storage';
-import { Theme } from '@/interface/theme.type';
 import { defineStore } from 'pinia'
 
 export const useThemeStore = defineStore('theme', {

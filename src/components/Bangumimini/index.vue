@@ -33,7 +33,7 @@
 import { useAnimeData } from "@/hooks/Bangumi";
 import AnimeCard from "./components/AnimeCard.vue";
 
-const { today, weekDayList, day } = useAnimeData();
+const { weekDayList, day } = useAnimeData();
 let nowDay = ref(0);
 nowDay.value = Number(day.value) + 1;
 const changeDay = (day: number | string) => {

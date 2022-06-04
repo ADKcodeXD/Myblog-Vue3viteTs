@@ -17,7 +17,6 @@
 
 <script lang="ts" setup>
 import { getMessageApi } from "@/api/message";
-import { MessageVo } from "@/interface/message";
 import Newmsg from '@/assets/img/new-msg.png';
 let result = ref<MessageVo[]>([]);
 const getMsg = async () => {

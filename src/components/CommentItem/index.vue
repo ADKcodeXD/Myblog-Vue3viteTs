@@ -74,8 +74,6 @@
 
 <script lang="ts" setup>
 import { addComment } from "@/api/comment";
-import { CommentItemInfo } from "@/interface/comment";
-import { CommentParams } from "@/interface/params";
 import { useUserStore } from "@/store/user";
 import { encodeEmoji } from "@/utils/emoji";
 import { ElMessage } from "element-plus";
@@ -92,12 +90,19 @@ const props = defineProps({
   },
   authorId: {
     type: String,
-    default: "123456789",
+    default: "",
   },
   articleId: {
     type: String,
     default: "1",
   },
+  avatar:{
+    type: String,
+    default: "",
+  },
+  children:{
+    
+  }
 });
 const emit = defineEmits(['publishSecond'])
 const userStrore = useUserStore();

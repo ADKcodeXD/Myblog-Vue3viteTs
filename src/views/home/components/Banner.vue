@@ -4,7 +4,7 @@
         accept=".png, .jpg, .jpeg" :on-exceed="handleExceed">
         <el-button type="primary" plain>点击上传封面</el-button>
       </el-upload>
-      <img :src="banner" alt="" onerror="javascript:this.src='/src/assets/img/404img1200.jpg';" />
+      <img :src="banner" onerror="javascript:this.src='/src/assets/img/404img1200.jpg';" />
     </div>
 </template>
 <script setup lang="ts" >
@@ -36,7 +36,7 @@ const handleExceed = (files: FileList, fileList: UploadFile[]) => {
 
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .banner {
     position: relative;
     width: 100%;

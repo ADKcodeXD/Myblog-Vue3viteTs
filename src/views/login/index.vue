@@ -29,20 +29,20 @@
             <div class="tw-w-48 tw-my-5">
               <MyElimage :img="Login" />
             </div>
-            <el-form label-position="left" ref="ruleFormRef" :rules="rules" :model="form">
-              <el-form-item prop="username">
+            <ElForm label-position="left" ref="ruleFormRef" :rules="rules" :model="form">
+              <ElFormItem prop="username">
                 <div class="tw-w-32 tw-h-10 tw-mr-5">
                   <MyElimage :img="Username" />
                 </div>
-                <el-input v-model="form.username"></el-input>
-              </el-form-item>
-              <el-form-item prop="password">
+                <ElInput v-model="form.username"></ElInput>
+              </ElFormItem>
+              <ElFormItem prop="password">
                 <div class="tw-w-32 tw-h-10 tw-mr-5">
                   <MyElimage :img="Password" />
                 </div>
-                <el-input type="password" v-model="form.password" prop="password"></el-input>
-              </el-form-item>
-            </el-form>
+                <ElInput type="password" v-model="form.password" ></ElInput>
+              </ElFormItem>
+            </ElForm>
             <div class="btn">
               <div class="register-btn" @click="isLogin = false">
               </div>
@@ -65,32 +65,32 @@
             <div class="tw-w-72 md:tw-w-96 tw-my-5">
               <MyElimage :img="Register" />
             </div>
-            <el-form label-position="left" ref="registerFormRef" :rules="registerRules" :model="registerForm">
-              <el-form-item prop="username">
+            <ElForm label-position="left" ref="registerFormRef" :rules="registerRules" :model="registerForm">
+              <ElFormItem prop="username">
                 <div class="tw-w-32 tw-h-10 tw-mr-5">
                   <MyElimage :img="Username" />
                 </div>
-                <el-input v-model="registerForm.username" prop="username"></el-input>
-              </el-form-item>
-              <el-form-item prop="nickname">
+                <ElInput v-model="registerForm.username" ></ElInput>
+              </ElFormItem>
+              <ElFormItem prop="nickname">
                 <div class="tw-w-32 tw-h-10 tw-mr-5">
                   <MyElimage :img="Nickname" />
                 </div>
-                <el-input v-model="registerForm.nickname" prop="nickname"></el-input>
-              </el-form-item>
-              <el-form-item prop="password">
+                <ElInput v-model="registerForm.nickname"></ElInput>
+              </ElFormItem>
+              <ElFormItem prop="password">
                 <div class="tw-w-32 tw-h-10 tw-mr-5">
                   <MyElimage :img="Password" />
                 </div>
-                <el-input type="password" v-model="registerForm.password" prop="password"></el-input>
-              </el-form-item>
-              <el-form-item prop="repassword">
+                <ElInput type="password" v-model="registerForm.password" ></ElInput>
+              </ElFormItem>
+              <ElFormItem prop="repassword">
                 <div class="tw-w-32 tw-h-10 tw-mr-5">
                   <MyElimage :img="RePassword" />
                 </div>
-                <el-input type="password" v-model="registerForm.repassword" prop="repassword"></el-input>
-              </el-form-item>
-            </el-form>
+                <ElInput type="password" v-model="registerForm.repassword" ></ElInput>
+              </ElFormItem>
+            </ElForm>
             <div class="btn">
               <div class="login-btn" @click="isLogin = true">
               </div>

@@ -79,23 +79,21 @@
   </div>
 </template>
 
-<script lang="ts">
-import { EpDeatil } from "@/interface/bangumiApi.type";
+<script lang="ts" setup>
 import { isMobile } from "@/utils/mobile";
-import { defineComponent, PropType } from "vue";
+import { PropType } from "vue";
 
-export default defineComponent({
-  props: {
+const props = defineProps({
     eps: {
-      type: Object as PropType<Array<EpDeatil>>,
+      type: Object as PropType<Array<Bangumi.EpDeatil>>,
       require: true,
     },
-  },
-  setup(props) {
-    let pageParams = reactive({
+  });
+
+let pageParams = reactive({
       page: 1,
     });
-    let arrs = ref<Array<EpDeatil>>([]);
+    let arrs = ref<Array<Bangumi.EpDeatil>>([]);
     let moreFlag = ref(false);
     let loading = ref(false);
     // 大于100条章节  更多再显示
@@ -136,15 +134,6 @@ export default defineComponent({
     } else {
       popType.value = "hover";
     }
-    return {
-      arrs,
-      moreFlag,
-      nextPage,
-      loading,
-      popType,
-    };
-  },
-});
 </script>
 
 <style lang="less" scoped>

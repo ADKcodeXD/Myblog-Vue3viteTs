@@ -1,5 +1,4 @@
 import { userLogin, userRegister } from "@/api/login";
-import { RegisterParams } from "@/interface/params";
 import { useStore } from "@/store/main";
 import { setItem } from "@/utils/storage";
 import {

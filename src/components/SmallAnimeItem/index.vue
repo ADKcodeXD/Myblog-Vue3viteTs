@@ -1,8 +1,6 @@
 <template>
-  <div
-    class="card-little tw-flex tw-mb-2 tw-cursor-pointer tw-p-3 hover:tw-bg-blue-100"
-    @click="$router.push(`/index/animedetail/${item.id}`)"
-  >
+  <div class="card-little tw-flex tw-mb-2 tw-cursor-pointer tw-p-3 hover:tw-bg-blue-100"
+    @click="$router.push(`/index/animedetail/${item.id}`)">
     <div class="img tw-w-2/5 tw-flex-shrink-0 tw-h-40">
       <MyElimage :img="item.images.medium" :not-found-type="'3:4'" />
     </div>
@@ -16,21 +14,18 @@
         </p>
       </div>
 
-      <p >{{ item.collection.doing }}人在看</p>
+      <p>{{ item.collection.doing }}人在看</p>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { AnimeItemInfo } from "@/interface/bangumiApi.type";
+<script lang="ts" setup>
 import { defineComponent, PropType } from "vue";
 
-export default defineComponent({
-  props: {
-    item: {
-      type: Object as PropType<AnimeItemInfo>,
-      default: {},
-    },
+defineProps({
+  item: {
+    type: Object as PropType<Bangumi.AnimeItemInfo>,
+    default: {},
   },
 });
 </script>

@@ -1,4 +1,4 @@
-export interface UserEasy {
+declare interface UserEasy {
     avatar: string,
     id: string,
     role: string,
@@ -7,7 +7,7 @@ export interface UserEasy {
     introduce:string,
     banner:string,
 }
-export interface UserAll{
+declare interface UserAll{
     avatar: string,
     id: string,
     role: string,
@@ -19,3 +19,5 @@ export interface UserAll{
     email:string,
     date:string
 }
+
+

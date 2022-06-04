@@ -115,8 +115,6 @@
 
 <script setup lang="ts">
 import { changeCollectionStatus, getSubjectInfoApi } from "@/api/bangumi";
-import { AnimeItemInfoCollection, AnimeTag, SubjectInfoSmall } from "@/interface/bangumiApi.type";
-import { CollectionTypeTwo } from "@/interface/BangumiEnum";
 import { getFormatTime } from "@/utils/dayjs";
 import { PropType } from "@vue/runtime-core";
 import { onClickOutside } from "@vueuse/core";
@@ -125,10 +123,10 @@ import { ElMessage } from "element-plus";
 let dialogVisable = ref(false);
 let isStatusBoxShow = ref(false);
 const target = ref(null);
-let tagsOption = ref<AnimeTag[]>([])
+let tagsOption = ref<Bangumi.AnimeTag[]>([])
 const props = defineProps({
   item: {
-    type: Object as PropType<AnimeItemInfoCollection>,
+    type: Object as PropType<Bangumi.AnimeItemInfoCollection>,
     default: {},
   },
 });
@@ -155,7 +153,7 @@ onClickOutside(target, () => (isStatusBoxShow.value = false));
 const openForm = () => {
   dialogVisable.value = true;
   getSubjectInfoApi(props.item.id).then(({ data }) => {
-    let item: SubjectInfoSmall = data;
+    let item: Bangumi.SubjectInfoSmall = data;
     tagsOption.value = item.tags;
   })
 }

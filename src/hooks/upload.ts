@@ -1,6 +1,6 @@
 import { uploadBanner } from "@/api/article";
 import { ElMessage } from "element-plus";
-import { ElFile, UploadFile } from "element-plus/es/components/upload/src/upload.type";
+import { ElFile } from "element-plus/es/components/upload/src/upload.type";
 
 export const useUpload = async (file: ElFile): Promise<string> => {
     const isImg = file.type === "image/jpeg" || file.type === "image/png";

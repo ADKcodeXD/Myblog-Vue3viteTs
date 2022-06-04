@@ -43,9 +43,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineComponent, PropType } from "vue";
+import { PropType } from "vue";
 import { getRealativeTime } from "@/utils/dayjs";
-import { ArticleItemInfo } from "@/interface/article";
 
 const props = defineProps({
   articleItem: {

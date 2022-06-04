@@ -29,7 +29,8 @@
         </div>  </div>
 </template>
 
-<script setup lang="ts">import { PropType } from 'vue';
+<script setup lang="ts">
+import { PropType } from 'vue';
 import { gsap } from "gsap";
 import { ElMessage } from 'element-plus';
 const props = defineProps({

@@ -1,6 +1,3 @@
-import { PageParams } from './../interface/params';
-// user/currentUser
-import { LikeOrCollectParams, UpdateUserInfoParams } from '@/interface/params'
 import request from '@/utils/request'
 
 // 获取当前user信息

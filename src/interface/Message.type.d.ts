@@ -1,4 +1,4 @@
-export interface MessageVo{
+declare interface MessageVo{
     id:string,
     avatar:string,
     authorName:string,

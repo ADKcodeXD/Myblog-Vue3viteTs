@@ -16,9 +16,6 @@
       </div>
     </div>
 </template>
-<script setup lang="ts">
-
-</script>
 <style lang="less" scoped>
     .sub-title{
           font-family: 'urafont','幼圆';

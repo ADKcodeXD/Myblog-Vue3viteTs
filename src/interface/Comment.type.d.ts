@@ -1,5 +1,4 @@
-import { UserEasy } from './user';
-export interface CommentItemInfo{
+declare interface CommentItemInfo{
     childrens:Array<CommentItemInfo>,
     content:string,
     createDate:string,

@@ -13,8 +13,6 @@
 </template>
 <script setup lang="ts">
 import { deleteUserCollect, getUserCollect } from '@/api/user';
-import { ArticleItemInfo } from '@/interface/article';
-import { PageParams } from '@/interface/params';
 import { ElMessage } from 'element-plus';
 import MyTab from './MyTab.vue';
 

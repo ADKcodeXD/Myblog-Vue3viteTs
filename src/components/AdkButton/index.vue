@@ -13,7 +13,8 @@
         </span>
     </div>
 </template>
-<script setup lang="ts">import { PropType } from 'vue';
+<script setup lang="ts">
+import { PropType } from 'vue';
 
 const props = defineProps({
     /**

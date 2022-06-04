@@ -4,27 +4,21 @@
   </svg>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+const props = defineProps({
+  prefix: {
+    type: String,
+    default: 'icon',
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  color: {
+    type: String,
+    default: '#333',
+  },
+});
 
-export default defineComponent({
-  props: {
-    prefix: {
-      type: String,
-      default: 'icon',
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    color: {
-      type: String,
-      default: '#333',
-    },
-  },
-  setup(props) {
-    const symbolId = computed(() => `#${props.prefix}-${props.name}`)
-    return { symbolId }
-  },
-})
+const symbolId = computed(() => `#${props.prefix}-${props.name}`)
 </script>

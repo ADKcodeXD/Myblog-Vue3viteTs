@@ -15,8 +15,6 @@
 </template>
 <script setup lang="ts">
 import { getUserLiked } from '@/api/user';
-import { ArticleItemInfo } from '@/interface/article';
-import { PageParams } from '@/interface/params';
 import MyTab from './MyTab.vue';
 let pageParams = reactive<PageParams>({
     page: 1,

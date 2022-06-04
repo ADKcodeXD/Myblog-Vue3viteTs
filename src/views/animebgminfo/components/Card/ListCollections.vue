@@ -4,14 +4,12 @@
 </template>
 
 <script setup lang="ts">
-import { AnimeItemInfoCollection } from "@/interface/bangumiApi.type";
-import { CollectionTypeTwo } from "@/interface/BangumiEnum";
 import { PropType } from "@vue/runtime-core";
 import CardItem from "./CardItem.vue";
 
 const props = defineProps({
   list: {
-    type: Object as PropType<AnimeItemInfoCollection[]>,
+    type: Object as PropType<Bangumi.AnimeItemInfoCollection[]>,
     default: [],
   },
 });

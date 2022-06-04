@@ -3,15 +3,15 @@
     <el-upload class="avatar-uploader" action="noaction" :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg"
       :on-exceed="handleExceed" :before-upload="beforeAvatarUpload">
       <div class="avatar">
-        <img :src="avatar ? avatar : 'src/assets/img/logo.png'" onerror="javascript:this.src='src/assets/img/logo.png';"/>
+        <img :src="avatar ? avatar : 'src/assets/img/logo.png'"
+          onerror="javascript:this.src='src/assets/img/logo.png';" />
       </div>
       <p style="font-size: 12px" v-if="isShow">点此上传头像</p>
     </el-upload>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
 import img from "@/assets/logo.png";
 import { ElMessage } from "element-plus";
 import {
@@ -19,35 +19,32 @@ import {
   UploadFile,
 } from "element-plus/es/components/upload/src/upload.type";
 import { useUpload } from "@/hooks/upload";
-export default defineComponent({
-  props: {
-    size: {
-      type: Number,
-      default: 60,
-    },
-    avatar: {
-      type: String,
-      default: img,
-    },
-    isShow: {
-      type: Boolean,
-      default: true,
-    },
+const emit=defineEmits(['changeAvatar'])
+const props = defineProps({
+  size: {
+    type: Number,
+    default: 60,
   },
-  setup(props, { emit }) {
-    let avatarLink = ref<string | undefined>("");
-    avatarLink.value = props.avatar;
-    const handleExceed = (files: FileList, fileList: UploadFile[]) => {
-      ElMessage.warning("只能上传一张头图");
-    };
-    const beforeAvatarUpload = async (file: UploadFile) => {
-      const url = await useUpload(file as unknown as ElFile);
-      if (url == "") return false;
-      emit("changeAvatar", url);
-    };
-    return { handleExceed, beforeAvatarUpload, avatarLink };
+  avatar: {
+    type: String,
+    default: img,
+  },
+  isShow: {
+    type: Boolean,
+    default: true,
   },
 });
+
+let avatarLink = ref<string | undefined>("");
+avatarLink.value = props.avatar;
+const handleExceed = (files: FileList, fileList: UploadFile[]) => {
+  ElMessage.warning("只能上传一张头图");
+};
+const beforeAvatarUpload = async (file: UploadFile) => {
+  const url = await useUpload(file as unknown as ElFile);
+  if (url == "") return false;
+  emit("changeAvatar", url);
+};
 </script>
 
 <style lang="less" scoped>

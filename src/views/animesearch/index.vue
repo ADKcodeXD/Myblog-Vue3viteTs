@@ -93,13 +93,13 @@
 
 <script lang="ts" setup>
 import { getSubjectSeachApi } from "@/api/bangumi";
-import { AnimeItemInfo, SearchParamsBgm } from "@/interface/bangumiApi.type";
 import { ResponseGroup } from "@/interface/BangumiEnum";
 import { Search } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { BangumiType } from "@/interface/BangumiEnum";
 import SearchItem from "./components/SearchItem.vue";
 import { ArrowLeft } from "@element-plus/icons-vue";
+import { Bangumi } from "@/interface/BangumiApi.type";
 
 const route = useRoute();
 let query = route.query;
@@ -113,13 +113,13 @@ let urlencode = computed(() => {
   return encodeURIComponent(mykeyword.value);
 });
 
-let queryParams = reactive<SearchParamsBgm>({
+let queryParams = reactive<Bangumi.SearchParamsBgm>({
   keywords: urlencode.value,
   responseGroup: ResponseGroup.Large,
   start: 1,
   max_results: 13,
 });
-let animeinfoList = ref<Array<AnimeItemInfo>>([]);
+let animeinfoList = ref<Array<Bangumi.AnimeItemInfo>>([]);
 let total = ref(0);
 let page = computed({
   get: () => {

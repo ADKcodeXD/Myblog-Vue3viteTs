@@ -6,24 +6,19 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Tag } from "@/interface/tag";
-import { defineComponent, PropType } from "vue";
-
-export default defineComponent({
-  props: {
+<script lang="ts" setup>
+import {PropType } from "vue";
+const emit=defineEmits(['tagId'])
+const props = defineProps({
     tags: {
       type: Object as PropType<Tag[]>,
       default: () => [],
     },
-  },
-  setup(props,{emit}) {
-      const publishId=(id:number)=>{
+  });
+
+const publishId=(id:number)=>{
           emit('tagId',id);
       }
-      return {publishId}
-  },
-});
 </script>
 
 <style lang="less" scoped>

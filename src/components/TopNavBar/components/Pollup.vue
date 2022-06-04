@@ -77,7 +77,6 @@ closePollup;
 </template>
 <script setup lang="ts">
 
-import { UserEasy } from "@/interface/user";
 import { onClickOutside } from "@vueuse/core";
 import { PropType } from "vue";
 const props = defineProps({

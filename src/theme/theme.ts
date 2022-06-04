@@ -1,4 +1,3 @@
-import { Theme } from '@/interface/theme.type';
 import { getItem, setItem } from '@/utils/storage';
 import { themes } from "./themeData";
 

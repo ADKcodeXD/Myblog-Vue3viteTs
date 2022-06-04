@@ -1,4 +1,3 @@
-import { PageParams } from '../interface/params';
 import request from '@/utils/request'
 
 // 获取当前数据库中所有tags

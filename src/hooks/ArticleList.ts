@@ -1,6 +1,4 @@
 import {getSearchTipApi, getTagListApi} from '@/api/article';
-import {PageParams} from '@/interface/params';
-import {Tag} from '@/interface/tag';
 import {ElMessage} from 'element-plus';
 
 export const useArticleListSearch = (props, emit) => {

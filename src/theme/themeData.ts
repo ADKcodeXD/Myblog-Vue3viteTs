@@ -1,4 +1,3 @@
-import { Theme } from './../interface/theme.type';
 // 一套默认主题以及一套暗黑主题
 // 一套默认主题以及一套暗黑主题
 

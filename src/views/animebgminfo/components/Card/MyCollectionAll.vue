@@ -25,7 +25,6 @@ import {
   getUserCollectionByType,
 } from "@/api/bangumi";
 import { useSubjectInfo } from "@/hooks/Bangumi";
-import { AnimeItemInfoCollection } from "@/interface/bangumiApi.type";
 import { useBangumiUser } from "@/store/bangumiUser";
 import { ElMessage } from "element-plus";
 import ListCollections from "./ListCollections.vue";
@@ -33,7 +32,7 @@ const activeName = ref("2");
 const bgmUser = useBangumiUser();
 const status = ref(null);
 let loading = ref(true)
-let itemList = ref<AnimeItemInfoCollection[]>([]);
+let itemList = ref<Bangumi.AnimeItemInfoCollection[]>([]);
 getCollectionStatus(bgmUser.bgm_user_info.id).then(({ data }) => {
   status.value = data.find((item) => item.type === 2);
 });

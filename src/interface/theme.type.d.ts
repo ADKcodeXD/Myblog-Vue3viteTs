@@ -1,4 +1,4 @@
-export interface Theme{
+declare interface Theme{
     primaryBackGroundColor: string;
     primaryTextColor:string;
     primaryActiveColor:string;

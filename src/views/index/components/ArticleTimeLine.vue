@@ -15,7 +15,6 @@
 
 <script setup lang="ts">
 import { getArticleGroupByTimeApi } from "@/api/article";
-import { ArticleTime } from "@/interface/article";
 import Achive from '@/assets/img/article-achive.png';
 let tags = ref<ArticleTime[]>();
 const router = useRouter();

@@ -4,11 +4,8 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import AnimeBroswerMain from "./AnimeBroswerMain.vue";
-export default defineComponent({
-    components:{AnimeBroswerMain}
-})
 </script>
 
 

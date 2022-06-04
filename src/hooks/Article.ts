@@ -1,14 +1,6 @@
 import { encodeEmoji, decodeEmoji } from './../utils/emoji';
 import { getArticleItem } from "@/api/article";
 import { addComment, getComments } from "@/api/comment";
-import { ArticleItemInfo } from "@/interface/article";
-import { CommentItemInfo } from "@/interface/comment";
-import {
-    CommentParams,
-    LikeOrCollectParams,
-    PageParams,
-} from "@/interface/params";
-import { UserEasy } from "@/interface/user";
 import { useUserStore } from "@/store/user";
 import { getRealativeTime } from "@/utils/dayjs";
 import { ElMessage } from "element-plus";

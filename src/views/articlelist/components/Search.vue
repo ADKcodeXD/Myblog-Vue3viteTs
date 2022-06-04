@@ -15,7 +15,6 @@
 <script setup lang="ts">
 
 import { useArticleListSearch } from '@/hooks/ArticleList';
-import { PageParams } from '@/interface/params';
 import { PropType } from 'vue';
 const props = defineProps({
     pageParams: {

@@ -1,6 +1,6 @@
 <template>
     <div class="carousel-container">
-        <el-carousel ref="carousel" pause-on-hover v-loading="items.length === 0" :arrow="isM?'always':'hover'">
+        <el-carousel ref="carousel" pause-on-hover v-loading="items.length === 0" :arrow="isM ? 'always' : 'hover'">
             <el-carousel-item v-for="item in items" style="display: block" :key="item.id">
                 <div class="content" @click="$router.push(`/article/${item.id}`)">
                     <h2 class="title">{{ item.articleName }}</h2>
@@ -11,47 +11,43 @@
     </div>
 
 </template>
-<script lang="ts">
-import { Banner } from "@/interface/article";
+<script lang="ts" setup>
 import { isMobile } from "@/utils/mobile";
 import { PropType } from "@vue/runtime-core";
 import ElCarousel from "element-plus/es/components/carousel";
 
-export default defineComponent({
-    props: {
-        items: {
-            type: Array as PropType<Banner[]>,
-            default: () => [],
-        },
+const props = defineProps({
+    items: {
+        type: Array as PropType<Banner[]>,
+        default: () => [],
     },
-    setup(props) {
-        const carousel = ref<typeof ElCarousel>();
-        let isM=ref(false);
-        isM.value=isMobile();
-        onMounted(() => {
-            setTimeout(() => {
-                carousel.value?.setActiveItem(0);
-            }, 500);
-        });
-        return { carousel ,isM};
-    },
+});
+
+const carousel = ref<typeof ElCarousel>();
+let isM = ref(false);
+isM.value = isMobile();
+onMounted(() => {
+    setTimeout(() => {
+        carousel.value?.setActiveItem(0);
+    }, 500);
 });
 </script>
 
 <style lang="less" scoped>
 @media screen and(min-width:320px) {
-    .carousel-container{
+    .carousel-container {
         margin: 0.5rem 0;
         background-color: #fff;
-        .border-pinkline(1rem,0px);
+        .border-pinkline(1rem, 0px);
     }
+
     :deep(.el-carousel__container) {
         height: 200px;
     }
 }
 
 @media screen and(min-width:992px) {
-    
+
     :deep(.el-carousel__container) {
         margin-top: 0;
         height: 340px;

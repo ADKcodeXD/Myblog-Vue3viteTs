@@ -1,12 +1,10 @@
 import { getYhdmAnimeSearchInfo } from "@/api/YhdmApi";
-import { AnimeDeatilItem, InfoBoxItem } from "@/interface/bangumiApi.type";
-import { YhdmSearchInfo } from "@/interface/yhdm.type";
 import { getSiteFromBGMId } from "@/utils/bangumiData";
 import { TextFilter } from "@/utils/textFilter";
 import { Ref } from "vue";
 
-export const useYhdm = (animeDetail: AnimeDeatilItem|null) => {
-    const infoboxVal: Ref<Array<InfoBoxItem>> | undefined =
+export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem|null) => {
+    const infoboxVal: Ref<Array<Bangumi.InfoBoxItem>> | undefined =
         inject("infoboxVal");
     // 找出谁是导演
     const eps = computed(() => {
@@ -68,7 +66,7 @@ export const useYhdm = (animeDetail: AnimeDeatilItem|null) => {
             if (results.length > 0) {
                 yhdmList.value = results;
             } else {
-                let name: InfoBoxItem | undefined;
+                let name: Bangumi.InfoBoxItem | undefined;
                 let keywordsTwo: string;
                 // 如果是第二季之类的 加空格和不加空格各搜索一次
                 if (season.value) {

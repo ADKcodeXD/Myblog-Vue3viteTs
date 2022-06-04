@@ -22,7 +22,6 @@ name:'Anime',
 </script>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue";
 import AnimeHeader from "./components/AnimeHeader.vue";
 import AnimeCarousel from "./components/AnimeCarousel.vue";
 import AnimeBroswer from "./components/AnimeBroswer.vue";
