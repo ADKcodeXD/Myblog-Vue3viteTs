@@ -22,13 +22,16 @@ const props = defineProps({
 });
 const clearInput=()=>{
   let textarea=picker.value.querySelector('.v3-emoji-picker-textarea');
-  console.log(textarea.value);
   textarea.value="";
 }
-defineExpose({clearInput})
+const setText=(val:string)=>{
+  let textarea=picker.value.querySelector('.v3-emoji-picker-textarea');
+  textarea.value=val;
+}
+defineExpose({clearInput,setText})
 const emit = defineEmits(['changeText'])
 const onChangeText = (t: string) => {
-  emit('changeText', t)
+  emit('changeText', t);
 }
 const picker = ref<EmojiPicker | null>();
 const { disabledGroup, groupName } = useEmoji();
