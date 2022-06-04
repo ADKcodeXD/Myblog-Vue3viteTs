@@ -31,6 +31,7 @@ export const useArticle = () => {
         page: 1,
         pagesize: 10,
     });
+    let totalComment=ref(0);
     // 计算属性 计算相对时间
     let time = computed(() => {
         article.value as ArticleItemInfo;
@@ -71,7 +72,8 @@ export const useArticle = () => {
     // 获取评论
     const getAllComment = async () => {
         const { data } = await getComments(route.params.id as string, pageparams);
-        commentList.value = data.data;
+        commentList.value = data.data.results;
+        totalComment.value=data.data.length;
         commentList.value.map(item => {
             item.content = decodeEmoji(item.content);
             if(item.childrens){
@@ -129,6 +131,10 @@ export const useArticle = () => {
         }
         isCollectLoading.value = false;
     };
+    // 分页获取评论
+    const changePage=()=>{
+        getAllComment();
+    }
     // 函数加载 挂载组件
     onMounted(() => {
         getArticle(route.params.id);
@@ -141,12 +147,15 @@ export const useArticle = () => {
         isCollectLoading,
         publishSecond,
         goTop,
+        totalComment,
         getAllComment,
+        changePage,
         publishComment,
         commentParams,
         time,
         article,
         commentList,
+        pageparams,
         user,
         comment,
         changeComment,
