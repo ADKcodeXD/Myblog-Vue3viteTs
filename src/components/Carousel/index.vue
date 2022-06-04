@@ -14,7 +14,7 @@
 <script lang="ts" setup>
 import { isMobile } from "@/utils/mobile";
 import { PropType } from "@vue/runtime-core";
-import ElCarousel from "element-plus/es/components/carousel";
+import { ElCarousel } from "element-plus";
 
 const props = defineProps({
     items: {
