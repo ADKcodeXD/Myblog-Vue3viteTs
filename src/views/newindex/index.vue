@@ -150,7 +150,6 @@
             </ul>
         </div>
     </div>
-
 </template>
 <script setup lang="ts">
 import { useMouse } from "@vueuse/core";
