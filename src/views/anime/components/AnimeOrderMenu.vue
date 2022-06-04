@@ -54,7 +54,8 @@
 </template>
 
 <script lang="ts" setup>
-import { BroswerType, SortRole } from "Myenum";
+import {SortRole,BroswerType} from '@/interface/EnumExport';
+
 const emit = defineEmits(['changeParams'])
 let month = ref(0);
 let yearChoice = ref(0);

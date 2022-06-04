@@ -78,9 +78,9 @@ declare namespace Bangumi {
      * 用于获取排行榜和分页的参数
      */
     interface BroswerParams {
-        sort?: SortRole,
+        sort?: BgmEnum.SortRole,
         order?: string,
-        type?: BroswerType,
+        type?: BgmEnum.BroswerType,
         page?: number,
         airtime?: string,
         bigType?: string,
@@ -210,8 +210,8 @@ declare namespace Bangumi {
      */
     interface SearchParamsBgm {
         keywords: string,
-        type?: BangumiType,
-        responseGroup?: ResponseGroup,
+        type?: BgmEnum.BangumiType,
+        responseGroup?: BgmEnum.ResponseGroup,
         start?: number,
         max_results?: number
     }

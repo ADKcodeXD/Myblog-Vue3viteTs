@@ -51,13 +51,13 @@
         </div>
       </div>
     </div>
-    <el-empty v-else> </el-empty>
+    <ElEmpty v-else /> 
   </div>
 </template>
 
 <script lang="ts" setup>
 import { PropType } from "vue";
-
+import {WeekDayType,BangumiType} from '@/interface/EnumExport';
 const props = defineProps({
   animeDetail: {
     type: Object as PropType<Bangumi.AnimeDeatilItem>,

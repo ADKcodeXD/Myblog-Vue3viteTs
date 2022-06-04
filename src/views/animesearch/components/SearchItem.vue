@@ -40,7 +40,7 @@
 
 <script lang="ts" setup>
 import {PropType } from "vue";
-
+import {BangumiType} from '@/interface/EnumExport'
 const props = defineProps({
   item: { type: Object as PropType<Bangumi.AnimeItemInfo>, default: {} },
 });

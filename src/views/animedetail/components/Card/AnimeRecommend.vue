@@ -58,7 +58,7 @@
 <script lang="ts" setup>
 import { useBroswer } from "@/hooks/Bangumi";
 import { PropType } from "vue";
-
+import {SortRole} from '@/interface/EnumExport';
 const props = defineProps({
   tags: {
     type: Object as PropType<Array<Bangumi.AnimeTag>>,

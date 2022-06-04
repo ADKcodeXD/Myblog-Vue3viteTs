@@ -27,7 +27,7 @@
 <script lang="ts" setup>
 import { PropType } from "vue";
 import * as echarts from "echarts";
-
+import {CollectionType} from '@/interface/EnumExport';
 const props = defineProps({
   collectionData: {
     type: Object as PropType<Bangumi.Collection>,

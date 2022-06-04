@@ -44,6 +44,7 @@ import Loading from "@/assets/img/loading.gif";
 import AnimeBroswerCard from "./AnimeBroswerCard.vue";
 import AnimeOrderMenu from "./AnimeOrderMenu.vue";
 import { useBroswer } from "@/hooks/Bangumi";
+import { SortRole } from "@/interface/EnumExport";
 
 let animeInfoList = ref<Array<Bangumi.BroswerResult>>([]);
 let page = ref(0);

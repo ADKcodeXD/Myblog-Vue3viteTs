@@ -4,6 +4,7 @@
 </template>
 
 <script setup lang="ts">
+import { CollectionTypeTwo } from "@/interface/EnumExport";
 import { PropType } from "@vue/runtime-core";
 import CardItem from "./CardItem.vue";
 

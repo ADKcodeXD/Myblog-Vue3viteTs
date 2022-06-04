@@ -1,101 +1,42 @@
-// 这是用于 首页的 我自己的接口
-declare enum SortRole {
-    rank = "rank",
-    date = "date",
-    title = "title"
-}
-declare enum Type {
-    Book = 1,
-    Anime = 2,
-    Music = 3,
-    Game = 4,
-    Real = 5
-}
-declare enum BroswerType {
-    TV = "tv",
-    WEB = "web",
-    OVA = "ova",
-    MOVIE = "movie",
-    MISC = "misc"
-}
-declare enum Status {
-    Ok = "Air",
-    No = "NA"
-}
-declare enum CollectionType {
-    doing = "在看",
-    on_hold = "搁置",
-    wish = "想看",
-    collect = "看过",
-    dropped = "抛弃"
-}
-declare enum BangumiType {
-    小说Book = 1,
-    动漫Anime = 2,
-    音乐Musci = 3,
-    游戏Game = 4,
-    三次元Real = 6,
-}
-declare enum WeekDayType {
-    星期天 = 7,
-    星期一 = 1,
-    星期二 = 2,
-    星期三 = 3,
-    星期四 = 4,
-    星期五 = 5,
-    星期六 = 6
-}
-declare enum ResponseGroup {
-    Large = "large",
-    Medium="medium",
-    Small="small"
-}
-declare enum CollectionTypeTwo {
-    do = "在看",
-    on_hold = "搁置",
-    wish = "想看",
-    collect = "看过",
-    dropped = "抛弃"
-}
-declare module 'Myenum'{
-    export enum SortRole {
+declare namespace BgmEnum{
+    enum SortRole {
         rank = "rank",
         date = "date",
         title = "title"
     }
-    export enum Type {
+    enum Type {
         Book = 1,
         Anime = 2,
         Music = 3,
         Game = 4,
         Real = 5
     }
-    export enum BroswerType {
+    enum BroswerType {
         TV = "tv",
         WEB = "web",
         OVA = "ova",
         MOVIE = "movie",
         MISC = "misc"
     }
-    export enum Status {
+    enum Status {
         Ok = "Air",
         No = "NA"
     }
-    export enum CollectionType {
+    enum CollectionType {
         doing = "在看",
         on_hold = "搁置",
         wish = "想看",
         collect = "看过",
         dropped = "抛弃"
     }
-    export enum BangumiType {
+    enum BangumiType {
         小说Book = 1,
         动漫Anime = 2,
         音乐Musci = 3,
         游戏Game = 4,
         三次元Real = 6,
     }
-    export enum WeekDayType {
+    enum WeekDayType {
         星期天 = 7,
         星期一 = 1,
         星期二 = 2,
@@ -104,12 +45,12 @@ declare module 'Myenum'{
         星期五 = 5,
         星期六 = 6
     }
-    export enum ResponseGroup {
+    enum ResponseGroup {
         Large = "large",
         Medium="medium",
         Small="small"
     }
-    export enum CollectionTypeTwo {
+    enum CollectionTypeTwo {
         do = "在看",
         on_hold = "搁置",
         wish = "想看",
