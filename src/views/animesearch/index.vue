@@ -93,13 +93,11 @@
 
 <script lang="ts" setup>
 import { getSubjectSeachApi } from "@/api/bangumi";
-import { ResponseGroup } from "@/interface/BangumiEnum";
+import { BangumiType } from "Myenum";
 import { Search } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
-import { BangumiType } from "@/interface/BangumiEnum";
 import SearchItem from "./components/SearchItem.vue";
 import { ArrowLeft } from "@element-plus/icons-vue";
-import { Bangumi } from "@/interface/BangumiApi.type";
 
 const route = useRoute();
 let query = route.query;

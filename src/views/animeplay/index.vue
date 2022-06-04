@@ -37,7 +37,6 @@
 
 <script lang="ts" setup>
 import { getYhdmAnimeVideoInfo } from "@/api/YhdmApi";
-import { YhdmVideoInfo } from "@/interface/yhdm.type";
 import { ArrowLeft } from "@element-plus/icons-vue";
 import Player from "./components/player.vue";
 

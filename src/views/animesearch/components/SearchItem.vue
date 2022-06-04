@@ -39,8 +39,6 @@
 </template>
 
 <script lang="ts" setup>
-import { Bangumi } from "@/interface/BangumiApi.type";
-import { BangumiType } from "@/interface/BangumiEnum";
 import {PropType } from "vue";
 
 const props = defineProps({
