@@ -14,26 +14,8 @@
           </div>
         </template>
       </el-image>
-      <transition @enter="translateYenter" @leave="translateYleave">
-        <div class="info" v-if="!detailInfoShow">
-          <p class="title text-line-show-2" :alt="animeInfo.name">
-            {{ animeInfo.name_cn ? animeInfo.name_cn : animeInfo.name }}
-          </p>
-          <div class="rating">
-            <p class="man" v-if="animeInfo.collection">
-              {{ animeInfo.collection.doing }}人在看
-            </p>
-            <p>
-              #<span class="rank">{{
-                  animeInfo.rank ? animeInfo.rank : "暂无数据"
-              }}</span>
-            </p>
-          </div>
-        </div>
-      </transition>
-
       <transition @enter="infoXenter" @leave="infoXleave">
-        <div v-if="detailInfoShow" class="tw-flex-1">
+        <div v-if="detailInfoShow" class="info-detail-container">
           <transition @enter="infoXenter" @leave="infoXleave">
             <div v-if="animeDetailData" class="info-detail">
               <div :key="1" :data-index="0">
@@ -77,6 +59,21 @@
           </transition>
         </div>
       </transition>
+      <div class="info" >
+        <p class="title text-line-show-2" :alt="animeInfo.name">
+          {{ animeInfo.name_cn ? animeInfo.name_cn : animeInfo.name }}
+        </p>
+        <div class="rating">
+          <p class="man" v-if="animeInfo.collection">
+            {{ animeInfo.collection.doing }}人在看
+          </p>
+          <p>
+            #<span class="rank">{{
+                animeInfo.rank ? animeInfo.rank : "暂无数据"
+            }}</span>
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -92,8 +89,6 @@ const props = defineProps({
   },
 });
 const {
-  translateYleave,
-  translateYenter,
   infoXenter,
   infoXleave,
 } = useAnime();
@@ -138,34 +133,33 @@ const tagsInfoThree = computed(() => {
     background-color: white;
 
     &:hover {
-
-      background-color: rgb(255, 255, 255);
-
-      .card {
-        flex-direction: row;
-      }
-
       .elimg {
-        cursor: pointer;
-        width: 0rem;
+        width: 0%;
         height: 100%;
+      }
+      .info{
+        opacity: 0;
+        color: rgb(255, 255, 255);
+      }
+      .info-detail{
+        opacity: 1;
       }
     }
   }
-
+  // 容器
   .card {
     height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     transition: all 0.5s ease;
     position: relative;
     font-family: 'Thinfont', '幼圆';
     font-weight: 600;
-
     .elimg {
       width: 100%;
-      height: 18rem;
+      height: 70%;
       flex-shrink: 0;
       transition: all 0.5s ease;
     }
@@ -177,20 +171,24 @@ const tagsInfoThree = computed(() => {
     .info {
       padding: 10px;
       flex: 1;
+      width: 100%;
+      height: 30%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: all 1s ease;
 
       .rating {
         display: flex;
         justify-content: space-between;
       }
-
       .rank {
         color: rgb(0, 60, 255);
       }
     }
-
+    .info-detail-container{
+      width:100%
+    }
     .info-detail {
       padding: 1rem;
       display: flex;
@@ -198,7 +196,7 @@ const tagsInfoThree = computed(() => {
       justify-content: space-between;
       color: rgb(0, 0, 0);
       height: 100%;
-
+      opacity: 0;
       .hanyaku {
         font-family: '黑体';
       }
@@ -214,16 +212,24 @@ const tagsInfoThree = computed(() => {
 @media screen and (min-width: 768px) {
   .anime-card {
     height: 34rem;
-
     &:hover {
       width: 98%;
       background-color: rgb(255, 255, 255);
       .elimg {
         cursor: pointer;
-        width: 20rem;
+        width: 40%;
         height: 100%;
       }
+      .info{
+        opacity: 0;
+      }
+      .info-detail{
+        opacity: 1;
+      }
     }
+  }
+  .card .info-detail-container{
+      width:60%
   }
 }
 
@@ -238,10 +244,6 @@ const tagsInfoThree = computed(() => {
     &:hover {
       width: 50rem;
       background-color: rgb(255, 255, 255);
-
-      .card {
-        flex-direction: row;
-      }
     }
   }
 
@@ -249,9 +251,6 @@ const tagsInfoThree = computed(() => {
     .elimg {
       width: 100%;
     }
-
   }
-
-
 }
 </style>
