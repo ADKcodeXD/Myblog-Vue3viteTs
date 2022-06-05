@@ -169,7 +169,7 @@ img {
 }
 
 // 重置element的样式
-:deep(.el-input__inner) {
+:deep(.el-input__wrapper) {
   font-family: 'Thinfont', '幼圆';
   outline: 3px black solid;
   border-radius: 10px;
@@ -277,12 +277,13 @@ img {
 }
 
 // 定义一个球
-.ball(@size,@color){
+.ball(@size, @color) {
   width: @size;
   height: @size;
   border-radius: 50%;
   background-color: @color;
 }
+
 // 定义所有变量 
 @primaryBackGroundColor: var(--primaryBackGroundColor, rgb(255, 253, 253));
 @primaryTextColor: var(--primaryTextColor, rgb(8, 8, 8));
