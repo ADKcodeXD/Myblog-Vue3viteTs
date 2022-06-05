@@ -5,7 +5,10 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite';
 import viteCompression from 'vite-plugin-compression';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+// 预构建插件 
+import OptimizationPersist from 'vite-plugin-optimize-persist'
+import PkgConfig from 'vite-plugin-package-config'
 function resovePath(paths: string) {
   // 如何 __dirname 找不到 需要 yarn add @types/node --save-dev
   return resolve(__dirname, paths);
@@ -36,6 +39,8 @@ export default ({ mode }) => {
         // 指定symbolId格式
         symbolId: 'icon-[dir]-[name]',
       }),
+      PkgConfig(),
+      OptimizationPersist()
     ],
     resolve: {
       alias: {
