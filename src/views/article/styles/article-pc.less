@@ -1,4 +1,3 @@
-@import url(../../../assets/styles/github-light.css);
 @media screen and (min-width:320px){
     .article {
         overflow-x: hidden;
@@ -21,10 +20,7 @@
           transition: all 0.8s ease;
           background-color: rgb(@primaryBackGroundColor);
           height: 100%;
-          .markdown-body{
-            margin: 20px 0;
-            padding: 30px;
-          }
+          
           .banner {
             top: 0;
             left: 0;
@@ -46,59 +42,9 @@
               content: "";
             }
           }
-          .title {
+          .article-container {
             color: rgb(@primaryTextColor);
-            .content {
-              display: flex;
-              flex-direction: column;
-              .article-title {
-                font-size: 32px;
-                h2 {
-                  margin: 20px 0;
-                }
-              }
-              .author {
-                display: flex;
-                height: 60px;
-                img {
-                  width: 60px;
-                  height: 60px;
-                  border-radius: 50%;
-                  background-color: rgb(@primaryBackGroundColor);
-                  object-fit: cover;
-                }
-                .author-info {
-                  height: 100%;
-                  display: flex;
-                  flex-direction: column;
-                  justify-content: space-between;
-                  margin-left: 12px;
-                  .author-name {
-                    font-size: 18px;
-                    font-weight: 600;
-                  }
-                  .introduce {
-                    font-size: 16px;
-                    color: rgb(@primaryTipColor);
-                  }
-                }
-              }
-              .summary {
-                padding: 10px;
-                border-left: rgb(87, 231, 30) 3px solid;
-                margin-top: 20px;
-                font-size: 20px;
-                .summary-subtitle {
-                  font-size: 22px;
-                  color: rgb(@primaryTipColor);
-                }
-                .summary-content {
-                  margin-top: 10px;
-                  font-size: 18px;
-                  color: rgb(@primaryTipColor);
-                }
-              }
-            }
+            
           }
           .body {
             padding: 20px;
@@ -140,26 +86,6 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
-              .left {
-                .publishtime {
-                  font-size: 14px;
-                  color: rgb(@primaryTipColor);
-                  margin-top: 10px;
-                }
-                .red {
-                  font-size: 18px;
-                  color: rgb(@primaryHightlightColor);
-                }
-              }
-              .icon {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                i {
-                  margin-left: 10px;
-                  font-size: 20px;
-                }
-              }
             }
             .tags {
               margin: 20px 0;

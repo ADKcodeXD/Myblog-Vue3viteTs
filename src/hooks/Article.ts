@@ -39,7 +39,8 @@ export const useArticle = () => {
             return getRealativeTime(article.value.createDate);
         }
     });
-
+    // 滚动
+    const body = ref<HTMLElement | null>();
     // 方法区-----------------------
     // 发送一级评论
     const publishComment = async () => {
@@ -84,12 +85,10 @@ export const useArticle = () => {
             return item
         })
     };
-    // 滚动
-    const body = ref<HTMLElement | null>();
     const goTop = () => {
         console.log(body.value?.scrollTop);
     };
-    // 接受发送二级评论
+    // 发送二级评论
     const publishSecond = () => {
         ElMessage.success("发送成功");
         getAllComment();
