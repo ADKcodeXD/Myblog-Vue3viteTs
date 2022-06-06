@@ -22,10 +22,8 @@
         <div class="msg-avatar">
           <UploadAvatar :avatar="messageParams.avatar" @changeAvatar="changeAvatarParams" />
         </div>
-
         <div class="edit-area">
-          <ElInput v-model="messageParams.content" :rows="5" maxlength="256" show-word-limit resize="none"
-            type="textarea" style="font-size: 20px; line-height: 30px" placeholder="在这里发布留言哦~" />
+          <MyEmoji @changeText="changeMsg" ref="emoji" placeholder="在这里输入留言哦~~~"/>
         </div>
       </div>
       <div class="button">
@@ -41,10 +39,11 @@
     </div>
 
     <div class="message-part" v-if="messageList">
-      <MessageItem :message="item" v-for="item in messageList" :key="item.id" />
+      <CommentItem v-for="item in toCommentItem" :commentInfo="item" :key="item.id" :reply="false" :level="false"/>
     </div>
-    <ElEmpty v-else description="暂时没有留言哦~"></ElEmpty>
-    <MyPagination :pageparams="pageparams" @changePage="changePage" :total="total" />
+    <AdkEmpty v-else desc="暂时没有留言哦~"></AdkEmpty>
+
+    <MyPagination :pageparams="pageparams" @changePage="changePage" :total="total" class="pagination" />
   </ElScrollbar>
 </template>
 
@@ -57,25 +56,26 @@ export default {
 <script lang="ts" setup>
 import avatar from "@/assets/img/logo.png";
 import { addMessageApi, getMessageApi } from "@/api/message";
-import MessageItem from "./components/MessageItem.vue";
 import { ElMessage, ElScrollbar } from "element-plus";
+import { decodeEmoji } from "@/utils/emoji";
 
-let comment = ref("");
-let messageParams: MessageParamsForADK = reactive({
+const comment = ref("");
+const messageParams: MessageParamsForADK = reactive({
   authorName: "",
   contact: "",
   content: "",
   avatar: avatar,
 });
-let pageparams = reactive<PageParams>({
+const pageparams = reactive<PageParams>({
   page: 1,
   pagesize: 10,
 });
-let messageList = ref<MessageVo[]>();
-let total = ref(0);
+const messageList = ref<MessageVo[]>();
+const total = ref(0);
 const body = ref<InstanceType<typeof ElScrollbar>>();
 // 排序规则
-let orderRole = ref(0);
+const orderRole = ref(0);
+const emoji=ref();
 // 方法和逻辑区
 const getMessage = async (pageparams: PageParams) => {
   const { data } = await getMessageApi(pageparams);
@@ -94,6 +94,7 @@ const publishMessage = async () => {
   const { data } = await addMessageApi(messageParams);
   if (data.code == 200) {
     ElMessage.success("发表成功");
+    emoji.value.clearInput();
   } else {
     ElMessage.error(data.msg);
   }
@@ -118,7 +119,6 @@ const order = (val: number) => {
   getMessage(pageparams);
 };
 // 控制滚动条
-
 const changePage = () => {
   getMessage(pageparams);
   body.value?.setScrollTop(0);
@@ -126,6 +126,24 @@ const changePage = () => {
 const changeAvatarParams = (val: string) => {
   messageParams.avatar = val;
 };
+const changeMsg=(val:string)=>{
+  messageParams.content=val;
+}
+const toCommentItem=computed(()=>{
+  let newCommentList=ref<CommentItemInfo[]>();
+  newCommentList.value=messageList.value.map(item=>{
+    let obj={
+      content:decodeEmoji(item.content),
+      contact:item.contact,
+      nickname:item.authorName,
+      createDate:item.createDate,
+      id:item.id,
+      avatar:item.avatar
+    }
+    return obj;
+  })
+  return newCommentList.value;
+})
 onMounted(() => {
   getMessage(pageparams);
 });
