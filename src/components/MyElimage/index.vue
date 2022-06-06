@@ -1,7 +1,7 @@
 <template>
   <el-image :src="img" fit="cover" style="width: 100%; height: 100%; " lazy>
     <template #placeholder>
-      <div class="gray" style="width: 100%; height: 100%; ">
+      <div class="gray">
         <LoadingAnime />
       </div>
     </template>
@@ -37,14 +37,10 @@ defineProps({
 
 <style scoped lang="less">
 .gray {
-  width: 100%;
-  height: 100%;
   background-color: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-  color: rgb(@primaryActiveTextColor);
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+  width: 100%;
+  .flexbox(column);
   overflow: hidden;
 }
 </style>
