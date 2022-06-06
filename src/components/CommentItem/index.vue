@@ -5,27 +5,28 @@
         <div class="tw-flex">
           <!-- 头像 -->
           <div class="user-avatar">
-            <img :src="commentInfo.user.avatar || commentInfo.avatar" />
+            <MyElimage :img="(commentInfo.user&&commentInfo.user.avatar)?commentInfo.user.avatar:commentInfo.avatar" />
           </div>
           <!-- 名字以及等级和简介等 -->
           <div class="username-time">
             <h3>
-              {{ commentInfo.user.nickname || commentInfo.nickname }}
+              {{ commentInfo.user?.nickname || commentInfo.nickname }}
               <div class="tag" v-if="commentInfo.user && commentInfo.user.id === authorId">
                 博主
               </div>
               <!-- 占位 以后接入等级系统可用 -->
-              <div class="tag tag2">
+              <div class="tag tag2" v-if="level">
                 Lv1
               </div>
             </h3>
             <p v-if="commentInfo.user">{{ commentInfo.user.introduce }}</p>
+            <p v-if="commentInfo.contact">联系方式:{{commentInfo.contact}}</p>
           </div>
         </div>
         <!-- 右边的消息栏 -->
         <div class="tw-flex tw-flex-col tw-items-end tw-justify-between" style="height: 60px;">
           <div class="floor tw-flex-1">{{ floor }}楼</div>
-          <div v-if="commentInfo.contact">联系方式{{commentInfo.contact}}</div>
+          
           <span>{{ commentInfo.createDate }}</span>
         </div>
       </div>
@@ -35,7 +36,7 @@
       </div>
       <div class="secondcomment">
         <!-- 回复区 -->
-        <Reply :commentInfo="commentInfo" :articleId="articleId" @published="published"/>
+        <Reply :commentInfo="commentInfo" :articleId="articleId" @published="published" v-if="reply"/>
         <!-- 二级评论列表区域 -->
         <ElDivider v-if="commentInfo.childrens && commentInfo.childrens.length > 0" />
         <div v-if="commentInfo.childrens">
@@ -71,6 +72,14 @@ const props = defineProps({
     type: String,
     default: "1",
   },
+  reply:{
+    type:Boolean,
+    default:true
+  },
+  level:{
+    type:Boolean,
+    default:true
+  }
 });
 const emit=defineEmits(['published'])
 const published=()=>{
@@ -89,10 +98,10 @@ const published=()=>{
   padding: 15px;
   font-family: 'Thinfont', '幼圆';
   font-weight: 600;
-  .border-pinkline(8px, 6px);
-
+  border: 3px black solid;
+  border-radius: 20px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.37);
   .content {
-    margin-left: 15px;
     width: 100%;
     word-break: break-all;
 
@@ -100,12 +109,10 @@ const published=()=>{
       min-height: 150px;
       font-size: 20px;
     }
-
     .secondcomment {
       display: flex;
       flex-direction: column;
     }
-
   }
 }
 </style>

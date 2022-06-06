@@ -1,7 +1,7 @@
 <template >
     <div class="second-comment">
         <div class="user-avatar">
-            <img :src="childrenItem.user.avatar" alt="" />
+            <MyElimage :img="childrenItem.user.avatar" alt="" />
         </div>
         <div class="tw-w-full tw-flex tw-flex-col">
             <div class="username">
@@ -29,7 +29,6 @@
 </template>
 <script setup lang="ts">
 import { PropType } from 'vue';
-
 const props = defineProps({
     childrenItem: {
         type: Object as PropType<CommentItemInfo>,
