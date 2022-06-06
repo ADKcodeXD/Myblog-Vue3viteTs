@@ -1,8 +1,7 @@
 import { uploadBanner } from "@/api/article";
 import { ElMessage } from "element-plus";
-import { ElFile } from "element-plus/es/components/upload/src/upload.type";
 
-export const useUpload = async (file: ElFile): Promise<string> => {
+export const useUpload = async (file: any): Promise<string> => {
     const isImg = file.type === "image/jpeg" || file.type === "image/png";
     const isLt5M = file.size / 1024 / 1024 < 5;
     if (!isImg) {
