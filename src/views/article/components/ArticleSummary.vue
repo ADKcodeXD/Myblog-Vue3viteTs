@@ -30,11 +30,12 @@
         </div>
         <div class="tip">
             <p>本文大概字数为：{{ word }}字，
-                看完大概需要{{needMin}}分钟</p>
+                看完大概需要{{ needMin }}分钟</p>
         </div>
     </div>
 </template>
 <script setup lang="ts">
+import { useArticle } from '@/hooks/Article';
 import { PropType } from 'vue';
 
 const props = defineProps({
@@ -43,18 +44,18 @@ const props = defineProps({
         default: () => { }
     }
 })
-const word=computed(()=>{
-    if(props.article.body.content&&props.article.body.content.length!=0){
+const word = computed(() => {
+    if (props.article.body.content && props.article.body.content.length != 0) {
         return props.article.body.content.length
-    }else{
+    } else {
         return props.article.body.html.length
     }
 })
-const needMin=computed(()=>{
-    if(props.article.body.content&&props.article.body.content.length!=0){
-        return Math.round(props.article.body.content.length/360)
-    }else{
-        return Math.round(props.article.body.html.length/360)
+const needMin = computed(() => {
+    if (props.article.body.content && props.article.body.content.length != 0) {
+        return Math.round(props.article.body.content.length / 360)
+    } else {
+        return Math.round(props.article.body.html.length / 360)
     }
 })
 </script>

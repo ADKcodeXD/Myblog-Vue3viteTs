@@ -4,13 +4,15 @@
         <template v-if="showPreview">
             <ElImageViewer v-if="showPreview"  :infinite="false"
                 :url-list="urlList" :hide-on-click-modal="true" :teleported="false"
-                @close="showPreview=false"
+                @close="close"
                 >
             </ElImageViewer>
         </template>
     </div>
 </template>
 <script setup lang="ts">
+import { isMobile } from '@/utils/mobile';
+
 const prop = defineProps({
     html: {
         type: String,
@@ -19,13 +21,18 @@ const prop = defineProps({
 })
 const htmlFilter = (val: string) => {
     let reg = new RegExp(/\<img/g);
-
+    
 }
 const ImagePreview = (e) => {
     if (e.target.nodeName === 'IMG') {
         urlList.value[0]=e.target.currentSrc;
-        showPreview.value=true
+        showPreview.value=true;
+        isMobile()?document.documentElement.style.overflow='hidden':document.body.style.overflow='hidden';     
     }
+}
+const close=()=>{
+    showPreview.value=false;
+    isMobile()?document.documentElement.style.overflow='':document.body.style.overflow='';
 }
 let urlList=ref([]);
 let showPreview=ref(false)

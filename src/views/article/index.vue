@@ -2,44 +2,29 @@
   <div class="article">
     <div class="top">
       <TopNavBar :back-color="'rgba(0, 0, 0, 0.7)'" />
+
     </div>
-    <Skin @top="goTop" />
+
     <div class="main-body" v-if="article">
       <!-- banner -->
-      <div class="banner">
-        <img :src="article.banner" alt="" />
+      <div class="banner" ref="banner">
+        <img :src="article.banner" />
       </div>
+      <transition name="onlyopacity">
+        <ToolBars v-if="isToolsShow" :article="article" @like-article="likedArticle" @collect-article="collectArticle"
+          @toComment="toComment" />
+      </transition>
       <!-- 标题和摘要 -->
-      <div class="article-container">
-        <ArticleSummary :article="article"/>
+      <div class="article-container" ref="articleContainer">
+        <ArticleSummary :article="article" />
         <!-- 主体部分 -->
         <ArticleBody :html="article.body.html" />
         <!-- 结束部分 显示查看数 点赞数 以及评论数 -->
-        <div class="detail">
-          <div class="good">
-            <!-- 点赞部分 -->
-            <i class="iconfont icon-good" :class="{ active: article.isLiked }" @click="likedArticle"><span
-                v-if="!article.isLiked">点赞</span><span v-else>已点赞</span></i>
-            <i class="iconfont icon-changyonggongneng" :class="{ active: article.isCollected }"
-              @click="collectArticle"><span v-if="!article.isCollected">收藏</span><span v-else>已收藏</span></i>
-          </div>
-          <el-divider>
-            <i class="iconfont icon-edit">文章就到这里结束啦</i>
-          </el-divider>
-
-          <div class="bottom-text">
-            <div class="left">
-              <p class="red">未经作者允许 禁止转载</p>
-            </div>
-          </div>
-          <div class="tags">
-            <TagItem v-for="tag in article.tags" :key="tag.id" :tagId="tag.id" :tagName="tag.tagName" />
-          </div>
-        </div>
+        <ElDivider />
       </div>
-
+      <Bottom :article="article" @like-article="likedArticle" @collect-article="collectArticle" />
       <!-- 评论区 -->
-      <div class="comments">
+      <div class="comments" ref="comment">
         <div class="edit-part">
           <div class="title">
             <p>{{ totalComment }}条评论</p>
@@ -55,9 +40,7 @@
           </div>
           <div class="button">
             <ElButtonGroup>
-              <ElButton @click="publishComment" 
-              class="buttonself" 
-              :disabled="user?.id === ''" type="success">
+              <ElButton @click="publishComment" class="buttonself" :disabled="user?.id === ''" type="success">
                 发布评论
               </ElButton>
             </ElButtonGroup>
@@ -72,6 +55,7 @@
           </transition-group>
         </div>
       </div>
+      <!-- 评论分页 -->
       <MyPagination :pageparams="pageparams" :total="totalComment" @changePage="changePage" class="page" />
     </div>
   </div>
@@ -80,9 +64,9 @@
 <script lang="ts">
 // 定义组件名字 不然include 和keepalive 无法生效
 import { useArticle } from "@/hooks/Article";
-import "../../../node_modules/vue3-emoji-picker/dist/style.css";
 import '@/assets/styles/github-light.css';
 import 'highlight.js/styles/github.css';
+
 // import css
 export default {
   name: "Article",
@@ -91,9 +75,10 @@ export default {
 <script setup lang="ts">
 import ArticleSummary from "./components/ArticleSummary.vue";
 import ArticleBody from "./components/ArticleBody.vue";
+import Bottom from "./components/Bottom.vue";
+import ToolBars from './components/ToolBars.vue';
+// 封装好的hook
 const {
-  collectArticle,
-  likedArticle,
   publishSecond,
   goTop,
   publishComment,
@@ -101,16 +86,41 @@ const {
   article,
   commentList,
   user,
+  likedArticle,
+  collectArticle,
   totalComment,
   changeComment,
   emoji,
   pageparams,
   changePage
 } = useArticle();
+// banner消失 导航栏出现
+const banner = ref();
+const comment = ref<HTMLElement>();
+const articleContainer = ref<HTMLElement>();
+const isToolsShow = ref(false);
+const toComment = () => {
+  let height = comment.value.offsetTop;
+  document.documentElement.scrollTo({ top: height, behavior: "smooth" });
+}
+
+// 刷新的时候工具栏出现的bug
+onMounted(() => {
+  document.addEventListener('scroll', () => {
+    if (articleContainer.value) {
+      if (window.scrollY > articleContainer.value.offsetTop) {
+        isToolsShow.value = true;
+      } else {
+        isToolsShow.value = false;
+      }
+    }
+
+  })
+})
 </script>
 
 <style scoped lang="less" >
-@import url(./styles/article-pc.less);
+@import url(./styles/Article.less);
 @import url("@/assets/styles/MyAnimate.less");
 
 .active {
