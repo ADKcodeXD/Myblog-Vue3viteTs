@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import { useEmoji } from "@/hooks/Article";
 import EmojiPicker from "vue3-emoji-picker";
-
+import "../../../node_modules/vue3-emoji-picker/dist/style.css";
 const props = defineProps({
   placeholder:{
     type: String,
