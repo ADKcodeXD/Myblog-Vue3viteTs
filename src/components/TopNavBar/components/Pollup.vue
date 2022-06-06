@@ -110,11 +110,11 @@ onMounted(() => {
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 99999;
+        z-index: 9999;
         transition: all 0.3s ease;
         width: 60%;
         height: 100%;
-        color: rgb(@primaryTextColor);
+        color: rgb(0, 0, 0);
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         background-color: rgb(@primaryBackGroundColor);
         // 右上角的关闭键

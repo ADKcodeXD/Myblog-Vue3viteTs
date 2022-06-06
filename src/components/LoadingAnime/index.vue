@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-w-full tw-h-full tw-items-center tw-justify-center">
+    <div class="loading">
         <div class="loading-box" style="--i:1;"></div>
         <div class="loading-box" style="--i:2;"></div>
         <div class="loading-box" style="--i:3;"></div>
@@ -23,7 +23,10 @@
         transform: translateY(15px);
     }
 }
-
+.loading{
+    .flexbox(row);
+    height: 100%
+}
 .loading-box{
     .ball(1rem, #fc566c);
     margin: 1rem;
