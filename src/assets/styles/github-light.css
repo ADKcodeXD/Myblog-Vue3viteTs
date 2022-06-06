@@ -107,10 +107,10 @@
   .markdown-body img {
     border-style: none;
     max-width: 100%;
+    max-height: 800px;
     box-sizing: content-box;
     background-color: #ffffff;
   }
-  
   .markdown-body code,
   .markdown-body kbd,
   .markdown-body pre,
@@ -120,9 +120,14 @@
   }
   
   .markdown-body figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 1em 40px;
   }
-  
+  .markdown-body iframe{
+    max-width: 100%;
+  }
   .markdown-body hr {
     box-sizing: content-box;
     overflow: hidden;
