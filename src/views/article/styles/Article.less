@@ -53,44 +53,7 @@
             font-size: 20px;
             color: rgb(@primaryTextColor);
           }
-          .detail {
-            display: flex;
-            flex-direction: column;
-            .good{
-              display: flex;
-              align-self: center;
-              justify-content: space-between;
-              width: 30rem;
-              padding: 20px;
-              i{
-                cursor: pointer;
-                display: flex;
-                flex-direction: column;
-                text-align: center;
-                justify-content: center;
-                width: 8rem;
-                height: 8rem;
-                transition: 0.4s all ease;
-                border-radius: 50%;
-                box-shadow: 1px 1px 5px rgb(@primaryTextColor,0.6);
-                color: rgb(@primaryHightlightColor);
-                background-color: rgb(@primaryBackGroundColor) ;
-                &:active{
-                  background-color: rgb(@primaryActiveColor) ;
-                  color: white;
-                }
-                
-              }
-            }
-            .bottom-text {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-            }
-            .tags {
-              margin: 20px 0;
-            }
-          }
+          
           .comments {
             margin-top: 20px;
             color: rgb(@primaryTextColor);
@@ -143,18 +106,7 @@
               min-height: 393px;
             }
           }
-          .detail {
-            .good{
-              i{
-                width: 5rem;
-                height: 5rem;
-                &:hover{
-                  background-color: rgb(@primaryActiveColor) ;
-                  color: white;
-                }
-              }
-            }
-          }
+
         }
     }
 }
