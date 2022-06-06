@@ -1,10 +1,11 @@
 <template>
   <div class="upload">
-    <el-upload class="avatar-uploader" action="noaction" :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg"
-      :on-exceed="handleExceed" :before-upload="beforeAvatarUpload">
-      <div class="avatar">
-        <img :src="avatar ? avatar : 'src/assets/img/logo.png'"
-          onerror="javascript:this.src='src/assets/img/logo.png';" />
+    <el-upload action="noaction" :show-file-list="false" 
+    :limit="1" accept=".png, .jpg, .jpeg" 
+    :on-exceed="handleExceed"
+    :before-upload="beforeAvatarUpload">
+      <div class="avatar" >
+        <MyElimage :img="avatar ? avatar : logo" />
       </div>
       <p style="font-size: 12px" v-if="isShow">点此上传头像</p>
     </el-upload>
@@ -13,13 +14,10 @@
 
 <script lang="ts" setup>
 import img from "@/assets/logo.png";
-import { ElMessage } from "element-plus";
-import {
-  ElFile,
-  UploadFile,
-} from "element-plus/es/components/upload/src/upload.type";
+import { ElMessage, UploadProps } from "element-plus";
 import { useUpload } from "@/hooks/upload";
-const emit=defineEmits(['changeAvatar'])
+import logo from '@/assets/img/logo.png';
+const emit = defineEmits(['changeAvatar'])
 const props = defineProps({
   size: {
     type: Number,
@@ -37,11 +35,11 @@ const props = defineProps({
 
 let avatarLink = ref<string | undefined>("");
 avatarLink.value = props.avatar;
-const handleExceed = (files: FileList, fileList: UploadFile[]) => {
+const handleExceed: UploadProps['onExceed'] = (files, fileList) => {
   ElMessage.warning("只能上传一张头图");
 };
-const beforeAvatarUpload = async (file: UploadFile) => {
-  const url = await useUpload(file as unknown as ElFile);
+const beforeAvatarUpload: UploadProps['beforeUpload'] = async (file) => {
+  const url = await useUpload(file);
   if (url == "") return false;
   emit("changeAvatar", url);
 };
@@ -52,24 +50,28 @@ const beforeAvatarUpload = async (file: UploadFile) => {
   display: flex;
   width: 100%;
   height: 100%;
-
-  .avatar-uploader {
-    display: flex;
+  flex-direction: column;
+  &>div{
     width: 100%;
     height: 100%;
+  }
+  :deep(.el-upload) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%
+  }
 
-    .avatar {
-      background-color: rgb(@primaryTextColor);
-      overflow: hidden;
-      border-radius: 50%;
-      margin: 0 auto;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
+  .avatar {
+    .flexbox(row);
+    background-color: rgb(0, 0, 0);
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
   }
 }
 </style>
