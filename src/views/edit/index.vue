@@ -121,12 +121,14 @@
 
 <script setup lang="ts">
 import { addTag, getTagList, publishArticle } from "@/api/article";
-import type { ElFile, UploadFile } from "element-plus/es/components/upload/src/upload.type";
 import { useStore } from "@/store/main";
 import { useUpload } from "@/hooks/upload";
 import MyEditor from "./components/MyEditor.vue";
 import { getItem, removeItem, setItem } from "@/utils/storage";
 import { ElInput, ElMessage, ElNotification } from "element-plus";
+import type { UploadProps, UploadUserFile } from 'element-plus'
+// 上传组件待重构
+// import { UploadFile,ElFile } from "element-plus/lib/components";
 // 定义组件名
 const store = useStore();
 const router = useRouter();
@@ -209,17 +211,17 @@ interface RawFile {
   url: string;
 }
 const fileList = ref<RawFile[]>([]);
-const handleRemove = (file: UploadFile) => {
-  console.log(file);
-};
-const beforeRemove = (file: UploadFile, fileList: UploadFile[]) => {
+const handleRemove: UploadProps['onRemove'] = (file, uploadFiles) => {
+  console.log(file, uploadFiles)
+}
+const beforeRemove: UploadProps['beforeRemove'] = (file,fileList) => {
   return true;
 };
-const handleExceed = (files: FileList, fileList: UploadFile[]) => {
+const handleExceed: UploadProps['onExceed'] = (files, fileList) => {
   ElMessage.warning("只能上传一张头图");
 };
-const beforeBannerUpload = async (file: UploadFile) => {
-  const link = await useUpload(file as unknown as ElFile);
+const beforeBannerUpload: UploadProps['beforeUpload'] = async (file) => {
+  const link = await useUpload(file);
   if (link !== "") {
     imglink.value = link;
   }
