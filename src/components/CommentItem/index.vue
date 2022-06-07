@@ -5,7 +5,8 @@
         <div class="tw-flex">
           <!-- 头像 -->
           <div class="user-avatar">
-            <MyElimage :img="(commentInfo.user&&commentInfo.user.avatar)?commentInfo.user.avatar:commentInfo.avatar" />
+            <MyElimage :img="commentInfo.user?
+            commentInfo.user.avatar:commentInfo.avatar" />
           </div>
           <!-- 名字以及等级和简介等 -->
           <div class="username-time">
