@@ -92,7 +92,10 @@ export default ({ mode }) => {
           rewrite: path => path.replace(/^\/yhdm/, '')
         }
       }
-    }
+    },
+    build: {
+      sourcemap: true,
+    },
   })
 }
 
