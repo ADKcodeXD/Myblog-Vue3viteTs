@@ -1,8 +1,7 @@
 <template>
   <div class="anime-card" v-if="animeInfo" @mouseenter="requestInfo" @mouseleave="detailInfoShow = false">
     <div class="card">
-      <el-image :src="animeInfo.images && animeInfo.images.large" fit="cover" class="elimg"
-        @click="$router.push(`/index/animedetail/${animeInfo.id}`)">
+      <el-image :src="animeInfo.images && animeInfo.images.large" fit="cover" class="elimg">
         <template #placeholder>
           <div class="tw-w-full tw-h-full tw-bg-white">
             <LoadingAnime />
@@ -163,11 +162,9 @@ const tagsInfoThree = computed(() => {
       flex-shrink: 0;
       transition: all 0.5s ease;
     }
-
     .title {
       font-size: 1.4rem;
     }
-
     .info {
       padding: 10px;
       flex: 1;
@@ -177,7 +174,6 @@ const tagsInfoThree = computed(() => {
       flex-direction: column;
       justify-content: space-between;
       transition: all 1s ease;
-
       .rating {
         display: flex;
         justify-content: space-between;
