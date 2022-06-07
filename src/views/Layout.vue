@@ -8,11 +8,11 @@
       <!-- routerview -->
       <Skin />
       <!-- vue3.0配置 -->
-      <router-view v-slot="{ Component }">
+      <RouterView v-slot="{ Component }">
         <keep-alive :include="pages">
           <component :is="Component"></component>
         </keep-alive>
-      </router-view>
+      </RouterView>
     </div>
     <Footer />
   </div>

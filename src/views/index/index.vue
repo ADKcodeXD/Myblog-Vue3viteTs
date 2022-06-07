@@ -54,7 +54,6 @@ export default { name: 'Index' }
 
 <script setup lang="ts">
 import { getIndexArticleApi, getIndexBanner } from "@/api/article";
-import { PageParams } from "@/interface/params";
 import MyInfo from "./components/MyInfo.vue";
 import TimeLine from "./components/TimeLine.vue";
 import TagsAll from './components/TagsAll.vue';
@@ -63,6 +62,9 @@ import Jinqi from '@/assets/img/近期更新.png';
 // Default SortableJS
 import Sortable from 'sortablejs';
 import SubTitle from "./components/SubTitle.vue";
+import Mix from '@/assets/styles/mixins.less';
+console.log(Mix);
+
 // 获取首页文章 按照时间顺序 5篇
 let articles = ref<ArticleItemInfo[]>([]);
 let bannerList = ref<Banner[]>([]);

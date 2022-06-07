@@ -158,6 +158,6 @@ onMounted(() => {
 
 
 <style lang="less" scoped>
-@import url(./styles/messageboard-pc.less);
+@import url(./styles/MessageBoard.less);
 @import url(@/assets/styles/MyAnimate.less);
 </style>

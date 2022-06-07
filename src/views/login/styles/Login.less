@@ -1,0 +1,189 @@
+@media screen and (min-width:320px){
+    ul{
+      li{
+        margin: 1rem;
+      }
+      .iconfont{
+        color: #000;
+        font-size: 24px;
+        font-weight: 600;
+      }
+    }
+    .login {
+        .flexbox();
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        perspective: 1000px;
+        .temp{
+          position: absolute;
+          left: 15vw;
+          top: 20%;
+        }
+        .imgbox {
+          position: absolute;
+          width: 80%;
+          height: 80%;
+          display: none;
+          background-image: linear-gradient(120deg, #a6c0fe 0%, #f68084 100%);
+          background-size: cover;
+          .jieshao{
+            position: absolute;
+            width: 20rem;
+            bottom: -5rem;
+            left: 1rem;
+          }
+        }
+        .login-box {
+          position: absolute;
+          display: block;
+          width: 70vw;
+          height: 70vh;
+          border: 4px solid black;
+          box-shadow: 5px 5px 0px rgb(255, 15, 15);
+          border-radius: 30px;
+          .loginform {
+            position: absolute;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            :deep(.el-form-item__content){
+              position: relative;
+              flex-wrap: nowrap;
+              font-family: 'Thinfont','幼圆';
+              font-weight: 600;
+              margin: 10px 0;
+            }
+            :deep(.el-form-item__error){
+              font-family: 'Thinfont','幼圆';
+              font-weight: 600;
+              top: 110%;
+            }
+            .btn {
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              .login-btn{
+                width: 10rem;
+                height: 4rem;
+                background: url('../imgs/login-btn.png') no-repeat;
+                background-size: cover;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                &:hover{
+                  background: url('../imgs/login-btn-hover.png') no-repeat;
+                  background-size: cover;
+                  animation: jump 0.8s both;;
+                }
+              }
+              .register-btn{
+                width: 10rem;
+                height: 4rem;
+                background: url('../imgs/register-btn.png') no-repeat;
+                background-size: cover;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                &:hover{
+                  background: url('../imgs/register-btn-hover.png') no-repeat;
+                  background-size: cover;
+                  animation: jump 0.8s both;;
+                }
+              }
+            }
+          }
+          .goin{
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            width: 10rem;
+            height: 3.8rem;
+            background: url('../imgs/直接看看.png') no-repeat;
+            background-size: cover;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            &:hover{
+              background: url('../imgs/直接看看-hover.png') no-repeat;
+              background-size: cover;
+              animation: jump 0.8s both;;
+            }
+          }
+        }
+    }
+    .rightout{
+      &-enter-from{
+        transform: rotateY(90deg);
+      }
+      &-enter-active{
+        transition: transform 1s cubic-bezier(.03,1.06,.46,1.11);
+      }
+      &-leave-active{
+        transition: transform 1s cubic-bezier(0,-0.23,.92,.12);
+      }
+      &-enter-to{
+        transform: rotateY(0);
+      }
+      &-leave-from{
+        transform: rotateY(0deg);
+      }
+      &-leave-to{
+        transform: rotateY(-90deg);
+      }
+    }
+}
+@media screen and (min-width:992px){
+    .login {
+        .temp{
+          width: 40rem;
+          height: 52rem;
+          left: 60%;
+          top: 50%;
+          transform-origin: 50%,0;
+        }
+        .imgbox {
+          width:83rem;
+          height:45rem;
+          display: block;
+          background: url(../imgs/login-bg.png) no-repeat ;
+          background-size: cover;
+          transition: width height 0.3s ease;
+        }
+        .login-box {
+          display: block;
+          width: 40rem;
+          height: 52rem;
+          transform:translateY(-50%);
+          background-color: white;
+          .btn{
+            margin-top: 20px;
+          }
+        }
+    }
+}
+
+@keyframes jump {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+  15% {
+    transform: translateX(-30px) rotate(-6deg);
+  }
+  30% {
+    transform: translateX(15px) rotate(6deg);
+  }
+  45% {
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+  60% {
+    transform: translateX(9px) rotate(2.4deg);
+  }
+  75% {
+    transform: translateX(-6px) rotate(-1.2deg);
+  }
+}
+

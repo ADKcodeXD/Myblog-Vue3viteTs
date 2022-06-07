@@ -12,15 +12,13 @@
         <a href="https://twitter.com/ADKinsoMaD" target="_blank"><i class="iconfont icon-tuite"></i></a>
       </li>
     </ul>
-
     <!-- 背景放的那张图 -->
-    <div class="imgbox" ref="target" :style="{ transform: `rotateX(${-xrotate}deg) rotateY(${yrotate}deg)` }">
+    <div class="imgbox" ref="target" :style="{ transform: `rotateX(${-yPos}deg) rotateY(${xPos}deg)` }">
       <!-- 介绍 -->
       <div class="jieshao">
         <MyElimage :img="Jieshao" />
       </div>
     </div>
-
     <!-- 登录盒子 -->
     <transition name="rightout" mode="out-in" @before-enter="beforeEnter" @enter="rotateYenter" @leave="rotateYleave" :css="false">
       <div v-if="isLogin" :key="1" class="temp">
@@ -128,6 +126,7 @@ import Jieshao from './imgs/介绍.png';
 import gsap from 'gsap';
 import { CustomEase } from "gsap/CustomEase";
 import { useAnime } from "@/hooks/Anime";
+import { useMousePointer } from "@/hooks/useMouseAdk";
 gsap.registerPlugin(CustomEase);
 const {
   registerFormRef,
@@ -141,31 +140,21 @@ const {
   router,
   userStore,
 } = useLoginprop();
-
 const { submitForm } = useLoginMethod(userStore, router, form);
 const { rules, registerRules } = useRoles(registerForm);
 const { submitRegister } = useRegisterMethod(userStore, router, registerForm);
+const {rotateYenter,
+        rotateYleave}=useAnime();
+const {xPos,yPos}=useMousePointer(x,y,50);
+
 const beforeEnter = (el) => {
     gsap.set(el, {
       rotationY: 90,
     })
 }
-const {rotateYenter,
-        rotateYleave}=useAnime();
-const yrotate = computed(() => {
-  let res = 0;
-  let halfVal = window.innerWidth / 2;
-  res = x.value - halfVal;
-  return res / 50;
-})
-const xrotate = computed(() => {
-  let res = 0;
-  let halfVal = window.innerHeight / 2;
-  res = y.value - halfVal;
-  return res / 50;
-})
+
 </script>
 
 <style scoped lang="less">
-@import url(./styles/login-pc.less);
+@import url(./styles/Login.less);
 </style>
