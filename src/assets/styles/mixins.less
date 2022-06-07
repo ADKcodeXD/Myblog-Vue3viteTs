@@ -292,16 +292,16 @@ img {
   border-radius: 50%;
   background-color: @color;
 }
-/**
-*flexbox居中
-*/
-.flexbox(@dir){
+//flexbox居中
+.flexbox(@dir:row){
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: @dir;
 }
-
+.shadow(@big:5px,@drop:3px,@color:rgba(0,0,0,0.3)){
+  box-shadow: @drop @drop @big @color;
+}
 // 定义所有变量 
 @primaryBackGroundColor: var(--primaryBackGroundColor, rgb(255, 253, 253));
 @primaryTextColor: var(--primaryTextColor, rgb(8, 8, 8));
