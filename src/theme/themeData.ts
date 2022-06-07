@@ -1,6 +1,5 @@
 // 一套默认主题以及一套暗黑主题
 // 一套默认主题以及一套暗黑主题
-
 export const themes = {
   default: {
     primaryBackGroundColor: `${255},${255},${255}`,

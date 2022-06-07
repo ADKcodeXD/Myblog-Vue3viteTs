@@ -26,7 +26,6 @@ export const setTheme = (themeName: string | void) => {
         changeStyle(themes["default"]);
         setItem("theme", themes["default"]);
         setItem("themeName", "default");
-
       }
     }
   } else {
