@@ -12,17 +12,12 @@
 </template>
 <script setup lang="ts">
 import { isMobile } from '@/utils/mobile';
-
 const prop = defineProps({
     html: {
         type: String,
         default: ""
     }
 })
-const htmlFilter = (val: string) => {
-    let reg = new RegExp(/\<img/g);
-    
-}
 const ImagePreview = (e) => {
     if (e.target.nodeName === 'IMG') {
         urlList.value[0]=e.target.currentSrc;
@@ -35,7 +30,7 @@ const close=()=>{
     isMobile()?document.documentElement.style.overflow='':document.body.style.overflow='';
 }
 let urlList=ref([]);
-let showPreview=ref(false)
+let showPreview=ref(false);
 </script>
 <style lang="less" scoped>
 .markdown-body {
