@@ -10,6 +10,7 @@ import hljsVuePlugin from '@highlightjs/vue-plugin'
 import '@/assets/styles/index.css'
 import '@/assets/styles/preflight.css';
 import 'virtual:svg-icons-register';
+
 const app=createApp(App).use(createPinia()).use(router).use(hljsVuePlugin)
 // app.config.globalProperties.$echarts = echarts;
 app.mount('#app')
