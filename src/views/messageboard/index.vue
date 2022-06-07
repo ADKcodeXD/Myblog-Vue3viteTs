@@ -1,19 +1,25 @@
 <template>
   <ElScrollbar max-height="80vh" class="message" ref="body">
     <div class="up-info">
-      <p class="title">留言板</p>
+      <div class="logo">
+        <div style="width:60px">
+          <MyElimage :img="MessageLogo" />
+        </div>
+        <p class="title">留言板</p>
+      </div>
       <p class="desc">输入你的昵称 联系方式 可以给我的网站留言哦~</p>
     </div>
     <div class="edit-part">
       <div class="liuyan-info">
         <div class="name">
           <span>您的昵称：</span>
-          <ElInput size="large" v-model="messageParams.authorName"  show-word-limit maxlength="16">
+          <ElInput size="large" v-model="messageParams.authorName" show-word-limit maxlength="16">
           </ElInput>
         </div>
         <div class="name">
           <span>您的联系方式：</span>
-          <ElInput class="contact" size="large" v-model="messageParams.contact"  maxlength="64">
+          <ElInput class="contact" size="large" v-model="messageParams.contact" show-word-limit maxlength="64"
+          placeholder="example@adkdream.top">
           </ElInput>
         </div>
       </div>
@@ -23,7 +29,7 @@
           <UploadAvatar :avatar="messageParams.avatar" @changeAvatar="changeAvatarParams" />
         </div>
         <div class="edit-area">
-          <MyEmoji @changeText="changeMsg" ref="emoji" placeholder="在这里输入留言哦~~~"/>
+          <MyEmoji @changeText="changeMsg" ref="emoji" placeholder="在这里输入留言哦~~~" />
         </div>
       </div>
       <div class="button">
@@ -39,7 +45,7 @@
     </div>
 
     <div class="message-part" v-if="messageList">
-      <CommentItem v-for="item in toCommentItem" :commentInfo="item" :key="item.id" :reply="false" :level="false"/>
+      <CommentItem v-for="item in toCommentItem" :commentInfo="item" :key="item.id" :reply="false" :level="false" />
     </div>
     <AdkEmpty v-else desc="暂时没有留言哦~"></AdkEmpty>
 
@@ -58,7 +64,7 @@ import avatar from "@/assets/img/logo.png";
 import { addMessageApi, getMessageApi } from "@/api/message";
 import { ElMessage, ElScrollbar } from "element-plus";
 import { decodeEmoji } from "@/utils/emoji";
-
+import MessageLogo from '@/assets/img/liuyan-logo.png'
 const comment = ref("");
 const messageParams: MessageParamsForADK = reactive({
   authorName: "",
@@ -75,7 +81,7 @@ const total = ref(0);
 const body = ref<InstanceType<typeof ElScrollbar>>();
 // 排序规则
 const orderRole = ref(0);
-const emoji=ref();
+const emoji = ref();
 // 方法和逻辑区
 const getMessage = async (pageparams: PageParams) => {
   const { data } = await getMessageApi(pageparams);
@@ -126,19 +132,19 @@ const changePage = () => {
 const changeAvatarParams = (val: string) => {
   messageParams.avatar = val;
 };
-const changeMsg=(val:string)=>{
-  messageParams.content=val;
+const changeMsg = (val: string) => {
+  messageParams.content = val;
 }
-const toCommentItem=computed(()=>{
-  let newCommentList=ref<CommentItemInfo[]>();
-  newCommentList.value=messageList.value.map(item=>{
-    let obj={
-      content:decodeEmoji(item.content),
-      contact:item.contact,
-      nickname:item.authorName,
-      createDate:item.createDate,
-      id:item.id,
-      avatar:item.avatar
+const toCommentItem = computed(() => {
+  let newCommentList = ref<CommentItemInfo[]>();
+  newCommentList.value = messageList.value.map(item => {
+    let obj = {
+      content: decodeEmoji(item.content),
+      contact: item.contact,
+      nickname: item.authorName,
+      createDate: item.createDate,
+      id: item.id,
+      avatar: item.avatar
     }
     return obj;
   })

@@ -11,6 +11,10 @@
         border: 3px black solid;
         background-color: rgb(@primaryBackGroundColor);
         .up-info {
+          .logo{
+            display: flex;
+            align-items: center;
+          }
           .title {
             .font-ura();
             font-size: 2.5rem;
@@ -21,7 +25,7 @@
           }
         }
         .edit-part {
-          margin-top: 1.4286rem;
+          margin-top: 1.5rem;
           width: 100%;
           .font-normal();
           .liuyan-info {
@@ -29,14 +33,15 @@
             flex-direction: column;
             .name {
               .flexbox(row);
+              padding: 5px;
               margin-right: 0;
-              margin-bottom: 1.4286rem;
+              margin-bottom: 1.5rem;
               span {
                 display: flex;
                 flex-shrink: 0;
                 font-size: 16px;
+                width: 120px;
               }
-              
             }
           }
           .main-content {
@@ -90,10 +95,10 @@
           .liuyan-info {
             flex-direction: row;
             .name {
-              margin-right: 1.4286rem;
+              margin-right: 1rem;
               margin-bottom: 0;
               .contact {
-                min-width: 21.4286rem;
+                min-width: 25rem;
               }
             }
           }
