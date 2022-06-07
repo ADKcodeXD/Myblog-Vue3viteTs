@@ -1,18 +1,17 @@
 <template>
-  <ElTabs v-model="editorName" class="tabs" type="card">
-    <ElTabPane label="富文本编辑器" name="tinymce">
-      <Editor api-key="h8f98pdypo6nw0cszfeo8vk97gkvk92wxtwxmiz3e2e05gje" :init="editorInit" 
-      v-model="contentRich.html"
-      tinymce-script-src="/tinymce/tinymce.min.js" />
-    </ElTabPane>
-    <ElTabPane label="markdown编辑器" name="markdown">
-      <!-- markdown 编辑器 -->
-      <div id="markdown">
-        <MdEditor v-model="content.text" ref="mdeditor" :theme="theme.theme === 'dark' ? 'dark' : 'light'"
-          @onHtmlChanged="saveHtml" @onUploadImg="onUploadImg" />
-      </div>
-    </ElTabPane>
-  </ElTabs>
+  <div class="container">
+    <div class="switch-btn" >
+      <p class="text" @click="changeEditorName(editorName)">切换{{ editorName === 'tinymce' ? 'markdown' : '富文本' }}编辑器</p>
+    </div>
+    <div v-if="editorName == 'tinymce'">
+      <Editor api-key="h8f98pdypo6nw0cszfeo8vk97gkvk92wxtwxmiz3e2e05gje" :init="editorInit" v-model="contentRich.html"
+        tinymce-script-src="/tinymce/tinymce.min.js" />
+    </div>
+    <div v-else id="markdown">
+      <MdEditor v-model="content.text" ref="mdeditor" :theme="theme.theme === 'dark' ? 'dark' : 'light'"
+        @onHtmlChanged="saveHtml" @onUploadImg="onUploadImg" />
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -22,7 +21,6 @@ import { uploadBanner } from "@/api/article";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { useThemeStore } from "@/store/theme";
-
 const props = defineProps({
   html: {
     type: String,
@@ -70,8 +68,8 @@ let editorInit = {
   height: 500,
   plugins: [
     'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-    'anchor', 'searchreplace','code','fullscreen','visualblocks','insertdatetime',
-    'media','table','help','wordcount'
+    'anchor', 'searchreplace', 'code', 'fullscreen', 'visualblocks', 'insertdatetime',
+    'media', 'table', 'help', 'wordcount'
   ],
   toolbar:
     "undo redo | formatselect | bold italic backcolor | \
@@ -95,7 +93,6 @@ let editorInit = {
 const saveHtml = (val: string) => {
   content.html = val;
 };
-
 // markdown图片上传逻辑
 const onUploadImg = async (files: FileList, callback: (urls: string[]) => void) => {
   const res = await Promise.all(
@@ -113,6 +110,9 @@ const onUploadImg = async (files: FileList, callback: (urls: string[]) => void) 
   );
   callback(res.map((item: any) => item.data.data));
 }
+const changeEditorName=(val:string)=>{
+  val==='tinymce'?editorName.value='markdown':editorName.value='tinymce'
+}
 // 区分开两个编辑器分别传不同的值..... 这里需要
 watch(content, (newValue) => {
   emit("changeContent", newValue);
@@ -125,8 +125,35 @@ watch(contentRich, (newValue) => {
 watch(editorName, (newValue) => {
   emit("changeEditor", newValue);
 });
-    // tinyMce编辑器
+// tinyMce编辑器
 </script>
 
-<style lang="less" scoped>
+<style scoped lang="less">
+.container {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.switch-btn {
+  display: flex;
+  margin-left: 5px;
+  
+  .font-normal();
+  .text{
+    display: flexbox;
+    padding: 10px 15px 5px 15px;
+    color: #fff;
+    cursor: pointer;
+    .flexbox();
+    background-color: rgb(248, 248, 248);
+    color: black;
+    border-radius:20px 20px 0 0;
+    transition: all 0.3s ease;
+    &:hover{
+      background-color: orangered;
+      color: #fff;
+    }
+  }
+}
 </style>
