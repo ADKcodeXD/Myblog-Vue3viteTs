@@ -1,38 +1,47 @@
 <template>
-    <div class="tw-my-2">
+    <div class="tw-my-3">
         <!-- 选择的菜单 可以删除 -->
-
         <div class="tw-flex ">
             <p class="label-width tw-flex-shrink-0">已选标签</p>
-            <div class="tw-border-2  tw-w-3/5  tw-flex-1 tw-flex tw-items-center  tw-p-1 tw-justify-between">
+            <div class="tw-border-2 tw-rounded-lg tw-flex-1 tw-flex tw-items-center  tw-p-2 tw-justify-between ">
                 <div class="tw-flex tw-flex-wrap">
                     <ElTag closable v-for="tag in choosedTag" :key="tag" @close="removeTag(tag)" class="tw-m-1">{{
-                        tag
+                            typeof tag === 'object' ? tag.tagName : tag
                     }}</ElTag>
                 </div>
-                <p class="tw-flex-shrink-0">{{ choosedTag.length }}/{{ limit }}</p>
+                <p class="tw-flex-shrink-0 limit">{{ choosedTag.length }}/{{ limit }}</p>
             </div>
         </div>
         <!-- 待选 -->
         <div class="tw-flex tw-my-4">
             <p class="label-width tw-flex-shrink-0">可选标签</p>
             <div class="tw-flex tw-flex-wrap" :key="'div'">
-                <transition-group mode="in-out" name="anime-class" tag="ul" @before-enter="beforeEnter" @enter="enter"
+                <transition-group mode="out-in" name="anime-class" tag="ul" @before-enter="beforeEnter" @enter="enter"
                     @leave="leave">
                     <ElTag effect="dark" class="tw-cursor-pointer tw-m-1 tag-item-class"
-                        v-for="tag, index in chooseOptionsFilter" :data-index="index" :key="tag.name"
-                        @click="setTag(tag.name)">
-                        {{ tag.name }}({{ tag.count }})
+                        v-for="tag, index in chooseOptionsFilter" :data-index="index" :key="tag.name || tag.tagName"
+                        @click="setTag(tag)">
+                        {{ tag.name || tag.tagName }}<span v-if="tag.count">({{ tag.count }})</span>
                     </ElTag>
+                    <div v-if="canAdd" class="tw-my-3">
+                        <el-input v-if="inputVisible" v-model="inputValue" ref="inputref" style="width:5em"
+                            size="small" placeholder="标签名" @keyup.enter="handleInputConfirm" @blur="handleInputConfirm">
+                        </el-input>
+                        <el-button v-else class="button-new-tag ml-1" size="small" @click="showInput">
+                            + 新增标签
+                        </el-button>
+                    </div>
                 </transition-group>
             </div>
-        </div>  </div>
+        </div>
+    </div>
 </template>
 
 <script setup lang="ts">
 import { PropType } from 'vue';
 import { gsap } from "gsap";
-import { ElMessage } from 'element-plus';
+import { ElInput, ElMessage } from 'element-plus';
+import { useAddtag } from '@/hooks/useEdit';
 const props = defineProps({
     /**
      * 接受一个数组 待选择标签的数组
@@ -63,29 +72,37 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
+    /**
+     * 如果可以新增标签 则传入true 发送一个事件 @newTag
+     */
+    canAdd: {
+        type: Boolean,
+        default: false
+    },
 })
-const emit=defineEmits(['changeTag'])
+const emit = defineEmits(['changeTag', 'addTag'])
 let chooseOptionsFilter = computed(() => {
     return props.chooseOptions.filter(item => {
         return props.choosedTag.indexOf(typeof item === 'object' ? item.name : item) === -1
     })
 })
-
-const setTag = (name: string) => {
+const { inputVisible,
+    inputValue,
+    inputref,
+    showInput,
+    handleInputConfirm } = useAddtag(emit);
+const setTag = (tag: any) => {
     if (props.choosedTag.length >= props.limit) {
         ElMessage.error('选择标签达到上限')
         return;
     }
-    props.choosedTag.push(name)
-    emit('changeTag',props.choosedTag)
+    props.choosedTag.push(tag.name ? tag.name : tag)
 }
-
-const removeTag = (name: string) => {
-    let index=props.choosedTag.indexOf(name)
-    if(index!==-1){
-        props.choosedTag.splice(index,1);
+const removeTag = (tag: any) => {
+    let index = props.choosedTag.indexOf(tag)
+    if (index !== -1) {
+        props.choosedTag.splice(index, 1);
     }
-    emit('changeTag',props.choosedTag)
 }
 // 延迟动画 TODO:封装起来 统一调用
 const beforeEnter = (el) => {
@@ -95,16 +112,17 @@ const beforeEnter = (el) => {
 const enter = (el, done) => {
     gsap.to(el, {
         opacity: 1,
-        translateY: '0',
-        delay: el.dataset.index * 0.05,
+        y: '0',
+        // delay: el.dataset.index * 0.05,
         onComplete: done
     })
 }
 const leave = (el, done) => {
     gsap.to(el, {
         opacity: 0,
-        translateY: '-10px',
-        delay: el.dataset.index * 0.05,
+        y: '-20px',
+        ease: "power4.out",
+        // delay: el.dataset.index * 0.05,
         onComplete: done
     })
 }
@@ -116,10 +134,13 @@ const leave = (el, done) => {
 }
 
 .tag-item-class {
-    transition: all 0.8s ease;
+    transition: all 0.6s ease;
 }
-
+.limit{
+    .font-normal();
+}
 .label-width {
     width: 100px;
+    font-weight: 600;
 }
 </style>
