@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 import { useCacheStore } from "@/store/cache";
-import { setTheme } from "@/theme/theme";
+import { setConfig } from "@/theme/theme";
 const cachePages = useCacheStore();
 const pages = cachePages.cachePages;
 const route = useRoute();
@@ -35,7 +35,7 @@ watch(route, (to) => {
 });
 
 onMounted(() => {
-  setTheme();
+  setConfig();
 });
 </script>
 

@@ -78,6 +78,12 @@ const routes:RouteRecordRaw[] = [
                 meta: { requireAuth: false, keepAlive: false },
                 component: () => import('@/views/animebgminfo/index.vue')
             },
+            {
+                path: 'options',
+                name: 'Options',
+                meta: { requireAuth: false, keepAlive: false },
+                component: () => import('@/views/options/index.vue')
+            },
         ]
     },
     {
