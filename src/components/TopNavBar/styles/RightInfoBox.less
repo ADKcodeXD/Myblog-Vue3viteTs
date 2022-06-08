@@ -13,6 +13,7 @@
             margin-right: @margin-general;
             justify-content: space-around;
             li {
+                color: @textColor;
                 cursor: pointer;
                 transition: transform 0.8s cubic-bezier(0, .79, .16, .99);
                 i {
@@ -44,7 +45,7 @@
                 border-radius: 40px;
                 overflow: hidden;
                 background-size: 100% auto;
-                border: @bgColor 5px solid;
+                border: @bgColor @border-line solid;
                 .imgcontainer {
                     position: absolute;
                     width: 100%;
@@ -101,7 +102,7 @@
                             &:hover {
                                 text-shadow: 3px 3px 10px rgba(255, 80, 80, 0.3);
                             }
-                            border-bottom: black 2px dashed;
+                            border-bottom: @textColor 2px dashed;
                         }
                     }
                 }

@@ -4,7 +4,7 @@
             <li>
                 <i class="iconfont icon-mail"></i>
             </li>
-            <li>
+            <li @click="$router.push('/index/options')">
                 <i class="iconfont icon-shezhi "></i>
             </li>
             <li>
