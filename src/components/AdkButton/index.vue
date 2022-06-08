@@ -85,6 +85,7 @@ let dom = ref<HTMLElement>();
     padding-top: 2px;
     font-weight: 600;
     overflow: hidden;
+    color: black;
     transition: all 0.2s ease;
     cursor: pointer;
     font-family: 'urafont', '幼圆', 'Cartoonfont';

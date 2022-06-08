@@ -64,7 +64,7 @@
 <script lang="ts">
 // 定义组件名字 不然include 和keepalive 无法生效
 import { useArticle } from "@/hooks/Article";
-import '@/assets/styles/github-light.css';
+import '@/assets/styles/markdown/github-light.css';
 import 'highlight.js/styles/github.css';
 
 // import css
@@ -122,13 +122,4 @@ onMounted(() => {
 <style scoped lang="less" >
 @import url(./styles/Article.less);
 @import url("@/assets/styles/MyAnimate.less");
-
-.active {
-  background-color: rgb(@primaryActiveColor) !important;
-  color: white !important;
-}
-
-.page {
-  margin: 30px 0;
-}
 </style>

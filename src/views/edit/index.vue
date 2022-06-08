@@ -60,10 +60,6 @@ const {canChooseTags,
 </script>
 
 <style lang="less" scoped>
-@import url(./styles/edit-pc.less);
+@import url(./styles/Edit.less);
 
-.boxshadow {
-  background-color: rgb(255, 255, 254) !important;
-  box-shadow: 1px 1px 10px rgba(10, 145, 255, 0.521);
-}
 </style>

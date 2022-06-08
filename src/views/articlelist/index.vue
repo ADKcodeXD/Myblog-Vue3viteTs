@@ -118,5 +118,5 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-@import url(./styles/articlelist-pc.less);
+@import url(./styles/ArticleList.less);
 </style>

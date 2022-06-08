@@ -80,7 +80,7 @@ onMounted(()=>{
 .relpy-container{
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: @padding-general;
     align-items: flex-end;
 }
 .relpy {

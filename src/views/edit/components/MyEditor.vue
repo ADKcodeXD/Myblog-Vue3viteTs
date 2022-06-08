@@ -129,31 +129,5 @@ watch(editorName, (newValue) => {
 </script>
 
 <style scoped lang="less">
-.container {
-  display: flex;
-  flex-direction: column;
-  
-}
-
-.switch-btn {
-  display: flex;
-  margin-left: 5px;
-  
-  .font-normal();
-  .text{
-    display: flexbox;
-    padding: 10px 15px 5px 15px;
-    color: #fff;
-    cursor: pointer;
-    .flexbox();
-    background-color: rgb(248, 248, 248);
-    color: black;
-    border-radius:20px 20px 0 0;
-    transition: all 0.3s ease;
-    &:hover{
-      background-color: orangered;
-      color: #fff;
-    }
-  }
-}
+@import url(../styles/MyEditor.less);
 </style>

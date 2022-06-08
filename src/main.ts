@@ -4,11 +4,11 @@ import router from './router';
 import { createPinia } from 'pinia';
 // import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css'
-import '@/assets/styles/iconfont.less'
+import '@/assets/styles/iconfont/iconfont.less'
 import 'highlight.js/lib/common'
 import hljsVuePlugin from '@highlightjs/vue-plugin'
-import '@/assets/styles/index.css'
-import '@/assets/styles/preflight.css';
+import '@/assets/styles/tailwind/index.css'
+import '@/assets/styles/tailwind/preflight.css';
 import 'virtual:svg-icons-register';
 
 const app=createApp(App).use(createPinia()).use(router).use(hljsVuePlugin)

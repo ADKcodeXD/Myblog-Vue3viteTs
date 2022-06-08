@@ -1,0 +1,24 @@
+.timeline {
+    transition: background-color 1s ease;
+    background-color: @bgColor;
+    padding: @padding-general;
+    overflow: hidden;
+    border: @textColor solid @border-line;
+    border-radius: @border-radius;
+    .shadow();
+
+    .content {
+        .text-line-show(2);
+    }
+
+    .title {
+        display: flex;
+        flex-direction: column;
+        .font-normal();
+        font-size: @big-text;
+
+        span {
+            font-size: @mid-text;
+        }
+    }
+}

@@ -23,9 +23,13 @@
           <template #header>
             <div class="card-header">
               <div class="title">
-                <MyElimage :img="Jinqi" />
+                <div class="tw-flex tw-flex-col few">
+                  <p>近期更新文章</p>
+                  <span>Update in few days</span>
+                </div>
               </div>
-              <AdkButton :x="8" :y="3.3" :mainTextsize="1.3" :subTextsize="0.7" @click="$router.push('/index/articlelist')">
+              <AdkButton :x="8" :y="3.3" :mainTextsize="1.3" :subTextsize="0.7"
+                @click="$router.push('/index/articlelist')">
                 更多
                 <template #endesc>
                   more
@@ -38,10 +42,15 @@
         </el-card>
       </div>
       <ul class="rightbox" ref="rightUl">
-        <li><MyInfo /></li>
-        <li><ArticleTimeLine /></li>
-        <li><TagsAll /></li>
-        <li><TimeLine /></li>
+        <li>
+          <ArticleTimeLine />
+        </li>
+        <li>
+          <TagsAll />
+        </li>
+        <li>
+          <TimeLine />
+        </li>
       </ul>
     </div>
   </div>
@@ -54,7 +63,6 @@ export default { name: 'Index' }
 
 <script setup lang="ts">
 import { getIndexArticleApi, getIndexBanner } from "@/api/article";
-import MyInfo from "./components/MyInfo.vue";
 import TimeLine from "./components/TimeLine.vue";
 import TagsAll from './components/TagsAll.vue';
 import ArticleTimeLine from "./components/ArticleTimeLine.vue";
@@ -62,9 +70,6 @@ import Jinqi from '@/assets/img/近期更新.png';
 // Default SortableJS
 import Sortable from 'sortablejs';
 import SubTitle from "./components/SubTitle.vue";
-import Mix from '@/assets/styles/mixins.less';
-console.log(Mix);
-
 // 获取首页文章 按照时间顺序 5篇
 let articles = ref<ArticleItemInfo[]>([]);
 let bannerList = ref<Banner[]>([]);
@@ -78,7 +83,7 @@ const getIndexfive = async () => {
   const { data } = await getIndexArticleApi(pageparams);
   articles.value = data.data;
 };
-const rightUl=ref<HTMLElement>();
+const rightUl = ref<HTMLElement>();
 
 // 获取文章头图
 const getBannerList = async () => {
@@ -97,10 +102,5 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-@import url(./styles/index-pc.less);
-
-.title {
-  width: 160px;
-}
-
+@import url(./styles/Index.less);
 </style>

@@ -8,7 +8,6 @@
 
 <style lang="less" scopd>
 @keyframes uptodown {
-
     0%,
     50%,
     100% {

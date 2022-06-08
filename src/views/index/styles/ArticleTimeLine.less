@@ -1,0 +1,33 @@
+.box {
+    transition: background-color 1s ease;
+    background-color: @bgColor;
+    padding: @padding-general;
+    overflow: hidden;
+    border-radius: @border-radius;
+    border: @textColor solid @border-line;
+    .shadow();
+    .item {
+        display: flex;
+        color: @textColor;
+        justify-content: space-between;
+        background-color: @bgColor;
+        padding: @padding-general;
+        margin-top: @margin-general;
+        border-radius: @border-radius;
+        cursor: pointer;
+        &:hover {
+            color: @hoverTextColor;
+            background-color: @hoverColor;
+        }
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        .font-normal();
+        font-size: @big-text;
+
+        span {
+            font-size: @mid-text;
+        }
+    }
+}

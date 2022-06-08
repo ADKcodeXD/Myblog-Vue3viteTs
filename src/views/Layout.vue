@@ -40,5 +40,5 @@ onMounted(() => {
 </script>
 
 <style scoped  lang="less">
-@import url("@/assets/styles/pc/layout-pc.less");
+@import url("@/assets/styles/Layout/Layout.less");
 </style>

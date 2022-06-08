@@ -1,15 +1,13 @@
 <template>
   <div class="tasall">
-    <div class="tw-w-32 tw-my-2">
-      <MyElimage :img="Alltag" />
+    <div>
+      <div class="title">
+        <p>所有标签</p>
+        <span>All tags</span>
+      </div>
     </div>
     <el-divider class="tw-my-4"></el-divider>
-    <TagItem
-      v-for="tag in tags"
-      :key="tag.id"
-      :tagId="tag.id"
-      :tagName="tag.tagName"
-      />
+    <TagItem v-for="tag in tags" :key="tag.id" :tagId="tag.id" :tagName="tag.tagName" />
   </div>
 </template>
 
@@ -18,33 +16,16 @@ import { getTagList } from "@/api/article";
 import Alltag from '@/assets/img/all-tag.png';
 
 let tags = ref<Tag[]>();
-    const getTags = async () => {
-      const { data } = await getTagList();
-      tags.value = data.data;
-    };
-    onMounted(() => {
-      getTags();
-    });
+const getTags = async () => {
+  const { data } = await getTagList();
+  tags.value = data.data;
+};
+onMounted(() => {
+  getTags();
+});
 </script>
 
 
 <style lang="less" scoped>
-.tasall {
-  .title {
-    padding: 1rem 0;
-    margin: 0;
-    font-weight: 100;
-  }
-  transition: background-color 1s ease;
-  background-color: rgb(@primaryBackGroundColor);
-  padding: 0.7143rem;
-  overflow: hidden;
-  border-radius: 0.3571rem;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  .tag {
-    margin-right: 10px;
-    margin-top: 5px;
-    cursor: pointer;
-  }
-}
+@import url(../styles/TagsAll.less);
 </style>

@@ -1,7 +1,10 @@
 <template>
   <div class="timeline">
-    <div class="tw-w-32 tw-my-2">
-      <MyElimage :img="Newmsg" />
+    <div>
+      <div class="title">
+        <p>最新留言</p>
+        <span>New Message</span>
+      </div>
     </div>
     <el-divider class="tw-my-4"></el-divider>
     <el-timeline>
@@ -29,26 +32,5 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-.timeline {
-  transition: background-color 1s ease;
-  background-color: rgb(@primaryBackGroundColor);
-  padding: 0.7143rem;
-  overflow: hidden;
-  border-radius: 0.3571rem;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  .title {
-    font-weight: 100;
-    margin: 0;
-    padding: 1rem 0;
-  }
-
-  .content {
-    word-break: break-all;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-}
+@import url(../styles/TimeLine.less);
 </style>

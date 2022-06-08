@@ -36,58 +36,5 @@ const { handleSelect,
 </script>
 
 <style lang="less" scoped>
-@keyframes jello {
-    0% {
-        transform: skew(0deg 0deg);
-    }
-
-    30% {
-        transform: skew(-25deg -25deg);
-    }
-
-    40% {
-        transform: skew(15deg, 15deg);
-    }
-
-    50% {
-        transform: skew(-15deg, -15deg);
-    }
-
-    65% {
-        transform: skew(5deg, 5deg);
-    }
-
-    75% {
-        transform: skew(-5deg, -5deg);
-    }
-
-    100% {
-        transform: skew(0deg 0deg);
-    }
-}
-
-.search {
-    display: flex;
-    padding: 1rem;
-    align-items: center;
-    width: 60%;
-
-    .search-btn {
-        width: 68px;
-        height: 55px;
-        background: url(@/assets/img/search.png) no-repeat;
-        background-size: contain;
-        transition: all 0.3s ease-in-out;
-        cursor: pointer;
-        &:hover {
-            background: url(@/assets/img/search-hover.png) no-repeat;
-            background-size: contain;
-            animation: jello 0.5s both;
-        }
-    }
-
-    .input-search {
-        margin-right: 1rem;
-    }
-}
+@import url(../styles/Search.less);
 </style>

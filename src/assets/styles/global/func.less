@@ -1,0 +1,64 @@
+// 优先使用urafont 其次幼圆
+.font-ura() {
+    font-family: 'urafont', '幼圆';
+    font-weight: 600;
+}
+
+.font-normal() {
+    font-family: 'Thinfont', '幼圆';
+    font-weight: 600;
+}
+
+// 1、article-item 的图片边框 
+.border-article-item(@width, @outset, @borderwidth) {
+    border-radius: @borderwidth;
+    border: @borderwidth solid transparent;
+    border-image: url(@/assets/img/border-my.png) 99 100 95 96;
+    border-image-width: @width;
+    border-image-outset: @outset;
+}
+
+// 2、部分标签的图片边框
+.border-tag(@outset, @borderwidth) {
+    border: @borderwidth solid transparent;
+    border-radius: @borderwidth;
+    border-image: url(@/assets/img/border-line.png) 20 24 17 25;
+    border-image-outset: @outset;
+}
+
+// 3、街角魔族类型的图片边框 
+.border-pinkline(@width, @outset) {
+    border: @width solid transparent;
+    border-radius: @width;
+    border-image: url(@/assets/img/page.png) 25 repeat;
+    border-image-outset: @outset;
+}
+
+// 定义一个球
+.ball(@size, @color) {
+    width: @size;
+    height: @size;
+    border-radius: 50%;
+    background-color: @color;
+}
+
+//flexbox 居中盒子
+.flexbox(@dir: row, @jus: center, @align: center) {
+    display: flex;
+    justify-content: @jus;
+    align-items: @align;
+    flex-direction: @dir;
+}
+.flex(@dir: row, @jus: flex-start, @align: flex-start) {
+    display: flex;
+    justify-content: @jus;
+    align-items: @align;
+    flex-direction: @dir;
+}
+.shadow(@drop: 3px, @big: 5px, @color: @shadowColor) {
+    box-shadow: @drop @drop @big @color;
+}
+
+.textShadow(@drop: 3px, @big: 5px, @color: @shadowColor){
+    text-shadow: @drop @drop @big @color;
+}

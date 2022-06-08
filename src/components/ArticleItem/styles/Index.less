@@ -1,0 +1,110 @@
+@media screen and (min-width:@mobile-device){
+  .box {
+    padding: @padding-general;
+    margin: 30px 0;
+    .flex(column,flex-start,center);
+    border: @border-line @textColor solid;
+    border-radius: @border-radius;
+    transition: transform 0.2s ease;
+    box-shadow: 5px 12px 0px @shadowColor;
+    .image {
+      flex-shrink: 0;
+      margin-right: 0;
+      max-height: 30rem;
+      overflow: hidden;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      border: 5px @tipTextColor solid;
+      border-radius: 10px;
+    }
+    .content {
+      .font-normal();
+      display: flex;
+      flex-direction: column;
+      align-self: flex-start;
+      justify-content: space-between;
+      width: 100%;
+      .up {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        .time {
+          padding: @padding-general;
+          justify-content: flex-end;
+        }
+        .title {
+          font-size: 2.2857rem;
+          .text-line-show(1);
+        }
+        .desc {
+          margin-top: .5rem;
+          font-size: @small-text;
+          .text-line-show(2);
+        }
+      }
+      .down {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin-top: @margin-general;
+        width: 100%;
+        .leftcontent {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .author {
+            font-size: @small-text;
+            margin-right: 3rem;
+          }
+          i{
+            margin-right: .5rem;
+          }
+        }
+        .icongroup{
+          i{
+            margin: 5px;
+          }
+        }
+      }
+    }
+
+  }
+}
+@media screen and (min-width:@pad-device){
+  .box {
+    flex-direction: row;
+    margin: @margin-general 0;
+    .image {
+      flex-shrink: 0;
+      margin-right: @margin-general;
+      height: 10rem;
+      width: 10rem;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin: 0;
+      }
+    }
+    .content {
+      height: 10rem;
+      .up {
+        height: 50%;
+      }
+      .down {
+        flex-direction: row;
+        align-items: flex-end;
+        .leftcontent {
+          justify-content: flex-start;
+          align-items: center;
+        }
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      transform: translate(0,-10px);
+      box-shadow: 5px 12px 0px @themeColor;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+.tasall {
+    transition: background-color 1s ease;
+    background-color:@bgColor;
+    padding: @padding-general;
+    overflow: hidden;
+    border-radius: @border-radius;
+    border: @textColor solid @border-line;
+    .shadow();
+    .tag {
+        margin-right: @margin-general;
+        margin-top: 5px;
+        cursor: pointer;
+    }
+    .title{
+        display: flex;
+        flex-direction: column;
+        .font-normal();
+        font-size: @big-text;
+        span{
+            font-size: @mid-text;
+        }
+    }
+}

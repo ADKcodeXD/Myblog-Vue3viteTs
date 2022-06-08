@@ -44,35 +44,5 @@ const { changeInfo,
 </script>
 
 <style lang="less" scoped>
-@media screen and(min-width:320px) {
-  .my-info {
-    width: 100%;
-    margin: 0 auto;
-    min-height: 600px;
-    transition: all 0.8s ease;
-    background-color: rgb(@primaryBackGroundColor);
-
-    .info-deatil {
-      display: flex;
-      flex-direction: column;
-
-      .all-info {
-        padding: 20px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        color: rgb(@primaryTextColor);
-      }
-    }
-  }
-}
-
-@media screen and (min-width:960px) {
-  .my-info {
-    width: 80%;
-    .info-deatil {
-      flex-direction: row;
-    }
-  }
-}
+@import url(./styles/Home.less);
 </style>

@@ -58,9 +58,6 @@ const time = computed(() => {
 });
 </script>
 <style lang="less" scoped>
-@import url("./style.less");
+@import url("./styles/Index.less");
 
-.tag {
-  margin-top: unset;
-}
 </style>

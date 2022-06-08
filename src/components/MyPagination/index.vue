@@ -22,6 +22,3 @@ const changePage=(val:number)=>{
     emit('changePage')
 }
 </script>
-<style lang="less" scoped>
-    
-</style>

@@ -1,5 +1,5 @@
 <template >
-    <div class="top">
+    <div class="tw-flex tw-justify-between tw-items-center">
         <p style="font-size: 32px">详细信息</p>
         <div class="buttongroup">
             <ElButton type="primary" plain @click="changeIsEdit(true)" v-if="!isEdit">编辑资料</ElButton>
@@ -68,11 +68,3 @@ const { formSubmit,
     isEdit } = useFormGroup(emit);
 
 </script>
-
-<style lang="less">
-.top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-</style>

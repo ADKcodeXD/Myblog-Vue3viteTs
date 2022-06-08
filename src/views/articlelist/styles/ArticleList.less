@@ -1,0 +1,115 @@
+.article-enter-to,
+.article-leave-from{
+  transform: translateX(0);
+  opacity: 1;
+}
+.article-leave-active{
+  position: absolute;
+   transition: all 0.8s ease-in-out;
+}
+.article-move{
+  transition: all 0.8s ease;
+}
+.article-enter-from,
+.article-leave-to{
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.article-item-sub{
+  transition: all 0.6s ease;
+}
+@media screen and (min-width:320px){
+    .artilce-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 6.6rem;
+        .top {
+          width: 100%;
+          padding: @padding-general;
+          border-radius: 2rem;
+          margin-top: @margin-general;
+          border: @border-line @textColor solid;
+          background-color: @bgColor;
+          .shadow(5px,0px,@themeColor);
+          .top-bar{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            .search{
+              width: 100%;
+            }
+          }
+          .title {
+            font-family: 'urafont','幼圆';
+            margin: @margin-general;
+            display: flex;
+            flex-shrink: 0;
+            align-items: center;
+            i{
+              font-size: 4.5rem;
+              color: rgb(255, 37, 139);
+            }
+            p{
+              font-size: 2.5rem;
+            }
+            span{
+              font-size:@mid-text;
+              margin-left: 0.4rem;
+            }
+          }
+          .main {
+            width: 100%;
+            transition: all 0.4s ease;
+            .article-item-sub{
+              margin: 2.5rem 0 !important;
+            }
+          }
+          .tip{
+            .font-normal();
+          }
+        }
+        .page {
+          .font-normal();
+          .border-pinkline(1rem,0px);
+          .shadow(4px,0,@themeColor);
+          font-size: @mid-text;
+          padding: @padding-general;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          margin-top: @margin-general;
+          background-color: @bgColor;
+        }
+    }
+}
+@media screen and (min-width:@pad-device) {
+  .top-bar{
+    flex-direction: row !important;
+    .search{
+      width: 70%;
+    }
+  }
+}
+@media screen and (min-width:992px) {
+    .artilce-list {
+        width: 80%;
+        margin: 0 auto;
+        .top {
+          padding: @padding-general;
+          border-radius: 2rem;
+          margin-top: @margin-general;
+          .top-bar{
+            .search{
+              width: 35%;
+            }
+          }
+          .tip{
+            line-height: 2rem;
+            padding: @padding-general;
+            margin-left: .5rem;
+          }
+        }
+    }
+}

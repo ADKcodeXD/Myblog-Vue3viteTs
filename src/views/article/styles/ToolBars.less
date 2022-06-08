@@ -1,0 +1,43 @@
+@media screen and(min-width:@mobile-device) {
+    .toolbars {
+        position: fixed;
+        bottom: 20px;
+        right: 5%;
+        z-index: 10;
+        width: 0;
+        height: 0;
+        color: @textColor;
+        ul {
+            display: flex;
+            flex-direction: column;
+            li {
+                .ball(4.5rem, @bgColor);
+                .flexbox(row);
+                cursor: pointer;
+                margin: @margin-general;
+                .shadow(2px,5px);
+                &:active {
+                    background-color: @activeColor;
+                    color: @hoverTextColor;
+                }
+                &:hover {
+                    background-color: @activeColor;
+                    color: @hoverTextColor;
+                }
+
+            }
+            .active {
+                background-color: @activeColor;
+                color: @hoverTextColor;
+                box-shadow: 2px 2px 5px rgba(250, 21, 71, 0.171);
+            }
+        }
+    }
+}
+@media screen and (min-width:992px) {
+    .toolbars{
+        position: fixed;
+        top: 20px;
+        left: 16%;
+    }
+}

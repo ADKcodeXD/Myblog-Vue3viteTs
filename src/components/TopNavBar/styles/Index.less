@@ -1,0 +1,25 @@
+@import url(@/assets/styles/MyAnimate.less);
+@media  screen and (min-width: @mobile-device) { 
+  .el-header {
+    padding: 0;
+    height: 6.6429rem;
+    position: fixed;
+    z-index: 9999;
+    box-shadow:0px 2px 10px @shadowColor;
+    background-color: @themeColor;
+    left: 0;
+    right: 0;
+    .el-row {
+      height: 100%;
+      padding: @padding-general;
+      align-items: center;
+    }
+  }
+  
+}
+@media  screen and (min-width: @smallpc-device) { 
+  .el-header {
+    position: relative;
+    background-color: @bgColor;
+  }
+}

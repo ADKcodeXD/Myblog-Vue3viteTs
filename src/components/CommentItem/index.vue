@@ -90,30 +90,5 @@ const published=()=>{
 
 <style lang="less" scoped>
 @import url(./styles/CommentPublic.less);
-
-.comment-item {
-  margin-top: 30px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  font-family: 'Thinfont', '幼圆';
-  font-weight: 600;
-  border: 3px black solid;
-  border-radius: 20px;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.37);
-  .content {
-    width: 100%;
-    word-break: break-all;
-
-    .comment-content {
-      min-height: 150px;
-      font-size: 20px;
-    }
-    .secondcomment {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-}
+@import url(./styles/Index.less);
 </style>

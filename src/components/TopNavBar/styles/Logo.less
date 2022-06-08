@@ -1,0 +1,34 @@
+@media screen and (min-width:@mobile-device) {
+
+    // logo样式
+    .icon {
+        cursor: pointer;
+        width: 17rem;
+        i {
+            transition: all 1s ease;
+            color: rgb(255, 255, 255);
+            display: block;
+            font-size: @big-text;
+            padding: 0 @padding-general;
+        }
+
+        img {
+            display: none;
+            transition: 1s all ease;
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+@media screen and (min-width:@smallpc-device) {
+    .icon {
+        img {
+          display: block;
+          transition: all 1s ease;
+        }
+        i{
+          transition: all 1s ease;
+          display: none;
+        }
+      }
+}

@@ -13,6 +13,8 @@ export const themes = {
     primaryHightlightColor: `${63},${87},${183}`,
     primaryLinkColor: `${75},${23},${60}`,
     primaryHoverColor: `${39},${72},${108}`,
+    bgColor:`rgb(255,255,255)`,
+    textColor:`rgb(0, 0, 0)`,
   },
   dark: {
     primaryBackGroundColor: `${25},${25},${25}`,
@@ -26,5 +28,7 @@ export const themes = {
     primaryHightlightColor: `${187},${255},${255}`,
     primaryLinkColor: `${75},${23},${60}`,
     primaryHoverColor: `${39},${72},${108}`,
+    bgColor:`rgb(255,255,255)`,
+    textColor:`rgb(0, 0, 0)`,
   },
 };

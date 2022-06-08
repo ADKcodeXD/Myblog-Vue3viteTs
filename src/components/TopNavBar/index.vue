@@ -94,30 +94,5 @@ getUserInfo();
 </script>
 
 <style lang="less" scoped>
-@import url(@/assets/styles/MyAnimate.less);
-@media  screen and (min-width: 320px) { 
-  .el-header {
-    padding: 0;
-    height: 6.6429rem;
-    position: fixed;
-    z-index: 9999;
-    box-shadow:0px 2px 10px rgba(0, 0, 0, 0.3);
-    background-color: rgb(255, 24, 62);
-    left: 0;
-    right: 0;
-    .el-row {
-      height: 100%;
-      padding: .7143rem;
-      align-items: center;
-      
-    }
-  }
-  
-}
-@media  screen and (min-width: 992px) { 
-  .el-header {
-    position: relative;
-    background-color: rgb(247, 247, 247);
-  }
-}
+@import url(./styles/Index.less);
 </style>

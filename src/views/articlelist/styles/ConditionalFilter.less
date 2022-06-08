@@ -1,0 +1,104 @@
+@media screen and (min-width: @mobile-device) {
+    .bottom {
+        display: flex;
+        flex-direction: column;
+        font-size: @small-text;
+        margin: 1rem;
+        .alltag {
+            .font-normal();
+            display: flex;
+            align-items: center;
+            text-align: center;
+            height: 1.5rem;
+            margin: @margin-general;
+            .shadow(5px,0,@shadowColor);
+            transition: transform 0.2s ease;
+            .border-tag(5px,1rem);
+            background-color: #fff;
+            cursor: pointer;
+            color: black;
+        }
+        .orderBytime {
+            display: flex;
+            align-items: center;
+            margin: @margin-general;
+        }
+        .orderByTag {
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            margin: @margin-general;
+            align-items: flex-start;
+            justify-content: space-between;
+            p {
+                flex-shrink: 0;
+            }
+            .left {
+                display: flex;
+                align-items: center;
+            }
+            .right {
+                display: flex;
+                align-items: center;
+                margin-top: @margin-general;
+            }
+            .change-tag {
+                display: flex;
+                align-items: center;
+                span {
+                    margin: 0 @margin-general;
+                }
+            }
+        }
+        .order {
+            display: flex;
+            margin: .8rem;
+            align-items: center;
+        }
+        .label {
+            .font-ura();
+            font-size: @very-big-text;
+            display: flex;
+            flex-shrink: 0;
+            align-items: flex-end;
+            margin-right: @margin-general;
+            span {
+                font-size: @big-text;
+            }
+            &-rotate-6 {
+                transform: rotateZ(6deg);
+            }
+            &-rotate-4 {
+                transform: rotateZ(4deg);
+            }
+            &-rotate-m4 {
+                transform: rotateZ(-4deg);
+            }
+            &-rotate-m6 {
+                transform: rotateZ(-6deg);
+            }
+        }
+
+        // tags
+        .tags {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            .active {
+                color: @hoverTextColor;
+                background-color: @activeColor;
+                border-image: url(@/assets/img/border-line-active.png) 20 24 17 25;
+                border-image-outset: 5px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:@smallpc-device) {
+    .bottom {
+        .orderByTag {
+            display: flex;
+            align-items: flex-start;
+        }
+    }
+}

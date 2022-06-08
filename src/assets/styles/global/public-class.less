@@ -1,0 +1,53 @@
+.text-line-show(@line) {
+    word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @line;
+    overflow: hidden;
+}
+
+.text-line-show-1 {
+    .text-line-show(1)
+}
+
+.text-line-show-2 {
+    .text-line-show(2)
+}
+
+.text-line-show-3 {
+    .text-line-show(3)
+}
+
+.text-line-show-6 {
+    .text-line-show(6)
+}
+
+// 自定义滚动条
+.myscrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+.myscrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background-color: #F5F5F5;
+}
+
+.myscrollbar::-webkit-scrollbar-thumb {
+    background-color: orangered;
+    background-image: -webkit-linear-gradient(45deg,
+            rgba(255, 255, 255, .2) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, .2) 50%,
+            rgba(255, 255, 255, .2) 75%,
+            transparent 75%,
+            transparent)
+}
+// 路由激活类
+.router-active {
+    border-left: 3px solid pink;
+    background-color: rgba(255, 233, 237, 0.521);
+}

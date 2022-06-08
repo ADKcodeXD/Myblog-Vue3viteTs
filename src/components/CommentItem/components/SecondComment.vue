@@ -70,23 +70,20 @@ const published=()=>{
 </script>
 <style lang="less" scoped>
 @import url(../styles/CommentPublic.less);
-
-
 .second-comment {
     display: flex;
-    margin-top: 1rem;
-    padding: 1rem;
+    margin-top:  @margin-general;
+    padding: @padding-general;
     overflow: hidden;
     border-radius: 20px;
-
     .user-avatar {
-        margin-right: 10px;
+        margin-right: @margin-general;
     }
 
     .content {
         margin: 0;
-        font-size: 14px;
-        color: rgb(0, 0, 0);
+        font-size: @small-text;
+        color: @textColor;
     }
 }
 </style>

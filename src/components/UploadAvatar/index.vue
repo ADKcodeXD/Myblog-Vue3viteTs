@@ -1,10 +1,8 @@
 <template>
   <div class="upload">
-    <el-upload action="noaction" :show-file-list="false" 
-    :limit="1" accept=".png, .jpg, .jpeg" 
-    :on-exceed="handleExceed"
-    :before-upload="beforeAvatarUpload">
-      <div class="avatar" >
+    <el-upload action="noaction" :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg" :on-exceed="handleExceed"
+      :before-upload="beforeAvatarUpload">
+      <div class="avatar">
         <MyElimage :img="avatar ? avatar : logo" />
       </div>
       <p style="font-size: 12px" v-if="isShow">点此上传头像</p>
@@ -14,8 +12,9 @@
 
 <script lang="ts" setup>
 import img from "@/assets/logo.png";
-import { ElMessage, UploadProps } from "element-plus";
+import { ElMessage } from "element-plus";
 import { useUpload } from "@/hooks/upload";
+import type { UploadProps } from 'element-plus';
 import logo from '@/assets/img/logo.png';
 const emit = defineEmits(['changeAvatar'])
 const props = defineProps({
@@ -51,10 +50,12 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = async (file) => {
   width: 100%;
   height: 100%;
   flex-direction: column;
-  &>div{
+
+  &>div {
     width: 100%;
     height: 100%;
   }
+
   :deep(.el-upload) {
     display: flex;
     flex-direction: column;

@@ -1,0 +1,24 @@
+
+.comment-item {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: @padding-general;
+    .font-normal();
+    border: @border-line @textColor solid;
+    border-radius: 20px;
+    .shadow();
+    .content {
+      width: 100%;
+      word-break: break-all;
+      .comment-content {
+        min-height: 150px;
+        font-size: 20px;
+      }
+      .secondcomment {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }

@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  .switch-btn {
+    display: flex;
+    margin-left: 5px;
+    .font-normal();
+    .text{
+      display: flexbox;
+      padding: 10px 15px 5px 15px;
+      color: @textColor;
+      cursor: pointer;
+      .flexbox();
+      background-color: @tipTextColor;
+      color: @textColor;
+      border-radius:20px 20px 0 0;
+      transition: all 0.3s ease;
+      &:hover{
+        background-color: @hoverColor;
+        color: @hoverTextColor;
+      }
+    }
+  }

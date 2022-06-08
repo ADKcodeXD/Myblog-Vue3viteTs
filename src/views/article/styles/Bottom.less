@@ -1,0 +1,57 @@
+@media screen and (min-width:@mobile-device) {
+    .detail {
+        display: flex;
+        flex-direction: column;
+        padding: @padding-general;
+        color: @textColor;
+        .good {
+            display: flex;
+            align-self: center;
+            justify-content: space-between;
+            width: 30rem;
+            padding: @padding-general;
+            i {
+                .ball(8rem, @bgColor);
+                .flexbox(column);
+                .shadow(2px, 5px);
+                cursor: pointer;
+                transition: 0.4s all ease;
+                &:active {
+                    background-color: @activeColor;
+                    color: @hoverTextColor;
+                }
+            }
+        }
+
+        .bottom-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tags {
+            margin: 20px 0;
+        }
+
+        .active {
+            background-color: @activeColor  !important;
+            color: @hoverTextColor  !important;
+        }
+    }
+}
+
+@media screen and(min-width: 992px) {
+    .detail {
+        .good {
+            i {
+                width: 5rem;
+                height: 5rem;
+
+                &:hover {
+                    background-color: @hoverColor;
+                    color: @hoverTextColor;
+                }
+            }
+        }
+    }
+}

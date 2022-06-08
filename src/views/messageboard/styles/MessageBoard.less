@@ -1,4 +1,4 @@
-@media screen and (min-width:320px){
+@media screen and (min-width:@mobile-device){
     .message {
         margin-top: 7rem;
         padding: 2.5rem;
@@ -8,8 +8,8 @@
         overflow-y: auto;
         transition: all 1s ease;
         border-radius: 2.5rem;
-        border: 3px black solid;
-        background-color: rgb(@primaryBackGroundColor);
+        border: @border-line @textColor solid;
+        background-color: @bgColor;
         .up-info {
           .logo{
             display: flex;
@@ -21,11 +21,11 @@
           }
           .desc {
             .font-normal();
-            font-size: 1.5rem;
+            font-size: @big-text;
           }
         }
         .edit-part {
-          margin-top: 1.5rem;
+          margin-top: @margin-general;
           width: 100%;
           .font-normal();
           .liuyan-info {
@@ -33,13 +33,13 @@
             flex-direction: column;
             .name {
               .flexbox(row);
-              padding: 5px;
+              padding: @padding-general;
               margin-right: 0;
-              margin-bottom: 1.5rem;
+              margin-bottom: @margin-general;
               span {
                 display: flex;
                 flex-shrink: 0;
-                font-size: 16px;
+                font-size: @mid-text;
                 width: 120px;
               }
             }
@@ -61,12 +61,12 @@
             width: 100%;
             display: flex;
             justify-content: flex-end;
-            margin-top: 1rem;
+            margin-top: @margin-general;
           }
         }
         .paixu {
           .font-normal();
-          margin-top: 1.5rem;
+          margin-top: @margin-general;
           display: flex;
           align-items: center;
           h2 {
@@ -74,12 +74,12 @@
           }
           p {
             align-self: flex-end;
-            margin-left: .7143rem;
+            margin-left: @margin-general;
             cursor: pointer;
             font-weight: 600;
           }
           .active {
-            color: rgb(@primaryActiveColor);
+            color: @textColor;
           }
         }
         .pagination{
@@ -88,17 +88,20 @@
     }
 }
 
-@media screen and (min-width:992px){
+@media screen and (min-width:@smallpc-device){
     .message {
-        margin-top: 1.4286rem;
+        margin-top: 1.5rem;
         .edit-part {
           .liuyan-info {
             flex-direction: row;
             .name {
-              margin-right: 1rem;
+              margin-right: @margin-general;
               margin-bottom: 0;
               .contact {
                 min-width: 25rem;
+              }
+              span{
+                width: unset;
               }
             }
           }

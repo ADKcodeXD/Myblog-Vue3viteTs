@@ -1,0 +1,105 @@
+// 重置element的样式
+:deep(.el-input__wrapper) {
+    font-family: 'Thinfont', '幼圆';
+    outline: @border-line @textColor solid;
+    border-radius: @border-radius;
+    font-weight: 600;
+    background-color: @bgColor;
+    color: @textColor;
+}
+
+// 重置input框内的字数限制的样式
+:deep(.el-input__suffix) {
+    color: @textColor;
+    background-color: @bgColor;
+
+    .el-input__count {
+        .el-input__count-inner {
+            color: @textColor;
+            background-color: @bgColor;
+        }
+
+    }
+}
+
+// 重置分页器样式
+:deep(.el-pagination.is-background) {
+    .el-pager {
+        li {
+            font-family: 'Cartoonfont', '幼圆';
+            border: 0.8rem solid transparent;
+            border-radius: 1rem;
+            border-image: url(@/assets/img/page.png) 20;
+            border-image-outset: 1px;
+            color: @textColor;
+            background-color: @bgColor;
+        }
+
+        .is-active {
+            background-color: #FF5778 !important;
+            border: 0.8rem solid transparent;
+            border-radius: 1rem;
+            border-image-outset: 1px;
+            border-image: url(@/assets/img/page-active.png) 20 repeat;
+        }
+    }
+}
+
+// 重置轮播图的箭头样式
+:deep(.el-carousel__arrow) {
+    .el-icon {
+        display: none;
+    }
+}
+
+:deep(.el-carousel__arrow--left) {
+    background-color: unset;
+    border-radius: unset;
+    background: url(../../img/leftarrow.png) no-repeat;
+    background-size: contain;
+
+    &:hover {
+        animation: leftmove-loop 0.5s both ease-in-out;
+    }
+}
+
+:deep(.el-carousel__arrow--right) {
+    background-color: unset;
+    border-radius: unset;
+    background: url(../../img/rightarrow.png) no-repeat;
+    background-size: contain;
+
+    &:hover {
+        animation: rightmove-loop 0.5s both ease-in-out;
+    }
+}
+
+// 重置轮播图的下面的水平线样式
+:deep(.el-carousel__indicators) {
+    .el-carousel__button {
+        width: 30px;
+        height: 30px;
+        background: url(../../img/lunbo.png) no-repeat;
+        background-size: cover;
+    }
+
+    .is-active {
+        .el-carousel__button {
+            background: url(../../img/lunbo-active.png) no-repeat;
+            background-size: cover;
+        }
+    }
+}
+
+// 重置el-card
+:deep(.el-card) {
+    border: @border-line solid @textColor;
+    border-radius: @border-radius;
+}
+
+:deep(.el-card__body) {
+    background-color: @bgColor;
+}
+.md{
+    background-color: @bgColor;
+}

@@ -34,7 +34,7 @@ let showPreview=ref(false);
 </script>
 <style lang="less" scoped>
 .markdown-body {
-    margin: 20px 0;
+    margin: @margin-general 0;
     padding: 30px;
 }
 

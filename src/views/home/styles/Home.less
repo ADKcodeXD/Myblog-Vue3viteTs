@@ -1,0 +1,29 @@
+@media screen and(min-width:320px) {
+    .my-info {
+      width: 100%;
+      margin: 0 auto;
+      min-height: 600px;
+      transition: all 0.8s ease;
+      background-color: @bgColor;
+      .info-deatil {
+        display: flex;
+        flex-direction: column;
+        .all-info {
+          padding: @padding-general;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          color: @textColor;
+        }
+      }
+    }
+  }
+  
+  @media screen and (min-width:960px) {
+    .my-info {
+      width: 80%;
+      .info-deatil {
+        flex-direction: row;
+      }
+    }
+  }

@@ -1,0 +1,42 @@
+@media screen and(min-width: @mobile-device) {
+
+    // 导航栏样式
+    .menu {
+        display: none;
+        justify-content: start;
+        font-size: @big-text;
+        .font-normal();
+        flex: 1;
+        .menu-list {
+            display: flex;
+            color: black;
+            li {
+                padding: @padding-general;
+                transition: all ease 0.4s;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                a {
+                    font-weight: 600;
+                }
+                span {
+                    font-family: 'Cartoonfont', 'Microsoft';
+                    font-size: @small-text;
+                }
+                &:hover {
+                    text-shadow: 1px 1px 10px @hoverColor;
+                }
+            }
+        }
+    }
+}
+@media screen and(min-width:992px) {
+    .menu {
+        display: flex;
+        .menu-list {
+          display: flex;
+          color: @textColor;
+        }
+      }
+}

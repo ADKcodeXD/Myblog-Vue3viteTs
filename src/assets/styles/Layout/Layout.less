@@ -1,0 +1,33 @@
+#app {
+  height: 100%;
+}
+
+.cotainer {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  z-index: 1;
+  transition: 0.5s ease all;
+  background-color: @globlBgColor;
+}
+
+.main {
+  margin: 0 auto;
+  width: 80%;
+  color: @textColor;
+}
+
+@media screen and (min-width:320px) {
+  .main {
+    margin: 0 auto;
+    width: 100%;
+    color:@textColor;
+  }
+}
+
+@media screen and (min-width:1440px) {
+  .main {
+    width: 80%;
+  }
+}

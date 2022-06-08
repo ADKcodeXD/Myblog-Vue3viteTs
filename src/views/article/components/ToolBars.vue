@@ -33,49 +33,5 @@ const toComment = () => {
 }
 </script>
 <style lang="less" scoped>
-@media screen and(min-width:320px) {
-    .toolbars {
-        position: fixed;
-        bottom: 20px;
-        right: 5%;
-        z-index: 10;
-        width: 0;
-        height: 0;
-        ul {
-            display: flex;
-            flex-direction: column;
-            li {
-                .ball(4.5rem, rgb(255, 255, 255));
-                .flexbox(row);
-                cursor: pointer;
-                margin: 5px;
-                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-
-                &:active {
-                    background-color: orange;
-                    color: white;
-                }
-
-                &:hover {
-                    background-color: orange;
-                    color: white;
-                }
-
-            }
-
-            .active {
-                background-color: orange;
-                color: white;
-                box-shadow: 2px 2px 5px rgba(250, 21, 71, 0.171);
-            }
-        }
-    }
-}
-@media screen and (min-width:992px) {
-    .toolbars{
-        position: fixed;
-        top: 20px;
-        left: 16%;
-    }
-}
+@import url(../styles/ToolBars.less);
 </style>
