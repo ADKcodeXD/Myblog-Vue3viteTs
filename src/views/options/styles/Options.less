@@ -1,0 +1,34 @@
+@media screen and(mid-width:320px) {
+    
+}
+
+.options-container {
+    padding: @padding-general;
+    background-color: @bgColor;
+    .shadow();
+    .border-normal();
+    margin: @margin-general 0;
+    .title{
+        .font-normal();
+        font-size: @very-big-text;
+        display: flex;
+        flex-direction: column;
+        span{
+            font-size: @mid-text;
+            color: @tipTextColor;
+        }
+    }
+    .form{
+        .font-normal();
+        font-size: @big-text;
+        margin: @margin-general 0;
+        .form-item{
+            display: flex;
+            margin: @margin-general 0;
+            justify-content: space-between;
+            .label{
+                width: 400px;
+            }
+        }
+    }
+}

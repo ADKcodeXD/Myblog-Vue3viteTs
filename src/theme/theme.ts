@@ -1,6 +1,6 @@
+import { humpToLine } from './../utils/tools';
 import {getItem, setItem} from '@/utils/storage';
-import {themes} from "./themeData";
-
+import {defaultConfig, themes} from "./themeData";
 // 修改页面中的样式变量值
 const changeStyle = (obj : Theme) => {
     let style: HTMLStyleElement;
@@ -48,3 +48,45 @@ export const setTheme = (themeName : string | void) => {
         }
     }
 };
+
+/**
+ * 用于getlocalitem设置整体的style属性
+ * @param config type : GlobalConfig 要求类型是一个全局配置项
+ */
+const setProperty=(config:GlobalConfig)=>{
+    for(let key in config){
+        // 由于命名原因 如果是number类型的config 则直接转换成横线
+        if(typeof config[key] ==='number'){
+            document.documentElement.style.setProperty(`--${humpToLine(key)}`,`${config[key]}rem`);
+        }else{
+            document.documentElement.style.setProperty(`--${key}`,config[key]);
+        }
+    }
+}
+/**
+ * 用于设置单个属性 不需要每次都全部遍历设置属性
+ * @param varName css属性变量的名字
+ * @param val 属性的值 可以为number或者string
+ */
+const setOneProperty=(varName:string,val:string|number)=>{
+
+}
+/**
+ * 可以自适应的传入或者不传入 不传入则默认读取本地的配置
+ * 传入配置会自动保存本地
+ * @param config 一个GlobalConfig 或者不传 
+ */
+export const setConfig=(config:GlobalConfig|void)=>{
+    if(!config){
+        let localConfig=getItem('globalConfig');
+        if(!localConfig){
+            setProperty(defaultConfig);
+            setItem('globalConfig',defaultConfig);
+        }else {
+            setProperty(localConfig);
+        }
+    }else{
+        setProperty(config);
+        setItem('globalConfig',config);
+    }
+}
