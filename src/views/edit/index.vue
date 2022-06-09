@@ -1,17 +1,9 @@
 <template>
   <div class="edit">
     <div class="top">
-      <el-upload class="upload-demo" action="" :on-remove="handleRemove" :before-remove="beforeRemove"
-        :before-upload="beforeBannerUpload" :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg"
-        :on-exceed="handleExceed">
-        <div class="upload-banner">
-          <MyElimage :img="imglink" v-if="imglink" />
-          <div class="tip" v-else>
-            <span style="font-size: 80px;">+</span>
-            点击上传文章头图
-          </div>
-        </div>
-      </el-upload>
+      <div class="upload">
+        <UploadImage @imglink="changeImagelink" :imglink="imglink">点击上传文章头图</UploadImage>
+      </div>
       <input class="title" :class="{ boxshadow: styleChange }" type="text" @focus="styleChange = true"
         @blur="styleChange = false" v-model="title" />
       <div class="summary">
@@ -38,10 +30,11 @@
 <script setup lang="ts">
 import MyEditor from "./components/MyEditor.vue";
 import { ElInput } from "element-plus";
-import { useEditor, useTagAndArticle, useUploadBanner } from "@/hooks/useEdit";
-
-const { imglink, handleRemove, beforeRemove, handleExceed, beforeBannerUpload } = useUploadBanner();
-
+import { useEditor, useTagAndArticle } from "@/hooks/useEdit";
+const imglink = ref("");
+const changeImagelink = (link: string) => {
+  imglink.value = link
+}
 const { changeEditor,
   changeContentRich,
   changeContent,
@@ -49,17 +42,16 @@ const { changeEditor,
   content,
   contentRich } = useEditor();
 
-const {canChooseTags,
-        addTagFn,
-        submitArticle,
-        tags,
-        styleChange,
-        summary,
-        title}=useTagAndArticle(editorName,imglink,contentRich,content);
+const { canChooseTags,
+  addTagFn,
+  submitArticle,
+  tags,
+  styleChange,
+  summary,
+  title } = useTagAndArticle(editorName, imglink, contentRich, content);
 
 </script>
 
 <style lang="less" scoped>
 @import url(./styles/Edit.less);
-
 </style>

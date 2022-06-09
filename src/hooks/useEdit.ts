@@ -4,33 +4,6 @@ import {getItem, removeItem, setItem} from "@/utils/storage";
 import {ref, reactive, onBeforeMount, onUnmounted, Ref} from "vue";
 import {addTag, getTagList, publishArticle} from "@/api/article";
 import { useStore } from "@/store/main";
-export const useUploadBanner = () => {
-    const imglink = ref("");
-    const handleRemove: UploadProps['onRemove'] = (file, uploadFiles) => {
-        console.log(file, uploadFiles)
-    }
-    const beforeRemove: UploadProps['beforeRemove'] = (file, fileList) => {
-        return true;
-    };
-    const handleExceed: UploadProps['onExceed'] = (files, fileList) => {
-        ElMessage.warning("只能上传一张头图");
-    };
-    const beforeBannerUpload: UploadProps['beforeUpload'] = async (file) => {
-        const link = await useUpload(file);
-        if (link !== "") {
-            imglink.value = link;
-        }
-        return true;
-    };
-    return {
-        imglink,
-        handleRemove,
-        beforeRemove,
-        handleExceed,
-        beforeBannerUpload
-    }
-}
-
 export const useEditor = () => { // 存放两种内容的地方
     const content = reactive < Content > ({html: "", text: ""});
     const contentRich = reactive < Content > ({html: "", text: ""});
