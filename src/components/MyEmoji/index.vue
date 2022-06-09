@@ -1,34 +1,34 @@
 <template>
   <div ref="picker" class="tw-h-full tw-w-full">
     <EmojiPicker :hide-group-icons="true" :disable-skin-tones="true" :disabled-groups="disabledGroup"
-      :group-names="groupName" :static-texts="{ placeholder: '搜索表情' }" picker-type="textarea" @update:text="onChangeText"
-        />
+      :group-names="groupName" :static-texts="{ placeholder: '搜索表情' }" picker-type="textarea"
+      @update:text="onChangeText" />
   </div>
-  
+
 </template>
 <script lang="ts" setup>
 import { useEmoji } from "@/hooks/Article";
 import EmojiPicker from "vue3-emoji-picker";
 import "../../../node_modules/vue3-emoji-picker/dist/style.css";
 const props = defineProps({
-  placeholder:{
+  placeholder: {
     type: String,
     default: "请输入评论~",
   },
-  maxLeagth:{
+  maxLeagth: {
     type: Number,
     default: 255,
   }
 });
-const clearInput=()=>{
-  let textarea=picker.value.querySelector('.v3-emoji-picker-textarea');
-  textarea.value="";
+const clearInput = () => {
+  let textarea = picker.value.querySelector('.v3-emoji-picker-textarea');
+  textarea.value = "";
 }
-const setText=(val:string)=>{
-  let textarea=picker.value.querySelector('.v3-emoji-picker-textarea');
-  textarea.value=val;
+const setText = (val: string) => {
+  let textarea = picker.value.querySelector('.v3-emoji-picker-textarea');
+  textarea.value = val;
 }
-defineExpose({clearInput,setText})
+defineExpose({ clearInput, setText })
 const emit = defineEmits(['changeText'])
 const onChangeText = (t: string) => {
   emit('changeText', t);
@@ -37,11 +37,11 @@ const picker = ref<EmojiPicker | null>();
 const { disabledGroup, groupName } = useEmoji();
 
 
-onMounted(()=>{
-  let textarea=picker.value.querySelector('.v3-emoji-picker-textarea');
-  textarea.setAttribute('maxlength',props.maxLeagth.toString());
-  textarea.setAttribute('placeholder',props.placeholder);
-  textarea.setAttribute('row','10')
+onMounted(() => {
+  let textarea = picker.value.querySelector('.v3-emoji-picker-textarea');
+  textarea.setAttribute('maxlength', props.maxLeagth.toString());
+  textarea.setAttribute('placeholder', props.placeholder);
+  textarea.setAttribute('row', '10')
 })
 </script>
 
@@ -49,6 +49,9 @@ onMounted(()=>{
 <style lang="less" scoped>
 @media screen and(min-width:320px) {
   :deep(.v3-emoji-picker) {
+
+    color: @bgColor;
+
     .v3-header {
       display: none !important;
     }
@@ -63,6 +66,7 @@ onMounted(()=>{
   :deep(.v3-input-picker-root) {
     width: 100%;
     height: 100%;
+    background-color: @bgColor  !important;
 
     .v3-emoji-picker-textarea {
       border-radius: 10px;
@@ -71,6 +75,20 @@ onMounted(()=>{
       line-height: 20px;
       resize: none !important;
       min-height: 120px !important;
+    }
+  }
+  :deep(.v3-input-emoji-picker){
+    .v3-emoji-picker-textarea{
+      background-color: @bgColor  !important;
+      .border-normal();
+      &:focus-visable{
+        border: @hoverColor 3px solid;
+        outline: unset;
+      }
+    }
+    .v3-input-picker-icon{
+      background-color: #fff !important;
+      border-radius: 50%;
     }
   }
 }
