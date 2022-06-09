@@ -13,7 +13,6 @@
     </div>
 </template>
 <script setup lang="ts">
-
 import { useArticleListSearch } from '@/hooks/ArticleList';
 import { PropType } from 'vue';
 const props = defineProps({

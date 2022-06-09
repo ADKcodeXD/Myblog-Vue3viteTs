@@ -1,12 +1,15 @@
 <template>
   <div class="cotainer" ref="body">
+    <div class="filter">
+
+    </div>
     <!-- 头部 -->
     <TopNavBar />
     <!-- banner -->
+    <ThemeConfig />
     <div class="main">
       <!-- 导航 -->
       <!-- routerview -->
-      <Skin />
       <!-- vue3.0配置 -->
       <RouterView v-slot="{ Component }">
         <keep-alive :include="pages">

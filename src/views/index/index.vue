@@ -38,7 +38,7 @@
             </div>
           </template>
           <ArticleItem v-for="articleItem in articles" :key="articleItem.id" :articleItem="articleItem" />
-          <el-empty v-if="articles.length === 0" description="暂时没有文章发表哦~"></el-empty>
+          <AdkEmpty v-if="articles.length === 0" desc="暂时没有文章发表哦~"></AdkEmpty>
         </el-card>
       </div>
       <ul class="rightbox" ref="rightUl">

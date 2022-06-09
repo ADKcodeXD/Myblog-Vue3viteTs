@@ -18,12 +18,14 @@
 </template>
 <style lang="less" scoped>
     .sub-title{
-          font-family: 'urafont','幼圆';
-          font-weight: 600;
+          .font-ura();
           display: flex;
           flex-direction: column;
-          margin: 1.5rem 0;
-          font-size: 2rem;
+          margin: @margin-general 0;
+          padding:@padding-general @padding-general 0 @padding-general ;
+          border-radius: @border-radius @border-radius 0 0;
+          font-size: @very-big-text;
+          background-color: @bgColor;
           .content{
             display: flex;
             align-items: flex-end;
@@ -37,17 +39,17 @@
               }
             }
             .right{
-              font-size: 1rem;
+              font-size: @mid-text;
             }
           }
           &::after{
             content: '';
             display: block;
             width: 100%;
-            margin-top: 5px;
+            margin-top: @margin-general;
             height: 5px;
             border-radius: 999px;
-            background-color: rgb(255, 22, 61);
+            background-color: @themeColor;
           }
         }
 </style>

@@ -1,10 +1,9 @@
 <template>
   <div class="article">
+    <ThemeConfig />
     <div class="top">
       <TopNavBar :back-color="'rgba(0, 0, 0, 0.7)'" />
-
     </div>
-
     <div class="main-body" v-if="article">
       <!-- banner -->
       <div class="banner" ref="banner">
