@@ -10,19 +10,31 @@
   z-index: 1;
   transition: 0.5s ease all;
   background-color: @globlBgColor;
+  background-size: @backGroundImgSize;
+  background-repeat: @backGroundImgRepeat;
+  background-attachment: @backgroundImgAttachment;
+  .filter {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    z-index: -1000;
+    backdrop-filter: blur(@backGroundImgBlur) brightness(@backGroundImgLight);
+  }
 }
 
 .main {
   margin: 0 auto;
   width: 80%;
   color: @textColor;
+
 }
 
 @media screen and (min-width:320px) {
   .main {
     margin: 0 auto;
     width: 100%;
-    color:@textColor;
+    color: @textColor;
   }
 }
 

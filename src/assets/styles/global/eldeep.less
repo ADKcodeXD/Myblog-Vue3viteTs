@@ -6,8 +6,21 @@
     font-weight: 600;
     background-color: @bgColor;
     color: @textColor;
+    font-size: @mid-text;
+    
 }
-
+:deep(.el-input__inner){
+    color: @textColor;
+    font-size: @mid-text;
+}
+:deep(.el-radio-group){
+    justify-content: flex-end;
+}
+:deep(.el-radio){
+    .font-normal();
+    margin: 0;
+    margin-left: 1rem;
+}
 // 重置input框内的字数限制的样式
 :deep(.el-input__suffix) {
     color: @textColor;
