@@ -17,7 +17,7 @@ declare interface GlobalConfig{
     bigText:number,
     midText:number,
     smallText:number,
-    verySmallText:number,
+    verySamllText:number,
     paddingGeneral:number,
     borderRadius:number,
     borderLine:number,
@@ -25,6 +25,8 @@ declare interface GlobalConfig{
     textColor:string,
     globlBgColor:string,
     tipTextColor:string,
+    warnningTextColor:string,
+    errorTextColor:string,
     bgTextColor:string,
     hoverColor:string,
     hoverTextColor:string,
@@ -32,5 +34,10 @@ declare interface GlobalConfig{
     activeColor:string,
     shadowColor:string,
     themeColor:string,
-    
+    backGroundImg:string,
+    backGroundImgBlur:number,
+    backGroundImgLight:number,
+    backGroundImgRepeat:string,
+    backGroundImgSize:string,
+    backgroundImgAttachment:string
 }
