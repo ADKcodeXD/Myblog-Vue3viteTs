@@ -41,5 +41,6 @@
     {
       "path": "./tsconfig.node.json"
     }
-  ]
+  ],
+  "skipLibCheck":true
 }
