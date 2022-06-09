@@ -1,0 +1,97 @@
+@media screen and(min-width:@mobile-device) {
+    .theme-global{
+        .ball(4rem,@themeColor);
+        .flexbox();
+        .shadow();
+        position: fixed;
+        right: 20px;
+        bottom: -2rem;
+        z-index: 3;
+        font-size: @big-text;
+        transform: rotateZ(-90deg);
+        color: @textColor;
+        background-color: @bgColor;
+        transition: all 0.5s ease;
+        cursor: pointer;
+        &:hover{
+            bottom: 1rem;
+            transform: rotateZ(0deg);
+            color: @hoverTextColor;
+            background-color: @activeColor;
+        }
+        &.active{
+            bottom: 1rem;
+            color: @hoverTextColor;
+            background-color: @activeColor;
+        }
+    }
+    .mini-setting{
+        position: fixed;
+        bottom: 5.5rem;
+        right: 20px;
+        .border-normal();
+        .shadow();
+        .font-normal();
+        width: 85%;
+        height: 50vh;
+        z-index: 100;
+        background-color: @bgColor;
+        padding: @padding-general;
+        color: @textColor;
+        .tip{
+            font-size: @very-samll-text;
+            color: @tipTextColor;
+        }
+        .title{
+            font-size: @big-text;
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-direction: row;
+            span{
+                font-size: @mid-text;
+                color: @tipTextColor;
+            }
+            .right{
+                display: flex;
+                font-size: @mid-text;
+                color: @linkColor;
+                align-items: flex-end;
+                p{
+                    cursor: pointer;
+                    margin:0 @margin-general;
+                }
+            }
+            
+        }
+        .pannel{
+            display: flex;
+            flex-direction: column;
+            .form-item{
+                display: flex;
+                margin: 2px 0;
+                justify-content: space-between;
+                .label{
+                    width: 20rem;
+                }
+                .background{
+                    flex: 1;
+                    height: 20rem;
+                }
+            }
+        }
+    }
+}
+@media screen and (min-width:@pad-device) {
+    .mini-setting{
+        width: 60%;
+        height: 40vh;
+    }
+}
+@media screen and (min-width:@smallpc-device) {
+    .mini-setting{
+        width: 600px;
+        height:500px;
+    }
+}
