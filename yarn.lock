@@ -48,10 +48,10 @@
   "resolved" "https://registry.npmmirror.com/@ctrl/tinycolor/-/tinycolor-3.4.1.tgz"
   "version" "3.4.1"
 
-"@element-plus/icons-vue@^2.0.5":
-  "integrity" "sha512-jvNWyKcdvPvMDLTWjghrPY+bYHKqh7hbAFIPe+HWR073zilzt33csREzmKx3VwhdlJUW5u0nCqN+0rwI8jlH+w=="
-  "resolved" "https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-2.0.5.tgz"
-  "version" "2.0.5"
+"@element-plus/icons-vue@^1.1.4":
+  "integrity" "sha512-Iz/nHqdp1sFPmdzRwHkEQQA3lKvoObk8azgABZ81QUOpW9s/lUyQVUSh0tNtEPZXQlKwlSh7SPgoVxzrE0uuVQ=="
+  "resolved" "https://registry.npmmirror.com/@element-plus/icons-vue/-/icons-vue-1.1.4.tgz"
+  "version" "1.1.4"
 
 "@emmetio/abbreviation@^2.2.3":
   "integrity" "sha512-87pltuCPt99aL+y9xS6GPZ+Wmmyhll2WXH73gG/xpGcQ84DRnptBsI2r0BeIQ0EB/SQTOe2ANPqFqj3Rj5FOGA=="
@@ -1144,13 +1144,13 @@
   "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.87.tgz"
   "version" "1.4.87"
 
-"element-plus@^2.2.4":
-  "integrity" "sha512-jktZr0o3ARDxWNWPEaJZQm2BN7thTpQl0aIfCUo5eB5m+zEap2DEcojyGKMHSQsCULcPM32NFfu2sHlhbhOiGA=="
-  "resolved" "https://registry.npmmirror.com/element-plus/-/element-plus-2.2.4.tgz"
-  "version" "2.2.4"
+"element-plus@^2.2.2":
+  "integrity" "sha512-yGcj2Ayb0jZO1WbI51tHJ4efhlfWKlBqqGtWbzhq+tcpfaKzJZN+IHRouuFasqn0ZV3tWCDu1jggDR1+9y7XfQ=="
+  "resolved" "https://registry.npmmirror.com/element-plus/-/element-plus-2.2.2.tgz"
+  "version" "2.2.2"
   dependencies:
     "@ctrl/tinycolor" "^3.4.1"
-    "@element-plus/icons-vue" "^2.0.5"
+    "@element-plus/icons-vue" "^1.1.4"
     "@floating-ui/dom" "^0.5.0"
     "@popperjs/core" "npm:@sxzz/popperjs-es@^2.11.7"
     "@types/lodash" "^4.14.182"
