@@ -16,15 +16,16 @@ export const useArticleListSearch = (props, emit) => {
         }
     };
     // 搜索建议
-    const querySearchAsync = async (val : string, cb : Function) => {
-        const {data} = await getSearchTipApi(val);
-        const results = data.data;
-        cb(results);
+    const querySearchAsync = (val : string, cb : (arg : any) => void) => {
+        getSearchTipApi(val).then(({data}) => {
+            const results = data.data;
+            cb(results);
+        }).catch((err) => {
+            ElMessage.error(err)
+        });
     };
     // 自动填充
-    const handleSelect = (val : {
-        articleName: string
-    }) => {
+    const handleSelect = (val : any) => {
         props.pageParams.keyword = val.articleName;
     };
     return {handleSelect, querySearchAsync, nullSearch, searchByKeyword}
@@ -71,6 +72,7 @@ export const useArticleListConditional = (props, emit) => {
          else 
             props.pageParams.tagIds = currentTagIds.value;
         
+
 
         emit('changeConditional')
     };
