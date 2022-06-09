@@ -1,34 +1,114 @@
-@media screen and(mid-width:320px) {
-    
-}
-
-.options-container {
-    padding: @padding-general;
-    background-color: @bgColor;
-    .shadow();
-    .border-normal();
-    margin: @margin-general 0;
-    .title{
+@media screen and(min-width:@mobile-device) {
+    .options-container {
+        padding: @padding-general;
+        background-color: @bgColor;
+        .shadow();
+        .border-normal();
+        margin: @margin-general;
+        margin-top: 6.8rem;
         .font-normal();
-        font-size: @very-big-text;
-        display: flex;
-        flex-direction: column;
-        span{
-            font-size: @mid-text;
+        .title {
+            font-size: @very-big-text;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            span {
+                font-size: @mid-text;
+                color: @tipTextColor;
+            }
+            .right{
+                display: flex;
+                font-size: @big-text;
+                align-items: flex-end;
+                color: @linkColor;
+                p{
+                    cursor: pointer;
+                    margin:0 @margin-general;
+                }
+            }
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            font-size: @big-text;
+            margin: @margin-general 0;
+            .pannel {
+                padding: 0 @padding-general;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form-item {
+                display: flex;
+                margin: @margin-general 0;
+                justify-content: space-between;
+
+                .label {
+                    width: 20rem;
+                }
+
+                .background {
+                    flex: 1;
+                    height: 20rem;
+                }
+            }
+
+            .demo {
+                display: flex;
+                margin: @margin-general;
+                flex-direction: column;
+                align-self: center;
+                .border-normal();
+                background-color: @bgColor;
+                color: @textColor;
+                padding: @padding-general;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: @hoverColor;
+                    color: @hoverTextColor;
+                }
+
+                &.active {
+                    background-color: @activeColor;
+                    color: @hoverTextColor;
+                }
+
+                &:active {
+                    background-color: @activeColor;
+                    color: @hoverTextColor;
+                }
+
+                .very-big {
+                    font-size: @very-big-text;
+                }
+
+                .big {
+                    font-size: @big-text;
+                }
+
+                .mid {
+                    font-size: @mid-text;
+                }
+
+                .small {
+                    font-size: @small-text;
+                }
+
+                .very-small {
+                    font-size: @very-samll-text;
+                }
+            }
+        }
+        .tip{
             color: @tipTextColor;
         }
     }
-    .form{
-        .font-normal();
-        font-size: @big-text;
-        margin: @margin-general 0;
-        .form-item{
-            display: flex;
-            margin: @margin-general 0;
-            justify-content: space-between;
-            .label{
-                width: 400px;
-            }
-        }
+}
+
+@media screen and(min-width:@smallpc-device) {
+    .options-container {
+        margin-top: @margin-general;
     }
 }
