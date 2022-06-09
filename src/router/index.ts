@@ -81,7 +81,7 @@ const routes:RouteRecordRaw[] = [
             {
                 path: 'options',
                 name: 'Options',
-                meta: { requireAuth: false, keepAlive: false },
+                meta: { requireAuth: false, keepAlive: true },
                 component: () => import('@/views/options/index.vue')
             },
         ]
