@@ -13,6 +13,7 @@
       max-height: 30rem;
       overflow: hidden;
       width: 100%;
+      height: 20rem;
       display: flex;
       align-items: center;
       border: 5px @tipTextColor solid;
@@ -53,9 +54,11 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
+          flex-wrap: wrap;
           .author {
             font-size: @small-text;
             margin-right: 3rem;
+            flex-shrink: 0;
           }
           i{
             margin-right: .5rem;

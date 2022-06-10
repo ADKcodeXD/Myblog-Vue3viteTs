@@ -3,7 +3,7 @@
     <div class="my-info-easy">
         <!-- icon 头像 -->
         <div class="avatar">
-            <UploadAvatar @changeAvatar="changeAvatar" :is-show="false" :avatar="currentUser.avatar" />
+            <UploadAvatar @imglink="changeAvatar" :is-show="false" :avatar="currentUser.avatar" v-if="currentUser.avatar"/>
         </div>
         <div class="infobox">
             <!-- 用户名 -->

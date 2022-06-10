@@ -12,7 +12,7 @@
 <script setup lang="ts" >
 import { ElMessage } from "element-plus";
 import type { UploadProps } from 'element-plus';
-import { useUpload } from "@/hooks/upload";
+import { useUpload } from "@/hooks/useUpload";
 const props = defineProps({
   banner: {
     type: String,
@@ -46,6 +46,7 @@ const handleExceed:UploadProps['onExceed']= (files, fileList) => {
     position: absolute;
     right: 20px;
     bottom: 30px;
+    z-index: 1;
   }
 }
 </style>

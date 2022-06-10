@@ -24,19 +24,22 @@
       <div v-if="isLogin" :key="1" class="temp">
         <div class="login-box">
           <div class="loginform">
-            <div class="tw-w-48 tw-my-5">
-              <MyElimage :img="Login" />
+            <div class="tw-w-48 tw-my-5 label--big">
+              <p class="zh">登录</p>
+              <p class="en">Login to ADKBLOG</p>
             </div>
             <ElForm label-position="left" ref="ruleFormRef" :rules="rules" :model="form">
               <ElFormItem prop="username">
-                <div class="tw-w-32 tw-h-10 tw-mr-5">
-                  <MyElimage :img="Username" />
+                <div class="tw-w-32 tw-h-10 tw-mr-5 label">
+                  <p class="zh">用户名</p>
+                  <p class="en">Username</p>
                 </div>
                 <ElInput v-model="form.username"></ElInput>
               </ElFormItem>
               <ElFormItem prop="password">
-                <div class="tw-w-32 tw-h-10 tw-mr-5">
-                  <MyElimage :img="Password" />
+                <div class="tw-w-32 tw-h-10 tw-mr-5 label">
+                  <p class="zh">密 &nbsp; 码</p>
+                  <p class="en">Password</p>
                 </div>
                 <ElInput type="password" v-model="form.password" ></ElInput>
               </ElFormItem>
@@ -60,31 +63,41 @@
       <div v-else :key="2" class="temp">
         <div class="login-box">
           <div class="loginform">
-            <div class="tw-w-72 md:tw-w-96 tw-my-5">
-              <MyElimage :img="Register" />
+            <div class=" tw-my-5 tw-flex tw-items-center">
+              <div class="left tw-w-20">
+                <MyElimage :img="LogoIcon" />
+              </div>
+              <div class="tw-flex tw-flex-col reg">
+                <p class="register">欢迎注册到<span class="cartoon"><span>ADK</span>-Blog</span></p>
+                <p class="shita">Register to ADK-Blog</p>
+              </div>
             </div>
             <ElForm label-position="left" ref="registerFormRef" :rules="registerRules" :model="registerForm">
               <ElFormItem prop="username">
-                <div class="tw-w-32 tw-h-10 tw-mr-5">
-                  <MyElimage :img="Username" />
+                <div class="tw-w-32 tw-h-10 tw-mr-5 label">
+                  <p class="zh">用户名</p>
+                  <p class="en">Username</p>
                 </div>
                 <ElInput v-model="registerForm.username" ></ElInput>
               </ElFormItem>
               <ElFormItem prop="nickname">
-                <div class="tw-w-32 tw-h-10 tw-mr-5">
-                  <MyElimage :img="Nickname" />
+                <div class="tw-w-32 tw-h-10 tw-mr-5 label">
+                  <p class="zh">昵&nbsp;&nbsp;称</p>
+                  <p class="en">Nickname</p>
                 </div>
                 <ElInput v-model="registerForm.nickname"></ElInput>
               </ElFormItem>
               <ElFormItem prop="password">
-                <div class="tw-w-32 tw-h-10 tw-mr-5">
-                  <MyElimage :img="Password" />
+                <div class="tw-w-32 tw-h-10 tw-mr-5 label">
+                  <p class="zh">密 &nbsp; 码</p>
+                  <p class="en">Password</p>
                 </div>
                 <ElInput type="password" v-model="registerForm.password" ></ElInput>
               </ElFormItem>
               <ElFormItem prop="repassword">
-                <div class="tw-w-32 tw-h-10 tw-mr-5">
-                  <MyElimage :img="RePassword" />
+                <div class="tw-w-32 tw-h-10 tw-mr-5 label">
+                  <p class="zh">确认密码</p>
+                  <p class="en">Confirm</p>
                 </div>
                 <ElInput type="password" v-model="registerForm.repassword" ></ElInput>
               </ElFormItem>
@@ -115,13 +128,9 @@ import {
   useRegisterMethod,
   useRoles,
 } from "@/hooks/login";
-import Login from './imgs/login-logo.png'
-import Username from './imgs/username.png'
-import Password from './imgs/password.png'
-import RePassword from './imgs/repassword.png'
-import Nickname from './imgs/nickname.png'
 import Register from './imgs/register-logo.png';
 import Logo from '@/assets/img/new-logo.png';
+import LogoIcon from '@/assets/img/logo-icon.png';
 import Jieshao from './imgs/介绍.png';
 import gsap from 'gsap';
 import { CustomEase } from "gsap/CustomEase";

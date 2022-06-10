@@ -20,7 +20,7 @@
         .temp{
           position: absolute;
           left: 15vw;
-          top: 20%;
+          top: 12%;
         }
         .imgbox {
           position: absolute;
@@ -41,6 +41,7 @@
           display: block;
           width: 70vw;
           height: 70vh;
+          min-height: 50rem;
           border: @border-line solid @textColor;
           .shadow(5px,0px,@themeColor);
           border-radius: 30px;
@@ -60,6 +61,49 @@
             :deep(.el-form-item__error){
               .font-normal();
               top: 110%;
+            }
+            .label{
+              .font-normal();
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              color: @textColor;
+              .zh{
+                font-size: @big-text;
+              }
+              .en{
+                font-size: @small-text;
+              }
+              &--big{
+                .font-normal();
+                color: @textColor;
+                .zh{
+                  font-size: 3rem;
+                }
+                .en{
+                  font-size: @small-text;
+                }
+              }
+            }
+            .reg{
+              color: @textColor;
+              .register{
+                .font-ura();
+                font-size: @very-big-text;
+                .cartoon{
+                  font-family: 'Cartoonfont';
+                  color: @linkColor;
+                  font-size: @big-text;
+                  span{
+                    font-size: @very-big-text;
+                    color: @themeColor;
+                  }
+                }
+              }
+              .shita{
+                font-size: @big-text;
+                font-family: 'Cartoonfont';
+              }
             }
             .btn {
               width: 100%;

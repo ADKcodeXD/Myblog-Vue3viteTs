@@ -57,6 +57,7 @@
       <!-- 评论分页 -->
       <MyPagination :pageparams="pageparams" :total="totalComment" @changePage="changePage" class="page" />
     </div>
+    <Footer />
   </div>
 </template>
 
