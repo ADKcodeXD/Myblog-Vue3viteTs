@@ -1,9 +1,14 @@
-import {useUpload} from "./upload";
 import {ElInput, ElMessage, ElNotification, UploadProps} from 'element-plus';
 import {getItem, removeItem, setItem} from "@/utils/storage";
-import {ref, reactive, onBeforeMount, onUnmounted, Ref} from "vue";
+import {
+    ref,
+    reactive,
+    onBeforeMount,
+    onUnmounted,
+    Ref
+} from "vue";
 import {addTag, getTagList, publishArticle} from "@/api/article";
-import { useStore } from "@/store/main";
+import {useStore} from "@/store/main";
 export const useEditor = () => { // 存放两种内容的地方
     const content = reactive < Content > ({html: "", text: ""});
     const contentRich = reactive < Content > ({html: "", text: ""});
@@ -93,7 +98,7 @@ export const useAddtag = (emit : any) => { // 动态增加标签
     }
 }
 
-export const useTagAndArticle = (editorName:Ref<string>,imglink:Ref<string>,contentRich:Content,content:Content) => {
+export const useTagAndArticle = (editorName : Ref < string >, imglink : Ref < string >, contentRich : Content, content : Content) => {
     const store = useStore();
     const router = useRouter();
     // elm input
@@ -181,7 +186,9 @@ export const useTagAndArticle = (editorName:Ref<string>,imglink:Ref<string>,cont
                 if (tag.id === item.id) 
                     flag = false
 
+
                 
+
 
             })
             return flag;

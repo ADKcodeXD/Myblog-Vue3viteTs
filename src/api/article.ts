@@ -29,18 +29,27 @@ export const listArticle = (pageParams: PageParams) => {
 
 
 /**
- * uploadBanner 上传文章头图 获取图片oss地址
- * @param imgFile 
+ * uploadImage 用于上传图片 获取图片oss地址
+ * 设置了60s的超时时间
+ * @param imgFile 上传的文件
+ * @param cb 用于接受上传的进度的函数 可以在这个函数里获取到一个progressEvent
+ * @param source 用于控制该axios请求 可以使用这个来控制取消请求
  * @returns 
  */
-export const uploadBanner = (imgFile: any) => {
+export const uploadImage = (imgFile: any,cb?:any,source?:any) => {
     return request({
         method: 'post',
         url: '/api/upload/img',
         data: imgFile,
-        header: {
+        headers: {
             'Content-Type': 'multipart/form-data'
-        }
+        },
+        onUploadProgress:e=>{
+            if(e.lengthComputable){
+                cb(e);
+            }
+        },
+        timeout:60000,
     })
 }
 /**

@@ -7,6 +7,9 @@ export const useStore = defineStore('main', {
         // 这里写变量
         user:{
           token:getItem("user")||""
+        },
+        cancel:{
+
         }
     }
   },
@@ -14,6 +17,9 @@ export const useStore = defineStore('main', {
   // state: () => ({ count: 0 })
   actions: {
     // 这里写方法action
+    setCancel(cancelObj){
+      this.cancel=cancelObj
+    }
   },
   getters:{
     //   getters
