@@ -7,23 +7,27 @@
         margin: @margin-general;
         margin-top: 6.8rem;
         .font-normal();
+
         .title {
-            font-size: @very-big-text;
+            font-size: 2rem;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+
             span {
-                font-size: @mid-text;
+                font-size: 1.3rem;
                 color: @tipTextColor;
             }
-            .right{
+
+            .right {
                 display: flex;
-                font-size: @big-text;
+                font-size: 1.5rem;
                 align-items: flex-end;
                 color: @linkColor;
-                p{
+
+                p {
                     cursor: pointer;
-                    margin:0 @margin-general;
+                    margin: 0 1rem;
                 }
             }
         }
@@ -31,38 +35,44 @@
         .form {
             display: flex;
             flex-direction: column;
-            font-size: @big-text;
+            font-size: 1.5rem;
             margin: @margin-general 0;
+
             .pannel {
-                padding: 0 @padding-general;
+                padding: 0 1rem;
                 display: flex;
                 flex-direction: column;
             }
 
             .form-item {
                 display: flex;
-                margin: @margin-general 0;
+                margin: 1rem 0;
                 justify-content: space-between;
+                flex-wrap: wrap;
 
                 .label {
                     width: 20rem;
+                    flex-shrink: 0;
                 }
 
                 .background {
-                    flex: 1;
+                    flex-shrink: 0;
+                    flex-grow: 1;
+                    min-width: 30rem;
                     height: 20rem;
                 }
             }
 
             .demo {
                 display: flex;
-                margin: @margin-general;
+                margin: 1rem;
                 flex-direction: column;
                 align-self: center;
                 .border-normal();
                 background-color: @bgColor;
                 color: @textColor;
-                padding: @padding-general;
+                padding: 1rem;
+                width: 60vw;
                 cursor: pointer;
 
                 &:hover {
@@ -101,7 +111,8 @@
                 }
             }
         }
-        .tip{
+
+        .tip {
             color: @tipTextColor;
         }
     }
@@ -110,5 +121,12 @@
 @media screen and(min-width:@smallpc-device) {
     .options-container {
         margin-top: @margin-general;
+
+        .form {
+            .demo {
+                width: 40rem;
+            }
+        }
     }
+
 }

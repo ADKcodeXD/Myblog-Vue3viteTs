@@ -6,7 +6,7 @@
     <!-- 头部 -->
     <TopNavBar />
     <!-- banner -->
-    <ThemeConfig />
+    <ThemeConfig v-if="themeConfig" />
     <div class="main">
       <!-- 导航 -->
       <!-- routerview -->
@@ -27,7 +27,7 @@ import { setConfig } from "@/theme/theme";
 const cachePages = useCacheStore();
 const pages = cachePages.cachePages;
 const route = useRoute();
-
+const themeConfig=ref(false)
 // 监视页面 并动态设置页面缓存
 watch(route, (to) => {
   if (to.meta.keepAlive) {
@@ -39,6 +39,7 @@ watch(route, (to) => {
 
 onMounted(() => {
   setConfig();
+  themeConfig.value=true;
 });
 </script>
 

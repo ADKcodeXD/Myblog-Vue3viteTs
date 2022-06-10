@@ -1,81 +1,90 @@
+@import url(@/assets/styles/anime/anime.less);
+
 @media screen and(min-width:@mobile-device) {
-    .theme-global{
-        .ball(4rem,@themeColor);
+    .out {
+        .ball(6rem, @bgColor);
         .flexbox();
         .shadow();
         position: fixed;
         right: 20px;
-        bottom: -2rem;
+        bottom: 6rem;
         z-index: 3;
         font-size: @big-text;
-        transform: rotateZ(-90deg);
         color: @textColor;
-        background-color: @bgColor;
-        transition: all 0.5s ease;
-        cursor: pointer;
-        &:hover{
-            bottom: 1rem;
-            transform: rotateZ(0deg);
-            color: @hoverTextColor;
-            background-color: @activeColor;
-        }
-        &.active{
-            bottom: 1rem;
-            color: @hoverTextColor;
-            background-color: @activeColor;
+        .theme-global {
+            .ball(6rem, @bgColor);
+            .flexbox();
+            transition: all 0.5s ease;
+            cursor: pointer;
+            &:hover,
+            &.active {
+                transform: rotateZ(0deg);
+                color: @hoverTextColor;
+                background-color: @activeColor;
+                animation: rotation-loop infinite 2s linear both;
+            }
         }
     }
-    .mini-setting{
+
+    .mini-setting {
         position: fixed;
-        bottom: 5.5rem;
-        right: 20px;
         .border-normal();
         .shadow();
         .font-normal();
+        bottom: 13rem;
+        right: 25px;
         width: 85%;
         height: 50vh;
         z-index: 100;
         background-color: @bgColor;
         padding: @padding-general;
         color: @textColor;
-        .tip{
-            font-size: @very-samll-text;
+        .tip {
+            font-size: 0.8rem;
             color: @tipTextColor;
         }
-        .title{
-            font-size: @big-text;
+
+        .title {
+            font-size: 1.5rem;
             display: flex;
             width: 100%;
             justify-content: space-between;
             align-items: flex-end;
             flex-direction: row;
-            span{
-                font-size: @mid-text;
+
+            span {
+                font-size: 1.3rem;
                 color: @tipTextColor;
             }
-            .right{
+
+            .right {
                 display: flex;
-                font-size: @mid-text;
+                font-size: 1.3rem;
                 color: @linkColor;
                 align-items: flex-end;
-                p{
+
+                p {
                     cursor: pointer;
-                    margin:0 @margin-general;
+                    margin: 0 @margin-general;
                 }
             }
-            
+
         }
-        .pannel{
+
+        .pannel {
             display: flex;
             flex-direction: column;
-            .form-item{
+
+            .form-item {
                 display: flex;
                 margin: 2px 0;
                 justify-content: space-between;
-                .label{
+
+                .label {
                     width: 20rem;
                 }
-                .background{
+
+                .background {
                     flex: 1;
                     height: 20rem;
                 }
@@ -83,15 +92,30 @@
         }
     }
 }
+
 @media screen and (min-width:@pad-device) {
+    .out{
+        .ball(4rem, @bgColor);
+        bottom: 6rem;
+        .theme-global{
+            .ball(4rem, @bgColor);
+        }
+    }
     .mini-setting{
         width: 60%;
-        height: 40vh;
+        bottom: 11rem;
     }
+    
 }
+
 @media screen and (min-width:@smallpc-device) {
-    .mini-setting{
+    .out{
+        .theme-global{
+            bottom: 4rem;
+        }
+    }
+    .mini-setting {
         width: 600px;
-        height:500px;
+        height: 500px;
     }
 }

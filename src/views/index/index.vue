@@ -66,18 +66,17 @@ import { getIndexArticleApi, getIndexBanner } from "@/api/article";
 import TimeLine from "./components/TimeLine.vue";
 import TagsAll from './components/TagsAll.vue';
 import ArticleTimeLine from "./components/ArticleTimeLine.vue";
-import Jinqi from '@/assets/img/近期更新.png';
 // Default SortableJS
 import Sortable from 'sortablejs';
 import SubTitle from "./components/SubTitle.vue";
 // 获取首页文章 按照时间顺序 5篇
-let articles = ref<ArticleItemInfo[]>([]);
-let bannerList = ref<Banner[]>([]);
-let pageparams: PageParams = {
+const articles = ref<ArticleItemInfo[]>([]);
+const bannerList = ref<ArticleItemInfo[]>([]);
+const pageparams: PageParams = {
   page: 1,
   pagesize: 5,
 };
-let isHover = ref(true)
+const isHover = ref(true)
 // 获取文章列表
 const getIndexfive = async () => {
   const { data } = await getIndexArticleApi(pageparams);

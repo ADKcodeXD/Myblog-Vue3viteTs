@@ -83,7 +83,7 @@
             <div class="pannel">
                 <div class="form-item">
                     <span class="label">超大文字(verybig)大小(rem)</span>
-                    <el-slider :min="0.5" :max="10" :step="0.1" v-model="localConfig.veryBigText" />
+                    <el-slider :min="0.5" :max="12" :step="0.1" v-model="localConfig.veryBigText" />
                 </div>
                 <div class="form-item">
                     <span class="label">大文字(big)大小(rem)</span>
@@ -91,15 +91,15 @@
                 </div>
                 <div class="form-item">
                     <span class="label">中文字(mid)大小(rem)</span>
-                    <el-slider :min="0.5" :max="10" :step="0.1" v-model="localConfig.midText" />
+                    <el-slider :min="0.5" :max="8" :step="0.1" v-model="localConfig.midText" />
                 </div>
                 <div class="form-item">
                     <span class="label">小文字(small)大小(rem)</span>
-                    <el-slider :min="0.5" :max="10" :step="0.1" v-model="localConfig.smallText" />
+                    <el-slider :min="0.5" :max="2.5" :step="0.05" v-model="localConfig.smallText" />
                 </div>
                 <div class="form-item">
                     <span class="label">超小文字(verysmall)大小(rem)</span>
-                    <el-slider :min="0.5" :max="10" :step="0.1" v-model="localConfig.verySamllText" />
+                    <el-slider :min="0.5" :max="2" :step="0.05" v-model="localConfig.verySamllText" />
                 </div>
                 <div class="form-item">
                     <span class="label">padding标准值(rem)</span>
@@ -196,9 +196,17 @@ const saveLocal = () => {
 const isClick = ref(false);
 const setDefaultFn=()=>{
     setDefault();
+    const newconfig=getItem('globalConfig');
+    for(let key in localConfig){
+        localConfig[key]=newconfig[key];
+    }
 }
 const setDarkFn=()=>{
     setDark();
+    const newconfig=getItem('globalConfig');
+    for(let key in localConfig){
+        localConfig[key]=newconfig[key];
+    }
 }
 onMounted(() => {
     watchEffect(() => {

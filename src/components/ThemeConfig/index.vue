@@ -1,6 +1,8 @@
 <template >
-    <div class="theme-global" title="更改主题颜色" @click="isElShow = true" :class="{ active: isElShow }">
-        <i class="iconfont icon-shezhi"></i>
+    <div class="out">
+        <div class="theme-global" title="更改主题颜色" @click="isElShow = true" :class="{ active: isElShow }">
+            <i class="iconfont icon-shezhi"></i>
+        </div>
     </div>
     <div class="mini-setting" v-if="isElShow" ref="target">
         <ElScrollbar>
@@ -12,7 +14,7 @@
                 <div class="right">
                     <p @click="setDefault">重置所有</p>
                     <p @click="setDark">暗黑主题</p>
-                    <p @click="$router.push('/index/options');isElShow=false">跳转设置页面</p>
+                    <p @click="$router.push('/index/options'); isElShow = false">跳转设置页面</p>
                 </div>
             </div>
             <p class="tip">设置完毕请拉到底部点击保存,保存后可在下次自动载入</p>
@@ -32,23 +34,23 @@
                 </div>
                 <div class="form-item">
                     <span class="label">超大文字(verybig)大小(rem)</span>
-                    <el-slider :min="0.5" :max="10" :step="0.1" v-model="localConfig.veryBigText" />
+                    <el-slider :min="0.5" :max="5" :step="0.1" v-model="localConfig.veryBigText" />
                 </div>
                 <div class="form-item">
                     <span class="label">大文字(big)大小(rem)</span>
-                    <el-slider :min="0.5" :max="10" :step="0.1" v-model="localConfig.bigText" />
+                    <el-slider :min="0.5" :max="5" :step="0.1" v-model="localConfig.bigText" />
                 </div>
                 <div class="form-item">
                     <span class="label">中文字(mid)大小(rem)</span>
-                    <el-slider :min="0.5" :max="10" :step="0.1" v-model="localConfig.midText" />
+                    <el-slider :min="0.5" :max="4" :step="0.1" v-model="localConfig.midText" />
                 </div>
                 <div class="form-item">
                     <span class="label">小文字(small)大小(rem)</span>
-                    <el-slider :min="0.5" :max="10" :step="0.1" v-model="localConfig.smallText" />
+                    <el-slider :min="0.5" :max="3" :step="0.1" v-model="localConfig.smallText" />
                 </div>
                 <div class="form-item">
                     <span class="label">超小文字(verysmall)大小(rem)</span>
-                    <el-slider :min="0.5" :max="10" :step="0.1" v-model="localConfig.verySamllText" />
+                    <el-slider :min="0.5" :max="3" :step="0.1" v-model="localConfig.verySamllText" />
                 </div>
                 <div class="form-item">
                     <span class="label">圆角度(rem)</span>
@@ -78,25 +80,27 @@
         </ElScrollbar>
     </div>
 </template>
-<script setup lang="ts">import { getItem } from '@/utils/storage';
+<script setup lang="ts">
+import { getItem } from '@/utils/storage';
 import { ElMessage } from 'element-plus';
 import { onClickOutside } from '@vueuse/core'
-import { setConfig ,setDark,setDefault} from '@/theme/theme';
+import { setConfig, setDark, setDefault } from '@/theme/theme';
 const localConfig = reactive(getItem('globalConfig') as GlobalConfig);
+
 const saveLocal = () => {
     ElMessage.success('保存到本地成功!');
     setConfig(localConfig, true);
 }
 const isElShow = ref(false);
 const target = ref();
-onClickOutside(target, (event:any) => {
-    let regex=new RegExp(/el-[\s\S]*/g);
-    let className=event.target.className
-    if(!className){
-        className=event.target.parentNode.className;
+onClickOutside(target, (event: any) => {
+    let regex = new RegExp(/el-[\s\S]*/g);
+    let className = event.target.className
+    if (!className) {
+        className = event.target.parentNode.className;
     }
     if (!regex.test(className)) {
-        isElShow.value=false;
+        isElShow.value = false;
     }
 });
 onMounted(() => {
