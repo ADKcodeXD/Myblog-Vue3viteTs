@@ -1,5 +1,5 @@
 <template>
-  <div class="anime-card" v-if="animeInfo" @mouseenter="requestInfo" @mouseleave="detailInfoShow = false">
+  <div class="anime-card" ref="nowcard" v-if="animeInfo" @mouseenter="requestInfo" @mouseleave="detailInfoShow = false">
     <div class="card">
       <el-image :src="animeInfo.images && animeInfo.images.large" fit="cover" class="elimg">
         <template #placeholder>
@@ -36,7 +36,7 @@
               <p class="desc" :key="2" :data-index="1">简介:{{ animeDetailData.summary }}</p>
               <div :key="3" :data-index="2">
                 <p class="tw-mt-1">总集数:{{ animeDetailData.eps }}</p>
-                <p class="tw-text-red-500">评分:{{ animeInfo.rating.score ? animeInfo.rating.score : '暂无评分'
+                <p class="tw-text-red-500" v-if="animeInfo.rating">评分:{{ animeInfo.rating.score ? animeInfo.rating.score : '暂无评分'
                 }}&nbsp;<span>({{ animeInfo.rating.total
 }}人参加评分)</span></p>
                 <div class="tw-flex tw-justify-between tw-items-end tw-flex-wrap">
@@ -87,18 +87,21 @@ const props = defineProps({
     default: {},
   },
 });
+const emit=defineEmits(['scrollLeft']);
 const {
   infoXenter,
   infoXleave,
 } = useAnime();
-let detailInfoShow = ref(false);
-let animeDetailData = ref<null | Bangumi.SubjectInfoSmall>();
+const detailInfoShow = ref(false);
+const animeDetailData = ref<null | Bangumi.SubjectInfoSmall>();
+const nowcard=ref<HTMLElement>();
 const getSubjectInfo = async (id: number) => {
   const { data } = await getSubjectInfoApi(id);
   animeDetailData.value = data;
 }
 const requestInfo = async () => {
   detailInfoShow.value = true;
+  emit('scrollLeft',nowcard.value.offsetWidth);
   if (!animeDetailData.value) {
     getSubjectInfo(props.animeInfo.id);
   } else {

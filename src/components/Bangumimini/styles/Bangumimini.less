@@ -1,7 +1,8 @@
 .tip {
     font-family: 'urafont';
     font-weight: 600;
-    font-size: 20px;
+    font-size: @mid-text;
+    color: @tipTextColor;
 }
 
 @media screen and (min-width: @mobile-device) {
@@ -50,14 +51,24 @@
     .tab-inner {
         display: flex;
         justify-content: space-around;
-        flex-wrap: wrap;
         overflow: auto;
-        height: 50rem;
+        flex-wrap: wrap;
+        height: 46rem;
         padding:@padding-general;
         flex: 1;
     }
 }
-
+@media screen and (min-width:@smallpc-device) {
+    .tab-inner {
+        display: flex;
+        justify-content: flex-start;
+        overflow-y: auto;
+        flex-wrap: nowrap;
+        padding:@padding-general;
+        height: unset;
+        flex: 1;
+    }
+}
 @media screen and (min-width: @normal-device) {
 
     .bangumi {
