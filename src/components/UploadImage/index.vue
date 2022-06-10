@@ -1,24 +1,31 @@
 <template >
     <el-upload class="upload-demo" action="" :on-remove="handleRemove" :before-remove="beforeRemove"
-        :before-upload="beforeBannerUpload" :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg"
-        :on-exceed="handleExceed">
+        :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg" :on-exceed="handleExceed" :auto-upload="true"
+        :before-upload="beforeUpload" ref="uploadEl" :http-request="upload">
         <div class="upload-banner">
-            <MyElimage :img="imglink" v-if="imglink" />
-            <div class="tip" v-else>
-                <div v-if="!loading" class="inner">
+            <div class="tip" v-if="!imglink">
+                <div class="inner">
                     <span style="font-size: 80px;">+</span>
                     <slot></slot>
                 </div>
-                <div v-else class="loading">
-                    <LoadingAnime />
+            </div>
+            <div v-else class="tw-h-full tw-w-full">
+                <div class="tip" v-if="loading">
+                    <div class="loading_percent">
+                        <LoadingAnime />
+                        {{ loadingPercent }}%
+                        <ElButton type="danger" @click.stop="cancelUpload">
+                            取消上传
+                        </ElButton>
+                    </div>
                 </div>
+                <MyElimage :img="imglink" not-found-type="3:1" />
             </div>
         </div>
     </el-upload>
 </template>
 <script setup lang="ts">
-import { useUploadImg } from './hooks/useUpload';
-
+import { useUploadImg } from '@/hooks/useUpload';
 const props = defineProps({
     imglink: {
         type: String,
@@ -26,9 +33,19 @@ const props = defineProps({
     }
 })
 const emit = defineEmits(['imglink']);
-const { imglink, loading, handleRemove, beforeRemove, handleExceed, beforeBannerUpload } = useUploadImg(emit, props.imglink);
+const { imglink,
+    handleRemove,
+    beforeRemove,
+    handleExceed,
+    beforeUpload,
+    cancelUpload,
+    upload,
+    loading,
+    loadingPercent,
+    uploadEl } = useUploadImg(emit, props.imglink);
 
 </script>
+
 <style lang="less" scoped>
 .upload-demo {
     padding: 20px 0;
@@ -50,6 +67,7 @@ const { imglink, loading, handleRemove, beforeRemove, handleExceed, beforeBanner
         overflow: hidden;
         background-color: @tipTextColor;
         transition: background-color 0.3s ease;
+        position: relative;
 
         &:hover {
             border: @linkColor @border-line dashed;
@@ -57,17 +75,26 @@ const { imglink, loading, handleRemove, beforeRemove, handleExceed, beforeBanner
         }
 
         .tip {
+            position: absolute;
             .flexbox(column);
             .font-normal();
+            z-index: 5;
             height: 100%;
             width: 100%;
-            .inner{
+            backdrop-filter: blur(3px);
+
+            .inner {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
             }
-            .loading{
-                background-color: @bgColor;
+
+            .loading_percent {
+                color: @hoverTextColor;
+                .flexbox(column);
+                padding: @padding-general;
+                width: 100%;
+                height: 100%;
             }
         }
     }

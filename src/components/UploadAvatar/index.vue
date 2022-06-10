@@ -1,27 +1,33 @@
 <template>
-  <div class="upload">
-    <el-upload action="noaction" :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg" :on-exceed="handleExceed"
-      :before-upload="beforeAvatarUpload">
-      <div class="avatar">
-        <MyElimage :img="avatar ? avatar : logo" />
+  <div class="out">
+    <el-upload class="upload" action="" :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg"
+      :on-exceed="handleExceed" :before-upload="beforeUpload" :http-request="upload" ref="uploadEl">
+      <div class="upload-banner">
+        <div class="tip" v-if="!imglink">
+          <div class="inner">
+            &#128513;
+          </div>
+        </div>
+        <div v-else class="tw-h-full tw-w-full">
+          <div class="tip" v-if="loading">
+            <div class="loading_percent">
+              <LoadingAnime />
+              {{ loadingPercent }}%
+            </div>
+          </div>
+          <MyElimage :img="imglink" />
+        </div>
       </div>
-      <p style="font-size: 12px" v-if="isShow">点此上传头像</p>
     </el-upload>
+    <p v-if="isShow">点击上传头像</p>
   </div>
 </template>
 
 <script lang="ts" setup>
 import img from "@/assets/logo.png";
-import { ElMessage } from "element-plus";
-import { useUpload } from "@/hooks/upload";
-import type { UploadProps } from 'element-plus';
-import logo from '@/assets/img/logo.png';
-const emit = defineEmits(['changeAvatar'])
+import { useUploadImg } from "@/hooks/useUpload";
+const emit = defineEmits(['imglink']);
 const props = defineProps({
-  size: {
-    type: Number,
-    default: 60,
-  },
   avatar: {
     type: String,
     default: img,
@@ -31,48 +37,74 @@ const props = defineProps({
     default: true,
   },
 });
+const { imglink,
+  handleExceed,
+  beforeUpload,
+  upload,
+  loading,
+  loadingPercent,
+  uploadEl } = useUploadImg(emit,props.avatar);
 
-let avatarLink = ref<string | undefined>("");
-avatarLink.value = props.avatar;
-const handleExceed: UploadProps['onExceed'] = (files, fileList) => {
-  ElMessage.warning("只能上传一张头图");
-};
-const beforeAvatarUpload: UploadProps['beforeUpload'] = async (file) => {
-  const url = await useUpload(file);
-  if (url == "") return false;
-  emit("changeAvatar", url);
-};
 </script>
 
 <style lang="less" scoped>
-.upload {
-  display: flex;
+.out{
   width: 100%;
   height: 100%;
-  flex-direction: column;
-
-  &>div {
+  .flexbox(column,flex-start);
+}
+.upload {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  :deep(.el-upload) {
     width: 100%;
     height: 100%;
   }
 
-  :deep(.el-upload) {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100%;
-    width: 100%
-  }
-
-  .avatar {
-    .flexbox(row);
-    background-color: rgb(0, 0, 0);
-    margin: 0 auto;
+  .upload-banner {
+    border: @border-line dashed @textColor;
+    .flexbox();
     border-radius: 50%;
     width: 100%;
     height: 100%;
-    flex-shrink: 0;
     overflow: hidden;
+    background-color: @tipTextColor;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      border: @linkColor @border-line dashed;
+      background-color: @bgColor;
+    }
+
+    .tip {
+      position: absolute;
+      .flexbox(column);
+      z-index: 5;
+      height: 100%;
+      width: 100%;
+      backdrop-filter: blur(3px);
+      border-radius: 50%;
+
+      .inner {
+        height: 100%;
+        width: 100%;
+        .flexbox();
+        font-size: 60px;
+      }
+
+      .loading_percent {
+        color: @hoverTextColor;
+        .flexbox(column);
+        padding: @padding-general;
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 }
 </style>

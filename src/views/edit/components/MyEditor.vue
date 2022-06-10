@@ -17,7 +17,7 @@
 <script lang="ts" setup>
 import { PropType } from "vue";
 import Editor from "@tinymce/tinymce-vue";
-import { uploadBanner } from "@/api/article";
+import { uploadImage } from "@/api/article";
 import MdEditor from "md-editor-v3";
 import "md-editor-v3/lib/style.css";
 import { useThemeStore } from "@/store/theme";
@@ -83,7 +83,7 @@ let editorInit = {
     let formdata = new FormData();
     formdata.append("image", blobInfo.blob());
     try {
-      let result = await uploadBanner(formdata);
+      let result = await uploadImage(formdata);
       success(result.data.data);
     } catch (error) {
       failure("error");
@@ -100,7 +100,7 @@ const onUploadImg = async (files: FileList, callback: (urls: string[]) => void) 
       return new Promise((rev, rej) => {
         const form = new FormData();
         form.append('image', file);
-        uploadBanner(form).then((result: any) => {
+        uploadImage(form).then((result: any) => {
           rev(result);
         }).catch((err: any) => {
           rej(err);
