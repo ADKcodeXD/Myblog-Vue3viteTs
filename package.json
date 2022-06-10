@@ -6,6 +6,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "build:prod": "vue-tsc --noEmit && vite build --mode production",
     "dev": "vite",
+    "prod": "vite --mode production",
     "preview": "vite preview"
   },
   "dependencies": {
