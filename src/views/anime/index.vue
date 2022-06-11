@@ -12,15 +12,11 @@
     </div>
   </div>
 </template>
-
-
-
 <script lang="ts">
 export default {
 name:'Anime',
 };
 </script>
-
 <script lang="ts" setup>
 import AnimeHeader from "./components/AnimeHeader.vue";
 import AnimeCarousel from "./components/AnimeCarousel.vue";

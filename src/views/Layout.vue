@@ -9,8 +9,6 @@
     <ThemeConfig v-if="themeConfig" />
     <div class="main">
       <!-- 导航 -->
-      <!-- routerview -->
-      <!-- vue3.0配置 -->
       <RouterView v-slot="{ Component }">
         <keep-alive :include="pages">
           <component :is="Component"></component>
