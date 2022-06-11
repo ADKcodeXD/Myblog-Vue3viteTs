@@ -395,7 +395,16 @@
   "resolved" "https://registry.npmmirror.com/@vue/shared/-/shared-3.2.25.tgz"
   "version" "3.2.25"
 
-"@vueuse/core@*", "@vueuse/core@^8.5.0":
+"@vueuse/components@^8.6.0":
+  "integrity" "sha512-TkRCknGsBk/Zuap4YC9MLf+xpopdAkHugSVcSVFbciyBwqr3LlWVeJ4HHlHKGIBNOWyMQqDW0WFy47xfAPd3WA=="
+  "resolved" "https://registry.npmmirror.com/@vueuse/components/-/components-8.6.0.tgz"
+  "version" "8.6.0"
+  dependencies:
+    "@vueuse/core" "8.6.0"
+    "@vueuse/shared" "8.6.0"
+    "vue-demi" "*"
+
+"@vueuse/core@*", "@vueuse/core@^8.5.0", "@vueuse/core@8.6.0":
   "integrity" "sha512-VirzExCm/N+QdrEWT7J4uSrvJ5hquKIAU9alQ37kUvIJk9XxCLxmfRnmekYc1kz2+6BnoyuKYXVmrMV351CB4w=="
   "resolved" "https://registry.npmmirror.com/@vueuse/core/-/core-8.6.0.tgz"
   "version" "8.6.0"

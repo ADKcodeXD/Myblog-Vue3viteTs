@@ -69,7 +69,7 @@ declare module 'vue' {
     TagChoose: typeof import('./src/components/TagChoose/index.vue')['default']
     TagItem: typeof import('./src/components/TagItem/index.vue')['default']
     TagsGroup: typeof import('./src/components/TagsGroup/index.vue')['default']
-    ThemeConfig: typeof import('./src/components/ThemeConfig/index.vue')['default']
+    ThemeConfig: typeof import('./src/components/ThemeConfig/ThemeConfig.vue')['default']
     TopNavBar: typeof import('./src/components/TopNavBar/index.vue')['default']
     UploadAvatar: typeof import('./src/components/UploadAvatar/index.vue')['default']
     UploadImage: typeof import('./src/components/UploadImage/index.vue')['default']
