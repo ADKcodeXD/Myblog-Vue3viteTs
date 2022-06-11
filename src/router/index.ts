@@ -1,127 +1,164 @@
-import { getItem } from './../utils/storage';
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import {getItem} from './../utils/storage';
+import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
+import {ElMessage, ElMessageBox} from 'element-plus';
 
-const routes:RouteRecordRaw[] = [
+const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        redirect: '/welcome',
+        redirect: '/welcome'
     },
     {
         path: '/index',
         name: 'Layout',
-        component: () => import('@/views/Layout.vue'),
+        component: () => import ('@/views/Layout.vue'),
         children: [
             {
                 path: '',
                 name: 'Index',
-                meta: { requireAuth: false, keepAlive: false },
-                component: () => import('@/views/index/index.vue')
+                meta: {
+                    title: '首页',
+                    requireAuth: false,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/index/index.vue')
             },
             {
                 path: 'edit',
                 name: 'Edit',
-                meta: { requireAuth: true, keepAlive: false },
-                component: () => import('@/views/edit/index.vue')
+                meta: {
+                    requireAuth: true,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/edit/index.vue')
             },
             {
                 path: 'articlelist',
                 name: 'ArticleList',
-                meta: { requireAuth: false, keepAlive: true },
-                component: () => import('@/views/articlelist/index.vue')
+                meta: {
+                    requireAuth: false,
+                    keepAlive: true
+                },
+                component: () => import ('@/views/articlelist/index.vue')
             },
             {
                 path: 'messageboard',
                 name: 'MessageBoard',
-                meta: { keepAlive: true },
-                component: () => import('@/views/messageboard/index.vue')
-            },
-            {
+                meta: {
+                    keepAlive: true
+                },
+                component: () => import ('@/views/messageboard/index.vue')
+            }, {
                 path: 'home',
                 name: 'Home',
-                meta: { requireAuth: true, keepAlive: true },
-                component: () => import('@/views/home/index.vue')
-            },
-            {
+                meta: {
+                    requireAuth: true,
+                    keepAlive: true
+                },
+                component: () => import ('@/views/home/index.vue')
+            }, {
                 path: 'anime',
                 name: 'Anime',
-                meta: { requireAuth: false, keepAlive: true },
-                component: () => import('@/views/anime/index.vue'),
-            },
-            {
+                meta: {
+                    requireAuth: false,
+                    keepAlive: true
+                },
+                component: () => import ('@/views/anime/index.vue')
+            }, {
                 path: 'animedetail/:id',
                 name: 'AnimeDetail',
-                meta: { requireAuth: false, keepAlive: false },
-                component: () => import('@/views/animedetail/index.vue')
-            },
-            {
+                meta: {
+                    requireAuth: false,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/animedetail/index.vue')
+            }, {
                 path: 'animesearch',
                 name: 'AnimeSearch',
-                meta: { requireAuth: false, keepAlive: false },
-                component: () => import('@/views/animesearch/index.vue')
-            },
-            {
+                meta: {
+                    requireAuth: false,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/animesearch/index.vue')
+            }, {
                 path: 'animeplay/:id',
                 name: 'AnimePlay',
-                meta: { requireAuth: false, keepAlive: false },
-                component: () => import('@/views/animeplay/index.vue')
-            },
-            {
+                meta: {
+                    requireAuth: false,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/animeplay/index.vue')
+            }, {
                 path: 'animenew',
                 name: 'AnimeNew',
-                meta: { requireAuth: false, keepAlive: false },
-                component: () => import('@/views/animenew/index.vue')
-            },
-            {
+                meta: {
+                    requireAuth: false,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/animenew/index.vue')
+            }, {
                 path: 'animebgminfo',
                 name: 'AnimeBgmInfo',
-                meta: { requireAuth: false, keepAlive: false },
-                component: () => import('@/views/animebgminfo/index.vue')
-            },
-            {
+                meta: {
+                    requireAuth: false,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/animebgminfo/index.vue')
+            }, {
                 path: 'options',
                 name: 'Options',
-                meta: { requireAuth: false, keepAlive: true },
-                component: () => import('@/views/options/index.vue')
+                meta: {
+                    requireAuth: false,
+                    keepAlive: true
+                },
+                component: () => import ('@/views/options/index.vue')
             },
         ]
     },
     {
         path: '/welcome',
         name: 'welcome',
-        component: () => import('@/views/newindex/index.vue')
+        component: () => import ('@/views/newindex/index.vue')
     },
     {
         path: '/login',
         name: 'login',
-        meta: { requireAuth: false },
-        component: () => import('@/views/login/index.vue')
-    },
-    {
+        meta: {
+            requireAuth: false
+        },
+        component: () => import ('@/views/login/index.vue')
+    }, {
         path: '/article/:id',
         name: 'articledetail',
-        meta: { keepAlive: false },
-        component: () => import('@/views/article/index.vue')
-    },
-    {
+        meta: {
+            keepAlive: false
+        },
+        component: () => import ('@/views/article/index.vue')
+    }, {
         path: '/threeshow',
         name: 'threeshow',
-        component: () => import('@/views/threeshow/index.vue')
-    },
-    {
+        component: () => import ('@/views/threeshow/index.vue')
+    }, {
         path: '/play',
         name: 'Player',
-        meta: { requireAuth: false, keepAlive: false },
-        component: () => import('@/views/animeplay/components/player.vue')
-    },
+        meta: {
+            requireAuth: false,
+            keepAlive: false
+        },
+        component: () => import ('@/views/animeplay/components/player.vue')
+    }, {
+        path: '/:pathMatch(.*)*',
+        name: 'notfound',
+        meta: {
+            title: '页面走失啦~',
+            requireAuth: false,
+            keepAlive: false
+        },
+        component: () => import ('@/views/404.vue')
+    }
 ]
 
 
-const router = createRouter({
-    linkExactActiveClass:"router-active", 
-    history: createWebHistory(),
-    routes
-})
+const router = createRouter({linkExactActiveClass: "router-active", history: createWebHistory(), routes})
 
 router.beforeEach((to, from, next) => {
     const token = getItem("user")
@@ -129,21 +166,15 @@ router.beforeEach((to, from, next) => {
         if (token) {
             next()
         } else {
-            ElMessageBox.confirm(
-                '该页面需要登录才能使用，请问是否跳转到登录页面？',
-                '登录提示',
-                {
-                  confirmButtonText: '确认',
-                  cancelButtonText: '我不去了',
-                  type: 'warning',
-                }
-              )
-                .then(() => {
-                    next({ path: '/login' })
-                })
-                .catch(() => {
-                  return
-                })
+            ElMessageBox.confirm('该页面需要登录才能使用，请问是否跳转到登录页面？', '登录提示', {
+                confirmButtonText: '确认',
+                cancelButtonText: '我不去了',
+                type: 'warning'
+            }).then(() => {
+                next({path: '/login'})
+            }).catch(() => {
+                return
+            })
         }
     } else {
         next()
