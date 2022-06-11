@@ -5,14 +5,68 @@
     <img src="https://img.shields.io/badge/-Pinia-yellow?logo=picpay&logoColor=white" />
     <img src="https://img.shields.io/badge/-Axios-008fc7?logo=axios.js&logoColor=white" />
     <img src="https://img.shields.io/badge/-Less-1D365D?logo=less&logoColor=white" alt="Less">
+    <img src="https://img.shields.io/badge/adk-adkblog-red" alt="Less">
+    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/ADKcodeXD/Myblog-Vue3viteTs">
 <p>  
 
+# ADK-BLOG
 
-# Myblog-Vue3viteTs
+![adkblog](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/0238df3a-a7cd-4376-9951-57c03916cdf9.png?Expires=1812599738&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=zgRvR1hwnqMABsutX6FiZfl5RbY%3D)
 
-个人博客项目，目的是为了搭建一个供个人使用的简单易用的博客，支持简单的登录和注册功能。再加上留言功能。
+**一款二次元风格主题的个人博客**
 
-目前实现功能：发布文章，登录/注册，黑夜白天模式切换，浏览文章，文章排序，标签筛选，评论，留言，个人信息修改，自定义头图。
+展示页:http://adkdream.top
+
+主要功能为:
+
+- 博客的主要功能
+- 抓取bangumi数据 可以获取每日番剧更新
+- 抓取樱花数据 可以进行在线动漫观看
+- 多用户共享博客
+- 二级评论 markdown以及富文本双重编辑器
+- 自定义主题
+- 支持移动端(尽可能支持)
+
+## 预览
+
+![欢迎页视觉效果](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/64d99526-d0cc-4d44-85d0-b56fdf908bfb.png?Expires=1812599815&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=kS99FfYUoKbKXGoVbC9l9YgfpyA%3D)
+
+![首页视觉效果](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/7cd3eb4a-3208-4d9b-9424-d12570be20dd.png?Expires=1812642445&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=lhJoWfYALVNOELc14m6I9TpQmbI%3D)
+
+![文章详情图片效果](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/8a1b1dd8-47aa-4a7a-a4cc-1a83206491be.png?Expires=1812642563&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=Ut2srKWj2uZn%2BmnCgUDTrekSKUE%3D)
+
+![设置界面](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/87bba0c1-cb8a-4fa9-b3e1-27787d9b6771.png?Expires=1812642710&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=6CAXPP4LIgF7KuYAjAQ4A4QvZeM%3D)
+
+更多的请访问*http://adkdream.top*
+
+## 2022.6.11 网站再次更新 主题功能的完成！！！
+
+- 对于主要功能的页面的样式以及风格完成了统一
+- 抽取了所有(主要)页面的less 并且通过css变量的形式实现了自定义控制页面风格
+- type统一declare和定义namespace
+- 定义了几个全局变量用于控制文字大小
+- 新增设置页面
+- 重写了upload的组件和hooks 支持取消上传和上传进度预览
+- 升级了tinymce6.x版本 并且通过本地引入的方式引入tinymce
+- 修复后端bug 如上传的登录拦截 用户的like
+- 重写评论组件 使用了emoji组件自带的输入来实现emoji评论输入 并压缩emoji的编码
+- 对部分elementplus组件的写法根据官网进行了更正
+
+TODO
+
+- https
+- 风格切换的部分bug 以及交互的跟进
+- 开启nuxt3分支 支持服务端渲染
+- 用户的收藏和点赞功能的完善
+- 动漫详情页的重写
+
+此外 我也对我的博客后端进行了开源 地址如下
+
+**https://github.com/ADKcodeXD/ADKblog-backend**
+
+详细更新可以在这里查看:
+
+http://adkdream.top/article/1535536385474035713
 
 ## 2022.5.31 重构了整个网站的样式 并且加入了一些新功能
 
@@ -78,6 +132,7 @@ npm install
 npm run dev
 ```
 
-后端暂不开源，涉及到一些秘钥和apikey  可以参考我之前的项目
+~~后端暂不开源，涉及到一些秘钥和apikey  可以参考我之前的项目~~
 
-https://github.com/ADKcodeXD/Springboot-vue-Blog
+~~https://github.com/ADKcodeXD/Springboot-vue-Blog~~
+
