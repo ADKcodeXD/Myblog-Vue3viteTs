@@ -1,6 +1,6 @@
 <template >
     <div>
-        <div v-html="html" class="markdown-body" @click="ImagePreview($event)"></div>
+        <div v-html="html" v-highlight class="markdown-body" @click="ImagePreview($event)"></div>
         <template v-if="showPreview">
             <ElImageViewer v-if="showPreview"  :infinite="false"
                 :url-list="urlList" :hide-on-click-modal="true" :teleported="false"
@@ -12,6 +12,8 @@
 </template>
 <script setup lang="ts">
 import { isMobile } from '@/utils/mobile';
+import '@/assets/styles/markdown/markdown.less';
+import 'highlight.js/styles/monokai.css';
 const prop = defineProps({
     html: {
         type: String,
