@@ -12,6 +12,7 @@
         font-size: @big-text;
         color: @textColor;
         .theme-global {
+            .border-normal();
             .ball(6rem, @bgColor);
             .flexbox();
             transition: all 0.5s ease;
@@ -43,7 +44,18 @@
             font-size: 0.8rem;
             color: @tipTextColor;
         }
-
+        .close{
+            .ball(3rem,@themeColor);
+            .shadow();
+            .flexbox();
+            color: @hoverTextColor;
+            position: absolute;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 1;
+            top: 5px;
+            right: 5px;
+        }
         .title {
             font-size: 1.5rem;
             display: flex;
@@ -68,7 +80,7 @@
                     margin: 0 @margin-general;
                 }
             }
-
+            
         }
 
         .pannel {
