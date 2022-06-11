@@ -62,21 +62,19 @@
 </template>
 
 <script lang="ts">
-// 定义组件名字 不然include 和keepalive 无法生效
-import { useArticle } from "@/hooks/Article";
-import '@/assets/styles/markdown/github-light.css';
-import 'highlight.js/styles/github.css';
-
 // import css
 export default {
   name: "Article",
 };
 </script>
 <script setup lang="ts">
+// 定义组件名字 不然include 和keepalive 无法生效
+import { useArticle } from "@/hooks/Article";
 import ArticleSummary from "./components/ArticleSummary.vue";
 import ArticleBody from "./components/ArticleBody.vue";
 import Bottom from "./components/Bottom.vue";
 import ToolBars from './components/ToolBars.vue';
+
 // 封装好的hook
 const {
   publishSecond,

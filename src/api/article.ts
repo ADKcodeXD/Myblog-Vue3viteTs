@@ -33,10 +33,9 @@ export const listArticle = (pageParams: PageParams) => {
  * 设置了60s的超时时间
  * @param imgFile 上传的文件
  * @param cb 用于接受上传的进度的函数 可以在这个函数里获取到一个progressEvent
- * @param source 用于控制该axios请求 可以使用这个来控制取消请求
  * @returns 
  */
-export const uploadImage = (imgFile: any,cb?:any,source?:any) => {
+export const uploadImage = (imgFile: any,cb?:any) => {
     return request({
         method: 'post',
         url: '/api/upload/img',

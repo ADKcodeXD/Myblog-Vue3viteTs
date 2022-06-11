@@ -26,8 +26,6 @@ export const useUpload = async (file : File, loadingNum? : Ref < number >) : Pro
             if (loadingNum) {
                 if (e.lengthComputable) 
                     loadingNum.value = Number(((e.loaded / e.total) * 100).toFixed(2));
-                
-
             }
         }).then(({data}) => {
             if (data.code !== 200) {
