@@ -45,7 +45,7 @@ const scrollToElement = (val: number, index) => {
     return
   } else {
     animeFlag.value=true;
-    myRefs.value[nowDay.value - 1].scrollTo({ left: val * index, behavior: 'smooth' });
+    myRefs.value[nowDay.value - 1].scrollTo({ left: (val) * (index-1.2), behavior: 'smooth' });
     setTimeout(() => {
       animeFlag.value=false;
     },500);
