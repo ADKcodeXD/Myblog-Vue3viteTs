@@ -37,7 +37,7 @@ let showPreview=ref(false);
 <style lang="less" scoped>
 .markdown-body {
     margin: @margin-general 0;
-    padding: 30px;
+    padding: @padding-general;
 }
 
 .img{

@@ -1,64 +1,69 @@
 <template>
-  <div class="article">
-    <ThemeConfig />
-    <div class="top">
-      <TopNavBar :back-color="'rgba(0, 0, 0, 0.7)'" />
+  <div class="cotainer" ref="body">
+    <div class="filter">
     </div>
-    <div class="main-body" v-if="article">
-      <!-- banner -->
-      <div class="banner" ref="banner">
-        <img :src="article.banner" />
-      </div>
-      <transition name="onlyopacity">
-        <ToolBars v-if="isToolsShow" :article="article" @like-article="likedArticle" @collect-article="collectArticle"
-          @toComment="toComment" />
-      </transition>
-      <!-- 标题和摘要 -->
-      <div class="article-container" ref="articleContainer">
-        <ArticleSummary :article="article" />
-        <!-- 主体部分 -->
-        <ArticleBody :html="article.body.html" />
-        <!-- 结束部分 显示查看数 点赞数 以及评论数 -->
-        <ElDivider />
-      </div>
-      <Bottom :article="article" @like-article="likedArticle" @collect-article="collectArticle" />
-      <!-- 评论区 -->
-      <div class="comments" ref="comment">
-        <div class="edit-part">
-          <div class="title">
-            <p>{{ totalComment }}条评论</p>
+    <TopNavBar />
+    <div class="banner" v-if="article">
+      <MyElimage :img="article.banner" />
+    </div>
+    <div class="main">
+      <div class="article">
+        <ThemeConfig />
+        <div class="main-body" v-if="article">
+          <transition name="onlyopacity">
+            <ToolBars v-if="isToolsShow" :article="article" @like-article="likedArticle"
+              @collect-article="collectArticle" @toComment="toComment" />
+          </transition>
+          <!-- 标题和摘要 -->
+          <div class="article-container" ref="articleContainer">
+            <ArticleSummary :article="article" />
+            <!-- 主体部分 -->
+            <ArticleBody :html="article.body.html" />
+            <!-- 结束部分 显示查看数 点赞数 以及评论数 -->
+            <ElDivider />
           </div>
-          <ElDivider />
-          <div class="main-content">
-            <div class="avatar">
-              <MyElimage :img="user?.avatar" />
+          <Bottom :article="article" @like-article="likedArticle" @collect-article="collectArticle" />
+          <!-- 评论区 -->
+          <div class="comments" ref="comment">
+            <div class="edit-part">
+              <div class="title">
+                <p>{{ totalComment }}条评论</p>
+              </div>
+              <ElDivider />
+              <div class="main-content">
+                <div class="avatar">
+                  <MyElimage :img="user?.avatar" />
+                </div>
+                <div class="edit-area">
+                  <MyEmoji @changeText="changeComment" ref="emoji" />
+                </div>
+              </div>
+              <div class="button">
+                <ElButtonGroup>
+                  <ElButton @click="publishComment" class="buttonself" :disabled="user?.id === ''" type="success">
+                    发布评论
+                  </ElButton>
+                </ElButtonGroup>
+              </div>
             </div>
-            <div class="edit-area">
-              <MyEmoji @changeText="changeComment" ref="emoji" />
+            <AdkEmpty v-if="commentList.length === 0" desc="还没有评论哦~快来发送第一条吧"></AdkEmpty>
+            <div class="comment-list">
+              <transition-group name="list">
+                <CommentItem class="list-item" v-for="(commentitem, i) in commentList" :commentInfo="commentitem"
+                  :floor="i + 1" :key="commentitem.id" :authorId="article.authorVo.id" :articleId="article.id"
+                  @published="publishSecond" />
+              </transition-group>
             </div>
           </div>
-          <div class="button">
-            <ElButtonGroup>
-              <ElButton @click="publishComment" class="buttonself" :disabled="user?.id === ''" type="success">
-                发布评论
-              </ElButton>
-            </ElButtonGroup>
-          </div>
+          <!-- 评论分页 -->
+          <MyPagination :pageparams="pageparams" :total="totalComment" @changePage="changePage" class="page" />
         </div>
-        <AdkEmpty v-if="commentList.length === 0" desc="还没有评论哦~快来发送第一条吧"></AdkEmpty>
-        <div class="comment-list">
-          <transition-group name="list">
-            <CommentItem class="list-item" v-for="(commentitem, i) in commentList" :commentInfo="commentitem"
-              :floor="i + 1" :key="commentitem.id" :authorId="article.authorVo.id" :articleId="article.id"
-              @published="publishSecond" />
-          </transition-group>
-        </div>
+        <AdkEmpty desc="努力加载中" v-else />
       </div>
-      <!-- 评论分页 -->
-      <MyPagination :pageparams="pageparams" :total="totalComment" @changePage="changePage" class="page" />
     </div>
     <Footer />
   </div>
+
 </template>
 
 <script lang="ts">
@@ -74,6 +79,7 @@ import ArticleSummary from "./components/ArticleSummary.vue";
 import ArticleBody from "./components/ArticleBody.vue";
 import Bottom from "./components/Bottom.vue";
 import ToolBars from './components/ToolBars.vue';
+import { setConfig } from "@/theme/theme";
 
 // 封装好的hook
 const {
@@ -112,12 +118,13 @@ onMounted(() => {
         isToolsShow.value = false;
       }
     }
-
   })
+  setConfig();
 })
 </script>
 
 <style scoped lang="less" >
+@import url(@/assets/styles/Layout/Layout.less);
 @import url(./styles/Article.less);
 @import url("@/assets/styles/MyAnimate.less");
 </style>
