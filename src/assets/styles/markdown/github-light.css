@@ -32,11 +32,13 @@
   }
   
   .markdown-body details,
-  .markdown-body figcaption,
   .markdown-body figure {
-    display: block;
+    display: flex;
+    flex-direction: column;
   }
-  
+  .markdown-body figcaption{
+    color:#ddd
+  }
   .markdown-body summary {
     display: list-item;
   }
