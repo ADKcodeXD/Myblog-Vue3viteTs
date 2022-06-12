@@ -1,5 +1,5 @@
 <template>
-  <el-image :src="img" fit="cover" style="width: 100%; height: 100%; " lazy>
+  <el-image :src="img" fit="cover" style="width: 100%; height: 100%; " :lazy="isLazy">
     <template #placeholder>
       <div class="gray">
         <LoadingAnime />
@@ -30,6 +30,13 @@ defineProps({
   notFoundType: {
     type: String,
     default: 'fang'
+  },
+  /**
+   * 是否开启懒加载 默认开启懒加载
+   */
+  isLazy:{
+    type: Boolean,
+    require: true
   }
 });
 </script>
