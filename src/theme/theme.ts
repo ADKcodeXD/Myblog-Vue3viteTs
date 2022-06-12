@@ -1,6 +1,8 @@
 import {humpToLine} from './../utils/tools';
 import {getItem, setItem} from '@/utils/storage';
-import {darkConfig, defaultConfig, themes} from "./themeData";
+// import {darkConfig, defaultConfig, themes} from "./themeData";
+import {themes} from './themeData';
+import {darkConfig,defaultConfig} from './themeData.json';
 // 修改页面中的样式变量值
 const changeStyle = (obj : Theme) => {
     let style: HTMLStyleElement;
