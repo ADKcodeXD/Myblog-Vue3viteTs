@@ -1,0 +1,53 @@
+@media screen and(min-width:@mobile-device){
+    .card-little{
+        cursor: pointer;
+        display: flex;
+        .border-normal();
+        .font-normal();
+        overflow: hidden;
+        transition: 0.5s ease all;
+        .shadow();
+        margin: @margin-general 0;
+        &-img{
+            max-height:15rem;
+            flex-shrink: 0;
+        }
+        &-info{
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            margin-left: 0.5rem;
+            flex:1;
+            color: @textColor;
+           
+            &__title{
+                font-size: @big-text;
+            }
+            &__tip{
+                font-size: @small-text;
+                color: @tipTextColor;
+            }
+            &__rank{
+                font-size: @mid-text;
+                color: @warnningTextColor;
+            }
+            &__miru{
+                color:@small-text;
+                color: @linkColor;
+            }
+        }
+        &:hover{
+            transform: translateY(-10px);
+            background-color: @hoverColor;
+            color: @hoverTextColor;
+            .card-little-info{
+                &__title,&__rank,
+                &__tip,&__miru{
+                    color: @hoverTextColor;
+                    transition: inherit;
+                }
+            }
+        }
+    }
+}
