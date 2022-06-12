@@ -1,0 +1,107 @@
+@media screen and (min-width:@mobile-device) {
+    .card-main {
+        height: 28rem;
+        width: 100%;
+        .border-normal();
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        overflow: hidden;
+        .shadow(4px, 0px,@shadowColor);
+        background-color: @bgColor;
+        transition: all 0.4s ease;
+        &-img {
+            height: 14rem;
+            width: 100%;
+            position: relative;
+
+            &-rank {
+                border-radius: 0 @border-radius 0 @border-radius;
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 10;
+                background-color: @themeColor;
+                height: 3rem;
+                width: 4rem;
+                .flexbox();
+            }
+        }
+
+        &-info {
+            padding: 0.5rem;
+            .flex(column, space-between);
+            flex: 1;
+            &__title {
+                .flex();
+
+                .name {
+                    font-size: @big-text;
+                    color: @themeColor;
+                    .text-line-show(2);
+                }
+
+                .tip {
+                    color: @tipTextColor;
+                    .text-line-show(2);
+                    font-size: @very-samll-text;
+                }
+            }
+
+            &__raiting {
+                .flex(row, space-between, center);
+                flex-shrink: 0;
+                width: 100%;
+            }
+        }
+        &:hover{
+            transform: translateY(-10px);
+            background-color: @hoverColor;
+            color: @hoverTextColor;
+            box-shadow: 8px 8px 0px @themeColor;
+            .name,.tip,.card-main-info__raiting{
+                transition: inherit;
+                color: @hoverTextColor;
+                
+            }
+        }
+    }
+
+    :deep(.el-rate__item) {
+        width: 10px;
+    }
+
+    :deep(.el-rate) {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (min-width:@smallpc-device) {
+    .card-main{
+        height: 28rem;
+        &-img{
+            height: 18rem;
+        }
+    }
+    :deep(.el-rate) {
+        flex-grow: 0;
+        flex-basis: auto;
+        width: 40%;
+    }
+}
+
+@media screen and (min-width:@normal-device) {
+    .card-main{
+        height: 26rem;
+        &-img{
+            height: 16rem;
+        }
+    }
+    :deep(.el-rate__item) {
+        width: 16px;
+    }
+}

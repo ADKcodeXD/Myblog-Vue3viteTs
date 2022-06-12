@@ -1,0 +1,50 @@
+@media screen and (min-width:@mobile-device) {
+    .container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin: @margin-general auto;
+        margin-top: @top-nav-bar-height;
+        background-color: @bgColor;
+        padding: @padding-general;
+        .border-normal();
+        &-second{
+            display: flex;
+            flex-direction: column;
+            margin: @margin-general 0;
+            height: 80rem;
+            &-carousel{
+                width: 100%;
+                height: 40rem;
+                margin-right: @margin-general;
+            }
+            &-myanime{
+                width: 30%;
+                height: 100%;
+            }
+            &-tab{
+                margin-top: @padding-general;
+                flex: 1;
+                .border-normal();
+                overflow: hidden;
+            }
+        }
+    }
+}
+@media screen and (min-width:@smallpc-device) {
+    .container{
+        margin-top: @margin-general;
+        &-second{
+            flex-direction: row;
+            height: 40rem;
+            &-carousel{
+                width: 70%;
+                flex-shrink: 0;
+                margin-right: @margin-general;
+            }
+            &-tab{
+                margin-top: 0;
+            }
+        }
+    }
+}

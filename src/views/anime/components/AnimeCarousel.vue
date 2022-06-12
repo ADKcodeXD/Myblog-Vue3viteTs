@@ -1,24 +1,12 @@
 <template>
-  <div class="container tw-mt-10">
-    <div class="title 
-    tw-text-3xl 
-    tw-flex 
-    tw-justify-between 
-    tw-items-end">
-      <p>今日速递</p>
-      <p class="tw-text-xl">今天是 {{ day }}</p>
-    </div>
-    <div class="carousel tw-mt-5">
-      <el-carousel ref="carousel" :interval="5000" pause-on-hover arrow="always" height="28rem"
-        v-loading="bannerLoading">
-        <el-carousel-item v-for="item in bannerList" :key="item.id">
-          <carousel-item :anime-info="item" />
-        </el-carousel-item>
-      </el-carousel>
-    </div>
+  <div class="carousel">
+    <ElCarousel ref="carousel" :interval="5000" pause-on-hover arrow="always" v-loading="bannerLoading">
+      <ElCarouselItem v-for="item in bannerList" :key="item.id">
+        <CarouselItem :anime-info="item" />
+      </ElCarouselItem>
+    </ElCarousel>
   </div>
 </template>
-
 
 <script lang="ts" setup>
 import { getSubjectInfoApi } from "@/api/bangumi";
@@ -35,11 +23,10 @@ let weekdayMap = [
   "星期五",
   "星期六",
 ];
-let weekDayList = ref<Array<Bangumi.CalendarItem>>();
-let bannerList = ref<Array<Bangumi.SubjectInfoSmall>>([]);
+const weekDayList = ref<Array<Bangumi.CalendarItem>>();
+const bannerList = ref<Array<Bangumi.SubjectInfoSmall>>([]);
 const carousel = ref<typeof ElCarousel>();
-
-let bannerLoading = ref(true);
+const bannerLoading = ref(true);
 const getData = async () => {
   bannerLoading.value = true;
   let subjectIds = null;
@@ -91,27 +78,11 @@ const getData = async () => {
   }
 };
 const date = new Date();
-let day = ref("");
+const day = ref("");
 day.value = weekdayMap[date.getDay()];
 getData();
 </script>
 
 <style lang="less" scoped>
-@media screen and (min-width: 320px) {
-  :deep(.el-carousel__indicators) {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  :deep(.el-carousel__indicators) {
-    display: block;
-  }
-}
-
-:deep(.el-carousel__item) {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-}
+@import url(../styles/AnimeCarousel.less);
 </style>

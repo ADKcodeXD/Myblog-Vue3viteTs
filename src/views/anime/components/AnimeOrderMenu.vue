@@ -1,53 +1,53 @@
 <template>
-  <div class="container tw-mt-5">
-    <div class="tw-flex tw-text-center tw-items-center tw-mt-4">
-      <p class="title tw-text-xl tw-font-bold">类型</p>
-      <p class="type" @click="changeType(6)" :class="{ active: params.type == undefined }">
+  <div class="menu">
+    <div class="menu-item">
+      <p class="menu-item-title">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型</p>
+      <p class="menu-item-type" @click="changeType(6)" :class="{ active: params.type == undefined }">
         全部
       </p>
-      <p class="type" @click="changeType(1)" :class="{ active: params.type == BroswerType.TV }">
+      <p class="menu-item-type" @click="changeType(1)" :class="{ active: params.type == BroswerType.TV }">
         TV
       </p>
-      <p class="type" @click="changeType(2)" :class="{ active: params.type == BroswerType.WEB }">
+      <p class="menu-item-type" @click="changeType(2)" :class="{ active: params.type == BroswerType.WEB }">
         WEB
       </p>
-      <p class="type" @click="changeType(3)" :class="{ active: params.type == BroswerType.OVA }">
+      <p class="menu-item-type" @click="changeType(3)" :class="{ active: params.type == BroswerType.OVA }">
         OVA
       </p>
-      <p class="type" @click="changeType(4)" :class="{ active: params.type == BroswerType.MOVIE }">
+      <p class="menu-item-type" @click="changeType(4)" :class="{ active: params.type == BroswerType.MOVIE }">
         剧场版
       </p>
-      <p class="type" @click="changeType(5)" :class="{ active: params.type == BroswerType.MISC }">
+      <p class="menu-item-type" @click="changeType(5)" :class="{ active: params.type == BroswerType.MISC }">
         其他
       </p>
     </div>
-    <div class="tw-flex tw-text-center tw-items-center tw-mt-4">
-      <p class="title tw-text-xl tw-font-bold">排序规则</p>
-      <p class="type" @click="changeSort(1)" :class="{ active: params.sort === SortRole.rank }">
+    <div class="menu-item">
+      <p class="menu-item-title">排序规则</p>
+      <p class="menu-item-type" @click="changeSort(1)" :class="{ active: params.sort === SortRole.rank }">
         排名排序
       </p>
-      <p class="type" @click="changeSort(2)" :class="{ active: params.sort === SortRole.date }">
+      <p class="menu-item-type" @click="changeSort(2)" :class="{ active: params.sort === SortRole.date }">
         时间排序
       </p>
-      <p class="type" @click="changeSort(3)" :class="{ active: params.sort === SortRole.title }">
+      <p class="menu-item-type" @click="changeSort(3)" :class="{ active: params.sort === SortRole.title }">
         名称排序
       </p>
     </div>
-    <div class="tw-flex tw-text-center tw-items-center tw-mt-4 tw-flex-wrap">
-      <p class="title tw-text-xl tw-font-bold tw-shrink-0">年份</p>
-      <span class="type" :class="{ active: yearChoice === 0 }" @click="changeYear(0)">默认</span>
-      <span v-for="i in 22" :key="i" class="type" @click="changeYear(new Date().getFullYear() + 1 - i)"
+    <div class="menu-item">
+      <p class="menu-item-title">年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份</p>
+      <span class="menu-item-type" :class="{ active: yearChoice === 0 }" @click="changeYear(0)">默认</span>
+      <span v-for="i in 22" :key="i" class="menu-item-type" @click="changeYear(new Date().getFullYear() + 1 - i)"
         :class="{ active: yearChoice === new Date().getFullYear() + 1 - i }">{{ new Date().getFullYear() + 1 - i
         }}</span>
-      <span @click="isMoreShow = true" v-show="!isMoreShow" class="type">更多</span>
+      <span @click="isMoreShow = true" v-show="!isMoreShow" class="menu-item-type">更多</span>
       <div v-show="isMoreShow">
         <el-date-picker class="tw-mr-1" v-model="year" type="year" placeholder="选择更多其他年份" />
       </div>
     </div>
-    <div class="tw-flex tw-text-center tw-items-center tw-mt-4 tw-flex-wrap">
-      <p class="title tw-text-xl tw-font-bold tw-shrink-0">月份</p>
-      <span class="type" @click="changeMonth(0)" :class="{ active: month === 0 }">默认</span>
-      <span v-for="i in 12" :key="i" class="type" @click="changeMonth(i)" :class="{ active: month === i }">{{ i
+    <div class="menu-item">
+      <p class="menu-item-title">月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份</p>
+      <span class="menu-item-type" @click="changeMonth(0)" :class="{ active: month === 0 }">默认</span>
+      <span v-for="i in 12" :key="i" class="menu-item-type" @click="changeMonth(i)" :class="{ active: month === i }">{{ i
       }}</span>
     </div>
   </div>
@@ -197,22 +197,5 @@ watch(year, (newval) => {
 
 
 <style lang="less" scoped>
-.title {
-  margin-right: 0.5rem;
-}
-
-.type {
-  margin-right: 5px;
-  color: rgb(6, 67, 158);
-  cursor: pointer;
-
-  &:hover {
-    text-decoration-line: underline;
-  }
-}
-
-.active {
-  font-weight: 600;
-  color: orange;
-}
+@import url(../styles/AnimeOrderMenu.less);
 </style>

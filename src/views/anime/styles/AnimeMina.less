@@ -1,0 +1,18 @@
+@media screen and(min-width:@mobile-device) {
+    .mina{
+        display: flex;
+        flex-direction: column;
+        background-color: @bgColor;
+        padding: @padding-general;
+        &-top{
+            .font-normal();
+            color:@textColor;
+            &--big{
+                font-size:@big-text;
+            }
+            &--small{
+                font-size:@small-text;
+            }
+        }
+    }
+}

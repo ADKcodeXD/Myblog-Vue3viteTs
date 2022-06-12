@@ -1,0 +1,88 @@
+@media screen and(min-width:@mobile-device) {
+    :deep(.el-carousel__indicators) {
+        display: flex !important;
+    }
+    :deep(.el-image) {
+        width: unset;
+        height: unset;
+        flex: 1;
+    }
+    .content {
+        width: 100%;
+        height: 400%;
+        position: absolute;
+        position: relative;
+        .flexbox();
+        left: 0;
+        right: 0;
+        overflow: hidden;
+        background-color: @textColor;
+        &-img{
+            filter: brightness(0.6) blur(1px);
+        }
+        &-info{
+            position: absolute;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            left: 30px;
+            top: 39%;
+            max-width: 80%;
+            height: 35rem;
+            .font-normal();
+            color: @hoverTextColor;
+            &__title{
+                .text-line-show(2);
+                font-size: @very-big-text;
+            }
+            &__subtitle{
+                .text-line-show(2);
+                font-size: @mid-text;
+            }
+            &__summary{
+                display: block;
+                font-size: @small-text;
+                .text-line-show(4);
+                margin-top: 5px;
+            }
+            &-bottom{
+                display: flex;
+                margin-top: 0.5rem;
+                align-items: flex-end;
+                &__detail{
+                    font-size: @small-text;
+                }
+                &-button{
+                    padding: 0.5rem;
+                    .border-normal();
+                    color: @linkColor;
+                    cursor: pointer;
+                    position: absolute;
+                    right: -17%;
+                    bottom: 0;
+                    height:3rem;
+                    margin-left: @margin-general;
+                    font-size: @small-text;
+                    background-color: @bgColor;
+                    &:hover{
+                        color: @hoverTextColor;
+                        background-color: @themeColor;
+                    }
+                }
+            }
+            &-tag{
+                margin: @margin-general 0;
+                &__text{
+                    &:first-child{
+                        margin: 0;
+                    }
+                    margin:0 0.2rem;
+                }
+            }
+        }
+    }
+}
+
+
+

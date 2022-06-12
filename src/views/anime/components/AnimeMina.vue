@@ -1,24 +1,16 @@
 <template>
-  <div class="
-      container
-      tw-flex
-      tw-flex-col
-      tw-drop-shadow-md
-      tw-bg-white
-      tw-border-2
-      tw-p-3
-      tw-rounded-md
-    ">
-    <div class="title">
-      <p class="tw-font-bold tw-text-xl">大家都在看</p>
-      <small>{{ today }} 为您推荐{{ season }}月番</small>
+  <div class="mina">
+    <div class="mina-top">
+      <p class="mina-top--big">大伙都在看</p>
+      <small class="mina-top--small">{{ today }} 为您推荐{{ season }}月番</small>
     </div>
-    <el-divider></el-divider>
+    <ElDivider />
     <div v-if="todayList">
       <div v-for="(item, index) in todayList" :key="index">
         <SmallAnimeItem :item="item" />
       </div>
     </div>
+    <AdkEmpty v-else />
   </div>
 </template>
 
@@ -26,9 +18,9 @@
 import { useAnimeCalendar } from "@/hooks/Bangumi";
 import { getFormatTime } from "@/utils/dayjs";
 
-let todayList = ref<Array<Bangumi.AnimeItemInfo>>([]);
-let today = getFormatTime(new Date().toString(), "YYYY年MM月DD日");
-let month = new Date().getMonth();
+const todayList = ref<Array<Bangumi.AnimeItemInfo>>([]);
+const today = getFormatTime(new Date().toString(), "YYYY年MM月DD日");
+const month = new Date().getMonth();
 let season = 0;
 if (month >= 0 && month < 3) {
   season = 1;
@@ -73,7 +65,6 @@ useAnimeCalendar().then((list: Bangumi.CalendarItem[]) => {
   }
 });
 </script>
-
-
-<style>
+<style lang="less" scoped>
+@import url(../styles/AnimeMina.less);
 </style>

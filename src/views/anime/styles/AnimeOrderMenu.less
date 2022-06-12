@@ -1,0 +1,46 @@
+.menu{
+    display: flex;
+    flex-direction: column;
+    &-item{
+        display: flex;
+        text-align: center;
+        align-items: center;
+        margin-top: @margin-general;
+        flex-wrap: wrap;
+        &-title{
+            font-size: @big-text;
+            text-align: left;
+            width:8rem;
+        }
+        &-type{
+            padding:0 0.5rem;
+            border-radius: @border-radius;
+            cursor: pointer;
+            
+            color: @linkColor;
+            &.active{
+                color: @hoverTextColor;
+                background-color: @activeColor;
+            }
+        }
+    }
+}
+
+// .title {
+//     margin-right: 0.5rem;
+//   }
+  
+//   .type {
+//     margin-right: 5px;
+//     color: rgb(6, 67, 158);
+//     cursor: pointer;
+  
+//     &:hover {
+//       text-decoration-line: underline;
+//     }
+//   }
+  
+//   .active {
+//     font-weight: 600;
+//     color: orange;
+//   }
