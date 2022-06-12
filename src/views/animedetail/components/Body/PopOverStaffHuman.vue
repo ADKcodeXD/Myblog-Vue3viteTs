@@ -54,7 +54,7 @@ defineProps({
   },
 });
 
-let popType = ref('')
+let popType = ref<"click" | "focus" | "hover" | "contextmenu">()
 // 判断设备
 if (isMobile()) {
   popType.value = 'click'
