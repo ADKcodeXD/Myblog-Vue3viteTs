@@ -6,24 +6,6 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ADK-Blog 我的个人小站</title>
-  <script>
-    (function () {
-      function recal() {
-        let docElement = document.documentElement || document.body;
-
-        // #region 可根据响应式需求自由调整逻辑
-        let clientWidth = docElement.clientWidth,
-          designWidth = 1920; //PC端设计稿宽度（主内容区域）
-        
-        // #region 
-        docElement.style.fontSize = ((clientWidth / designWidth) * 14) < 10 ? (10 + "px") : (clientWidth /
-          designWidth) * 14 + "px";
-        
-      }
-      window.addEventListener("resize", recal);
-      recal();
-    })();
-  </script>
 </head>
 
 <body>
