@@ -21,6 +21,10 @@
                 <a>我也要写</a>
                 <span>Edit</span>
             </li>
+            <li @click="$router.push('/index/aboutme')">
+                <a>关于我</a>
+                <span>About ME</span>
+            </li>
         </ul>
     </div>
 </template>
