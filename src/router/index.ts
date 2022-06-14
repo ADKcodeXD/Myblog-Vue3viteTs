@@ -26,6 +26,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'edit',
                 name: 'Edit',
                 meta: {
+                    title: '写文章',
                     requireAuth: true,
                     keepAlive: false
                 },
@@ -35,6 +36,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'articlelist',
                 name: 'ArticleList',
                 meta: {
+                    title: '文章列表',
                     requireAuth: false,
                     keepAlive: true
                 },
@@ -44,6 +46,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'messageboard',
                 name: 'MessageBoard',
                 meta: {
+                    title: '留言板',
                     keepAlive: true
                 },
                 component: () => import ('@/views/messageboard/index.vue')
@@ -51,6 +54,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'home',
                 name: 'Home',
                 meta: {
+                    title: '个人信息',
                     requireAuth: true,
                     keepAlive: true
                 },
@@ -59,6 +63,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'anime',
                 name: 'Anime',
                 meta: {
+                    title: '动漫',
                     requireAuth: false,
                     keepAlive: true
                 },
@@ -67,6 +72,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'animedetail/:id',
                 name: 'AnimeDetail',
                 meta: {
+                    title: '动漫详情',
                     requireAuth: false,
                     keepAlive: false
                 },
@@ -75,6 +81,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'animesearch',
                 name: 'AnimeSearch',
                 meta: {
+                    title: '动漫搜索',
                     requireAuth: false,
                     keepAlive: false
                 },
@@ -83,6 +90,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'animeplay/:id',
                 name: 'AnimePlay',
                 meta: {
+                    title: '动漫播放',
                     requireAuth: false,
                     keepAlive: false
                 },
@@ -91,6 +99,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'animenew',
                 name: 'AnimeNew',
                 meta: {
+                    title: '新番速看',
                     requireAuth: false,
                     keepAlive: false
                 },
@@ -99,6 +108,7 @@ const routes: RouteRecordRaw[] = [
                 path: 'animebgminfo',
                 name: 'AnimeBgmInfo',
                 meta: {
+                    title: '我的追番',
                     requireAuth: false,
                     keepAlive: false
                 },
@@ -107,15 +117,16 @@ const routes: RouteRecordRaw[] = [
                 path: 'options',
                 name: 'Options',
                 meta: {
+                    title: '设置',
                     requireAuth: false,
                     keepAlive: true
                 },
                 component: () => import ('@/views/options/index.vue')
-            },
-            {
+            }, {
                 path: 'aboutme',
                 name: 'Aboutme',
                 meta: {
+                    title: '关于我',
                     requireAuth: false,
                     keepAlive: true
                 },
@@ -170,7 +181,10 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({linkExactActiveClass: "router-active", history: createWebHistory(), routes})
 
 router.beforeEach((to, from, next) => {
-    const token = getItem("user")
+    const token = getItem("user");
+    if (to.meta.title) {
+        document.title=`${to.meta.title}-ADK-blog 我的个人小站`
+    }
     if (to.meta.requireAuth) {
         if (token) {
             next()

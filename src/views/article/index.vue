@@ -80,13 +80,11 @@ import ArticleBody from "./components/ArticleBody.vue";
 import Bottom from "./components/Bottom.vue";
 import ToolBars from './components/ToolBars.vue';
 import { setConfig } from "@/theme/theme";
-
+import { useHead } from '@vueuse/head';
 // 封装好的hook
 const {
   publishSecond,
-  goTop,
   publishComment,
-  time,
   article,
   commentList,
   user,
