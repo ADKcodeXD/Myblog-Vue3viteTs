@@ -6,7 +6,7 @@
       </div>
     </template>
     <template #error>
-      <div class="tw-w-fill">
+      <div class="gray">
         <img v-if="notFoundType === 'fang'" class="tw-w-fill tw-h-fill" src="@/assets/img/404img.jpg" />
         <img v-if="notFoundType === '3:4'" class="tw-w-fill tw-h-fill" src="@/assets/img/404img600.jpg" />
         <img v-if="notFoundType === '3:1'" class="tw-w-fill tw-h-fill" src="@/assets/img/404img1200.jpg" />

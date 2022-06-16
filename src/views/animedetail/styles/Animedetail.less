@@ -1,0 +1,52 @@
+@media screen and(min-width:@mobile-device) {
+    .big-container {
+        padding: 0.3rem;
+        margin-top: @top-nav-bar-height;
+        color: @textColor;
+        .font-normal();
+        .header {
+            margin-top: @margin-general;
+            .back-btn{
+                display: inline-flex;
+                background-color: @bgColor;
+                padding:0.5rem @padding-general ;
+                cursor: pointer;
+                .border-normal();
+                &:hover{
+                    background-color: @hoverColor;
+                    color: @hoverTextColor;
+                }
+            }
+        }
+        .content{
+            .flex(column);
+            margin-top: @margin-general;
+            .left-content{
+                width: 100%;
+                background-color: @bgColor;
+                .border-normal();
+            }
+            .right-content{
+                flex: 1;
+            }
+        }
+    }
+
+}
+
+@media screen and(min-width:@smallpc-device) {
+    .big-container {
+        margin-top: @margin-general;
+        .content{
+            flex-direction: row;
+            justify-content: space-between;
+            .left-content{
+                width: 75%;
+            }
+            .right-content{
+                max-width: 40rem;
+            }
+        }
+    }
+
+}
