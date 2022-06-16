@@ -1,6 +1,6 @@
 import { ElMessage } from 'element-plus';
 import { useStore } from './../store/main';
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import JSONbig from 'json-bigint';
 const baseUrl=process.env.VITE_BASE_API;
 const CancelToken = axios.CancelToken; // 用于axios取消请求
@@ -36,13 +36,13 @@ request.interceptors.request.use((config: AxiosRequestConfig) => {
     return config;
 })
 
-request.interceptors.response.use((response: any)=>{
+request.interceptors.response.use((response: AxiosResponse)=>{
     if(response.status>400){
-        ElMessage.error(response.message)
+        ElMessage.error(response.data)
     }
     return response;
 },(err:any)=>{
-    ElMessage.error('请求失败')
+    Promise.reject(err)
 })
 
 export default request;

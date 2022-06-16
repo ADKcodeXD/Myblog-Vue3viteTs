@@ -3,7 +3,7 @@
     <div class="up-info">
       <div class="logo">
         <div style="width:60px">
-          <MyElimage :img="MessageLogo" />
+          <MyElimage :img="messageParams.avatar?messageParams.avatar:MessageLogo" />
         </div>
         <p class="title">留言板</p>
       </div>
@@ -26,7 +26,7 @@
       <ElDivider />
       <div class="main-content">
         <div class="msg-avatar">
-          <UploadAvatar :avatar="messageParams.avatar" @changeAvatar="changeAvatarParams" />
+          <UploadAvatar :avatar="messageParams.avatar?messageParams.avatar:DefaultAvatar" @changeAvatar="changeAvatarParams" />
         </div>
         <div class="edit-area">
           <MyEmoji @changeText="changeMsg" ref="emoji" placeholder="在这里输入留言哦~~~" />
@@ -60,99 +60,27 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import avatar from "@/assets/img/logo.png";
-import { addMessageApi, getMessageApi } from "@/api/message";
-import { ElMessage, ElScrollbar } from "element-plus";
-import { decodeEmoji } from "@/utils/emoji";
-import MessageLogo from '@/assets/img/liuyan-logo.png'
-const comment = ref("");
-const messageParams: MessageParamsForADK = reactive({
-  authorName: "",
-  contact: "",
-  content: "",
-  avatar: avatar,
-});
-const pageparams = reactive<PageParams>({
-  page: 1,
-  pagesize: 10,
-});
-const messageList = ref<MessageVo[]>();
-const total = ref(0);
-const body = ref<InstanceType<typeof ElScrollbar>>();
-// 排序规则
-const orderRole = ref(0);
-const emoji = ref();
-// 方法和逻辑区
-const getMessage = async (pageparams: PageParams) => {
-  const { data } = await getMessageApi(pageparams);
-  total.value = data.data.length;
-  messageList.value = data.data.results;
-};
-// 留言的逻辑
-const publishMessage = async () => {
-  if (!messageParams.content) {
-    ElMessage.error("内容不能为空");
-    return false;
-  } else if (!messageParams.authorName) {
-    ElMessage.error("请输入昵称");
-    return false;
-  }
-  const { data } = await addMessageApi(messageParams);
-  if (data.code == 200) {
-    ElMessage.success("发表成功");
-    emoji.value.clearInput();
-  } else {
-    ElMessage.error(data.msg);
-  }
-  messageParams.content = "";
-  messageParams.authorName = "";
-  messageParams.avatar = avatar;
-  messageParams.contact = "";
-  pageparams.page = 1;
-  getMessage(pageparams);
-};
-// 排序方法
-const order = (val: number) => {
-  if (orderRole.value === val) {
-    return;
-  } else if (val === 1) {
-    pageparams.orderRole = "a";
-    orderRole.value = 1;
-  } else if (val === 2) {
-    pageparams.orderRole = undefined;
-    orderRole.value = 2;
-  }
-  getMessage(pageparams);
-};
-// 控制滚动条
-const changePage = () => {
-  getMessage(pageparams);
-  body.value?.setScrollTop(0);
-};
-const changeAvatarParams = (val: string) => {
-  messageParams.avatar = val;
-};
-const changeMsg = (val: string) => {
-  messageParams.content = val;
-}
-const toCommentItem = computed(() => {
-  let newCommentList = ref<CommentItemInfo[]>();
-  newCommentList.value = messageList.value.map(item => {
-    let obj = {
-      content: decodeEmoji(item.content),
-      contact: item.contact,
-      nickname: item.authorName,
-      createDate: item.createDate,
-      id: item.id,
-      avatar: item.avatar
-    }
-    return obj;
-  })
-  return newCommentList.value;
-})
-onMounted(() => {
-  getMessage(pageparams);
-});
+
+import {  ElScrollbar } from "element-plus";
+import MessageLogo from '@/assets/img/liuyan-logo.png';
+import { useChangeParams, useMessageApi, useMessageBoardParams } from "@/hooks/useMessageboard";
+import DefaultAvatar from '@/assets/img/logo.png'
+const {messageParams,
+        pageparams,
+        messageList,
+        total}=useMessageBoardParams();
+
+const { orderRole,
+        publishMessage,
+        order,
+        changePage,
+        body,
+        emoji}=useMessageApi(messageParams,pageparams,messageList,total);
+const {
+  changeAvatarParams,
+        changeMsg,
+        toCommentItem
+}=useChangeParams(messageParams,messageList);
 </script>
 
 
