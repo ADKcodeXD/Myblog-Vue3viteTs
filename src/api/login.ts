@@ -9,10 +9,10 @@ export const userLogin = (loginParams:any) => {
     })
 }
 
-export const userRegister = (loginParams:any) => {
+export const userRegister = (registerParams:any) => {
     return request({
         method: 'post',
         url: '/api/register',
-        data:loginParams
+        data:registerParams
     })
 }
