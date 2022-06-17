@@ -1,0 +1,21 @@
+
+@media screen and(min-width:@mobile-device) {
+    .boxcard{
+        margin: @margin-general 0;
+        padding: @padding-general;
+        background-color: @bgColor;
+        .border-normal();
+        .shadow();
+        #collectionCharts{
+            height: 22rem;
+        }
+        &-title{
+            font-size: @very-big-text;
+        }
+    }
+}
+@media screen and(min-width:@smallpc-device) {
+    .boxcard {
+        margin: @margin-general;
+    }
+}

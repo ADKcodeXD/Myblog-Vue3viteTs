@@ -8,7 +8,7 @@
         <p class="title--big">
           {{ animeDetail.name_cn ? animeDetail.name_cn : animeDetail.name }}
           <p class="tag">
-            神作
+            {{ratingTag}}
           </p>
         </p>
         <small v-if="animeDetail.name_cn" class="title--small">原名:{{ animeDetail.name }}</small>
@@ -45,9 +45,9 @@
           </p>
         </div>
         <div class="rating miru">
-          <small class="desc">在看</small>
+          <small class="desc">{{mostPeople.type}}</small>
           <p class="score">
-            {{ animeDetail.rank ? animeDetail.rank : "暂无数据" }}
+            {{mostPeople.nums }}
           </p>
         </div>
       </div>
@@ -69,26 +69,27 @@
           </p>
         </div>
         <div class="rating miru">
-          <small class="desc">在看</small>
+          <small class="desc">{{mostPeople.type}}</small>
           <p class="score">
-            {{ animeDetail.rank ? animeDetail.rank : "暂无数据" }}
+            {{mostPeople.nums }}
           </p>
         </div>
     </div>
-    
   </div>
 </template>
 
 <script lang="ts" setup>
 import { PropType } from "vue";
-import { WeekDayType, BangumiType } from '@/interface/EnumExport';
+import { WeekDayType, BangumiType, CollectionType } from '@/interface/EnumExport';
+import { useRatingTag } from "@/hooks/Bangumi";
+import { useHead } from "@vueuse/head";
+
 const props = defineProps({
   animeDetail: {
     type: Object as PropType<Bangumi.AnimeDeatilItem>,
     default: {},
   },
 });
-
 const director = computed(() => {
   if (props.animeDetail.staff) {
     let a = props.animeDetail.staff.find((item) => {
@@ -103,7 +104,6 @@ const director = computed(() => {
     return "未知"
   }
 });
-
 const type = computed(() => {
   for (let i in BangumiType) {
     if (props.animeDetail.type === parseInt(BangumiType[i])) {
@@ -120,6 +120,19 @@ const day = computed(() => {
     }
   }
 })
+const mostPeople=computed(()=>{
+  let obj={type:"",nums:0}
+  if (props.animeDetail.collection){
+    for(let i in props.animeDetail.collection){
+      if(props.animeDetail.collection[i]>obj.nums){
+        obj.type=CollectionType[i];
+        obj.nums=props.animeDetail.collection[i];
+      }
+    }
+  }
+  return obj;
+})
+const {ratingTag}=useRatingTag(props.animeDetail?.rating?.score||0);
 </script>
 
 <style lang="less" scoped>

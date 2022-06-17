@@ -29,7 +29,7 @@
 
       </div>
     </div>
-    <MyElimage :img="animeInfo.images.large" :isLazy="false" class="content-img" />
+    <MyElimage :img="animeInfo.images?.large||''" :isLazy="false" class="content-img" />
   </div>
 </template>
 
@@ -45,7 +45,7 @@ const props = defineProps({
 
 const tagsInfoThree = computed(() => {
   let tags = [];
-  if (props.animeInfo.tags.length > 3) {
+  if (props.animeInfo.tags?.length > 3) {
     for (let i = 0; i < 3; i++) {
       tags.push(props.animeInfo.tags[i]);
     }

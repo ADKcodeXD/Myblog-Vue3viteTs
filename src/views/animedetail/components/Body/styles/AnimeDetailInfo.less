@@ -1,0 +1,35 @@
+:deep(.el-descriptions__title) {
+    font-size: @very-big-text;
+    color: @textColor;
+}
+
+:deep(.el-descriptions__table) {
+    tbody {
+        
+        tr {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            background-color: @bgColor;
+            td {
+                flex: 1;
+                word-break: break-all;
+                text-overflow: ellipsis;
+                font-weight: 600 !important;
+            }
+
+            th {
+                flex: 1;
+                font-weight: 600 !important;
+            }
+        }
+    }
+}
+
+:deep(.el-descriptions__body) {
+    flex: 1;
+    .el-descriptions__cell{
+        background-color: @bgColor;
+        color: @textColor;
+    }
+}

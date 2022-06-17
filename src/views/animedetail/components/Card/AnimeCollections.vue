@@ -1,23 +1,9 @@
 <template>
-  <div class="
-      boxcard
-      tw-bg-slate-500 tw-text-white tw-p-3 tw-mt-3
-      md:tw-ml-4 md:tw-rounded-lg md:tw-drop-shadow-md
-    ">
-    <p class="
-        pinkbox
-        tw-p-3
-        tw-bg-pink-500
-        tw-w-36
-        tw-font-bold
-        tw-text-2xl
-        tw-text-white
-        tw-rounded-full
-        tw-text-center
-      ">
-      观看状态
+  <div class="boxcard">
+    <p class="boxcard-title">
+      观看分布
     </p>
-    <div class="tw-text-2xl tw-font-bold tw-m-3">
+    <div >
       在看人数:{{ collectionData?.doing }}
     </div>
     <div id="collectionCharts"></div>
@@ -28,6 +14,7 @@
 import { PropType } from "vue";
 import * as echarts from "echarts";
 import {CollectionType} from '@/interface/EnumExport';
+import { useGlobalConfigStore } from "@/store/globalConfig";
 const props = defineProps({
   collectionData: {
     type: Object as PropType<Bangumi.Collection>,
@@ -36,6 +23,7 @@ const props = defineProps({
 });
 
 let collectionChart: any;
+const config=useGlobalConfigStore();
 onMounted(() => {
   let domEl: HTMLElement | null = document.getElementById("collectionCharts");
   if (domEl) {
@@ -52,13 +40,12 @@ onMounted(() => {
     const option = {
       tooltip: {
         trigger: "item",
+        show:false
       },
       legend: {
-        top: "center",
-        orient: "vertical",
-        left: "0",
+        left: "center",
         textStyle: {
-          color: "#fff",
+          color: config.config.textColor,
         },
       },
       series: [
@@ -68,20 +55,29 @@ onMounted(() => {
           radius: ["40%", "70%"],
           avoidLabelOverlap: false,
           label: {
+            show:false,
             formatter: "{b}:{c}",
-            color: "#fff",
+            color: config.config.textColor,
             fontWeight: "bold",
+            position:'center'
           },
-          left: "20%",
+          top:"10%",
           labelLine: {
-            show: true,
+            show: false,
+          },
+          emphasis: {
+            label: {
+              show: true,
+              fontSize: '20',
+              fontWeight: 'bold'
+            }
           },
           itemStyle: {
             normal: {
               color: function (params: { dataIndex: string | number }) {
                 //自定义颜色
                 var colorList = [
-                  "#CE6693",
+                  "#f2cae8",
                   "#39C08F",
                   "#FF8328",
                   "#943160",
@@ -89,6 +85,8 @@ onMounted(() => {
                 ];
                 return colorList[params.dataIndex];
               },
+              borderRadius: 20,
+              borderWidth: 5
             },
           },
           data: data,
@@ -110,7 +108,5 @@ onBeforeUnmount(() => {
 
 
 <style lang="less" scoped>
-#collectionCharts {
-  height: 22rem;
-}
+@import url(./styles/AnimeCollections.less);
 </style>

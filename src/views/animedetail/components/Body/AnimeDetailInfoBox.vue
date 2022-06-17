@@ -26,28 +26,5 @@ const infoboxVal: Array<Bangumi.InfoBoxItem> | undefined = inject("infoboxVal");
 
 
 <style lang="less" scoped>
-:deep(.el-descriptions__title) {
-  font-size: 1.6rem;
-  color: #fff;
-}
-:deep(.el-descriptions__table) {
-  tbody {
-    tr {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-      td {
-        flex: 1;
-        word-break: break-all;
-        text-overflow: ellipsis;
-      }
-      th {
-        flex: 1;
-      }
-    }
-  }
-}
-:deep(.el-descriptions__body) {
-  flex: 1;
-}
+@import url(./styles/AnimeDetailInfo.less);
 </style>

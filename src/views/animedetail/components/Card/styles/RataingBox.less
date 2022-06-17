@@ -1,0 +1,44 @@
+@media screen and(min-width:@mobile-device) {
+    .rating {
+        margin: @margin-general 0;
+        background-color: @bgColor;
+        padding: @padding-general;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        .border-normal();
+        .shadow();
+        #raitingChart {
+            height: 22rem;
+        }
+        &-title{
+            font-size: @very-big-text;
+        }
+        &-score{
+            position: absolute;
+            top: 60px;
+            &-title{
+                display: flex;
+                font-size: @big-text;
+                .tag{
+                    font-size: @small-text;
+                    background-color: @themeColor;
+                    .flexbox();
+                    padding:0 0.6rem;
+                    margin-left: 0.4rem;
+                    border-radius: @border-radius;
+                    color: @hoverTextColor;
+                }
+                .total{
+                    font-size: @very-samll-text;
+                }
+            }
+        }
+    }
+}
+@media screen and(min-width:@smallpc-device) {
+    .rating {
+        margin: @margin-general;
+        margin-top: 0;
+    }
+}

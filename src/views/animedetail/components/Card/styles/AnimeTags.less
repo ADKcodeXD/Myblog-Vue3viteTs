@@ -1,0 +1,23 @@
+@media screen and(min-width:@mobile-device) {
+    .tags{
+        margin: @margin-general 0;
+        padding: @padding-general;
+        background-color: @bgColor;
+        .border-normal();
+        .shadow();
+        &-tag{
+            display: flex;
+            flex-wrap: wrap;
+            cursor: pointer;
+            margin: 0.2rem;
+        }
+        &-title{
+            font-size: @very-big-text;
+        }
+    }
+}
+@media screen and(min-width:@smallpc-device) {
+    .tags {
+        margin: @margin-general;
+    }
+}

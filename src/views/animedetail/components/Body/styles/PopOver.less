@@ -1,0 +1,63 @@
+.chra-avatar{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin:@margin-general ;
+    margin-left: 0;
+    overflow: hidden;
+    max-width: 10rem;
+    .role-name{
+        display: inline-flex;
+        width: 6rem;
+        border-radius: @border-radius;
+        padding-left: 0.5rem;
+        color:@hoverTextColor;
+        margin-bottom: 0.4rem;
+        background-color: @themeColor;
+        overflow: hidden;
+    }
+    .chra-name{
+        text-align: center;
+        width: 6rem;
+        .text-line-show(2);
+    }
+    .imgcontainer{
+        width: 6rem;
+        height: 6rem;
+        .border-normal();
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+}
+.popinfo{
+    display: flex;
+    .font-normal();
+    background-color: @bgColor;
+    color: @textColor;
+    &-img{
+        max-width: 46%;
+        max-height: 20rem;
+        flex-shrink: 0;
+    }
+    &-text{
+        display: flex;
+        flex:1;
+        flex-direction: column;
+        margin-left: 0.5rem;
+        p{
+            margin: 0.2rem 0;
+        }
+        &-title{
+            justify-content: space-between;
+            display: flex;
+            .bigtitle{
+                font-size: @very-big-text;
+            }
+            .more{
+                font-size: @mid-text;
+                color: @linkColor;
+                cursor: pointer;
+            }
+        }
+    }
+}

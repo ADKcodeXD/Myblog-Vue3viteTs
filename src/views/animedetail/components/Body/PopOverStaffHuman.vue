@@ -1,31 +1,30 @@
 <template>
-  <el-popover placement="top-start" :width="300" :trigger="popType">
+  <el-popover placement="top-start" :width="300" :show-after="100"  :trigger="popType">
     <template #reference>
-      <div class="tw-w-28 tw-mt-3 tw-flex-shrink-0 tw-mr-3">
-        <p v-if="role.jobs" class="up-name tw-text-stone-50 tw-flex tw-overflow-hidden">
+      <div class="chra-avatar">
+        <p v-if="role.jobs" class="role-name">
           <span class="tw-flex-shrink-0" v-for="(job, index) in role.jobs" :key="index">·{{ job }}</span>
         </p>
-        <div class="imgcontainer tw-mt-2 tw-h-28 tw-w-28">
+        <div class="imgcontainer">
           <MyElimage v-if="role.images" :img="role.images.small ? role.images.small : role.images.medium" />
           <MyElimage v-else />
         </div>
-        <p class="tw-text-stone-100 text-line-show-2 tw-font-thin">
+        <p class="chra-name">
           {{ role.name_cn ? role.name_cn : role.name }}
         </p>
       </div>
     </template>
     <template #default>
-      <div class="top tw-flex">
-        <div class="tw-overflow-hidden  tw-w-2/5">
-          <MyElimage v-if="role.images" :img="role.images.medium ? role.images.medium : role.images.small" />
-          <MyElimage v-else />
+      <div class="popinfo">
+        <div class="popinfo-img">
+          <MyElimage v-if="role.images" :img="role.images.grid ? role.images.grid : role.images.small || ''" />
         </div>
-        <div class="poprole tw-flex-1 tw-ml-5">
-          <div class="tw-flex tw-justify-between tw-w-full">
-            <p class="tw-text-xl">
+        <div class="popinfo-text">
+          <div class="popinfo-text-title">
+            <p class="bigtitle">
               {{ role.name_cn ? role.name_cn : role.name }}
             </p>
-            <p class="tw-text-xl tw-text-blue-500 tw-cursor-pointer tw-flex-shrink-0">
+            <p class="more">
               更多
             </p>
           </div>
@@ -65,14 +64,5 @@ if (isMobile()) {
 
 
 <style lang="less" scoped>
-.poprole {
-  p {
-    margin-top: 2px;
-  }
-}
-
-.up-name {
-  padding: 2px;
-  background-image: linear-gradient(to right, #044235 0%, #0c050100 100%);
-}
+@import url(./styles/PopOver.less);
 </style>

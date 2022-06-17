@@ -2,7 +2,7 @@
   <!-- 展示动漫详情页 -->
   <section class="big-container">
     <div class="header">
-      <div class="back-btn">
+      <div class="back-btn" @click="$router.back()">
         <i class="iconfont icon-left"></i>
         Back
       </div>
@@ -20,6 +20,9 @@
         <AnimeTags v-if="tags && tags.length > 0" :tags="tags" />
         <AnimeRecommend v-if="tags && tags.length > 0" :tags="tags" @changeId="changeData" />
       </div>
+      <div class="empty"  v-else>
+        <AdkEmpty desc="数据正在努力加载中~~~" />
+      </div>
     </div>
   </section>
 </template>
@@ -27,23 +30,23 @@
 <script lang="ts" setup>
 import { useAnimeDeatil } from "@/hooks/BangumiDetail";
 import { ElMessage } from "element-plus";
-import { isArray } from "lodash";
 import AnimeDetailHeader from "./components/Header/AnimeDetailHeader.vue";
 import AnimeDetailBody from "./components/Body/AnimeDetailBody.vue";
 import RataingBox from "./components/Card/RataingBox.vue";
-import { ArrowLeft } from "@element-plus/icons-vue";
 import AnimeCollections from "./components/Card/AnimeCollections.vue";
 import { getSubjectInfoApi } from "@/api/bangumi";
 import AnimeRecommend from "./components/Card/AnimeRecommend.vue";
 import AnimeTags from "./components/Card/AnimeTags.vue";
 
+
 const route = useRoute();
 document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
-let animeDetail = ref<Bangumi.AnimeDeatilItem | null>();
-let loading = ref(false);
-let tags = ref<Array<Bangumi.AnimeTag>>([]);
-let infoBox = ref<Array<Bangumi.InfoBoxItem>>([]);
-let id = ref(0);
+const animeDetail = ref<Bangumi.AnimeDeatilItem | null>();
+const tags = ref<Array<Bangumi.AnimeTag>>([]);
+const infoBox = ref<Array<Bangumi.InfoBoxItem>>([]);
+const loading = ref(false);
+const id = ref(0);
+
 provide("infoboxVal", infoBox);
 const getData = (id: number) => {
   loading.value = true;
@@ -60,7 +63,8 @@ const getData = (id: number) => {
 
   getSubjectInfoApi(id)
     .then((result: any) => {
-      const { data } = result;
+      const { data: res } = result;
+      const data = res.data;
       tags.value = data.tags;
       infoBox.value = data.infobox;
     })
@@ -69,19 +73,21 @@ const getData = (id: number) => {
       loading.value = false;
     });
 };
-if (route.params && route.params.id) {
-  if (isArray(route.params.id)) {
-    id.value = parseInt(route.params.id[0]);
-  } else {
-    id.value = parseInt(route.params.id);
-  }
-  getData(id.value);
-}
-const changeData = (id: number) => {
+const changeData = () => {
+  const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
   document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
   animeDetail.value = null;
-  getData(id);
+  const sb = Number(id);
+  if (isNaN(sb)) {
+    return;
+  }
+  getData(sb);
 }
+
+watchEffect(() => {
+  changeData();
+})
+
 </script>
 
 <style lang="less" scoped>

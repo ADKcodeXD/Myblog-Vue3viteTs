@@ -1,10 +1,6 @@
 <template>
   <div class="
-      tw-bg-slate-500 tw-mt-3
-      md:tw-ml-4
-      tw-text-white tw-p-3
-      md:tw-rounded-md
-      tw-drop-shadow-lg
+      recommend
     ">
     <div class="tw-font-bold tw-text-3xl md:tw-text-xl tw-flex tw-justify-between">
       <p>为您推荐同类作品</p>
@@ -30,25 +26,7 @@
       </template>
       <template #default>
         <div v-for="item in topTen" :key="item.id" @click="changeId(item.id)">
-          <div class="
-              tw-flex tw-h-48 tw-p-3 tw-mt-3 tw-cursor-pointer
-              hover:tw-bg-orange-500
-            ">
-            <div class="tw-w-2/5 tw-h-full tw-flex-shrink-0">
-              <MyElimage :img="item.imageUrl" />
-            </div>
-            <div class="
-                tw-ml-4 tw-font-bold tw-flex tw-flex-col tw-justify-between
-              ">
-              <div>
-                <p class="tw-text-2xl md:tw-text-xl tw-break-all">
-                  {{ item.nameCn ? item.nameCn : item.name }}
-                </p>
-                <p class="tw-text-xl md:tw-text-lg">评分:{{ item.score }}</p>
-              </div>
-              <p class="tw-text-xl md:tw-text-sm">{{ item.count }}条评分</p>
-            </div>
-          </div>
+          <SmallAnimeItem :broswerItem="item" />
         </div>
       </template>
     </el-skeleton>
@@ -66,21 +44,22 @@ const props = defineProps({
   },
 });
 const emit = defineEmits(['changeId'])
+
+// 随机在count数最高的tag 6个里面取出一个取请求 也要考虑 如果tag数量少于6
+const animeInfoList = ref<Array<Bangumi.BroswerResult>>([]);
+const page = ref(0);
+const Loading = ref(false);
+const mainParams = reactive<Bangumi.BroswerParams>({
+  page: 1,
+  sort: SortRole.rank,
+});
 const getTagInt = (length: number) => {
-  if (length > 8) {
-    return Math.random() * 8;
+  if (length > 6) {
+    return Math.random() * 6;
   } else {
     return Math.random() * length;
   }
 };
-// 随机在count数最高的tag 8个里面取出一个取请求 也要考虑 如果tag数量少于8
-let animeInfoList = ref<Array<Bangumi.BroswerResult>>([]);
-let page = ref(0);
-let Loading = ref(false);
-let mainParams = reactive<Bangumi.BroswerParams>({
-  page: 1,
-  sort: SortRole.rank,
-});
 const { getBroswer } = useBroswer(Loading, animeInfoList, page);
 // get tag 新
 const getRecommend = () => {
@@ -90,13 +69,7 @@ const getRecommend = () => {
   if (props.tags) {
     let index = Math.floor(getTagInt(props.tags.length));
     mainParams.tag = props.tags[index].name;
-    if (index % 3 == 0) {
-      mainParams.sort = SortRole.rank;
-    } else if (index % 3 == 1) {
-      mainParams.sort = SortRole.title;
-    } else {
-      mainParams.sort = SortRole.date;
-    }
+    mainParams.sort=SortRole.rank;
   }
   getBroswer(mainParams);
 };
@@ -118,3 +91,6 @@ const changeId = (val: number) => {
 </script>
 
 
+<style lang="less" scoped>
+@import url(./styles/AnimeRecommend.less);
+</style>

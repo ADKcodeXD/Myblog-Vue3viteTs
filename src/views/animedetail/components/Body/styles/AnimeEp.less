@@ -1,0 +1,45 @@
+.eps {
+    margin: @margin-general 0;
+    color: @textColor;
+    .font-normal();
+    &-title {
+        font-size: @very-big-text;
+        margin: @margin-general 0;
+    }
+
+    &-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &-container-ep {
+        display: flex;
+    }
+    .noactive {
+        background-color: rgb(136, 136, 136);
+    }
+
+    &-container-split {
+        background-color: @hoverColor  !important;
+        color: @hoverTextColor  !important;
+    }
+}
+
+
+.ep {
+    padding: 0.8rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    color: @textColor;
+    background-color: @bgColor;
+    cursor: pointer;
+    margin: 0.2rem;
+    .border-normal();
+    .flexbox();
+
+    &:hover {
+        background-color: @hoverColor;
+        color: @hoverTextColor;
+    }
+}

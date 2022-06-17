@@ -1,0 +1,132 @@
+@media screen and (min-width: 320px) {
+    .main {
+        background-color: @bgColor;
+        padding: @padding-general;
+        color: @textColor;
+
+        .desc {
+            &-title {
+                font-size: @very-big-text;
+            }
+
+            &-summary {
+                margin-top: @margin-general;
+                font-size: @mid-text;
+            }
+        }
+
+        .playsource-container {
+            margin: @margin-general 0;
+
+            .frist {
+                font-size: @very-big-text;
+            }
+
+            &-title {
+                margin: @margin-general 0;
+                font-size: @big-text;
+            }
+
+            .playsource-tag {
+                display: flex;
+                flex-wrap: wrap;
+
+                .playsource {
+                    width: 15rem;
+                    height: 4rem;
+                    .flexbox();
+                    cursor: pointer;
+                    margin-right: 0.8rem;
+                    margin-top: 0.8rem;
+                    border-radius: @border-radius;
+                    color: @hoverTextColor;
+                    background-color: @linkColor;
+
+                    &:hover {
+                        box-shadow: 0px 0px 10px @themeColor;
+                    }
+
+                    .inner {
+                        .flexbox();
+                        text-align: center;
+                        margin: 0.2rem;
+                    }
+
+                    .inner_text {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        
+        .yhdm{
+            margin: @margin-general 0;
+            &-title{
+                font-size: @very-big-text;
+            }
+            &-little-title{
+                margin: @margin-general 0;
+                font-size: @mid-text;
+            }
+        }
+    }
+
+    .ep {
+        background-color: @linkColor;
+        color: #fff;
+        margin: 2px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        padding: 8px;
+        align-items: center;
+        transition: all ease 0.3s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgb(11, 168, 11);
+        }
+
+        &:active {
+            background-color: rgb(255, 132, 51);
+        }
+    }
+
+    .sohu {
+        background-color: rgb(216, 178, 7) !important;
+    }
+
+    .letv {
+        background-color: rgb(3, 40, 82) !important;
+    }
+
+    .iqiyi {
+        background-color: rgb(30, 150, 14) !important;
+    }
+
+    .pptv {
+        background-color: rgb(10, 102, 114) !important;
+    }
+
+    .mgtv {
+        background-color: rgb(204, 100, 16) !important;
+    }
+
+    .youku {
+        background-color: rgb(2, 57, 88) !important;
+    }
+
+    .bilibili {
+        background-color: rgb(233, 55, 123) !important;
+    }
+
+    .bilibili {
+        background-color: rgb(233, 55, 123) !important;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .playsource {
+        width: 20%;
+    }
+}

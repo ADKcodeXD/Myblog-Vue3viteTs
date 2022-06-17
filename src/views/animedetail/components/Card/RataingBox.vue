@@ -1,52 +1,21 @@
 <template>
-  <div class="
-      rating
-      tw-p-3 tw-mt-3 tw-bg-slate-600 tw-relative
-      md:tw-mt-0 md:tw-ml-4 md:tw-rounded-lg md:tw-drop-shadow-md
-    ">
-    <p class="
-        pinkbox
-        tw-p-3
-        tw-bg-pink-500
-        tw-w-36
-        tw-font-bold
-        tw-text-2xl
-        tw-text-white
-        tw-rounded-full
-        tw-text-center
-      ">
-      评分box
+  <div class="rating">
+    <p class="rating-title">
+      评分分布
     </p>
-    <div class="watch tw-flex tw-justify-evenly tw-my-3">
-      <p>想看</p>
-      <p>看过</p>
-      <p>在看</p>
-      <p>搁置</p>
-      <p>抛弃</p>
-    </div>
-    <div class="
-        tw-flex
-        tw-w-full
-        tw-mt-3
-        tw-flex-col
-        tw-absolute
-        tw-z-10
-        tw-top-20%
-        tw-ml-3
-      ">
-      <p class="tw-text-3xl tw-text-white tw-font-bold">
+    <div class="rating-score">
+      <p class="rating-score-title">
         评分:{{ animeDetail?.rating.score }}
-        <span v-if="animeDetail?.rating.score" class="
-            tw-bg-white tw-px-2 tw-text-xs tw-text-orange-500 tw-rounded-full
-          ">
-          {{ tags }}
+        <span v-if="animeDetail?.rating.score" class="tag">
+          {{ ratingTag }}
         </span>
       </p>
-      <p class="tw-text-xs tw-text-orange-100">
+      <p class="total">
         评分人数:{{ animeDetail?.rating.total }}
       </p>
     </div>
-    <div class="rating tw-mt-5 tw-bg-slate-600" ref="echartRating" id="raitingChart"></div>
+    <div ref="echartRating" id="raitingChart">
+    </div>
   </div>
 </template>
 
@@ -54,6 +23,8 @@
 <script lang="ts" setup>
 import { PropType } from "vue";
 import * as echarts from "echarts";
+import { useRatingTag } from "@/hooks/Bangumi";
+import { useGlobalConfigStore } from "@/store/globalConfig";
 
 const props = defineProps({
   animeDetail: {
@@ -61,11 +32,12 @@ const props = defineProps({
     require: true,
   },
 });
-
 let ratingChart: echarts.ECharts;
+
+const global=useGlobalConfigStore();
 onMounted(() => {
-  let countValue = props.animeDetail?.rating.count;
-  let chartValue = [];
+  const countValue = props.animeDetail?.rating.count;
+  const chartValue = [];
   for (let i in countValue) {
     chartValue.push(countValue[i]);
   }
@@ -74,9 +46,6 @@ onMounted(() => {
     ratingChart = echarts.init(domRating);
     const option = {
       grid: {
-        left: "10%",
-        top: "20%",
-        right: "10%",
         bottom: "10%",
       },
       xAxis: {
@@ -85,7 +54,7 @@ onMounted(() => {
         axisLabel: {
           show: true,
           textStyle: {
-            color: "#fff", //更改坐标轴文字颜色
+            color: global.config.textColor, //更改坐标轴文字颜色
             fontSize: 14, //更改坐标轴文字大小
           },
         },
@@ -103,10 +72,10 @@ onMounted(() => {
         {
           data: chartValue,
           type: "bar",
-          barBorderRadius: 5,
           itemStyle: {
             normal: {
-              color: "#ff99cc",
+              barBorderRadius: 20,
+              color: global.config.themeColor,
             },
           },
           label: {
@@ -115,7 +84,7 @@ onMounted(() => {
             position: "top",
             distance: 10,
             textStyle: {
-              color: "#fff",
+              color: global.config.textColor,
             },
           },
         },
@@ -128,48 +97,7 @@ onMounted(() => {
     return;
   }
 });
-
-let tags = computed<String>(() => {
-  let tag = "";
-  if (props.animeDetail?.rating && props.animeDetail?.rating.score) {
-    if (props.animeDetail.rating.score >= 8.5) {
-      tag = "神作";
-    } else if (
-      props.animeDetail.rating.score < 8.5 &&
-      props.animeDetail.rating.score >= 7.5
-    ) {
-      tag = "不可多得";
-    } else if (
-      props.animeDetail.rating.score < 7.5 &&
-      props.animeDetail.rating.score >= 6.5
-    ) {
-      tag = "佳作";
-    } else if (
-      props.animeDetail.rating.score < 6.5 &&
-      props.animeDetail.rating.score >= 5.5
-    ) {
-      tag = "还算可以";
-    } else if (
-      props.animeDetail.rating.score < 5.5 &&
-      props.animeDetail.rating.score >= 4.5
-    ) {
-      tag = "勉强能看";
-    } else if (
-      props.animeDetail.rating.score < 4.5 &&
-      props.animeDetail.rating.score >= 3.5
-    ) {
-      tag = "厕所消遣";
-    } else if (props.animeDetail.rating.score < 3.5) {
-      tag = "图一乐";
-    } else {
-      tag = "暂无数据";
-    }
-  } else {
-    tag = "暂无数据";
-  }
-  return tag;
-});
-
+const {ratingTag}=useRatingTag(props.animeDetail?.rating?.score||0);
 onBeforeUnmount(() => {
   if (ratingChart)
     ratingChart.clear();
@@ -178,26 +106,5 @@ onBeforeUnmount(() => {
 
 
 <style lang="less" scoped>
-#raitingChart {
-  height: 22rem;
-}
-
-.watch {
-  background-color: rgb(255, 243, 243);
-  border-radius: 5px;
-  outline: 1px solid red;
-
-  p {
-    flex: 1;
-    text-align: center;
-
-    &:hover {
-      background-color: rgb(255, 120, 103);
-    }
-
-    .active {
-      background-color: rgb(255, 7, 131);
-    }
-  }
-}
+@import url(./styles/RataingBox.less);
 </style>
