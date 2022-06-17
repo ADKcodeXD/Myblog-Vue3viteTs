@@ -28,7 +28,6 @@ request.interceptors.request.use((config: AxiosRequestConfig) => {
     }
     // 当有重复请求的时候 则利用这个方式来取消重复的请求
     if(cancel[url]){
-        cancel[url]('重复请求');
         delete cancel[url];
     }
     cancel[url]=source.cancel;
