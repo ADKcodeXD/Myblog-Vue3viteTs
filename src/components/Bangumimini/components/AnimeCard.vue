@@ -97,7 +97,7 @@ const animeDetailData = ref<null | Bangumi.SubjectInfoSmall>();
 const nowcard=ref<HTMLElement>();
 const getSubjectInfo = async (id: number) => {
   const { data } = await getSubjectInfoApi(id);
-  animeDetailData.value = data;
+  animeDetailData.value = data.data;
 }
 const requestInfo = async () => {
   detailInfoShow.value = true;
