@@ -128,7 +128,6 @@ import {
   useRegisterMethod,
   useRoles,
 } from "@/hooks/login";
-import Register from './imgs/register-logo.png';
 import Logo from '@/assets/img/new-logo.png';
 import LogoIcon from '@/assets/img/logo-icon.png';
 import Jieshao from './imgs/介绍.png';
