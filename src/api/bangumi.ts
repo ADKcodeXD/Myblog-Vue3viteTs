@@ -1,4 +1,5 @@
 import bangumiRequest from '@/utils/bangumiApi';
+import request from '@/utils/request';
 import axios from 'axios';
 import qs from 'qs';
 
@@ -6,9 +7,9 @@ const PROXY = process.env.NODE_ENV == 'development' ? '/bgm' : '';
 const PROXY_TV = process.env.NODE_ENV == 'development' ? '/bgmtv' : 'https://bgm.tv';
 // 获取每日更新 这个不需要登录 /calendar
 export const getCalendarApi = () => {
-    return bangumiRequest({
+    return request({
         method: 'get',
-        url: PROXY + '/calendar'
+        url: '/api/bgm/calendar'
     })
 }
 /**
@@ -17,9 +18,9 @@ export const getCalendarApi = () => {
  * @returns 
  */
 export const getSubjectInfoApi = (subjectId: number) => {
-    return bangumiRequest({
+    return request({
         method: 'get',
-        url: PROXY + `/v0/subjects/${subjectId}`
+        url:`/api/bgm/subject/${subjectId}`
     })
 }
 
@@ -31,9 +32,9 @@ export const getSubjectInfoApi = (subjectId: number) => {
  * @returns 返回一个
  */
 export const getSubjectInfoAllApi = (subjectId: number, responseGroup?: string,timestamp?:number) => {
-    return bangumiRequest({
+    return request({
         method: 'get',
-        url: PROXY + `/subject/${subjectId}`,
+        url: `/api/bgm/subjectAll/${subjectId}`,
         params: { responseGroup: responseGroup ? responseGroup : 'large',timestamp:timestamp }
     })
 }
