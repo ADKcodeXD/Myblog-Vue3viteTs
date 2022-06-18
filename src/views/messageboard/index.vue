@@ -26,7 +26,8 @@
       <ElDivider />
       <div class="main-content">
         <div class="msg-avatar">
-          <UploadAvatar :avatar="messageParams.avatar?messageParams.avatar:DefaultAvatar" @changeAvatar="changeAvatarParams" />
+          <UploadAvatar :avatar="messageParams.avatar?messageParams.avatar:DefaultAvatar" 
+          @imglink="changeAvatarParams" />
         </div>
         <div class="edit-area">
           <MyEmoji @changeText="changeMsg" ref="emoji" placeholder="在这里输入留言哦~~~" />
