@@ -26,8 +26,9 @@ const getData = async () => {
       if (date.getDay() == 0) {
         return item.weekday.id === 7;
       }
-      return date.getDay() + 1 === item.weekday.id;
+      return date.getDay() === item.weekday.id;
     });
+    console.log(today);
     if (today) {
       subjectIds = today.items.map((item) => {
         return item.id;
@@ -37,7 +38,7 @@ const getData = async () => {
   if (subjectIds) {
     useSubjectInfo(subjectIds).then((item) => {
       item.forEach((obj) => {
-        if (obj.status === "fulfilled" && obj.value!==null) {
+        if (obj.status === "fulfilled" && obj.value !== null) {
           bannerList.value.push(obj.value);
         }
       });
