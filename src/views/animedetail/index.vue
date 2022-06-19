@@ -22,6 +22,7 @@
       </div>
       <div class="empty"  v-else>
         <AdkEmpty desc="数据正在努力加载中~~~" />
+        <LoadingAnime />
       </div>
     </div>
   </section>
