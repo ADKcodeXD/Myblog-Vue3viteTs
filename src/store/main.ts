@@ -10,7 +10,8 @@ export const useStore = defineStore('main', {
         },
         cancel:{
 
-        }
+        },
+        sourcePage:[]
     }
   },
   // could also be defined as

@@ -1,0 +1,89 @@
+@media screen and (min-width: 320px) {
+    .section {
+        padding: 0.4rem;
+        margin-top: @top-nav-bar-height;
+
+        .header {
+            display: flex;
+            align-items: center;
+            margin: @margin-general 0;
+
+            .back-btn {
+                display: inline-flex;
+                background-color: @bgColor;
+                height: 3rem;
+                padding: 0.5rem @padding-general ;
+                cursor: pointer;
+                .border-normal();
+
+                &:hover {
+                    background-color: @hoverColor;
+                    color: @hoverTextColor;
+                }
+            }
+
+            .title {
+                font-size: @big-text;
+
+                margin-left: @margin-general;
+            }
+
+
+        }
+
+        .font-normal();
+
+        .player {
+            width: 100%;
+            margin: @margin-general 0;
+        }
+
+        .eps {
+            .border-normal();
+            padding: @padding-general;
+            background-color: @bgColor;
+            
+            &-title {
+                font-size: @big-text;
+            }
+
+            &-container {
+                display: flex;
+                display: flex;
+
+                overflow-x: auto;
+                .ep {
+                    .flexbox();
+                    background-color: @bgColor;
+                    cursor: pointer;
+                    .border-normal();
+                    width: 12rem;
+                    height: 7rem;
+                    flex-shrink: 0;
+                    margin: @margin-general;
+                    &.active{
+                        background-color: @themeColor;
+                        color: @hoverTextColor;
+                    }
+                }
+            }
+
+        }
+
+        .newanime {
+            margin: @margin-general 0;
+
+            &-title {
+                font-size: @big-text;
+            }
+        }
+    }
+
+
+}
+
+@media screen and (min-width: @smallpc-device) {
+    .section {
+        margin: @margin-general 0;
+    }
+}

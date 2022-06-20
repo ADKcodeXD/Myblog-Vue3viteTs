@@ -26,10 +26,10 @@
         justify-content: center;
         text-align: center;
         align-items: center;
+        flex-direction: column;
         background-color: @bgColor;
         flex-wrap: wrap;
         margin-top: 20px;
-        
         .shadow(-1px, 2px);
         .font-normal();
 
@@ -55,6 +55,7 @@
 @media screen and(min-width: 460px) {
     .footer{
         justify-content: space-between;
+        flex-direction: row;
         text-align: unset;
         .right{
             text-align: right;
