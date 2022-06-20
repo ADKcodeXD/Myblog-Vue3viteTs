@@ -139,7 +139,6 @@
         "highlight.js/lib/common",
         "hls.js",
         "json-bigint",
-        "lodash",
         "md-editor-v3",
         "pinia",
         "qs",
@@ -151,10 +150,7 @@
         "three/examples/jsm/renderers/CSS2DRenderer.js",
         "vue",
         "vue-router",
-        "vue3-emoji-picker",
-        "vue3-video-play",
-        "xgplayer",
-        "xgplayer-hls.js"
+        "vue3-emoji-picker"
       ]
     }
   }

@@ -94,9 +94,6 @@ export default ({ mode }) => {
         }
       },
     },
-    build: {
-      sourcemap: true,
-    },
   })
 }
 
