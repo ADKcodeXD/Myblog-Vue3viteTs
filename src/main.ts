@@ -9,9 +9,10 @@ import hljs from 'highlight.js';
 import '@/assets/styles/tailwind/index.css'
 import '@/assets/styles/tailwind/preflight.css';
 import 'virtual:svg-icons-register';
-import { createHead } from '@vueuse/head'
+import { createHead } from '@vueuse/head';
 const head = createHead();
-const app = createApp(App).use(createPinia()).use(router).use(head);
+const pinia=createPinia();
+const app = createApp(App).use(router).use(pinia).use(head);
 // app.config.globalProperties.$echarts = echarts;
 // highlight js 的自定义指令
 app.directive('highlight', {

@@ -1,6 +1,6 @@
 import {getItem} from './../utils/storage';
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
-import {ElMessage, ElMessageBox} from 'element-plus';
+import {ElMessageBox} from 'element-plus';
 
 const routes: RouteRecordRaw[] = [
     {
@@ -74,9 +74,10 @@ const routes: RouteRecordRaw[] = [
                 meta: {
                     title: '动漫详情',
                     requireAuth: false,
-                    keepAlive: false
+                    keepAlive: true
                 },
-                component: () => import ('@/views/animedetail/index.vue')
+                component: () => import ('@/views/animedetail/index.vue'),
+                
             }, {
                 path: 'animesearch',
                 name: 'AnimeSearch',
@@ -176,8 +177,6 @@ const routes: RouteRecordRaw[] = [
         component: () => import ('@/views/404.vue')
     }
 ]
-
-
 const router = createRouter({linkExactActiveClass: "router-active", history: createWebHistory(), routes})
 
 router.beforeEach((to, from, next) => {
