@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="header">
-      <div class="back-btn" @click="$router.back()">
+      <div class="back-btn" @click="back">
         <i class="iconfont icon-left"></i>
         Back
       </div>
@@ -15,7 +15,7 @@
       <div class="eps-container myscrollbar" ref="chapter">
         <div v-for="(item, index) in info?.epInfo" :key="index" class="ep" 
         :class="{ active: urlFliter(item.epUrl) === route.params.id }"
-          @click="$router.push(`/index/animeplay/${urlFliter(item.epUrl)}`)">
+          @click="$event=>switchVideo($event,item.epUrl,index)">
           <p>{{ item.epTitle }}</p>
         </div>
       </div>
@@ -27,18 +27,31 @@
   </section>
 
 </template>
-
-
+<script lang="ts">
+export default {
+  name:"AnimePlay",
+  beforeRouteEnter(to, from, next) {
+    const mainstroe=useStore();
+    if(to.query.isCache!=='no'){
+      mainstroe.sourcePage.push(from.path);
+    }
+    to.query={};
+    next();
+  }
+}
+</script>
 <script lang="ts" setup>
 import { getYhdmAnimeVideoInfo } from "@/api/YhdmApi";
+import { useBackToSource } from "@/hooks/useSourcepage";
+import { useStore } from "@/store/main";
 import Player from "./components/player.vue";
 const route = useRoute();
+const router=useRouter();
 const loading = ref(true);
 const chapter = ref<HTMLElement>();
 const playerUrl = ref('');
 const info = ref<YhdmVideoInfo>();
-console.log(route.params.id);
-
+const {back}=useBackToSource(router);
 const getVideoInfo = async (params: string) => {
   const { data } = await getYhdmAnimeVideoInfo(params);
   return data;
@@ -47,9 +60,9 @@ const urlFliter = (url: string) => {
   let temp = url.split("/")[2];
   return temp.split(".")[0];
 };
-const getData = () => {
+const getData = async () => {
   const id = route.params.id;
-  getVideoInfo(id as string)
+  await getVideoInfo(id as string)
     .then((data) => {
       info.value = data.data;
       // 排序一下分集数据
@@ -72,13 +85,25 @@ const getData = () => {
         strarr[0] = strarr[0].replaceAll("https://tup.yinghuacd.com/", "/yhdm/");
       }
       playerUrl.value = strarr[0];
-      console.log(playerUrl.value);
-      
+      let index=info.value.epInfo.findIndex((item)=>{
+        return urlFliter(item.epUrl) === route.params.id
+      })
+      chapter.value.scrollTo({left:(index-3)*120,behavior: 'smooth' })
+          
     })
     .catch((reason) => {
       loading.value = false;
     });
 };
+const switchVideo=(e,epUrl,index)=>{
+  router.push(`/index/animeplay/${urlFliter(epUrl)}`);
+  let el=null;
+  if(!e.target.className){
+    el=e.target.parentNode;
+  }else 
+    el=e.target
+  chapter.value.scrollTo({left:(index-3)*el.offsetWidth,behavior: 'smooth' })
+}
 onMounted(() => {
   getData();
 });

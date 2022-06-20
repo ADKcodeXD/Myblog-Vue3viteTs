@@ -16,12 +16,10 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem|null) => {
             }
         });
     });
-    const openUrl = (url: string) => {
-        window.open(url, "_blank");
-    };
+    
     let sites: any = [];
-    let yhdmList = ref<Array<YhdmSearchInfo>>([]);
-    let season = ref(false);
+    const yhdmList = ref<Array<YhdmSearchInfo>>([]);
+    const season = ref(false);
     let keywordArr: Array<string> = [];
     const getYhdmList = async (keywords: string) => {
         if (animeDetail && animeDetail.type == 2) {
@@ -49,8 +47,13 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem|null) => {
                     keywords = keywordArr[0];
                 }
             }
-            const { data } = await getYhdmAnimeSearchInfo(keywords);
-            return data.data.results;
+            try {
+                const { data } = await getYhdmAnimeSearchInfo(keywords);
+                return data.data.results;
+            } catch (error) {
+                console.log(error);
+                return null
+            }
         }
     };
     if (animeDetail) {
@@ -111,7 +114,10 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem|null) => {
             }
         });
     }
-    let cnSite = computed(() => {
+    const openUrl = (url: string) => {
+        window.open(url, "_blank");
+    };
+    const cnSite = computed(() => {
         return sites.filter((item: any) => {
             if (item && item.lang) {
                 return item.lang.includes("CN");
@@ -120,7 +126,7 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem|null) => {
             }
         });
     });
-    let jpSite = computed(() => {
+    const jpSite = computed(() => {
         return sites.filter((item: any) => {
             if (item && item.lang) {
                 return item.lang.includes("JP");
@@ -129,7 +135,7 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem|null) => {
             }
         });
     });
-    let twHkSite = computed(() => {
+    const twHkSite = computed(() => {
         return sites.filter((item: any) => {
             if (item.lang && item.lang.length < 3) {
                 return item.lang.includes("TW") || item.lang.includes("HK");
@@ -138,7 +144,7 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem|null) => {
             }
         });
     });
-    let otherSite = computed(() => {
+    const otherSite = computed(() => {
         return sites.filter((item: any) => {
             if (item.lang) {
                 return item.lang.length > 4;

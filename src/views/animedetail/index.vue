@@ -2,7 +2,7 @@
   <!-- 展示动漫详情页 -->
   <section class="big-container">
     <div class="header">
-      <div class="back-btn" @click="$router.back()">
+      <div class="back-btn" @click="back">
         <i class="iconfont icon-left"></i>
         Back
       </div>
@@ -12,6 +12,9 @@
       <div class="left-content" v-if="!loading">
         <AnimeDetailHeader :animeDetail="animeDetail" v-if="animeDetail" />
         <AnimeDetailBody :animeDetail="animeDetail" v-if="animeDetail" />
+        <div class="empty" v-else>
+          <AdkEmpty desc="数据加载不出来了~请重试" />
+        </div>
       </div>
       <div class="right-content" v-if="!loading">
         <RataingBox :animeDetail="animeDetail" v-if="animeDetail" />
@@ -20,14 +23,28 @@
         <AnimeTags v-if="tags && tags.length > 0" :tags="tags" />
         <AnimeRecommend v-if="tags && tags.length > 0" :tags="tags" @changeId="changeData" />
       </div>
-      <div class="empty"  v-else>
+      <div class="empty" v-else>
         <AdkEmpty desc="数据正在努力加载中~~~" />
         <LoadingAnime />
       </div>
     </div>
+
   </section>
 </template>
-
+<script lang="ts">
+import { useStore } from "@/store/main";
+export default {
+  name:"AnimeDetail",
+  beforeRouteEnter(to, from, next) {
+    const mainstroe=useStore();
+    if(to.query.isCache!=='no'){
+      mainstroe.sourcePage.push(from.path);
+    }
+    to.query={};
+    next();
+  }
+}
+</script>
 <script lang="ts" setup>
 import { useAnimeDeatil } from "@/hooks/BangumiDetail";
 import { ElMessage } from "element-plus";
@@ -38,17 +55,16 @@ import AnimeCollections from "./components/Card/AnimeCollections.vue";
 import { getSubjectInfoApi } from "@/api/bangumi";
 import AnimeRecommend from "./components/Card/AnimeRecommend.vue";
 import AnimeTags from "./components/Card/AnimeTags.vue";
-
-
+import { useBackToSource } from "@/hooks/useSourcepage";
 const route = useRoute();
 document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
 const animeDetail = ref<Bangumi.AnimeDeatilItem | null>();
 const tags = ref<Array<Bangumi.AnimeTag>>([]);
 const infoBox = ref<Array<Bangumi.InfoBoxItem>>([]);
 const loading = ref(false);
-const id = ref(0);
-
+const router = useRouter();
 provide("infoboxVal", infoBox);
+const { back } = useBackToSource(router);
 const getData = (id: number) => {
   loading.value = true;
   useAnimeDeatil(id)

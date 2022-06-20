@@ -1,81 +1,91 @@
 <template>
   <div>
-    <div id="xgplayer" v-loading="loading"></div>
+    <div id="dplayer"></div>
   </div>
 </template>
-
 <script lang="ts" setup>
-import Player from "xgplayer";
-import HlsJsPlayer from "xgplayer-hls.js";
-
+import Hls from 'hls.js'
+import DPlayer from 'dplayer';
+import { useGlobalConfigStore } from "@/store/globalConfig";
+import { isMobile } from "@/utils/mobile";
+const config = useGlobalConfigStore();
+let dp = ref();
 const props = defineProps({
   videoUrl: {
     type: String,
     default: "",
   },
 });
-
-//接受路由传参 把视频地址获取 ，然后这个页面可以跨域
-// const route = useRoute();
-let url = ref("");
-if (props.videoUrl !== "") {
-  url.value = props.videoUrl;
-}
-let mp: HlsJsPlayer | Player | null;
-let loading = ref(true);
-const getVideo = () => {
-  let config = {
-    id: "xgplayer",
-    // rotateFullscreen: isMobile() ? true : false,
-    fluid: true,
-    url: url.value,
-    autoplay: true,
-    playbackRate: [0.5, 0.75, 1, 1.5, 2],
-    defaultPlaybackRate: 1,
-    useHls: true,
-    lang: "zh-cn",
-    closeVideoClick: true,
-    videoInit: true,
-    volume: 1,
-  };
-  // 判断是否m3u8
-
-  let houzhui = url.value?.split(".");
-  if (houzhui && houzhui[houzhui.length - 1] === "m3u8") {
-    mp = new HlsJsPlayer(config);
-  } else {
-    mp = new Player(config);
-  }
-  loading.value = false;
-  mp.on("requestFullscreen", function () {
-    window.screen.orientation.lock("landscape-primary");
-  });
-  mp.on("exitFullscreen", function () {
-    window.screen.orientation.unlock();
-  });
-};
-
-watch(
-  props,
-  (newval) => {
-    url.value = props.videoUrl;
-    if (mp) {
-      // 为什么重新加载 因为我不能保证视频源是否是m3u8或是其他 如果是m3u8需要新建hls播放器
-      mp.destroy(false);
-      mp = null;
-    }
-    getVideo();
-  },
-  { deep: true }
-);
-onMounted(() => {
-  getVideo();
+const isM3u8 = computed(() => {
+  let arr = props.videoUrl.split(".");
+  if (arr[arr.length - 1] === 'm3u8') return true;
+  else return false;
 });
+onMounted(() => {
+  dp.value = new DPlayer({
+    container: document.getElementById('dplayer'),
+    video: {
+      url: props.videoUrl,
+      type: isM3u8 ? 'customHls' : 'auto',
+      customType: {
+        customHls: function (video, player) {
+          const hls = new Hls();
+          hls.loadSource(video.src);
+          hls.attachMedia(video);
+        },
+      },
+    },
+    lang: 'zh-cn',
+    autoplay: true,
+    mutex: true,
+    playbackSpeed: [0.75, 1, 1.5],
+    theme: config.config.themeColor
+  });
+  dp.value.on('fullscreen', () => {
+    if (isMobile()) {
+      window.screen.orientation.lock("landscape-primary")
+    }
+  })
+  dp.value.on('fullscreen-cancel', () => {
+    if (isMobile()) {
+      window.screen.orientation.unlock();
+    }
+  })
+});
+onBeforeUnmount(() => {
+  dp.value = null;
+})
+watch(props, (props) => {
+  if (dp.value) {
+    dp.value.switchVideo({
+      url: props.videoUrl,
+      type: isM3u8 ? 'customHls' : 'auto',
+      customType: {
+        customHls: function (video, player) {
+          const hls = new Hls();
+          hls.loadSource(video.src);
+          hls.attachMedia(video);
+        },
+      },
+    })
+  }
+})
 </script>
 
 
 <style lang="less" scoped>
-#xgplayer {
-  background-color: rgb(0, 0, 0);
+@media screen and (min-width: @mobile-device) {
+  #dplayer {
+    overflow: hidden;
+    border-radius: 2rem;
+    height: 30rem;
+    .shadow();
+  }
+}
+
+@media screen and (min-width: @smallpc-device) {
+  #dplayer {
+    height: 54rem;
+  }
 }
 </style>
