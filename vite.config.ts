@@ -69,6 +69,7 @@ export default ({ mode }) => {
 
     },
     server: {
+      host:'192.168.0.103',
       port: 5001,
       proxy: {
         '/api': {
@@ -91,7 +92,7 @@ export default ({ mode }) => {
           changeOrigin: true,
           rewrite: path => path.replace(/^\/yhdm/, '')
         }
-      }
+      },
     },
     build: {
       sourcemap: true,
