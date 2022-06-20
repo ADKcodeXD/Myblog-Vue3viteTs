@@ -7,8 +7,9 @@
       </div>
       <div class="title">正在播放:{{ info?.title }}</div>
     </div>
+    <p class="tip">如遇到加载不行的情况下 请刷新重试</p>
     <div class="player">
-      <Player :videoUrl="playerUrl" />
+      <Player :videoUrl="playerUrl" v-if="playerUrl"/>
     </div>
     <div class="eps">
       <div class="eps-title">分集列表</div>
@@ -88,7 +89,7 @@ const getData = async () => {
       let index=info.value.epInfo.findIndex((item)=>{
         return urlFliter(item.epUrl) === route.params.id
       })
-      chapter.value.scrollTo({left:(index-3)*120,behavior: 'smooth' })
+      chapter.value.scrollTo({left:(index)*120,behavior: 'smooth' })
           
     })
     .catch((reason) => {
@@ -97,12 +98,6 @@ const getData = async () => {
 };
 const switchVideo=(e,epUrl,index)=>{
   router.push(`/index/animeplay/${urlFliter(epUrl)}`);
-  let el=null;
-  if(!e.target.className){
-    el=e.target.parentNode;
-  }else 
-    el=e.target
-  chapter.value.scrollTo({left:(index-3)*el.offsetWidth,behavior: 'smooth' })
 }
 onMounted(() => {
   getData();

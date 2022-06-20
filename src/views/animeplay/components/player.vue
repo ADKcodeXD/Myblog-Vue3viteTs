@@ -38,6 +38,7 @@ onMounted(() => {
     lang: 'zh-cn',
     autoplay: true,
     mutex: true,
+    airplay:true,
     playbackSpeed: [0.75, 1, 1.5],
     theme: config.config.themeColor
   });
@@ -46,13 +47,25 @@ onMounted(() => {
       window.screen.orientation.lock("landscape-primary")
     }
   })
-  dp.value.on('fullscreen-cancel', () => {
+  dp.value.on('fullscreen_cancel', () => {
     if (isMobile()) {
       window.screen.orientation.unlock();
     }
   })
+  dp.value.on('error',(e)=>{
+    console.log(e);
+    dp.value.pause();
+    dp.value.notice('视频加载失败',2000)
+  })
+  dp.value.container.addEventListener('mousemove', () => {
+    dp.value.controller.setAutoHide()
+  })
+  dp.value.container.addEventListener('click', () => {
+    dp.value.controller.setAutoHide()
+  })
 });
 onBeforeUnmount(() => {
+  dp.value.destroy();
   dp.value = null;
 })
 watch(props, (props) => {
@@ -78,7 +91,6 @@ watch(props, (props) => {
   #dplayer {
     overflow: hidden;
     border-radius: 2rem;
-    height: 30rem;
     .shadow();
   }
 }
