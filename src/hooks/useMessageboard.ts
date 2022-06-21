@@ -3,7 +3,7 @@ import {useUserStore} from "@/store/user";
 import {ElMessage, ElScrollbar} from "element-plus";
 import {Ref} from "vue";
 import Logo from '@/assets/img/logo.png';
-import {decodeEmoji} from "@/utils/emoji";
+import {decodeEmoji,encodeEmoji} from "@/utils/emoji";
 export const useMessageBoardParams = () => {
     const userinfo = useUserStore();
     const messageParams: MessageParamsForADK = reactive({authorName: "", contact: "", content: "", avatar: userinfo.userinfo.avatar});
@@ -32,6 +32,7 @@ export const useMessageApi = (messageParams : MessageParamsForADK, pageparams : 
             ElMessage.error("请输入昵称");
             return false;
         }
+        messageParams.content=encodeEmoji(messageParams.content);
         const {data} = await addMessageApi(messageParams);
         if (data.code == 200) {
             ElMessage.success("发表成功");

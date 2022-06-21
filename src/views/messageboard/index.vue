@@ -3,7 +3,7 @@
     <div class="up-info">
       <div class="logo">
         <div style="width:60px">
-          <MyElimage :img="messageParams.avatar?messageParams.avatar:MessageLogo" />
+          <MyElimage :img="MessageLogo" />
         </div>
         <p class="title">留言板</p>
       </div>
