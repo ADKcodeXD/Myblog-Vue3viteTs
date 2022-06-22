@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <nav class="navbar">
     <!-- 导航组件 -->
     <!-- pc端的导航组件 -->
     <el-header >
@@ -22,7 +22,7 @@
     <transition name="righttoleft">
       <Pollup v-show="isShow" :userinfo="userStore.userinfo" @close="closePollup" @logout="logout" />
     </transition>
-  </div>
+  </nav>
 </template>
 
 <script setup lang="ts">

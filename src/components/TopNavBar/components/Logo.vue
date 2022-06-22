@@ -1,10 +1,10 @@
 <template >
-    <div class="icon">
+    <aside class="icon">
         <router-link to="/welcome">
             <img src="@/assets/img/new-logo.png" />
         </router-link>
         <i @click="openPollup" class="iconfont icon-classification"></i>
-    </div>
+    </aside>
 </template>
 <script setup lang="ts">
 const emit=defineEmits(['openPollup']);

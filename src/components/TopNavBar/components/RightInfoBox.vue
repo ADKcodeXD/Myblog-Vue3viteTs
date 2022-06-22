@@ -1,5 +1,5 @@
 <template >
-    <div class="right">
+    <aside class="right">
         <ul v-if="userinfo.id" class="icon-group">
             <li>
                 <i class="iconfont icon-mail"></i>
@@ -66,7 +66,7 @@
                 </div>
             </transition>
         </div>
-    </div>
+    </aside>
 </template>
 <script setup lang="ts">
 import { PropType } from 'vue';

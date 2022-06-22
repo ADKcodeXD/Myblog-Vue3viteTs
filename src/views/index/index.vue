@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <main class="main">
     <div class="tw-h-24 ghost"></div>
     <SubTitle>
       最近更新
@@ -11,14 +11,14 @@
     <SubTitle>
       看看新番
     </SubTitle>
-    <div class="bangumi">
+    <section class="bangumi">
       <Bangumimini />
-    </div>
+    </section>
     <SubTitle>
       我的文章
     </SubTitle>
-    <div class="view-content">
-      <div class="article">
+    <section class="view-content">
+      <aside class="article">
         <el-card class="box-card">
           <template #header>
             <div class="card-header">
@@ -40,7 +40,7 @@
           <ArticleItem v-for="articleItem in articles" :key="articleItem.id" :articleItem="articleItem" />
           <AdkEmpty v-if="articles.length === 0" desc="暂时没有文章发表哦~"></AdkEmpty>
         </el-card>
-      </div>
+      </aside>
       <ul class="rightbox" ref="rightUl">
         <li>
           <ArticleTimeLine />
@@ -52,8 +52,8 @@
           <TimeLine />
         </li>
       </ul>
-    </div>
-  </div>
+    </section>
+  </main>
 </template>
 
 

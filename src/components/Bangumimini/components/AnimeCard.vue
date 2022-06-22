@@ -46,12 +46,11 @@
                       {{ tag.name }}
                     </ElTag>
                   </div>
-                  <div class="tw-text-blue-500 tw-cursor-pointer tw-underline tw-font-bold tw-text-xl tw-flex-shrink-0"
-                    @click="$router.push(`/index/animedetail/${animeInfo.id}`)">
+                  <router-link class="tw-cursor-pointer tw-underline tw-font-bold tw-text-xl tw-flex-shrink-0"
+                    :to="`/index/animedetail/${animeInfo.id}`">
                     查看更多
-                  </div>
+                  </router-link>
                 </div>
-
               </div>
             </div>
             <LoadingAnime v-else />

@@ -1,5 +1,5 @@
 <template >
-    <div class="pollup" ref="pollup">
+    <nav class="pollup" ref="pollup">
         <div class="right">
             <div class="out">
                 <i class="iconfont icon-delete" @click="closePollup"></i>
@@ -73,7 +73,7 @@ closePollup;
                 ">去登录</el-button>
             </div>
         </div>
-    </div>
+    </nav>
 </template>
 <script setup lang="ts">
 

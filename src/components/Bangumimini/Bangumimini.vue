@@ -16,11 +16,11 @@
     </template>
     <!-- 自制的tabs -->
     <div v-for="(week, index) in weekDayList" :key="index">
-      <div class="tab-inner myscrollbar" v-if="week.weekday.id === nowDay" :ref="el => { myRefs[index] = el }">
+      <section class="tab-inner myscrollbar" v-if="week.weekday.id === nowDay" :ref="el => { myRefs[index] = el }">
         <anime-card :anime-info="item" v-for="(item, index) in week.items" :key="index"
           @scroll-left="$event => scrollToElement($event, index)">
         </anime-card>
-      </div>
+      </section>
     </div>
     <AdkEmpty v-if="!weekDayList" desc="网络错误 获取不到数据~"></AdkEmpty>
     <!-- 底部提示消息 -->

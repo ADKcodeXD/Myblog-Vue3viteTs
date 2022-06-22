@@ -1,32 +1,38 @@
 <template >
-    <div class="menu">
+    <nav class="menu">
         <ul class="menu-list">
             <li @click="$router.push('/index')">
-                <a>首页</a>
+                <router-link to="/index" v-show="false">首页</router-link>
+                <p>首页</p>
                 <span>Index</span>
             </li>
             <li @click="$router.push('/index/articlelist')">
-                <a>文章</a>
+                <router-link to="/index/articlelist" v-show="false">首页</router-link>
+                <p>文章</p>
                 <span>Article</span>
             </li>
             <li @click="$router.push('/index/messageboard')">
-                <a>留言板</a>
+                <router-link to="/index/messageboard" v-show="false">首页</router-link>
+                <p>留言板</p>
                 <span>Message</span>
             </li>
             <li @click="$router.push('/index/anime')">
-                <a>动漫</a>
+                <router-link to="/index/anime" v-show="false">首页</router-link>
+                <p>动漫</p>
                 <span>Anime</span>
             </li>
             <li @click="$router.push('/index/edit')">
-                <a>我也要写</a>
+                <router-link to="/index/edit" v-show="false">首页</router-link>
+                <p>我也要写</p>
                 <span>Edit</span>
             </li>
             <li @click="$router.push('/index/aboutme')">
-                <a>关于我</a>
+                <router-link to="/index/aboutme" v-show="false">首页</router-link>
+                <p>关于我</p>
                 <span>About ME</span>
             </li>
         </ul>
-    </div>
+    </nav>
 </template>
 <style lang="less" scoped>
 @import url(../styles/PcMenu.less);

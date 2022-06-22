@@ -1,5 +1,5 @@
 <template>
-  <div class="card-main" v-if="item" @click="$router.push(`/index/animedetail/${item.id}`)">
+  <router-link class="card-main" :to="`/index/animedetail/${item.id}`" v-if="item" >
     <div class="card-main-img">
       <div v-if="item.rank" class="card-main-img-rank">
         <p class="tw-text-2xl tw-font-bold tw-shrink-0 tw-text-orange-50">
@@ -26,7 +26,7 @@
           :score-template="item.score.toString()" />
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script lang="ts" setup>

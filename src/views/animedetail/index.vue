@@ -1,35 +1,34 @@
 <template>
   <!-- 展示动漫详情页 -->
-  <section class="big-container">
-    <div class="header">
+  <article class="big-container">
+    <section class="header">
       <div class="back-btn" @click="back">
         <i class="iconfont icon-left"></i>
         Back
       </div>
-    </div>
-    <div class="content">
+    </section>
+    <section class="content">
       <!-- pc端上三栏布局 手机端左边一栏 右边详细信息 右边的往下放 -->
-      <div class="left-content" v-if="!loading">
+      <aside class="left-content" v-if="!loading">
         <AnimeDetailHeader :animeDetail="animeDetail" v-if="animeDetail" />
         <AnimeDetailBody :animeDetail="animeDetail" v-if="animeDetail" />
         <div class="empty" v-else>
           <AdkEmpty desc="数据加载不出来了~请重试" />
         </div>
-      </div>
-      <div class="right-content" v-if="!loading">
+      </aside>
+      <aside class="right-content" v-if="!loading">
         <RataingBox :animeDetail="animeDetail" v-if="animeDetail" />
         <!-- 在看人数 -->
         <AnimeCollections :collectionData="animeDetail.collection" v-if="animeDetail" />
         <AnimeTags v-if="tags && tags.length > 0" :tags="tags" />
         <AnimeRecommend v-if="tags && tags.length > 0" :tags="tags" @changeId="changeData" />
-      </div>
-      <div class="empty" v-else>
+      </aside>
+      <aside class="empty" v-else>
         <AdkEmpty desc="数据正在努力加载中~~~" />
         <LoadingAnime />
-      </div>
-    </div>
-
-  </section>
+      </aside>
+    </section>
+  </article>
 </template>
 <script lang="ts">
 import { useStore } from "@/store/main";
@@ -56,14 +55,13 @@ import { getSubjectInfoApi } from "@/api/bangumi";
 import AnimeRecommend from "./components/Card/AnimeRecommend.vue";
 import AnimeTags from "./components/Card/AnimeTags.vue";
 import { useBackToSource } from "@/hooks/useSourcepage";
+import { useHead } from "@vueuse/head";
 const route = useRoute();
-document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
 const animeDetail = ref<Bangumi.AnimeDeatilItem | null>();
 const tags = ref<Array<Bangumi.AnimeTag>>([]);
 const infoBox = ref<Array<Bangumi.InfoBoxItem>>([]);
 const loading = ref(false);
 const router = useRouter();
-provide("infoboxVal", infoBox);
 const { back } = useBackToSource(router);
 const getData = (id: number) => {
   loading.value = true;
@@ -100,7 +98,25 @@ const changeData = () => {
   }
   getData(sb);
 }
-
+document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+provide("infoboxVal", infoBox);
+useHead({
+  // Can be static or computed
+  title: computed(() => {
+    if(animeDetail.value){
+      if(animeDetail.value.name_cn) return `${animeDetail.value.name_cn}-ADKBlog-我的个人小站`
+      else return `${animeDetail.value.name}-ADKBlog-我的个人小站`
+    }else {
+      return '动漫详情-ADKBlog-我的个人小站'
+    }
+  }),
+  meta: [
+    {
+      name: `description`,
+      content: computed(() => animeDetail.value?.summary?animeDetail.value.summary:'描述'),
+    }
+  ],
+})
 watchEffect(() => {
   changeData();
 })

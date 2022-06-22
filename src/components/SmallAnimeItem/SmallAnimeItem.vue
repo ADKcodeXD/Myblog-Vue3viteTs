@@ -1,5 +1,5 @@
 <template>
-  <div class="card-little" v-if="myItem.id" @click="$router.push(`/index/animedetail/${myItem.id}`)">
+  <router-link class="card-little" v-if="myItem.id" :to="`/index/animedetail/${myItem.id}`" >
     <div class="card-little-img tw-w-2/5">
       <MyElimage :img="myItem.images.common || ''" :not-found-type="'3:4'" />
     </div>
@@ -17,7 +17,7 @@
         <p class="card-little-info__miru" v-if="myItem.collection?.doing">{{ myItem.collection.doing }}人在看</p>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script lang="ts" setup>

@@ -1,12 +1,12 @@
 <template>
   <div class="main" v-if="animeDetail">
     <!-- 简介 -->
-    <div class="desc">
+    <summary class="desc">
       <p class="desc-title">简介</p>
       <p class="desc-summary">
         {{ animeDetail.summary }}
       </p>
-    </div>
+    </summary>
     <!-- 播放源 -->
     <div class="playsource-container" v-if="sites.length > 0">
       <p class="frist">播放源</p>

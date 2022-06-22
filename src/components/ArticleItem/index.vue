@@ -1,21 +1,21 @@
 <template>
-  <div class="box" @click="$router.push(`/article/${articleItem.id}`)">
-    <div class="image">
+  <router-link class="box" :to="`/article/${articleItem.id}`">
+    <figure class="image">
       <MyElimage :img="articleItem.banner" />
-    </div>
-    <div class="content">
-      <div class="up">
+    </figure>
+    <article class="content">
+      <section class="up">
         <div class="left">
-          <p class="title">{{ articleItem.articleName }}</p>
-          <p class="desc">
+          <title class="title">{{ articleItem.articleName }}</title>
+          <summary class="desc">
             {{ articleItem.summary }}
-          </p>
+          </summary>
         </div>
-        <div class="right tw-flex-shrink-0">
-          <p class="time">{{ time }}</p>
-        </div>
-      </div>
-      <div class="down">
+        <time class="right tw-flex-shrink-0">
+          <time class="time">{{ time }}</time>
+        </time>
+      </section>
+      <section class="down">
         <div class="leftcontent">
           <div class="tw-flex tw-items-center ">
             <div class="tw-w-8 tw-h-8 tw-rounded-full tw-overflow-hidden tw-mr-2">
@@ -37,9 +37,9 @@
             }}</i>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+      </section>
+    </article>
+  </router-link>
 </template>
 
 <script lang="ts" setup>

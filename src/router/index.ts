@@ -5,7 +5,7 @@ import {ElMessageBox} from 'element-plus';
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        redirect: '/welcome'
+        redirect: '/index'
     },
     {
         path: '/index',
@@ -138,6 +138,9 @@ const routes: RouteRecordRaw[] = [
     {
         path: '/welcome',
         name: 'welcome',
+        meta:{
+            title: '欢迎~',
+        },
         component: () => import ('@/views/newindex/index.vue')
     },
     {

@@ -3,11 +3,11 @@
     <div class="filter">
     </div>
     <TopNavBar />
-    <div class="banner" v-if="article">
+    <figure class="banner" v-if="article">
       <MyElimage :img="article.banner" />
-    </div>
-    <div class="main">
-      <div class="article">
+    </figure>
+    <main class="main">
+      <article class="article">
         <ThemeConfig />
         <div class="main-body" v-if="article">
           <transition name="onlyopacity">
@@ -59,8 +59,8 @@
           <MyPagination :pageparams="pageparams" :total="totalComment" @changePage="changePage" class="page" />
         </div>
         <AdkEmpty desc="努力加载中" v-else />
-      </div>
-    </div>
+      </article>
+    </main>
     <Footer />
   </div>
 
@@ -80,6 +80,7 @@ import ArticleBody from "./components/ArticleBody.vue";
 import Bottom from "./components/Bottom.vue";
 import ToolBars from './components/ToolBars.vue';
 import { setConfig } from "@/theme/theme";
+import { useHead } from "@vueuse/head";
 const {
   publishSecond,
   publishComment,
@@ -103,7 +104,20 @@ const toComment = () => {
   let height = comment.value.offsetTop;
   document.documentElement.scrollTo({ top: height, behavior: "smooth" });
 }
-
+useHead({
+  // Can be static or computed
+  title: computed(() => `${article.value?.articleName?article.value.articleName:'文章详情'} - ADKBlog-我的个人小站`),
+  meta: [
+    {
+      name: `description`,
+      content: computed(() => article.value?.summary?article.value.summary:'描述'),
+    },
+    {
+      name:`author`,
+      content:computed(() => `文章作者:${article.value?.authorVo?.nickname?article.value.authorVo.nickname:'作者名字'}`)
+    }
+  ],
+})
 // 刷新的时候工具栏出现的bug
 onMounted(() => {
   document.addEventListener('scroll', () => {

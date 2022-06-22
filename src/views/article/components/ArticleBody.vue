@@ -1,5 +1,5 @@
 <template >
-    <div>
+    <section>
         <div v-html="html" v-highlight class="markdown-body" @click="ImagePreview($event)"></div>
         <template v-if="showPreview">
             <ElImageViewer v-if="showPreview"  :infinite="false"
@@ -8,7 +8,7 @@
                 >
             </ElImageViewer>
         </template>
-    </div>
+    </section>
 </template>
 <script setup lang="ts">
 import { isMobile } from '@/utils/mobile';

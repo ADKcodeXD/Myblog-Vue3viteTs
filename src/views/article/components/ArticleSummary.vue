@@ -3,7 +3,7 @@
         <!-- 文章标题 -->
         <div class="article-title">
             <h2>{{ article.articleName }}</h2>
-            <p><i class="iconfont icon-riqi"></i>发布于{{ article.createDate }}</p>
+            <time><i class="iconfont icon-riqi"></i>发布于{{ article.createDate }}</time>
         </div>
         <!-- 作者部分 -->
         <div class="author">
@@ -22,12 +22,12 @@
             <li><i class="iconfont icon-changyonggongneng"></i>{{ article.collectCounts }}</li>
             <li><i class="iconfont icon-pinglun"></i>{{ article.commentCounts }}</li>
         </ul>
-        <div class="summary">
+        <summary class="summary">
             <i class="summary-yinhao">“</i>
             <p class="summary-content">
                 引言:{{ article.summary }}
             </p>
-        </div>
+        </summary>
         <div class="tip">
             <p>本文大概字数为：{{ word }}字，
                 看完大概需要{{ needMin }}分钟</p>
@@ -35,7 +35,6 @@
     </div>
 </template>
 <script setup lang="ts">
-import { useArticle } from '@/hooks/Article';
 import { PropType } from 'vue';
 
 const props = defineProps({
