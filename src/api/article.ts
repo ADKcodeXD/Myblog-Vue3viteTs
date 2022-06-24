@@ -45,7 +45,8 @@ export const uploadImage = (imgFile: any,cb?:any) => {
         },
         onUploadProgress:e=>{
             if(e.lengthComputable){
-                cb(e);
+                if(cb)
+                    cb(e);
             }
         },
         timeout:60000,
