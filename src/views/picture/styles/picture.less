@@ -1,0 +1,113 @@
+@media screen and (min-width:@mobile-device) {
+    .container {
+        background-color: @bgColor;
+        padding: @padding-general;
+        .border-normal();
+        margin: @margin-general 0;
+        margin-top: @top-nav-bar-height;
+        .font-normal();
+        width: 100%;
+        min-height: 100vh;
+        overflow: auto;
+        
+        .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .post {
+                .flexbox();
+                .ball(4.5rem, rgb(8, 185, 23));
+                color: @hoverTextColor;
+                transition: all ease 0.5s;
+                font-size: @big-text;
+                cursor: url(@/assets/img/Hand2.cur), pointer;
+
+                &:hover {
+                    background-color: @themeColor;
+                    transform: translateY(-10px);
+                }
+            }
+        }
+
+        .img {
+            position: relative;
+            .img-item {
+                position: absolute;
+                transition: all ease 0.5s;
+                width: 48%;
+                .shadow();
+                .border-normal();
+                overflow: hidden;
+                .info {
+                    padding: @padding-general;
+                    .title {
+                        font-size: @big-text;
+                    }
+                    .desc {
+                        font-size: @small-text;
+                    }
+                    .author {
+                        margin-top: 0.5rem;
+                        display: flex;
+                        justify-content: space-between;
+                        .inner {
+                            display: flex;
+                            align-items: center;
+                            .authorname {
+                                margin-left: 0.5rem;
+                            }
+                        }
+                        .avatar {
+                            .ball(2rem, @bgColor);
+                            overflow: hidden;
+                        }
+                        .time {
+                            font-size: @very-samll-text;
+                        }
+                    }
+                }
+                &:hover {
+                    transform: translateY(-10px);
+                    box-shadow: 5px 5px 0px @themeColor;
+                }
+            }
+        }
+
+        .dialog {
+            width: 100%;
+
+            &-image {
+                width: 100%;
+            }
+
+            .text {
+                .textShadow(1px, 5px, rgba(255, 255, 255, 0.452));
+                background-color: rgba(255, 255, 255, 0.014);
+                height: 36px;
+                border: none;
+                outline: none;
+                border-bottom: 1px @tipTextColor solid;
+                width: 100%;
+                font-size: 2rem;
+                margin: @margin-general 0;
+            }
+            .summary {
+                margin: @margin-general 0;
+            }
+        }
+    }
+}
+
+@media screen and (min-width:@smallpc-device) {
+    .container {
+        margin-top: 0;
+        margin: @margin-general 0;
+        .img{
+            .img-item{
+                width: 32%;
+            }
+        }
+    }
+
+}

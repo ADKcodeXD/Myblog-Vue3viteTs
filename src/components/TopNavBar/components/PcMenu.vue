@@ -23,13 +23,18 @@
             </li>
             <li @click="$router.push('/index/edit')">
                 <router-link to="/index/edit" v-show="false">首页</router-link>
-                <p>我也要写</p>
+                <p>写文</p>
                 <span>Edit</span>
             </li>
             <li @click="$router.push('/index/aboutme')">
                 <router-link to="/index/aboutme" v-show="false">首页</router-link>
                 <p>关于我</p>
                 <span>About ME</span>
+            </li>
+            <li @click="$router.push('/index/picture')">
+                <router-link to="/index/aboutme" v-show="false">首页</router-link>
+                <p>更多</p>
+                <span>More</span>
             </li>
         </ul>
     </nav>
