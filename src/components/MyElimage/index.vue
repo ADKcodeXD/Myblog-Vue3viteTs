@@ -1,5 +1,5 @@
 <template>
-  <el-image :src="img" fit="cover" style="width: 100%; height: 100%; " :lazy="isLazy">
+  <el-image :src="img" fit="cover" style="width: 100%; height: 100%; " :lazy="isLazy" @load="$emit('load')">
     <template #placeholder>
       <div class="gray">
         <LoadingAnime />
@@ -39,6 +39,7 @@ defineProps({
     require: true
   }
 });
+defineEmits(['load'])
 </script>
 
 

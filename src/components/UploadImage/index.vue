@@ -53,7 +53,7 @@ const { imglink,
     align-items: center;
     width: 100%;
     height: 100%;
-
+    
     :deep(.el-upload) {
         width: 100%;
         height: 100%;
@@ -64,6 +64,7 @@ const { imglink,
         border-radius: 30px;
         width: 100%;
         height: 100%;
+        min-height: 200px;
         overflow: hidden;
         background-color: @tipTextColor;
         transition: background-color 0.3s ease;
