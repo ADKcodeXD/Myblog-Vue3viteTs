@@ -39,5 +39,10 @@ declare global{
         articleId:string,
         flag:Boolean
     }
+    interface PicParams {
+        title:string,
+        summary:string,
+        url:string
+    }
 }
 export{}

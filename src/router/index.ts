@@ -133,6 +133,16 @@ const routes: RouteRecordRaw[] = [
                 },
                 component: () => import ('@/views/aboutme/Aboutme.vue')
             },
+            {
+                path: 'picture',
+                name: 'Picture',
+                meta: {
+                    title: '画廊',
+                    requireAuth: false,
+                    keepAlive: true
+                },
+                component: () => import ('@/views/picture/index.vue')
+            },
         ]
     },
     {

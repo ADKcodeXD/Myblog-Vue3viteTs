@@ -50,6 +50,14 @@ declare global {
         id: number,
         tagName: string
     }
+    interface PicVo{
+        title:string,
+        summary:string,
+        url:string,
+        author:UserEasy,
+        createTime:stirng,
+        id:string
+    }
 }
 
 export {}
