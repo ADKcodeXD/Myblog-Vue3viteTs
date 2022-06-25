@@ -1,5 +1,5 @@
 <template>
-  <el-image :src="img" fit="cover" style="width: 100%; height: 100%; " :lazy="isLazy" @load="$emit('load')">
+  <el-image :src="img" fit="cover" :lazy="isLazy" @load="$emit('load')">
     <template #placeholder>
       <div class="gray">
         <LoadingAnime />
@@ -50,5 +50,9 @@ defineEmits(['load'])
   width: 100%;
   .flexbox(column);
   overflow: hidden;
+}
+:deep(.el-image){
+  width: 100%;
+  height: 100%;
 }
 </style>

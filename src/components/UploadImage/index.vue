@@ -1,5 +1,5 @@
 <template >
-    <el-upload class="upload-demo" action="" :on-remove="handleRemove" :before-remove="beforeRemove"
+    <el-upload class="upload-demo" action="" :on-remove="handleRemove" :before-remove="beforeRemove" drag
         :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg" :on-exceed="handleExceed" :auto-upload="true"
         :before-upload="beforeUpload" ref="uploadEl" :http-request="upload">
         <div class="upload-banner">
