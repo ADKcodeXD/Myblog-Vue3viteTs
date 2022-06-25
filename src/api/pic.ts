@@ -14,3 +14,7 @@ export const getPics = (pageParams : PageParams) => {
 export const addPic = (picParams : PicParams) => {
     return request({method: 'post', url: '/api/pic/addPic', data: picParams})
 }
+
+export const likePic=(picId:string)=>{
+    return request({method: 'get', url: '/api/pic/likePic', params:{id:picId}})
+}

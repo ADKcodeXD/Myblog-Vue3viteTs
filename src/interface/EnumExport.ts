@@ -57,3 +57,12 @@ export enum CollectionTypeTwo {
     dropped = "抛弃"
 }
 
+export enum PicTag {
+    默认板块 = 0,
+    动漫二次元 = 1,
+    风景 = 2,
+    三次元 = 3,
+    排版设计 = 4,
+    素材=5
+}
+

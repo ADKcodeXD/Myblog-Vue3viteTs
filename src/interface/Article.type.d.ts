@@ -56,7 +56,10 @@ declare global {
         url:string,
         author:UserEasy,
         createTime:stirng,
-        id:string
+        id:string,
+        origin:number,
+        likes:number,
+        tag:number
     }
 }
 

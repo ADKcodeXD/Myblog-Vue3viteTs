@@ -32,9 +32,9 @@
                 <span>About ME</span>
             </li>
             <li @click="$router.push('/index/picture')">
-                <router-link to="/index/aboutme" v-show="false">首页</router-link>
-                <p>更多</p>
-                <span>More</span>
+                <router-link to="/index/picture" v-show="false">首页</router-link>
+                <p>画廊</p>
+                <span>Picture</span>
             </li>
         </ul>
     </nav>

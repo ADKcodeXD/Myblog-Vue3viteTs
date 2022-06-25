@@ -7,7 +7,11 @@ declare global{
         year?: string,
         month?: string,
         orderRole?: string,
-        keyword?:string
+        keyword?:string,
+        //pic画廊的筛选项
+        tag?:number,
+        isOrigin?:number,
+
     }
     interface CommentParams {
         articleId: string,
@@ -42,7 +46,8 @@ declare global{
     interface PicParams {
         title:string,
         summary:string,
-        url:string
+        url:string,
+        isOrigin:number
     }
 }
 export{}
