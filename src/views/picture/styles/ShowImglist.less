@@ -37,7 +37,7 @@
                     flex: 1;
                     overflow: auto;
                     .el-image__inner{
-                        width: unset;
+                        width: 100%;
                         height: unset;
                         margin: 0 auto;
                     }
@@ -137,6 +137,11 @@
             flex-direction: row;
             .image{
                 width: 80%;
+                :deep(.el-image){
+                    .el-image__inner{
+                        width: unset;
+                    }
+                }
             }
         }
     }

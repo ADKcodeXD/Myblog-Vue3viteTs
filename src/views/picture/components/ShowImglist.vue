@@ -2,7 +2,7 @@
     <div class="show-img">
         <div class="item" ref="item">
             <ElScrollbar class="image">
-                <MyElimage :img="propsItem.url" @click="showPreview = true" />
+                <MyElimage :img="propsItem.url" @click="showPreview = true" :zip="4"/>
             </ElScrollbar>
             <div class="info">
                 <div class="up">
@@ -11,6 +11,7 @@
                     <ElTag effect="dark" class="tag">
                         {{PicTag[propsItem.tag]}}
                     </ElTag>
+                    <p>点击可查看大图</p>
                 </div>
                 <div class="down">
                     <ul class="icon-group">
@@ -21,7 +22,7 @@
                     <div class="author">
                         <div class="inner">
                             <div class="avatar">
-                                <MyElimage :img="propsItem.author.avatar" />
+                                <MyElimage :img="propsItem.author.avatar" :zip="1"/>
                             </div>
                             <div class="detail">
                                 <p class="authorname">{{ propsItem.author.nickname }}</p>

@@ -16,13 +16,14 @@
                     </div>
                     <div class="pick-inner">
                         <p>只看原创</p>
-                        <el-switch v-model="isOrigin" inline-prompt active-text="是" inactive-text="否"
-                            :active-value="1" :inactive-value="0" />
+                        <el-switch v-model="isOrigin" inline-prompt active-text="是" inactive-text="否" :active-value="1"
+                            :inactive-value="0" />
                     </div>
                     <div class="pick-inner">
                         <p>排序</p>
-                        <i class="iconfont icon-good" :class="{active:orderRole==='like'}" @click="orderRole='like'"></i>
-                        <i class="iconfont icon-riqi" :class="{active:!orderRole}" @click="orderRole=undefined"></i>
+                        <i class="iconfont icon-good" :class="{ active: orderRole === 'like' }"
+                            @click="orderRole = 'like'"></i>
+                        <i class="iconfont icon-riqi" :class="{ active: !orderRole }" @click="orderRole = undefined"></i>
                     </div>
                 </div>
             </div>
@@ -35,7 +36,7 @@
             <AdkEmpty v-if="!isLoading && picList.length <= 0 && !isAjaxLoading" />
             <div class="grid-item" v-for="item, index in picList" :key="item.id" @click="imgShowFn(index)">
                 <div class="up">
-                    <MyElimage :img="item.url" @load="loaded" />
+                    <MyElimage :img="`${item.url}`" @load="loaded" :zip="2"  />
                 </div>
                 <div class="info">
                     <div class="up-info">
@@ -51,7 +52,7 @@
                     <div class="author">
                         <div class="inner">
                             <div class="avatar">
-                                <MyElimage :img="item.author.avatar" />
+                                <MyElimage :img="item.author.avatar" :zip="1" />
                             </div>
                             <p class="authorname">{{ item.author.nickname }}</p>
                         </div>
@@ -90,10 +91,10 @@ const isLoading = ref(false); //图片加载完成的标志
 const isAjaxLoading = ref(false); //请求加载完成的标志
 const imgShow = ref(false);
 const imgShowIndex = ref(0);
-const orderRole=ref<undefined|string>(undefined);
-const tag=ref<undefined|number>(undefined);
-const isOrigin=ref<number>(0);
-const isChangeRule=ref(false);
+const orderRole = ref<undefined | string>(undefined);
+const tag = ref<undefined | number>(undefined);
+const isOrigin = ref<number>(0);
+const isChangeRule = ref(false);
 const pageParams = {
     page: 1,
     pagesize: 10,
@@ -109,11 +110,11 @@ const flushImage = async () => {
     let historyPage = pageParams.page;
     pageParams.page = 1;
     pageParams.orderRole = undefined;
-    pageParams.isOrigin=0;
-    pageParams.tag=undefined;
-    orderRole.value=undefined;
-    isOrigin.value=0;
-    tag.value=undefined;
+    pageParams.isOrigin = 0;
+    pageParams.tag = undefined;
+    orderRole.value = undefined;
+    isOrigin.value = 0;
+    tag.value = undefined;
     await getPicsFn();
     pageParams.page = historyPage;
     layout();
@@ -237,15 +238,15 @@ onMounted(() => {
     getPicsFn();
 })
 
-watch([isOrigin,tag,orderRole],async (newval)=>{
-    pageParams.page=1;
-    pageParams.isOrigin=isOrigin.value;
-    pageParams.tag=tag.value;
-    pageParams.orderRole=orderRole.value;
-    isChangeRule.value=true;
+watch([isOrigin, tag, orderRole], async (newval) => {
+    pageParams.page = 1;
+    pageParams.isOrigin = isOrigin.value;
+    pageParams.tag = tag.value;
+    pageParams.orderRole = orderRole.value;
+    isChangeRule.value = true;
     await getPicsFn();
     layout();
-    isChangeRule.value=false;
+    isChangeRule.value = false;
 })
 </script>
 <style lang="less" scoped>
