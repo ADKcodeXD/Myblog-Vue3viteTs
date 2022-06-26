@@ -113,10 +113,11 @@
         </div>
       </div>
     </div>
+    <!-- 在线播放源2 senfun -->
     <!-- 在线播放源 樱花 -->
     <div class="yhdm" v-if="yhdmList.length > 0">
       <p class="yhdm-title">
-        在线播放(所有资源来自网络资源，本站仅提供学习交流，侵权请联系)
+        在线播放(本站不提供存储增值付费服务，仅提供学习交流，所有资源源于网络，侵权请联系)
       </p>
       <div v-for="(yhdm, index) in yhdmList" :key="index">
         <div

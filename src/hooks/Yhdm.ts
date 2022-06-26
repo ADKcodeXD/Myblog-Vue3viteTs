@@ -35,7 +35,6 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem|null) => {
                     keywords = keywordArr[1];
                 } else if (regSeason.test(keywordArr[1])) {
                     season.value = true;
-                    console.log(keywordArr[1]);
                     keywords = keywordArr[0] + " " + keywordArr[1];
                 } else if (regEngname.test(keywordArr[1])) {
                     while (keywordArr[1] && regEngname.test(keywordArr[1])) {
