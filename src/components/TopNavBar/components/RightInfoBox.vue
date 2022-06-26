@@ -16,21 +16,22 @@
         </p>
         <div class="container" @mouseenter="infoShow = true" @mouseleave="infoShow = false">
             <div class="avatar">
-                <img v-if="userinfo.id" :src="userinfo.avatar"
-                    onerror="javascript:this.src='/src/assets/img/logo.png';" />
-                <img v-else src="@/assets/img/logo.png" alt="占位图片" />
+                <MyElimage v-if="userinfo.id" :img="userinfo.avatar" :zip="2"/>
+                <MyElimage v-else :img="Logo" alt="占位图片" :zip="2" />
             </div>
             <transition name="toptodown" mode="out-in">
-                <div v-show="infoShow" class="info-box">
+                <div v-show="infoShow"  class="info-box">
                     <!-- 显示个人用户设置的背景图 -->
-                    <div class="imgcontainer" :style="{
-                        backgroundImage: `url(${userinfo.banner})`,
-                    }"></div>
+                    <div class="imgmask" >
+                    </div>
+                    <div class="imgcontainer">
+                        <MyElimage :img="userinfo.banner" :zip="3" />
+                    </div>
                     <div class="loginbox" v-if="userinfo.id">
                         <div class="up">
                             <div class="info">
                                 <h2>{{ userinfo.nickname }}</h2>
-                                <div>{{ userinfo.introduce }}</div>
+                                <div>{{ userinfo.introduce }} </div>
                             </div>
                         </div>
                         <div class="button">
@@ -47,7 +48,7 @@
                                     <i class="iconfont icon-edit"></i>
                                     <span>我的发布</span>
                                 </li>
-                                <li @click="$router.push('/index/home')">
+                                <li @click="$router.push('/index/options')">
                                     <i class="iconfont icon-shezhi"></i>
                                     <span>设置</span>
                                 </li>
@@ -70,7 +71,7 @@
 </template>
 <script setup lang="ts">
 import { PropType } from 'vue';
-
+import Logo from '@/assets/img/logo.png'
 const props = defineProps({
     userinfo: {
         type: Object as PropType<UserEasy>,

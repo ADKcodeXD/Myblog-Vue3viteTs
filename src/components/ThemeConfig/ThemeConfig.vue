@@ -120,7 +120,6 @@ const close=(event: any) => {
     if (!regex.test(className)) {
         isElShow.value = false;
     }
-    console.log(isElShow.value+"onClickOutside");
 }
 onMounted(() => {
     watch(localConfig,(newval) => {

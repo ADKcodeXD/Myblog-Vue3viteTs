@@ -16,9 +16,8 @@
                         <div class="up">
                             <!-- 头像 -->
                             <div class="avatar">
-                                <img v-if="userinfo.id" :src="userinfo.avatar"
-                                    onerror="javascript:this.src='/src/assets/img/logo.png';" />
-                                <img v-else src="@/assets/img/logo.png" alt="" />
+                                <MyElimage v-if="userinfo.id" :img="userinfo.avatar" :zip="2"/>
+                                <MyElimage v-else :img="Logo" alt="占位图片" :zip="2" />
                             </div>
                             <!-- 提示信息 以及个人签名 -->
                             <div class="info">
@@ -48,7 +47,8 @@
                     文章
                 </router-link>
                 <router-link @click="closePollup" to="/index/messageboard" active-class="router-active">
-                    <SvgIcon name="pinglun" class="tw-w-12 tw-h-12 tw-mr-2" />留言板
+                    <SvgIcon name="pinglun" class="tw-w-12 tw-h-12 tw-mr-2" />
+                    留言板
                 </router-link>
                 <router-link @click="closePollup" to="/index/anime" active-class="router-active">
                     <SvgIcon name="bofang" class="tw-w-12 tw-h-12 tw-mr-2" />
@@ -56,7 +56,11 @@
                 </router-link>
                 <router-link @click="closePollup" to="/index/edit" active-class="router-active">
                     <SvgIcon name="bianji" class="tw-w-12 tw-h-12 tw-mr-2" />
-                    我也要写
+                    写写
+                </router-link>
+                <router-link @click="closePollup" to="/index/picture" active-class="router-active">
+                    <SvgIcon name="tupian" class="tw-w-12 tw-h-12 tw-mr-2" />
+                    画廊
                 </router-link>
             </div>
             <div class="button-login" v-if="userinfo.id">
@@ -76,8 +80,8 @@ closePollup;
     </nav>
 </template>
 <script setup lang="ts">
-
 import { onClickOutside } from "@vueuse/core";
+import Logo from '@/assets/img/logo.png'
 import { PropType } from "vue";
 const props = defineProps({
     userinfo: {

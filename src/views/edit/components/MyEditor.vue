@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="switch-btn" >
+    <div class="switch-btn">
       <p class="text" @click="changeEditorName(editorName)">切换{{ editorName === 'tinymce' ? 'markdown' : '富文本' }}编辑器</p>
     </div>
     <div v-if="editorName == 'tinymce'">
@@ -75,20 +75,17 @@ let editorInit = {
     "undo redo | formatselect | bold italic backcolor | \
            alignleft aligncenter alignright alignjustify | \
            bullist numlist outdent indent | removeformat | help",
-  images_upload_handler: async (
-    blobInfo: { blob: () => string | Blob },
-    success: (arg0: any) => void,
-    failure: (arg0: string) => void
-  ) => {
-    let formdata = new FormData();
-    formdata.append("image", blobInfo.blob());
-    try {
+  images_upload_handler:(blobInfo: { blob: () => string | Blob }) => 
+    new Promise(async (resolve, reject) => {
+      let formdata = new FormData();
+      formdata.append("image", blobInfo.blob());
       let result = await uploadImage(formdata);
-      success(result.data.data);
-    } catch (error) {
-      failure("error");
-    }
-  },
+      if (result.data.success) {
+        resolve(result.data.data);
+      }else{
+        reject('上传失败')
+      }
+    })
 };
 const saveHtml = (val: string) => {
   content.html = val;
@@ -110,8 +107,8 @@ const onUploadImg = async (files: FileList, callback: (urls: string[]) => void) 
   );
   callback(res.map((item: any) => item.data.data));
 }
-const changeEditorName=(val:string)=>{
-  val==='tinymce'?editorName.value='markdown':editorName.value='tinymce'
+const changeEditorName = (val: string) => {
+  val === 'tinymce' ? editorName.value = 'markdown' : editorName.value = 'tinymce'
 }
 // 区分开两个编辑器分别传不同的值..... 这里需要
 watch(content, (newValue) => {

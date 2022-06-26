@@ -1,5 +1,5 @@
 <template>
-  <el-image :src="img" fit="cover" :lazy="isLazy" @load="$emit('load')">
+  <el-image :src="img+(isAdd?quatily:'')" fit="cover" :lazy="isLazy" @load="$emit('load')">
     <template #placeholder>
       <div class="gray">
         <LoadingAnime />
@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts" setup>
-defineProps({
+const props=defineProps({
   /**
    * 传入图片链接url
    */
@@ -37,9 +37,39 @@ defineProps({
   isLazy:{
     type: Boolean,
     require: true
+  },
+  /**
+   * 可以节省图片加载资源
+   * 指定最大宽度和图片质量
+   * 默认几档 如果不传 则默认原图质量
+   */
+  zip:{
+    type: Number,
+    default: 0
   }
 });
 defineEmits(['load'])
+const quatily=computed(()=>{
+  let quality="";
+  switch(props.zip){
+    case 0:break;
+    case 1:quality="?x-oss-process=image/resize,w_100/quality,q_30";break;
+    case 2:quality="?x-oss-process=image/resize,w_300/quality,q_30";break;
+    case 3:quality="?x-oss-process=image/resize,w_640/quality,q_60";break;
+    case 4:quality="?x-oss-process=image/resize,w_1080/quality,q_80";break;
+  }
+  return quality;
+})
+/**
+ * 判断是否是oss图片 如果是才加上压缩参数
+ */
+const isAdd=computed(()=>{
+  let Reg=new RegExp(/^http:\/\/adkdream.top\/ossimage+/);
+  if(Reg.test(props.img)){
+    return true;
+  }
+  else return false;
+})
 </script>
 
 
@@ -51,7 +81,7 @@ defineEmits(['load'])
   .flexbox(column);
   overflow: hidden;
 }
-:deep(.el-image){
+.el-image{
   width: 100%;
   height: 100%;
 }

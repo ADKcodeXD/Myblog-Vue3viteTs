@@ -6,7 +6,7 @@
           <!-- 头像 -->
           <div class="user-avatar">
             <MyElimage :img="commentInfo.user?
-            commentInfo.user.avatar:commentInfo.avatar" />
+            commentInfo.user.avatar:commentInfo.avatar" :zip="2"/>
           </div>
           <!-- 名字以及等级和简介等 -->
           <div class="username-time">

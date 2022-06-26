@@ -11,7 +11,7 @@
                             {{tag.tagName}}
                         </ElTag>
                     </div>
-                    <MyElimage :src="item.banner" notFoundType="3:1" />
+                    <MyElimage :img="item.banner" notFoundType="3:1" :zip="4" />
                 </div>
             </el-carousel-item>
         </el-carousel>

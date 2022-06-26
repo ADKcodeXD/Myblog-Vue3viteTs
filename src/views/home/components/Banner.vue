@@ -5,7 +5,7 @@
       <el-button type="primary" plain>点击上传封面</el-button>
     </el-upload>
     <div class="tw-h-full tw-w-full">
-      <MyElimage :src="banner" not-found-type="3:1" />
+      <MyElimage :src="banner" not-found-type="3:1" :zip="4" />
     </div>
   </div>
 </template>

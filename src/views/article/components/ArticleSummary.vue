@@ -8,7 +8,7 @@
         <!-- 作者部分 -->
         <div class="author">
             <div class="img">
-                <MyElimage :img="article.authorVo.avatar" />
+                <MyElimage :img="article.authorVo.avatar" :zip="2" />
             </div>
             <div class="author-info">
                 <p class="author-name">{{ article.authorVo.nickname }}</p>

@@ -4,7 +4,7 @@
     </div>
     <TopNavBar />
     <figure class="banner" v-if="article">
-      <MyElimage :img="article.banner" />
+      <MyElimage :img="article.banner" :zip="4" />
     </figure>
     <main class="main">
       <article class="article">
@@ -32,7 +32,7 @@
               <ElDivider />
               <div class="main-content">
                 <div class="avatar">
-                  <MyElimage :img="user?.avatar" />
+                  <MyElimage :img="user?.avatar" :zip="2" />
                 </div>
                 <div class="edit-area">
                   <MyEmoji @changeText="changeComment" ref="emoji" />
@@ -67,9 +67,11 @@
 </template>
 
 <script lang="ts">
+import hljs from "highlight.js";
 // import css
 export default {
   name: "Article",
+  
 };
 </script>
 <script setup lang="ts">
@@ -95,6 +97,9 @@ const {
   pageparams,
   changePage
 } = useArticle();
+const app = getCurrentInstance();
+
+
 // banner消失 导航栏出现
 const banner = ref();
 const comment = ref<HTMLElement>();
@@ -106,15 +111,15 @@ const toComment = () => {
 }
 useHead({
   // Can be static or computed
-  title: computed(() => `${article.value?.articleName?article.value.articleName:'文章详情'} - ADKBlog-我的个人小站`),
+  title: computed(() => `${article.value?.articleName ? article.value.articleName : '文章详情'} - ADKBlog-我的个人小站`),
   meta: [
     {
       name: `description`,
-      content: computed(() => article.value?.summary?article.value.summary:'描述'),
+      content: computed(() => article.value?.summary ? article.value.summary : '描述'),
     },
     {
-      name:`author`,
-      content:computed(() => `文章作者:${article.value?.authorVo?.nickname?article.value.authorVo.nickname:'作者名字'}`)
+      name: `author`,
+      content: computed(() => `文章作者:${article.value?.authorVo?.nickname ? article.value.authorVo.nickname : '作者名字'}`)
     }
   ],
 })
