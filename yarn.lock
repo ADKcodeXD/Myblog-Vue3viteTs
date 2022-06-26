@@ -142,22 +142,12 @@
   "resolved" "https://registry.npmmirror.com/@trysound/sax/-/sax-0.2.0.tgz"
   "version" "0.2.0"
 
-"@types/ali-oss@^6.16.2":
-  "integrity" "sha512-M/fnNxUMJg0xqX2FU710LePStwmGM7BKAJHcHqTlz6ug6oYzbFKbz16v+Hhmv6SrUIuOSU2QmKKNsz5hmOU8Hg=="
-  "resolved" "https://registry.npmjs.org/@types/ali-oss/-/ali-oss-6.16.2.tgz"
-  "version" "6.16.2"
-
 "@types/echarts@^4.9.13":
   "integrity" "sha512-xqZ21MXOBU5i+BywnxAi0He+M6lsRtANBvbqJHmqM8T64Lx7azHJWbv/vSKVJfEbv3XyYpxeDhpV7gFi5mfgeA=="
   "resolved" "https://registry.npmjs.org/@types/echarts/-/echarts-4.9.13.tgz"
   "version" "4.9.13"
   dependencies:
     "@types/zrender" "*"
-
-"@types/json-bigint@^1.0.1":
-  "integrity" "sha512-zpchZLNsNuzJHi6v64UBoFWAvQlPhch7XAi36FkH6tL1bbbmimIF+cS7vwkzY4u5RaSWMoflQfu+TshMPPw8uw=="
-  "resolved" "https://registry.npmjs.org/@types/json-bigint/-/json-bigint-1.0.1.tgz"
-  "version" "1.0.1"
 
 "@types/json-schema@^7.0.5":
   "integrity" "sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ=="
@@ -171,7 +161,7 @@
   dependencies:
     "@types/lodash" "*"
 
-"@types/lodash@*", "@types/lodash@^4.14.178", "@types/lodash@^4.14.182":
+"@types/lodash@*", "@types/lodash@^4.14.182":
   "integrity" "sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q=="
   "resolved" "https://registry.npmmirror.com/@types/lodash/-/lodash-4.14.182.tgz"
   "version" "4.14.182"
@@ -648,11 +638,6 @@
   "integrity" "sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ=="
   "resolved" "https://registry.npmmirror.com/big.js/-/big.js-5.2.2.tgz"
   "version" "5.2.2"
-
-"bignumber.js@^9.0.0":
-  "integrity" "sha512-GAcQvbpsM0pUb0zw1EI0KhQEZ+lRwR5fYaAp3vPOYuP7aDvGy6cVN6XHLauvF8SOga2y0dcLcjt3iQDTSEliyw=="
-  "resolved" "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.0.2.tgz"
-  "version" "9.0.2"
 
 "binary-extensions@^2.0.0":
   "integrity" "sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA=="
@@ -1958,13 +1943,6 @@
   "version" "4.1.0"
   dependencies:
     "argparse" "^2.0.1"
-
-"json-bigint@^1.0.0":
-  "integrity" "sha512-SiPv/8VpZuWbvLSMtTDU8hEfrZWg/mH/nV/b4o0CYbSxu1UIQPLdwKOCIyLQX+VIPO5vrLX3i8qtqFyhdPSUSQ=="
-  "resolved" "https://registry.npmjs.org/json-bigint/-/json-bigint-1.0.0.tgz"
-  "version" "1.0.0"
-  dependencies:
-    "bignumber.js" "^9.0.0"
 
 "json-parse-even-better-errors@^2.3.0":
   "integrity" "sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w=="
