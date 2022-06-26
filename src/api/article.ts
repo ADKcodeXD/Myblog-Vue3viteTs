@@ -52,6 +52,31 @@ export const uploadImage = (imgFile: any,cb?:any) => {
         timeout:60000,
     })
 }
+
+/**
+ * uploadImageToLocal 用于上传图片到本地  获取图片的本地地址 用于解决oss流量贵的问题
+ * 设置了60s的超时时间
+ * @param imgFile 上传的文件
+ * @param cb 用于接受上传的进度的函数 可以在这个函数里获取到一个progressEvent
+ * @returns 
+ */
+ export const uploadImageToLocal = (imgFile: any,cb?:any) => {
+    return request({
+        method: 'post',
+        url: '/api/upload/imglocal',
+        data: imgFile,
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        onUploadProgress:e=>{
+            if(e.lengthComputable){
+                if(cb)
+                    cb(e);
+            }
+        },
+        timeout:60000,
+    })
+}
 /**
  * getArticleItem 获取文章详情 渲染文章
  * @param id articleId 通过query获取 

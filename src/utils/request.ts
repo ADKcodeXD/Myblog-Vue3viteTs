@@ -1,19 +1,11 @@
 import { ElMessage } from 'element-plus';
 import { useStore } from './../store/main';
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import JSONbig from 'json-bigint';
 const baseUrl=process.env.VITE_BASE_API;
 const CancelToken = axios.CancelToken; // 用于axios取消请求
 const request: AxiosInstance = axios.create({
     baseURL: baseUrl, //生产环境
     timeout: 7000,
-    transformResponse: [function (data) {
-        try {
-          return JSONbig.parse(data)
-        } catch (err) {
-          return data
-        }
-    }]
 })
 //请求拦截器  发请求之前，拦截器可以监测到
 request.interceptors.request.use((config: AxiosRequestConfig) => {

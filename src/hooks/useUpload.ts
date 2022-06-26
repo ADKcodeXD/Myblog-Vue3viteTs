@@ -1,4 +1,4 @@
-import {uploadImage} from "@/api/article";
+import {uploadImage,uploadImageToLocal} from "@/api/article";
 import {Ref} from "vue";
 import {useStore} from '@/store/main';
 import {
