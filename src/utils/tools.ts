@@ -22,3 +22,38 @@ export const humpToLine = (val : string) => {
         return res;
     }
 }
+/**
+ * 自行封装一个节流函数
+ * @param time 节流时间
+ * @param fn 节流函数
+ */
+export const throttle = (time : number, fn : Function) => {
+    let flag = true;
+    return function () {
+        if (! flag) 
+            return;
+        
+        flag = false;
+        let args = arguments;
+        console.log(arguments);
+        setTimeout(() => {
+            fn.apply(this, args);
+            flag = true;
+        }, time)
+    }
+}
+/**
+ * 自行封装一个防抖
+ * @param time 防抖时间
+ * @param fn 防抖函数
+ */
+export const debounce = (time : number, fn : Function) => {
+    let timmer = null;
+    return function () {
+        let args = arguments;
+        clearTimeout(timmer);
+        setTimeout(() => {
+            fn.apply(this, args);
+        }, time)
+    }
+}

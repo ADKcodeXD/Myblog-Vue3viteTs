@@ -49,8 +49,10 @@
         </div>
     </div>
     <template v-if="showPreview">
-        <ElImageViewer v-if="showPreview" :infinite="false" :url-list="urlList" :hide-on-click-modal="true"
-            :teleported="false" @close="showPreview = false" class="imgpreview" :z-index="10000" :initial-index="propsIndex">
+        <ElImageViewer v-if="showPreview" :infinite="false" 
+            :url-list="urlList" :hide-on-click-modal="true"
+            :teleported="false" @close="showPreview = false" 
+            class="imgpreview" :z-index="10000" >
         </ElImageViewer>
     </template>
 </template>
@@ -77,9 +79,7 @@ const props = defineProps({
 const emit = defineEmits(['close']);
 const showPreview = ref(false);
 const urlList = computed(() => {
-    return props.picList.map((item) => {
-        return item.url;
-    })
+    return [propsItem.value.url]
 })
 const item = ref(null);
 const propsItem=ref(props.activeItem);
@@ -107,9 +107,7 @@ onClickOutside(item, (e: any) => {
     let regex = new RegExp(/el-[\s\S]*/g);
     let className = e.target.className;
     let parentNode = e.target.parentNode;
-    console.log(className);
     while (!className || typeof className != 'string') {
-        console.log(parentNode);
         if (className)
             className = parentNode.className;
         parentNode = parentNode.parentNode;
