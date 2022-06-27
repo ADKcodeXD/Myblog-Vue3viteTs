@@ -28,16 +28,77 @@
 - 支持移动端(尽可能支持)
 
 ## 预览
+- 首页[![jVy3OH.png](https://s1.ax1x.com/2022/06/27/jVy3OH.png)](https://imgtu.com/i/jVy3OH)
+- 文章详情页
 
-![欢迎页视觉效果](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/64d99526-d0cc-4d44-85d0-b56fdf908bfb.png?Expires=1812599815&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=kS99FfYUoKbKXGoVbC9l9YgfpyA%3D)
+[![jVysmj.png](https://s1.ax1x.com/2022/06/27/jVysmj.png)](https://imgtu.com/i/jVysmj)
 
-![首页视觉效果](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/7cd3eb4a-3208-4d9b-9424-d12570be20dd.png?Expires=1812642445&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=lhJoWfYALVNOELc14m6I9TpQmbI%3D)
+- 文章列表
 
-![文章详情图片效果](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/8a1b1dd8-47aa-4a7a-a4cc-1a83206491be.png?Expires=1812642563&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=Ut2srKWj2uZn%2BmnCgUDTrekSKUE%3D)
+[![jVyh1U.md.png](https://s1.ax1x.com/2022/06/27/jVyh1U.png)](https://imgtu.com/i/jVyh1U)
 
-![设置界面](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/87bba0c1-cb8a-4fa9-b3e1-27787d9b6771.png?Expires=1812642710&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=6CAXPP4LIgF7KuYAjAQ4A4QvZeM%3D)
+- 设置页
+
+[![jVyTB9.md.png](https://s1.ax1x.com/2022/06/27/jVyTB9.png)](https://imgtu.com/i/jVyTB9)
+
+- 画廊功能
+
+[![jVyX9K.md.png](https://s1.ax1x.com/2022/06/27/jVyX9K.png)](https://imgtu.com/i/jVyX9K)
+
+- 画廊展示页
+
+[![jV6PAI.png](https://s1.ax1x.com/2022/06/27/jV6PAI.png)](https://imgtu.com/i/jV6PAI)
+
+- 写文章
+
+[![jV683T.png](https://s1.ax1x.com/2022/06/27/jV683T.png)](https://imgtu.com/i/jV683T)
+
+- 留言板
+
+[![jV6NDJ.png](https://s1.ax1x.com/2022/06/27/jV6NDJ.png)](https://imgtu.com/i/jV6NDJ)
+
+- 动漫页
+
+[![jV6r8K.png](https://s1.ax1x.com/2022/06/27/jV6r8K.png)](https://imgtu.com/i/jV6r8K)
+
+- 动漫详情
+
+[![jV6WVA.png](https://s1.ax1x.com/2022/06/27/jV6WVA.png)](https://imgtu.com/i/jV6WVA)
 
 更多的请访问*http://adkdream.top*
+
+## 2022.6.27 更新日志📋
+
+🎉**新功能：**
+
+- 增加了画廊功能，用户可以通过上传图片来进行共享生活和动态。
+
+🔨**修复:**
+
+- 修复了富文本编辑器的上传图片bug tinymce6不支持之前的success 改成了promise
+
+- 修复了后端的缓存bug 用户信息更改也能够及时刷新了 将token过期时间提高到了5天
+- 修复了后端缓存无论什么都存入缓存的问题
+
+**⚡优化：**
+
+- 优化了首页图片展示，利用了oss的请求参数做到了图片压缩 更快的网页加载
+- 将oss存储改成了内网转发 节省流量
+- 项目抽取了部分功能性代码为util
+- 将自定义指令的全局注册改为局部注册 首屏速度更友好了
+- 后端支持了动态生成文章sitemap 其他页面暂未支持
+- 利用了gitcz进行项目提交管理 提交更加规范了
+
+**🖊TODO**：
+
+- **支持https**
+- **每日签到**
+- **制作分享界面**
+- **个人创作中心**
+- 增加一个聊天室功能 详见这里6.23👇
+- 对文章增加分区 板块 调整
+- 制作数据导出的功能
+- 制作动态分享功能
 
 ## 2022.6.23 log 更新readme
 
