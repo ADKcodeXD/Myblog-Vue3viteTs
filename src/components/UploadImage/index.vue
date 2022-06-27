@@ -58,7 +58,13 @@ const { imglink,
         width: 100%;
         height: 100%;
     }
-
+    :deep(.el-upload-dragger){
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        border: unset;
+    }
     .upload-banner {
         border: @border-line dashed @textColor;
         border-radius: 30px;
@@ -83,7 +89,8 @@ const { imglink,
             height: 100%;
             width: 100%;
             backdrop-filter: blur(3px);
-
+            overflow: hidden;
+            border-radius: inherit;
             .inner {
                 display: flex;
                 flex-direction: column;

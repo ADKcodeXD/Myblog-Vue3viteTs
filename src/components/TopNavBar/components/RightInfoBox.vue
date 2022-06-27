@@ -22,10 +22,10 @@
             <transition name="toptodown" mode="out-in">
                 <div v-show="infoShow"  class="info-box">
                     <!-- 显示个人用户设置的背景图 -->
-                    <div class="imgmask" >
+                    <div class="imgmask" v-if="userinfo.banner">
                     </div>
-                    <div class="imgcontainer">
-                        <MyElimage :img="userinfo.banner" :zip="3" />
+                    <div class="imgcontainer" v-if="userinfo.banner">
+                        <MyElimage :img="userinfo.banner"  :zip="3" v-if="userinfo.banner"/>
                     </div>
                     <div class="loginbox" v-if="userinfo.id">
                         <div class="up">
