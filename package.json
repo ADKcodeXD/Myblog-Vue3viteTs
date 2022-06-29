@@ -1,7 +1,7 @@
 {
-  "name": "web-music-player",
-  "version": "0.0.0",
-  "private": true,
+  "name": "ADK-Blog",
+  "version": "1.0.0",
+  "private": false,
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
     "build:prod": "vue-tsc --noEmit && vite build --mode production",
