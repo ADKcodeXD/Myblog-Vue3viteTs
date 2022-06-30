@@ -32,6 +32,9 @@ export const useMessageApi = (messageParams : MessageParamsForADK, pageparams : 
             ElMessage.error("请输入昵称");
             return false;
         }
+        if(!messageParams.avatar){
+            messageParams.avatar=Logo;
+        }
         messageParams.content=encodeEmoji(messageParams.content);
         const {data} = await addMessageApi(messageParams);
         if (data.code == 200) {

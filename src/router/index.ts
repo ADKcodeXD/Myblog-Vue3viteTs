@@ -1,6 +1,8 @@
 import {getItem} from './../utils/storage';
 import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router';
 import {ElMessageBox} from 'element-plus';
+import NProgress from 'nprogress'
+import '@/assets/styles/myNprogress.css'
 
 const routes: RouteRecordRaw[] = [
     {
@@ -76,8 +78,8 @@ const routes: RouteRecordRaw[] = [
                     requireAuth: false,
                     keepAlive: true
                 },
-                component: () => import ('@/views/animedetail/index.vue'),
-                
+                component: () => import ('@/views/animedetail/index.vue')
+
             }, {
                 path: 'animesearch',
                 name: 'AnimeSearch',
@@ -132,6 +134,16 @@ const routes: RouteRecordRaw[] = [
                     keepAlive: true
                 },
                 component: () => import ('@/views/aboutme/Aboutme.vue')
+            }, 
+            {
+                path: 'create',
+                name: 'Create',
+                meta: {
+                    title: '创作中心',
+                    requireAuth: true,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/create/index.vue')
             },
             {
                 path: 'picture',
@@ -142,14 +154,23 @@ const routes: RouteRecordRaw[] = [
                     keepAlive: true
                 },
                 component: () => import ('@/views/picture/index.vue')
+            }, {
+                path: 'friendslink',
+                name: 'Friendslink',
+                meta: {
+                    title: '友情链接',
+                    requireAuth: false,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/friendslink/friendslink.vue')
             },
         ]
     },
     {
         path: '/welcome',
         name: 'welcome',
-        meta:{
-            title: '欢迎~',
+        meta: {
+            title: '欢迎~'
         },
         component: () => import ('@/views/newindex/index.vue')
     },
@@ -171,7 +192,8 @@ const routes: RouteRecordRaw[] = [
         path: '/threeshow',
         name: 'threeshow',
         component: () => import ('@/views/threeshow/index.vue')
-    }, {
+    },
+    {
         path: '/play',
         name: 'Player',
         meta: {
@@ -195,10 +217,13 @@ const router = createRouter({linkExactActiveClass: "router-active", history: cre
 router.beforeEach((to, from, next) => {
     const token = getItem("user");
     if (to.meta.title) {
-        document.title=`${to.meta.title}-ADK-blog 我的个人小站`
+        document.title = `${
+            to.meta.title
+        }-ADK-blog 我的个人小站`
     }
     if (to.meta.requireAuth) {
         if (token) {
+            NProgress.start();
             next()
         } else {
             ElMessageBox.confirm('该页面需要登录才能使用，请问是否跳转到登录页面？', '登录提示', {
@@ -206,13 +231,18 @@ router.beforeEach((to, from, next) => {
                 cancelButtonText: '我不去了',
                 type: 'warning'
             }).then(() => {
+                NProgress.start();
                 next({path: '/login'})
             }).catch(() => {
                 return
             })
         }
     } else {
+        NProgress.start();
         next()
     }
+})
+router.afterEach((to,from)=>{
+    NProgress.done();
 })
 export default router;
