@@ -84,3 +84,15 @@ export const deleteUserCollect =(articleId:string)=>{
         url: `/api/userset/deletemycollect/${articleId}`,
     })
 }
+
+/**
+ * 取消我的点赞过的文章 需要一个文章id
+ * @param articleId 
+ * @returns 
+ */
+ export const deleteUserLiked =(articleId:string)=>{
+    return request({
+        method: 'delete',
+        url: `/api/userset/deletemyliked/${articleId}`,
+    })
+}
