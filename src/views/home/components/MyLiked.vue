@@ -1,6 +1,6 @@
 <template >
     <div>
-        <MyTab :articles="likedArticles">
+        <MyTab :articles="likedArticles" :fn="deleteCollectFn" @changeTab="getMyLiked()">
             <template #title>
                 我的点赞
             </template>
@@ -14,8 +14,9 @@
     </div>
 </template>
 <script setup lang="ts">
-import { getUserLiked } from '@/api/user';
+import { deleteUserLiked, getUserLiked } from '@/api/user';
 import MyTab from './MyTab.vue';
+import { ElMessage } from 'element-plus';
 let pageParams = reactive<PageParams>({
     page: 1,
     pagesize: 10
@@ -26,6 +27,10 @@ const getMyLiked = async () => {
     const {data}=await getUserLiked(pageParams);
     likedArticles.value=data.data.results;
     total.value=data.data.length
+}
+const deleteCollectFn=async (id:string)=>{
+    await deleteUserLiked(id);
+    ElMessage.success("取消点赞成功");
 }
 onMounted(()=>{
     getMyLiked();

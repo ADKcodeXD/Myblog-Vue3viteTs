@@ -2,9 +2,10 @@
     <div class="tw-flex tw-justify-between tw-items-center">
         <p style="font-size: 32px">详细信息</p>
         <div class="buttongroup">
-            <ElButton type="primary" plain @click="changeIsEdit(true)" v-if="!isEdit">编辑资料</ElButton>
-            <ElButton type="primary" plain @click="changeIsEdit(false)" v-else>取消</ElButton>
-            <ElButton type="success" @click="formSubmit(formInstance)" v-if="isEdit" plain>完成</ElButton>
+            <ElButton type="primary"  @click="changeIsEdit(true)" v-if="!isEdit">编辑资料</ElButton>
+            <ElButton type="primary"  @click="changeIsEdit(false)" v-else>取消</ElButton>
+            <ElButton type="success" @click="formSubmit(formInstance)" v-if="isEdit">完成</ElButton>
+            <ElButton type="success" @click="$router.push('/index/create')">内容创作中心</ElButton>
         </div>
     </div>
     <ElDivider />

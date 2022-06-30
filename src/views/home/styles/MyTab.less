@@ -7,12 +7,18 @@
             width: 1rem;
             padding: 2rem;
             .flexbox();
-            background-color: @themeColor;
+            .border-normal();
+            background-color: @linkColor;
             color: @hoverTextColor;
             margin: @margin-general;
             border-radius: @border-radius;
-            .border-tag(2px,8px);
-            cursor: pointer;
+            transition: all ease 0.3s;
+            .cusor-pointer();
+            .shadow();
+            &:hover{
+                transform: translateY(-20px);
+                background-color: @themeColor;
+            }
         }
     }
 }

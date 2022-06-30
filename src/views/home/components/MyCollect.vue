@@ -10,6 +10,7 @@
             删除收藏
         </template>
     </MyTab>
+    <MyPagination :pageparams="pageParams" :total="total" @changePage="getMyCollect" />
 </template>
 <script setup lang="ts">
 import { deleteUserCollect, getUserCollect } from '@/api/user';

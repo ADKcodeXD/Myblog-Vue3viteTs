@@ -19,7 +19,6 @@
                         <slot name="caozuo"></slot>
                     </div>
                 </div>
-                <ElDivider />
             </div>
         </div>
         <div v-else>
