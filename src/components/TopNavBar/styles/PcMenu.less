@@ -11,12 +11,27 @@
             display: flex;
             color: @textColor;
             li {
+                .drop-item{
+                    display: flex;
+                    
+                }
+                :deep(.el-dropdown){
+                    font-size: @big-text;
+                    text-align: center;
+                    color: @textColor;
+                    span {
+                        display: block;
+                        margin-top: 4px;
+                    }
+                    
+                }
                 transition: all ease 0.4s;
                 cursor: pointer;
                 display: flex;
                 flex-direction: column;
                 padding: @padding-general;
                 align-items: center;
+                justify-content: center;
                 a {
                     font-weight: 600;
                 }

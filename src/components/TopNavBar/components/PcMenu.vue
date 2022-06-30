@@ -26,15 +26,34 @@
                 <p>写文</p>
                 <span>Edit</span>
             </li>
-            <li @click="$router.push('/index/aboutme')">
-                <router-link to="/index/aboutme" v-show="false">首页</router-link>
-                <p>关于我</p>
-                <span>About ME</span>
-            </li>
-            <li @click="$router.push('/index/picture')">
+            <li>
                 <router-link to="/index/picture" v-show="false">首页</router-link>
-                <p>画廊</p>
-                <span>Picture</span>
+                <el-dropdown>
+                    <p>更多</p>
+                    <span>More</span>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item>
+                                <div class="tw-flex tw-justify-between tw-items-center" @click="$router.push('/index/picture')">
+                                    <SvgIcon name="tupian" class="tw-w-8 tw-h-8 tw-mr-2" />
+                                    <p >画廊</p>
+                                </div>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <div class="tw-flex tw-justify-between tw-items-center"  @click="$router.push('/index/aboutme')">
+                                    <SvgIcon name="yonghu" class="tw-w-8 tw-h-8 tw-mr-2" />
+                                    <p >关于我</p>
+                                </div>
+                            </el-dropdown-item>
+                            <el-dropdown-item>
+                                <div class="tw-flex tw-justify-between tw-items-center" @click="$router.push('/index/friendslink')" >
+                                    <SvgIcon name="link" class="tw-w-8 tw-h-8 tw-mr-2" />
+                                    <p >友链</p>
+                                </div>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
             </li>
         </ul>
     </nav>
