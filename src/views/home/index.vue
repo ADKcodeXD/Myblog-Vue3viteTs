@@ -17,14 +17,9 @@
       <el-tab-pane label="我的点赞">
         <MyLiked />
       </el-tab-pane>
-      <el-tab-pane label="我的创作">
-        
-      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
-
-
 <script lang="ts">
 export default { name: 'Home' }
 </script>

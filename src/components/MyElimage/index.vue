@@ -73,13 +73,12 @@ const isAdd=computed(()=>{
 </script>
 
 
-<style scoped lang="less">
+<style lang="less">
 .gray {
   background-color: rgb(255, 255, 255);
   height: 100%;
   width: 100%;
   .flexbox(column);
-  overflow: hidden;
 }
 .el-image{
   width: 100%;

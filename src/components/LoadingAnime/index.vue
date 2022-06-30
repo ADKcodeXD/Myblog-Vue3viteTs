@@ -24,7 +24,7 @@
 }
 .loading{
     .flexbox(row);
-    height: 100%
+    height: 100%;
 }
 .loading-box{
     .ball(1rem, #fc566c);
