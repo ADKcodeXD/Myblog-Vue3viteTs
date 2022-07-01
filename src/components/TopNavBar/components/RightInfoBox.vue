@@ -40,11 +40,7 @@
                                     <i class="iconfont icon-geren"></i>
                                     <span>个人中心</span>
                                 </li>
-                                <li @click="$router.push('/index/home')">
-                                    <i class="iconfont icon-xihuan"></i>
-                                    <span>我的收藏</span>
-                                </li>
-                                <li @click="$router.push('/index/home')">
+                                <li @click="$router.push('/index/create')">
                                     <i class="iconfont icon-edit"></i>
                                     <span>我的发布</span>
                                 </li>

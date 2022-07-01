@@ -24,11 +24,11 @@
                                 <h3 v-if="userinfo.nickname">
                                     {{ userinfo.nickname }}
                                 </h3>
-                                <h3 v-else class="tw-text-slate-800">欢迎您 尊敬的访客</h3>
+                                <h3 v-else >欢迎您 尊敬的访客</h3>
                                 <div v-if="userinfo.introduce">
                                     {{ userinfo.introduce }}
                                 </div>
-                                <div v-else class="tw-text-slate-800">
+                                <div v-else >
                                     登录后可以使用更多功能哦
                                 </div>
                             </div>
@@ -64,16 +64,11 @@
                 </router-link>
             </div>
             <div class="button-login" v-if="userinfo.id">
-                <el-button type="primary" plain @click="
-    $router.push('/index/home');
-closePollup;
-                ">编辑资料</el-button>
+                <el-button type="primary" plain @click="jumpToEdit">编辑资料</el-button>
                 <el-button type="danger" plain @click="logout">退出登录</el-button>
             </div>
             <div class="button-login" v-else>
-                <el-button type="success" plain @click="
-    $router.push('/login');
-closePollup;
+                <el-button type="success" plain @click="$router.push('/login');closePollup;
                 ">去登录</el-button>
             </div>
         </div>
@@ -91,6 +86,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['close', 'logout']);
 let pollup = ref<HTMLElement | null>();
+const router=useRouter();
+const jumpToEdit=()=>{
+    router.push("/index/home");
+    emit('close')
+}
 const closePollup = () => {
     emit('close')
 }
