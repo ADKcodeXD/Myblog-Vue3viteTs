@@ -2,14 +2,14 @@
     <el-upload class="upload-demo" action="" :on-remove="handleRemove" :before-remove="beforeRemove" drag
         :show-file-list="false" :limit="1" accept=".png, .jpg, .jpeg" :on-exceed="handleExceed" :auto-upload="true"
         :before-upload="beforeUpload" ref="uploadEl" :http-request="upload">
-        <div class="upload-banner">
+        <div class="upload-banner" :style="{maxHeight:maxH?maxH+'px':''}">
             <div class="tip" v-if="!imglink">
                 <div class="inner">
                     <span style="font-size: 80px;">+</span>
                     <slot></slot>
                 </div>
             </div>
-            <div v-else class="tw-h-full tw-w-full">
+            <div v-else class="tip-container">
                 <div class="tip" v-if="loading">
                     <div class="loading_percent">
                         <LoadingAnime />
@@ -26,12 +26,10 @@
 </template>
 <script setup lang="ts">
 import { useUploadImg } from '@/hooks/useUpload';
-const props = defineProps({
-    imglink: {
-        type: String,
-        default: ""
-    }
-})
+const {imglink:parentimg,maxH} = defineProps<{
+    imglink:string,
+    maxH?:number
+}>()
 const emit = defineEmits(['imglink']);
 const { imglink,
     handleRemove,
@@ -42,7 +40,7 @@ const { imglink,
     upload,
     loading,
     loadingPercent,
-    uploadEl } = useUploadImg(emit, props.imglink);
+    uploadEl } = useUploadImg(emit, parentimg);
 
 </script>
 
@@ -80,7 +78,10 @@ const { imglink,
             border: @linkColor @border-line dashed;
             background-color: @bgColor;
         }
-
+        .tip-container{
+            height: inherit;
+            min-height: inherit;
+        }
         .tip {
             position: absolute;
             .flexbox(column);
@@ -88,6 +89,7 @@ const { imglink,
             z-index: 5;
             height: 100%;
             width: 100%;
+            min-height: inherit;
             backdrop-filter: blur(3px);
             overflow: hidden;
             border-radius: inherit;
