@@ -26,9 +26,13 @@
           <div>
             <TagItem v-for="tag in articleItem.tags" :key="tag.id" :tagId="tag.id" :tagName="tag.tagName" />
           </div>
+          
         </div>
         <div>
           <div class="icongroup">
+            <div>
+              <ElTag effect="dark">{{ArticlePannel[articleItem.pannel]}}</ElTag>
+            </div>
             <i class="iconfont icon-yanjing">{{ articleItem.viewCounts }}</i>
             <i class="iconfont icon-pinglun">{{ articleItem.commentCounts }}</i>
             <i class="iconfont icon-good">{{ articleItem.likeCounts }}</i>
@@ -45,7 +49,7 @@
 <script lang="ts" setup>
 import { PropType } from "vue";
 import { getRealativeTime } from "@/utils/dayjs";
-
+import {ArticlePannel} from '@/interface/EnumExport';
 const props = defineProps({
   articleItem: {
     type: Object as PropType<ArticleItemInfo>,
@@ -59,5 +63,4 @@ const time = computed(() => {
 </script>
 <style lang="less" scoped>
 @import url("./styles/Index.less");
-
 </style>

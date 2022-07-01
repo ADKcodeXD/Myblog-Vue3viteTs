@@ -5,11 +5,13 @@ declare global {
         content: string |void,
     }
     interface ArticleReqParams {
+        id?:string,
         body: ArticleBody,
         summary: string,
         articleName: string,
         tags: Array<Tag>,
-        banner: string
+        banner: string,
+        pannel: number
     }
     interface Content{
         html:string|undefined,
@@ -27,20 +29,18 @@ declare global {
         summary:string,
         tags:Array<Tag>,
         viewCounts:number,
-        isLiked:Boolean,
-        isCollected:Boolean,
-        likeCounts:Number,
-        collectCounts:Number
+        isLiked:boolean,
+        isCollected:boolean,
+        likeCounts:number,
+        collectCounts:number,
+        isPrivate:number,
+        pannel:number
     }
     
     interface Banner{
         banner:string,
         id:string,
         articleName:string
-    }
-    interface ArticleListItem{
-        articleVoList:Array<ArticleItemInfo>,
-        length:number
     }
     interface ArticleTime{
         date:string,

@@ -66,3 +66,13 @@ export enum PicTag {
     素材=5
 }
 
+export enum ArticlePannel {
+    默认板块 = 0,
+    水文日常 = 1,
+    技术文章 = 2,
+    个人笔记 = 3,
+    素材分享 = 4,
+    其他 =5,
+    设计参考 =6 ,
+    素材资源 =7
+}
