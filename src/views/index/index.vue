@@ -66,8 +66,6 @@ import { getIndexArticleApi, getIndexBanner } from "@/api/article";
 import TimeLine from "./components/TimeLine.vue";
 import TagsAll from './components/TagsAll.vue';
 import ArticleTimeLine from "./components/ArticleTimeLine.vue";
-// Default SortableJS
-import Sortable from 'sortablejs';
 import SubTitle from "./components/SubTitle.vue";
 // 获取首页文章 按照时间顺序 5篇
 const articles = ref<ArticleItemInfo[]>([]);

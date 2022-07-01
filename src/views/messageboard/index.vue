@@ -50,7 +50,7 @@
     </div>
     <AdkEmpty v-else desc="暂时没有留言哦~"></AdkEmpty>
 
-    <MyPagination :pageparams="pageparams" @changePage="changePage" :total="total" class="pagination" />
+    <MyPagination :pageParams="pageparams" @changePage="changePage" :total="total" class="pagination" />
   </ElScrollbar>
 </template>
 
