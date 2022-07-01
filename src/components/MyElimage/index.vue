@@ -78,10 +78,12 @@ const isAdd=computed(()=>{
   background-color: rgb(255, 255, 255);
   height: 100%;
   width: 100%;
+  min-height: inherit;
   .flexbox(column);
 }
 .el-image{
   width: 100%;
   height: 100%;
+  min-height: inherit;
 }
 </style>
