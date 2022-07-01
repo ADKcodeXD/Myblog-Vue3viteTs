@@ -44,7 +44,6 @@
                         :closable="true" :is-click="false" @closeTag="getTagId(tag)" />
                 </div>
             </transition>
-
         </div>
         <div class="order">
             <div class="label">
@@ -72,6 +71,15 @@
                 </div>
             </div>
         </div>
+        <div class="order">
+            <div class="label">
+                <p class="label-rotate-m4">板块</p>
+                <span class="label-rotate-6">&nbsp;Sort</span>
+            </div>
+            <el-select v-model="pageParams.pannel" placeholder="选择板块">
+                <el-option v-for="item, index in 8" :key="item" :label="ArticlePannel[index]" :value="index" />
+            </el-select>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -79,6 +87,7 @@ import { useArticleListConditional } from '@/hooks/ArticleList';
 import { PropType } from 'vue';
 import gsap from 'gsap';
 import { useAnime } from '@/hooks/Anime';
+import { ArticlePannel } from '@/interface/EnumExport';
 const props = defineProps({
     pageParams: {
         type: Object as PropType<PageParams>,

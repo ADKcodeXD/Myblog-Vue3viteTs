@@ -1,8 +1,9 @@
-@media screen and (min-width:320px) {
+@media screen and (min-width:@mobile-device) {
     .edit {
         display: flex;
-        margin-top: 6.6rem;
+        margin-top: @top-nav-bar-height;
         flex-direction: column;
+        .font-normal();
         .top {
             margin: @margin-general 0;
             padding: @padding-general;
@@ -24,8 +25,6 @@
                 font-size: 2.6rem;
                 margin: @margin-general 0;
             }
-            
-
             .summary {
                 margin: @margin-general 0;
                 :deep(.el-textarea) {
@@ -40,12 +39,17 @@
             justify-content: space-between;
             align-items: center;
             flex-direction: column;
-            .tag {
-                width: 100%;
+            .tags{
+                margin: @margin-general 0;
+            }
+            .pannel{
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: flex-start;
+                .label{
+                    width: 100px;
+                }
+            }
+            .tag{
+                width:100%;
             }
             .publish{
                 width: 100%;
@@ -54,7 +58,6 @@
                 }
             }
         }
-
     }
 }
 
@@ -62,7 +65,6 @@
 @media screen and (min-width:@smallpc-device) {
     .edit {
         margin-top: 0;
-
         .tagandpublish {
             background-color: @bgColor;
         }
