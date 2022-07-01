@@ -1,12 +1,9 @@
 <template>
   <!-- 展示动漫详情页 -->
   <article class="big-container">
-    <section class="header">
-      <div class="back-btn" @click="back">
-        <i class="iconfont icon-left"></i>
-        Back
-      </div>
-    </section>
+    <MyPageHeader :backFn="back" >
+      动漫 {{animeDetail?.name_cn}} 详情
+    </MyPageHeader>
     <section class="content">
       <!-- pc端上三栏布局 手机端左边一栏 右边详细信息 右边的往下放 -->
       <aside class="left-content" v-if="!loading">
