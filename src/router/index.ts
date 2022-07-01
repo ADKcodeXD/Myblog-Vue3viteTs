@@ -154,7 +154,8 @@ const routes: RouteRecordRaw[] = [
                     keepAlive: true
                 },
                 component: () => import ('@/views/picture/index.vue')
-            }, {
+            }, 
+            {
                 path: 'friendslink',
                 name: 'Friendslink',
                 meta: {
@@ -163,6 +164,16 @@ const routes: RouteRecordRaw[] = [
                     keepAlive: false
                 },
                 component: () => import ('@/views/friendslink/friendslink.vue')
+            },
+            {
+                path: 'updatearticle/:id',
+                name: 'Updatearticle',
+                meta: {
+                    title: '修改文章',
+                    requireAuth: true,
+                    keepAlive: false
+                },
+                component: () => import ('@/views/updatearticle/index.vue')
             },
         ]
     },

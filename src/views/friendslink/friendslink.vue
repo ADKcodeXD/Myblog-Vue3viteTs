@@ -6,7 +6,7 @@
         </div>
         <ElDivider />
         <div class="content">
-            <div class="friendlink"  v-for="i in 10">
+            <div class="friendlink">
                 <div class="left-image">
                     <MyElimage :img="Logo" :zip="2" />
                 </div>
@@ -16,6 +16,18 @@
                         <p class="desc">一个基于Vue3和vite的动漫类博客网站 支持了动漫功能和一些其他功能</p>
                     </div>
                     <address class="tw-text-blue-400">地址:https://adkdream.top</address>
+                </div>
+            </div>
+            <div class="friendlink">
+                <div class="left-image">
+                    <MyElimage img="https://www.crackingvip.xyz/wp-content/uploads/2022/06/Photo_1654586953819.png" :zip="2" />
+                </div>
+                <div class="info">
+                    <div class="up">
+                        <a href="https://www.crackingvip.xyz/" target="_blank" class="title">狐说社区</a>
+                        <p class="desc">狐说社区是国内小众的资源分享社区,拥有,资源分享,次元阁,玩机,技术分享,游戏,音乐等,板块</p>
+                    </div>
+                    <address class="tw-text-blue-400">地址:https://www.crackingvip.xyz/</address>
                 </div>
             </div>
         </div>
