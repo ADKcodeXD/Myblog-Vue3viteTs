@@ -1,6 +1,9 @@
 import request from '@/utils/request'
 
-// 获取当前数据库中所有tags
+/**
+ * 获取所有的标签 非分页获取
+ * @returns 
+ */
 export const getTagList = () => {
     return request({
         method: 'get',
@@ -8,7 +11,11 @@ export const getTagList = () => {
     })
 }
 
-// publish 发布文章
+/**
+ * 发布文章 需要登录才能发布 后端做好了限制
+ * @param articleReqParams 一个文章发布的params
+ * @returns 
+ */
 export const publishArticle = (articleReqParams: any) => {
     return request({
         method: 'post',
@@ -16,18 +23,6 @@ export const publishArticle = (articleReqParams: any) => {
         data: articleReqParams
     })
 }
-
-// listARticle 获取文章列表
-// params : page pagesize
-export const listArticle = (pageParams: PageParams) => {
-    return request({
-        method: 'post',
-        url: '/api/articles/articlelist',
-        data: pageParams
-    })
-}
-
-
 /**
  * uploadImage 用于上传图片 获取图片oss地址
  * 设置了60s的超时时间
@@ -52,7 +47,6 @@ export const uploadImage = (imgFile: any,cb?:any) => {
         timeout:60000,
     })
 }
-
 /**
  * uploadImageToLocal 用于上传图片到本地  获取图片的本地地址 用于解决oss流量贵的问题
  * 设置了60s的超时时间
@@ -82,7 +76,7 @@ export const uploadImage = (imgFile: any,cb?:any) => {
  * @param id articleId 通过query获取 
  * @returns 
  */
-export const getArticleItem = (id: number) => {
+export const getArticleItem = (id: number|string) => {
     return request({
         method: 'post',
         url: `/api/articles/article/${id}`,
@@ -99,8 +93,11 @@ export const getIndexBanner = () => {
     })
 }
 
-// listArticleWithCount 获取文章列表 并返回表中数据总数
-// params : page pagesize
+/**
+ * 获取文章的列表
+ * @param pageParams 
+ * @returns 
+ */
 export const listArticleWithCount = (pageParams: PageParams) => {
     return request({
         method: 'post',
@@ -108,7 +105,12 @@ export const listArticleWithCount = (pageParams: PageParams) => {
         data: pageParams
     })
 }
-// 添加tag
+
+/**
+ * 提供标签名即可添加标签
+ * @param tagName 标签名
+ * @returns 
+ */
 export const addTag = (tagName: string) => {
     return request({
         method: 'get',
@@ -116,7 +118,11 @@ export const addTag = (tagName: string) => {
     })
 }
 
-// get 首页文章 单独新增一个接口 最多获取五篇文章 且都在articleIndex中间表中(可以后台管理)
+/**
+ * 获取首页的文章 从单独的表中获取 和原表不关联
+ * @param pageparams 分页参数
+ * @returns 
+ */
 export const getIndexArticleApi = (pageparams: PageParams) => {
     return request({
         method: 'post',
@@ -125,8 +131,10 @@ export const getIndexArticleApi = (pageparams: PageParams) => {
     })
 }
 
-// 获取文章归档
-// get 首页文章 单独新增一个接口 最多获取五篇文章 且都在articleIndex中间表中(可以后台管理)
+/**
+ * 获取文章的发布时间信息
+ * @returns 文章归档信息
+ */
 export const getArticleGroupByTimeApi = () => {
     return request({
         method: 'get',
@@ -134,7 +142,11 @@ export const getArticleGroupByTimeApi = () => {
     })
 }
 
-//获取指定数量的 tag taglist
+/**
+ * 分页获取标签
+ * @param pageparams 分页参数
+ * @returns 
+ */
 export const getTagListApi = (pageparams:PageParams) => {
     return request({
         method: 'post',
@@ -142,11 +154,61 @@ export const getTagListApi = (pageparams:PageParams) => {
         data:pageparams
     })
 }
-// 搜索建议
+/**
+ * 获取搜索联想关键词
+ * @param keyword 关键词
+ * @returns 
+ */
 export const getSearchTipApi = (keyword:string) => {
     return request({
         method: 'get',
         url: '/api/articles/searchtip',
         params:{'keyword':keyword}
+    })
+}
+/**
+ * 获取自己所写的所有文章列表 包括私有和公开的
+ * @param pageparams 分页参数 获取自己所写的文章
+ * @returns 
+ */
+export const getMyArticles = (pageparams:PageParams) => {
+    return request({
+        method: 'post',
+        url: '/api/articles/myarticle',
+        data:pageparams
+    })
+}
+/**
+ * 修改自己的文章 需要登录 
+ * @param articleReqParams 文章参数 
+ * @returns 
+ */
+export const updateMyArticle = (articleReqParams:ArticleReqParams) => {
+    return request({
+        method: 'post',
+        url: '/api/articles/updatemyarticle',
+        data:articleReqParams
+    })
+}
+/**
+ * 删除指定的文章 需要自己的文章
+ * @param id 文章的id参数
+ * @returns 
+ */
+export const deleteMyArticle = (id:string) => {
+    return request({
+        method: 'post',
+        url: `/api/articles/deletemyarticle/${id}`,
+    })
+}
+/**
+ * 切换文章的显示状态 可以设置私有或者公开
+ * @param id 文章id
+ * @returns 
+ */
+export const switchMyArticle = (id:string) => {
+    return request({
+        method: 'post',
+        url: `/api/articles/switcharticlestate/${id}`,
     })
 }
