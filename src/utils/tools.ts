@@ -49,8 +49,7 @@ export const throttle = (time : number, fn : Function) => {
  */
 export const debounce = (time : number, fn : Function) => {
     let timmer = null;
-    return function () {
-        let args = arguments;
+    return function (...args: any) {
         clearTimeout(timmer);
         setTimeout(() => {
             fn.apply(this, args);
