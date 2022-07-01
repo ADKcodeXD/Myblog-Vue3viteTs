@@ -7,7 +7,7 @@
                 <span class="link">{{ item.articleName }}</span>
             </template>
         </el-autocomplete>
-        <div class="search-btn" v-loading="searchLoading"  @click="searchByKeyword">
+        <div class="search-btn"  @click="searchByKeyword">
 
         </div>
     </div>
