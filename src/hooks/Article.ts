@@ -12,28 +12,28 @@ import { storeToRefs } from 'pinia';
 export const useArticle = () => {
     const route = useRoute();
     const userStore = useUserStore();
-    let user=storeToRefs(userStore).userinfo;
-    let emoji=ref();
+    const user=storeToRefs(userStore).userinfo;
+    const emoji=ref();
     // 定义所有使用到的变量
-    let comment = ref("");
-    let commentParams: CommentParams = reactive({
+    const comment = ref("");
+    const commentParams: CommentParams = reactive({
         articleId: route.params.id as string,
         authorId: user.value.id,
         content: comment,
     });
-    let article = ref<ArticleItemInfo>();
-    let commentList = ref<CommentItemInfo[]>([]);
+    const article = ref<ArticleItemInfo>();
+    const commentList = ref<CommentItemInfo[]>([]);
     // loading
-    let isLikedLoading = ref(false);
-    let isCollectLoading = ref(false);
+    const isLikedLoading = ref(false);
+    const isCollectLoading = ref(false);
     // 评论分页参数
-    let pageparams: PageParams = reactive({
+    const pageparams: PageParams = reactive({
         page: 1,
         pagesize: 10,
     });
-    let totalComment=ref(0);
+    const totalComment=ref(0);
     // 计算属性 计算相对时间
-    let time = computed(() => {
+    const time = computed(() => {
         article.value as ArticleItemInfo;
         if (article.value) {
             return getRealativeTime(article.value.createDate);

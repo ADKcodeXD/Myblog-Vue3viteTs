@@ -7,7 +7,7 @@ import {
     onUnmounted,
     Ref
 } from "vue";
-import {addTag, getTagList, publishArticle} from "@/api/article";
+import {publishArticle} from "@/api/article";
 import {useStore} from "@/store/main";
 export const useEditor = () => { // 存放两种内容的地方
     const content = reactive < Content > ({html: "", text: ""});
@@ -26,18 +26,6 @@ export const useEditor = () => { // 存放两种内容的地方
     const changeEditor = (val : string) => {
         editorName.value = val;
     };
-    // 自动保存定时器
-    const save = () => {
-        if (content.html) {
-            setItem("temp", {
-                rich: contentRich,
-                markdown: content
-            });
-            ElNotification({title: "自动保存成功", message: "已保存到本地存储", type: "success"});
-        }
-    }
-    // 2分钟自动保存一次 设置定时器
-    const saveTemp = setInterval(save, 120000);
     // 加载 包括本地存储
     onBeforeMount(() => {
         const a = getItem("temp");
@@ -51,9 +39,6 @@ export const useEditor = () => { // 存放两种内容的地方
                 content.text = a.markdown.text;
             }
         }
-    });
-    onUnmounted(() => {
-        clearInterval(saveTemp);
     });
     return {
         changeEditor,
@@ -97,17 +82,28 @@ export const useAddtag = (emit : any) => { // 动态增加标签
         handleInputConfirm
     }
 }
-
-export const useTagAndArticle = (editorName : Ref < string >, imglink : Ref < string >, contentRich : Content, content : Content) => {
+/**
+ * 
+ * @param editorName 当前编辑器的名字 是一个ref对象
+ * @param imglink ref的图片链接
+ * @param contentRich 富文本编辑器的内容
+ * @param content markdown编辑器内容
+ * @param tags ref 的Tag[]数组
+ * @returns 
+ */
+export const useArticleSubmit = (editorName : Ref < string >, 
+    imglink : Ref < string >, 
+    contentRich : Content, 
+    content : Content,
+    tags:Ref < Tag[] >) => {
+    
     const store = useStore();
     const router = useRouter();
     // elm input
     const summary = ref("");
     const title = ref("这里输入标题");
     const styleChange = ref(false);
-    // 选择tag
-    const tags = ref < Tag[] > ([]);
-    const options = ref < Tag[] > ([]);
+    const pannel=ref(0);
     // 提交逻辑
     const submitArticle = async () => {
         if (! store.user.token) {
@@ -129,7 +125,7 @@ export const useTagAndArticle = (editorName : Ref < string >, imglink : Ref < st
             } else if (!imglink.value) {
                 ElMessage.error("请上传头图哦");
                 return;
-            }
+            } 
             // 创建一个请求参数体
             const articleReqParams: ArticleReqParams = {
                 body: {
@@ -139,7 +135,8 @@ export const useTagAndArticle = (editorName : Ref < string >, imglink : Ref < st
                 summary: "",
                 articleName: "",
                 tags: [],
-                banner: ""
+                banner:"",
+                pannel:pannel.value
             };
 
             // 赋值
@@ -149,7 +146,8 @@ export const useTagAndArticle = (editorName : Ref < string >, imglink : Ref < st
             } else {
                 articleReqParams.body.content = content.text;
                 articleReqParams.body.contentHtml = content.html;
-            } articleReqParams.summary = summary.value;
+            } 
+            articleReqParams.summary = summary.value;
             articleReqParams.tags = tags.value;
             articleReqParams.articleName = title.value;
             articleReqParams.banner = imglink.value;
@@ -165,47 +163,29 @@ export const useTagAndArticle = (editorName : Ref < string >, imglink : Ref < st
             }, 2000);
         }
     };
-    const getTag = async () => {
-        const {data} = await getTagList();
-        if (data.code === 200) {
-            options.value = data.data;
-        } else {
-            console.log("error");
-        }
-    };
-    const addTagFn = async (val : string) => { // 接口 调用 添加tag
-        await addTag(val);
-        ElMessage.success('成功');
-        getTag();
-    }
-    // 计算属性  移除已选择标签
-    const canChooseTags = computed(() => {
-        return options.value.filter(item => {
-            let flag = true;
-            tags.value.forEach(tag => {
-                if (tag.id === item.id) 
-                    flag = false
-
-
-                
-
-
-            })
-            return flag;
-        })
-    })
-    onMounted(() => {
-        getTag();
-    })
     return {
-        canChooseTags,
-        addTagFn,
-        getTag,
         submitArticle,
-        tags,
-        options,
         styleChange,
         summary,
-        title
+        title,
+        pannel
     }
+}
+
+export const useSave=(content:Content,contentRich:Content)=>{
+    // 自动保存定时器
+    const save = () => {
+        if (content.html) {
+            setItem("temp", {
+                rich: contentRich,
+                markdown: content
+            });
+            ElNotification({title: "自动保存成功", message: "已保存到本地存储", type: "success"});
+        }
+    }
+    // 2分钟自动保存一次 设置定时器
+    const saveTemp = setInterval(save, 120000);
+    onUnmounted(() => {
+        clearInterval(saveTemp);
+    });
 }

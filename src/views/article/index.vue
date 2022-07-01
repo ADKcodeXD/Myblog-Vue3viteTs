@@ -56,7 +56,7 @@
             </div>
           </div>
           <!-- 评论分页 -->
-          <MyPagination :pageparams="pageparams" :total="totalComment" @changePage="changePage" class="page" />
+          <MyPagination :pageParams="pageparams" :total="totalComment" @changePage="changePage" class="page" />
         </div>
         <AdkEmpty desc="努力加载中" v-else />
       </article>
@@ -67,7 +67,6 @@
 </template>
 
 <script lang="ts">
-import hljs from "highlight.js";
 // import css
 export default {
   name: "Article",
@@ -97,8 +96,6 @@ const {
   pageparams,
   changePage
 } = useArticle();
-const app = getCurrentInstance();
-
 
 // banner消失 导航栏出现
 const banner = ref();

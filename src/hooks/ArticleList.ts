@@ -55,7 +55,6 @@ export const useArticleListConditional = (props, emit) => {
         }
         emit('changeConditional')
     };
-
     const getTagId = (tag : Tag) => {
         if (currentTagIds.value.includes(tag.id)) {
             currentTagIds.value.splice(currentTagIds.value.indexOf(tag.id), 1);
@@ -71,9 +70,6 @@ export const useArticleListConditional = (props, emit) => {
             props.pageParams.tagIds = undefined;
          else 
             props.pageParams.tagIds = currentTagIds.value;
-        
-
-
         emit('changeConditional')
     };
     // 年月日
@@ -87,7 +83,6 @@ export const useArticleListConditional = (props, emit) => {
         }
         emit('changeConditional')
     };
-
     // 获取tag api
     const getTag = async () => {
         tagloading.value = true;
@@ -97,7 +92,8 @@ export const useArticleListConditional = (props, emit) => {
             tagTotal.value = data.data.length;
         } else {
             console.log("error");
-        } tagloading.value = false;
+        } 
+        tagloading.value = false;
     };
     // 获取tag 下一页
     const changeTag = () => {
