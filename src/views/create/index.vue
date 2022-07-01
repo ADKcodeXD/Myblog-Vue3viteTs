@@ -8,31 +8,19 @@
             <!-- 我的文章 -->
             <el-tabs type="card">
                 <el-tab-pane label="文章创作">
-                    <MyArticle />
+                    <MyArticle :user-id="userinfo.userinfo.id" />
                 </el-tab-pane>
                 <el-tab-pane label="画廊投稿">
-
+                    
                 </el-tab-pane>
             </el-tabs>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import { listArticle } from '@/api/article';
 import { useUserStore } from '@/store/user';
-import { ElMessage } from 'element-plus';
+import MyArticle from './components/MyArticle.vue';
 const userinfo=useUserStore();
-const pageParams=reactive<PageParams>({
-    page:1,
-    pagesize:10,
-    authorId:userinfo.userinfo.id
-})
-const getMyArticle=async ()=>{
-    if(!userinfo.userinfo.id){
-        ElMessage.error('错误')
-    }
-    const {data}=await listArticle(pageParams);
-}
 
 </script>
 <style lang="less" scoped>
