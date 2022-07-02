@@ -8,10 +8,10 @@
             <!-- 我的文章 -->
             <el-tabs type="card">
                 <el-tab-pane label="文章创作">
-                    <MyArticle :user-id="userinfo.userinfo.id" />
+                    <MyArticle :user-id="userinfo.userinfo.id" v-if="userinfo.userinfo.id" />
                 </el-tab-pane>
                 <el-tab-pane label="画廊投稿">
-                    
+                    <MyPicture  />
                 </el-tab-pane>
             </el-tabs>
         </div>
@@ -20,6 +20,7 @@
 <script setup lang="ts">
 import { useUserStore } from '@/store/user';
 import MyArticle from './components/MyArticle.vue';
+import MyPicture from './components/MyPicture.vue';
 const userinfo=useUserStore();
 
 </script>

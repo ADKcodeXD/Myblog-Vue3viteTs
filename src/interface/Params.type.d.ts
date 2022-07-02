@@ -46,10 +46,12 @@ declare global{
         flag:Boolean
     }
     interface PicParams {
+        id?:string,
         title:string,
         summary:string,
         url:string,
-        isOrigin:number
+        isOrigin:number,
+        tag?:number
     }
 }
 export{}
