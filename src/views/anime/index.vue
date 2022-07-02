@@ -23,7 +23,7 @@ export default {
 import AnimeHeader from "./components/AnimeHeader.vue";
 import AnimeCarousel from "./components/AnimeCarousel.vue";
 import AnimeBroswerMain from "./components/AnimeBroswerMain.vue";
-import Animemina from "./components/Animemina.vue";
+import Animemina from "@/anime/components/Animemina.vue";
 </script>
 <style lang="less" scoped>
 @import url(./styles/AnimePage.less);
