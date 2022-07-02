@@ -48,7 +48,7 @@ export const useUpload = async (file : File, loadingNum? : Ref < number >) : Pro
  * @param init 初始的图片链接 可以传入 也可以不传入
  * @returns 
  */
-export const useUploadImg = (emit, init?: string) => {
+export const useUploadImg = (emit, init?: string,onlyShow?:boolean) => {
     const imglink = ref(init); // 初始化图片链接
     const loading = ref(false); // 标识等待
     const uploadEl = ref < UploadInstance > (); // elupload 的组件实例
@@ -99,6 +99,10 @@ export const useUploadImg = (emit, init?: string) => {
         if (! isLt5M) {
             ElMessage.error("请不要上传大于5MB的图片");
             return false;
+        }
+        if(onlyShow){
+            ElMessage.error("当前仅为展示模式!!");
+            return false
         }
         imglink.value = URL.createObjectURL(file);
         return true;

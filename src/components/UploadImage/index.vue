@@ -26,9 +26,10 @@
 </template>
 <script setup lang="ts">
 import { useUploadImg } from '@/hooks/useUpload';
-const {imglink:parentimg,maxH} = defineProps<{
+const {imglink:parentimg,maxH,onlyShow} = defineProps<{
     imglink:string,
-    maxH?:number
+    maxH?:number,
+    onlyShow?:boolean
 }>()
 const emit = defineEmits(['imglink']);
 const { imglink,
@@ -40,7 +41,7 @@ const { imglink,
     upload,
     loading,
     loadingPercent,
-    uploadEl } = useUploadImg(emit, parentimg);
+    uploadEl } = useUploadImg(emit, parentimg,onlyShow);
 
 </script>
 
