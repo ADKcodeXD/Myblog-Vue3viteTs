@@ -19,6 +19,7 @@ export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   return defineConfig({
     base: '/',
+    assetsInclude: resolve(__dirname, 'src/assets'),
     plugins: [
       vue(), 
       AutoImport({
