@@ -32,6 +32,7 @@ import { ElMessage } from "element-plus";
 import { currentUserApi } from "@/api/user";
 import { useUserStore } from "@/store/user";
 import router from "@/router";
+import { userLogout } from "@/api/login";
 const props = defineProps({
   backColor: {
     type: String,
@@ -74,7 +75,8 @@ const closePollup = () => {
   isShow.value = false;
 }
 // 退出登录
-const logout = (): void => {
+const logout = async () => {
+  await userLogout();
   store.user.token = "";
   removeItem("user");
   userStore.setUser({
