@@ -13,5 +13,4 @@ const head = createHead();
 const pinia=createPinia();
 const app = createApp(App).use(router).use(pinia).use(head);
 // app.config.globalProperties.$echarts = echarts;
-
 app.mount('#app')
