@@ -3,7 +3,8 @@
     <el-dialog v-model="isDialogShow" title="上传图片" @close="$emit('close')">
         <div class="dialog">
             <div class="dialog-image">
-                <UploadImage @imglink="setUrl" :imglink="postParams.url" v-if="isDialogShow" />
+                <UploadImage @imglink="setUrl" :imglink="postParams.url" v-if="isDialogShow"
+                    :only-show="imgItem ? true : false" />
             </div>
             <input class="text" type="text" v-model="postParams.title" placeholder="这里输入图片标题" />
             <div class="summary">
@@ -18,14 +19,12 @@
             <div class="tag">
                 <p class="choose">选择板块</p>
                 <el-select v-model="postParams.tag" class="m-2" placeholder="Select">
-                    <el-option v-for="item,index in 6" :key="item" 
-                    :label="PicTag[index]" 
-                    :value="index" />
+                    <el-option v-for="item, index in 6" :key="item" :label="PicTag[index]" :value="index" />
                 </el-select>
             </div>
             <div class="button-group">
                 <ElButton type="danger" @click="$emit('close')">取消</ElButton>
-                <ElButton type="success" @click="postImage">上传</ElButton>
+                <ElButton type="success" @click="postImage">提交</ElButton>
             </div>
         </div>
     </el-dialog>
@@ -34,22 +33,32 @@
 import { addPic } from '@/api/pic';
 import { useUserStore } from '@/store/user';
 import { ElMessage } from 'element-plus';
-import {PicTag} from '@/interface/EnumExport';
-const props = defineProps({
-    isDialogShow: {
-        type: Boolean,
-        required: true
-    }
-})
-const emit = defineEmits(['flushImage', 'close']);
+import { PicTag } from '@/interface/EnumExport';
+const { isDialogShow, imgItem } = defineProps<{
+    isDialogShow: boolean,
+    imgItem?: PicVo
+}>()
+const emit = defineEmits(['flushImage', 'close','changeImg']);
 const currentUser = useUserStore();
-const postParams = reactive({
+const postParams = reactive<PicParams>({
+    id: undefined,
     url: '',
     title: '',
     summary: '',
     isOrigin: 0,
-    tag:0
+    tag: 0
 })
+onMounted(() => {
+    if (imgItem) {
+        postParams.url = imgItem.url;
+        postParams.isOrigin = imgItem.origin;
+        postParams.id = imgItem.id;
+        postParams.summary = imgItem.summary;
+        postParams.tag = imgItem.tag;
+        postParams.title = imgItem.title;
+    }
+})
+
 const setUrl = (val: string) => {
     postParams.url = val
 }
@@ -68,6 +77,11 @@ const postImage = async () => {
     }
     if (!currentUser.userinfo.id) {
         ElMessage.error('请登录后上传~');
+        return;
+    }
+    if(imgItem){
+        emit('close')
+        emit('changeImg',postParams);
         return;
     }
     await addPic(postParams);
@@ -109,11 +123,13 @@ const postImage = async () => {
     .origin {
         margin: @margin-general 0;
     }
-    .tag{
+
+    .tag {
         margin: @margin-general 0;
         display: flex;
         align-items: center;
-        .choose{
+
+        .choose {
             margin-right: 1.5rem;
         }
     }

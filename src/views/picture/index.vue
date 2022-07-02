@@ -35,40 +35,9 @@
         <ElDivider />
         <div class="grid" ref="imgcontainer">
             <AdkEmpty v-if="!isLoading && picList.length <= 0 && !isAjaxLoading" />
-            <div class="grid-item" v-for="item, index in picList" :key="item.id" @click="imgShowFn(index)">
-                <div class="up">
-                    <MyElimage :img="`${item.url}`" @load="loaded" :zip="2" />
-                </div>
-                <div class="info">
-                    <div class="up-info">
-                        <div>
-                            <p class="title">{{ item.title }}</p>
-                            <p class="desc">{{ item.summary }}</p>
-                        </div>
-                        <div class="likes">
-                            <i class="iconfont icon-good"></i>
-                            <p>{{ item.likes }}</p>
-                        </div>
-                    </div>
-                    <div class="author">
-                        <div class="inner">
-                            <div class="avatar">
-                                <MyElimage :img="item.author.avatar" :zip="1" />
-                            </div>
-                            <p class="authorname">{{ item.author.nickname }}</p>
-                        </div>
-                        <div class="right">
-                            <div class="tag">
-                                <ElTag type="success" v-if="item.origin === 1">原创</ElTag>
-                                <ElTag type="" effect="dark">
-                                    {{ PicTag[item.tag] }}
-                                </ElTag>
-                            </div>
-                            <p class="time">发布于{{ item.createTime }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ImageItem :item="item" v-for="item,index in picList" :key="item.id" :index="index" 
+            @loaded="loaded" @showImg="show"
+            />
             <LoadingAnime v-if="isLoading || isAjaxLoading" style="position:absolute;
             bottom: 10px;left: 50%;transform: translateX(-50%);" />
             <p class="bottom" v-if="total <= pageParams.page * pageParams.pagesize &&
@@ -84,19 +53,20 @@
 <script setup lang="ts" >
 import PostImg from './components/PostImg.vue';
 import ShowImglist from './components/ShowImglist.vue';
+import ImageItem from './components/ImageItem.vue';
 import { PicTag } from '@/interface/EnumExport';
-import { useImageLayout, usePictureMethod, usePictureState } from '@/hooks/usePicture';
-const { picList, total, activeItem, pageParams,
-    imgShowIndex, imgShow, isAjaxLoading,
-    isLoading, isDialogShow, orderRole,
-    isOrigin, tag, imgcontainer } = usePictureState();
+import { useGetPics, useImageLayout, useShowImgItem} from '@/hooks/usePicture';
 const { layoutImage } = useImageLayout();
-const { loaded,
-    imgShowFn,
-    flushImage, } = usePictureMethod(layoutImage,
-        imgcontainer, isLoading, pageParams, orderRole,
-        isOrigin, tag, isAjaxLoading, total, picList, activeItem,
-        imgShowIndex, imgShow);
+const {loaded,flushImage,total,isOrigin,imgcontainer,
+orderRole,tag,picList,isLoading,isAjaxLoading,pageParams}=useGetPics(layoutImage);
+const {imgShowFn,
+        imgShow,
+        imgShowIndex,
+        activeItem,
+        isDialogShow}=useShowImgItem(picList);
+const show=(index:number)=>{
+    imgShowFn(index);
+}
 </script>
 <style lang="less" scoped>
 @import url(./styles/picture.less);

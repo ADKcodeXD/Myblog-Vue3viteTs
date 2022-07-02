@@ -45,13 +45,26 @@ export const useImageLayout = () => { /**
     }
     return {layoutImage}
 }
-export const usePictureState = () => {
-    const imgcontainer = ref < HTMLElement > ();
-    const isDialogShow = ref(false);
-    const isLoading = ref(false); // 图片加载完成的标志
-    const isAjaxLoading = ref(false); // 请求加载完成的标志
+export const useShowImgItem=(picList:Ref<PicVo[]>)=>{
     const imgShow = ref(false);
     const imgShowIndex = ref(0);
+    const activeItem = ref < PicVo > ();
+    const isDialogShow = ref(false);
+    const imgShowFn = (index : number) => {
+        activeItem.value = picList.value[index];
+        imgShow.value = true;
+        imgShowIndex.value = index
+    }
+    return {
+        imgShowFn,
+        imgShow,
+        imgShowIndex,
+        activeItem,
+        isDialogShow
+    }
+}
+export const useGetPics = (layoutImage) => {
+    const isChangeRule = ref(false);
     const orderRole = ref < undefined | string > (undefined);
     const tag = ref < undefined | number > (undefined);
     const isOrigin = ref < number > (0);
@@ -62,40 +75,11 @@ export const usePictureState = () => {
         tag: tag.value,
         isOrigin: isOrigin.value
     }
-    const picList = ref < PicVo[] > ([]);
     const total = ref(0);
-    const activeItem = ref < PicVo > ();
-    return {
-        picList,
-        total,
-        activeItem,
-        pageParams,
-        imgShowIndex,
-        imgShow,
-        isAjaxLoading,
-        isLoading,
-        isDialogShow,
-        imgcontainer,
-        orderRole,
-        isOrigin,
-        tag
-    }
-}
-export const usePictureMethod = (layoutImage,
-                                imgcontainer,
-                                isLoading,
-                                pageParams,
-                                orderRole,
-                                isOrigin,
-                                tag,
-                                isAjaxLoading,
-                                total,
-                                picList,
-                                activeItem,
-                                imgShowIndex,
-                                imgShow
-    ) => {
-    const isChangeRule = ref(false);
+    const imgcontainer = ref < HTMLElement > ();
+    const picList = ref < PicVo[] > ([]);
+    const isLoading = ref(false); // 图片加载完成的标志
+    const isAjaxLoading = ref(false); // 请求加载完成的标志
     const layout = debounce(300, layoutImage(imgcontainer, 'grid-item', 8, () => isLoading.value = false));
     // 上传后的增加图片的函数
     const flushImage = async () => {
@@ -139,11 +123,6 @@ export const usePictureMethod = (layoutImage,
         }
         isAjaxLoading.value = false
     }
-    const imgShowFn = (index : number) => {
-        activeItem.value = picList.value[index];
-        imgShow.value = true;
-        imgShowIndex.value = index
-    }
     const getNext = () => {
         pageParams.page += 1;
         isLoading.value = true;
@@ -184,8 +163,16 @@ export const usePictureMethod = (layoutImage,
     }) 
     return {
         loaded,
-        imgShowFn,
         getPicsFn,
         flushImage,
+        total,
+        isOrigin,
+        imgcontainer,
+        orderRole,
+        tag,
+        picList,
+        isLoading,
+        isAjaxLoading,
+        pageParams
     }         
 }
