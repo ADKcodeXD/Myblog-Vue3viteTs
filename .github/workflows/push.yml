@@ -20,7 +20,7 @@ jobs:
                   node-version: 16.13.1
             # 安装依赖
             - name: 安装依赖
-              run: npm install
+              run: npm install -f
             # 打包
             - name: 打包
               run: npm run build:prod
