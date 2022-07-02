@@ -9,7 +9,7 @@ module.exports = {
     types: {
       chore: {
         description: 'Build process or auxiliary tool changes',
-        emoji: '🤖',
+        emoji: '🎯',
         value: 'chore'
       },
       ci: {
@@ -18,13 +18,13 @@ module.exports = {
         value: 'ci'
       },
       docs: {
-        description: 'Documentation only changes',
+        description: '文档更新',
         emoji: '✏️',
         value: 'docs'
       },
       feat: {
-        description: 'A new feature',
-        emoji: '🎸',
+        description: '新功能',
+        emoji: '🎉',
         value: 'feat'
       },
       fix: {
@@ -38,12 +38,12 @@ module.exports = {
         value: 'perf'
       },
       refactor: {
-        description: 'A code change that neither fixes a bug or adds a feature',
+        description: '重构代码或者改变代码结构',
         emoji: '💡',
         value: 'refactor'
       },
       release: {
-        description: 'Create a release commit',
+        description: '发布版',
         emoji: '🏹',
         value: 'release'
       },
