@@ -1,4 +1,4 @@
-<p align="center">  
+<p align="center">
     <img src="https://img.shields.io/badge/-Vue3-34495e?logo=vue.j" />
     <img src="https://img.shields.io/badge/-Vite2.7-646cff?logo=vite&logoColor=white" />
     <img src="https://img.shields.io/badge/-TypeScript-blue?logo=typescript&logoColor=white" />
@@ -7,11 +7,11 @@
     <img src="https://img.shields.io/badge/-Less-1D365D?logo=less&logoColor=white" alt="Less">
     <img src="https://img.shields.io/badge/adk-adkblog-red" alt="Less">
     <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/ADKcodeXD/Myblog-Vue3viteTs">
+    <img alt="CD" src="https://github.com/ADKcodeXD/Myblog-Vue3viteTs/actions/workflows/push.yml/badge.svg">
 <p>  
-
 # ADK-BLOG
 
-![adkblog](http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/0238df3a-a7cd-4376-9951-57c03916cdf9.png?Expires=1812599738&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=zgRvR1hwnqMABsutX6FiZfl5RbY%3D)
+![adkblog]([http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/0238df3a-a7cd-4376-9951-57c03916cdf9.png?Expires=1812599738&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=zgRvR1hwnqMABsutX6FiZfl5RbY%3D]#pic_center)
 
 **一款二次元风格主题的个人博客**
 
@@ -28,10 +28,10 @@
 - 支持移动端(尽可能支持)
 
 ## 预览
-- 首页[![jVy3OH.png](https://s1.ax1x.com/2022/06/27/jVy3OH.png)](https://imgtu.com/i/jVy3OH)
+- 首页[![jVy3OH.png]([https://s1.ax1x.com/2022/06/27/jVy3OH.png)](https://imgtu.com/i/jVy3OH]#pic_center)
 - 文章详情页
 
-[![jVysmj.png](https://s1.ax1x.com/2022/06/27/jVysmj.png)](https://imgtu.com/i/jVysmj)
+[![jVysmj.png]([https://s1.ax1x.com/2022/06/27/jVysmj.png)](https://imgtu.com/i/jVysmj]#pic_center)
 
 - 文章列表
 
