@@ -34,7 +34,7 @@
     </div>
 </template>
 <script  setup lang="ts">
-import Logo from '@/assets/img/Logo.png';
+import Logo from '@/assets/img/logo.png';
 </script>
 <style lang="less" scoped>
 .container {
