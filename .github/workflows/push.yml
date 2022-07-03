@@ -1,10 +1,11 @@
-name: CI/CD workflow autobuild
+name: CD Autobuild
 on:
     push:
         branches:
             - main
+
 jobs:
-    build:
+    pushserver:
         # runs-on 指定job任务运行所需要的虚拟机环境(必填字段)
         runs-on: ubuntu-latest
         steps:
@@ -17,10 +18,25 @@ jobs:
               # 使用action库  actions/setup-node安装node
               uses: actions/setup-node@v1
               with:
-                  node-version: 16.13.1
-            # 安装依赖
+                  node-version: 16.x
+            # 检查缓存
+            - name: 缓存依赖
+              # 缓存命中结果会存储在steps.[id].outputs.cache-hit里，该变量在继后的step中可读
+              id: cache-dependencies
+              uses: actions/cache@v3
+              with:
+                # 缓存文件目录的路径
+                path: |
+                  **/node_modules
+                # key中定义缓存标志位的生成方式。runner.OS指当前环境的系统。外加对yarn.lock内容生成哈希码作为key值，如果yarn.lock改变则代表依赖有变化。
+                # 这里用yarn.lock而不是package.json是因为package.json中还有version和description之类的描述项目但和依赖无关的属性
+                key: ${{runner.OS}}-${{hashFiles('**/yarn.lock')}}
+            # 如果存在缓存 不安装依赖
             - name: 安装依赖
+              if: steps.cache-dependencies.outputs.cache-hit != 'true'
               run: npm install -f
+            - name: eslint检测代码
+              run: npm run eslintfix
             # 打包
             - name: 打包
               run: npm run build:prod
