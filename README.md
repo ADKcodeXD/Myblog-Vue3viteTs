@@ -8,12 +8,12 @@
     <img src="https://img.shields.io/badge/adk-adkblog-red" alt="Less">
     <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/ADKcodeXD/Myblog-Vue3viteTs">
     <img alt="CD" src="https://github.com/ADKcodeXD/Myblog-Vue3viteTs/actions/workflows/push.yml/badge.svg">
-<p>  
+<p>
 # ADK-BLOG
 
-![adkblog]([http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/0238df3a-a7cd-4376-9951-57c03916cdf9.png?Expires=1812599738&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=zgRvR1hwnqMABsutX6FiZfl5RbY%3D]#pic_center)
+<img align=cnter src="http://firssst.oss-cn-guangzhou.aliyuncs.com/20220611/0238df3a-a7cd-4376-9951-57c03916cdf9.png?Expires=1812599738&OSSAccessKeyId=LTAI5t78YcsGmmK8uLsF2QFE&Signature=zgRvR1hwnqMABsutX6FiZfl5RbY%3D" />
 
-**一款二次元风格主题的个人博客**
+<p align="center" >一款二次元主题风格博客
 
 展示页:http://adkdream.top
 
