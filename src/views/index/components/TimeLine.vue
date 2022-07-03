@@ -8,7 +8,12 @@
     </div>
     <el-divider class="tw-my-4"></el-divider>
     <el-timeline>
-      <el-timeline-item v-for="item in result" :key="item.id" :timestamp="item.createDate" placement="top">
+      <el-timeline-item
+        v-for="item in result"
+        :key="item.id"
+        :timestamp="item.createDate"
+        placement="top"
+      >
         <el-card>
           <h4>{{ item.authorName }}</h4>
           <p class="content">{{ item.content }}</p>
@@ -19,8 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getMessageApi } from "@/api/message";
-import Newmsg from '@/assets/img/new-msg.png';
+import { getMessageApi } from '@/api/message';
 let result = ref<MessageVo[]>([]);
 const getMsg = async () => {
   const { data } = await getMessageApi({ page: 1, pagesize: 2 });

@@ -1,27 +1,30 @@
-.chra-avatar{
+.chra-avatar {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin:@margin-general ;
+    margin: @margin-general ;
     margin-left: 0;
     overflow: hidden;
     max-width: 10rem;
-    .role-name{
+
+    .role-name {
         display: inline-flex;
         width: 6rem;
         border-radius: @border-radius;
         padding-left: 0.5rem;
-        color:@hoverTextColor;
+        color: @hoverTextColor;
         margin-bottom: 0.4rem;
         background-color: @themeColor;
         overflow: hidden;
     }
-    .chra-name{
+
+    .chra-name {
         text-align: center;
         width: 6rem;
         .text-line-show(2);
     }
-    .imgcontainer{
+
+    .imgcontainer {
         width: 6rem;
         height: 6rem;
         .border-normal();
@@ -29,31 +32,38 @@
         flex-shrink: 0;
     }
 }
-.popinfo{
+
+.popinfo {
     display: flex;
     .font-normal();
     background-color: @bgColor;
     color: @textColor;
-    &-img{
+
+    &-img {
         max-width: 46%;
         max-height: 40rem;
         flex-shrink: 0;
     }
-    &-text{
+
+    &-text {
         display: flex;
-        flex:1;
+        flex: 1;
         flex-direction: column;
         margin-left: 0.5rem;
-        p{
+
+        p {
             margin: 0.2rem 0;
         }
-        &-title{
+
+        &-title {
             justify-content: space-between;
             display: flex;
-            .bigtitle{
+
+            .bigtitle {
                 font-size: @very-big-text;
             }
-            .more{
+
+            .more {
                 font-size: @mid-text;
                 color: @linkColor;
                 cursor: pointer;

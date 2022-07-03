@@ -15,11 +15,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useAnimeCalendar } from "@/hooks/Bangumi";
-import { getFormatTime } from "@/utils/dayjs";
+import { useAnimeCalendar } from '@/hooks/Bangumi';
+import { getFormatTime } from '@/utils/dayjs';
 
 const todayList = ref<Array<Bangumi.AnimeItemInfo>>([]);
-const today = getFormatTime(new Date().toString(), "YYYY年MM月DD日");
+const today = getFormatTime(new Date().toString(), 'YYYY年MM月DD日');
 const month = new Date().getMonth();
 let season = 0;
 if (month >= 0 && month < 3) {
@@ -35,7 +35,7 @@ if (month >= 0 && month < 3) {
 useAnimeCalendar().then((list: Bangumi.CalendarItem[]) => {
   if (list) {
     let res: Array<Bangumi.AnimeItemInfo> = [];
-    list.forEach((item) => {
+    list.forEach(item => {
       res = res.concat([...item.items]);
     });
 
@@ -57,7 +57,7 @@ useAnimeCalendar().then((list: Bangumi.CalendarItem[]) => {
     for (let i = 0; todayList.value.length < 10; i++) {
       let year = new Date().getFullYear();
       // 看一下开播日期 如果不是今年（-1年）的直接扔掉
-      if (Math.abs(parseInt(res[i].air_date.split("-")[0]) - year) > 1) {
+      if (Math.abs(parseInt(res[i].air_date.split('-')[0]) - year) > 1) {
         continue;
       }
       todayList.value.push(res[i]);

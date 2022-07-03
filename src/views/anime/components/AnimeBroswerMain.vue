@@ -13,12 +13,13 @@
     <AnimeOrderMenu @changeParams="changeParams" />
     <div class="broswer-inner" v-loading="cardLoading">
       <AnimeBroswerCard v-for="item in animeInfoList" :key="item.id" :item="item" />
-      <AdkEmpty v-if="!animeInfoList || animeInfoList.length == 0" 
-      desc="找不到动漫数据啦" />
+      <AdkEmpty v-if="!animeInfoList || animeInfoList.length == 0" desc="找不到动漫数据啦" />
     </div>
-    <div v-if="page > 1 && !isNextPageLoading" class="
-        tw-text-xl tw-self-center tw-mt-5 tw-cursor-pointer tw-text-blue-500
-      " @click="nextPage">
+    <div
+      v-if="page > 1 && !isNextPageLoading"
+      class="tw-text-xl tw-self-center tw-mt-5 tw-cursor-pointer tw-text-blue-500"
+      @click="nextPage"
+    >
       加载更多
     </div>
     <div v-if="isNextPageLoading" class="broswer-loading">
@@ -28,19 +29,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
-import Loading from "@/assets/img/loading.gif";
-import AnimeBroswerCard from "./AnimeBroswerCard.vue";
-import AnimeOrderMenu from "./AnimeOrderMenu.vue";
-import { useBroswer } from "@/hooks/Bangumi";
-import { SortRole } from "@/interface/EnumExport";
+import { ref } from 'vue';
+import AnimeBroswerCard from './AnimeBroswerCard.vue';
+import AnimeOrderMenu from './AnimeOrderMenu.vue';
+import { useBroswer } from '@/hooks/Bangumi';
+import { SortRole } from '@/interface/EnumExport';
 
 let animeInfoList = ref<Array<Bangumi.BroswerResult>>([]);
 let page = ref(0);
 let cardLoading = ref(false);
 let mainParams = reactive<Bangumi.BroswerParams>({
   page: 1,
-  sort: SortRole.rank,
+  sort: SortRole.rank
 });
 let isNextPageLoading = ref(false);
 const { getBroswer } = useBroswer(cardLoading, animeInfoList, page);
@@ -52,7 +52,7 @@ const nextPage = () => {
     isNextPageLoading.value = false;
     return;
   }
-  getBroswer(mainParams).then((item) => {
+  getBroswer(mainParams).then(() => {
     isNextPageLoading.value = false;
   });
 };

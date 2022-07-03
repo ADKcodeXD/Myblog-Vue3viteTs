@@ -12,9 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getTagList } from "@/api/article";
-import Alltag from '@/assets/img/all-tag.png';
-
+import { getTagList } from '@/api/article';
 let tags = ref<Tag[]>();
 const getTags = async () => {
   const { data } = await getTagList();
@@ -24,7 +22,6 @@ onMounted(() => {
   getTags();
 });
 </script>
-
 
 <style lang="less" scoped>
 @import url(../styles/TagsAll.less);

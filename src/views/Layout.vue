@@ -1,8 +1,6 @@
 <template>
   <div class="cotainer" ref="body">
-    <div class="filter">
-
-    </div>
+    <div class="filter"></div>
     <!-- 头部 -->
     <TopNavBar />
     <!-- banner -->
@@ -15,19 +13,22 @@
         </keep-alive>
       </RouterView>
     </div>
-    <Footer />
+    <FooterItem />
   </div>
 </template>
 
+<script lang="ts">
+export default { name: 'LayoutPage' };
+</script>
 <script setup lang="ts">
-import { useCacheStore } from "@/store/cache";
-import { setConfig } from "@/theme/theme";
+import { useCacheStore } from '@/store/cache';
+import { setConfig } from '@/theme/theme';
 const cachePages = useCacheStore();
 const pages = cachePages.cachePages;
 const route = useRoute();
-const themeConfig=ref(false)
+const themeConfig = ref(false);
 // 监视页面 并动态设置页面缓存
-watch(route, (to) => {
+watch(route, to => {
   if (to.meta.keepAlive) {
     if (to.name) {
       cachePages.setCachePage(to.name.toString());
@@ -37,10 +38,10 @@ watch(route, (to) => {
 
 onMounted(() => {
   setConfig();
-  themeConfig.value=true;
+  themeConfig.value = true;
 });
 </script>
 
-<style scoped  lang="less">
-@import url("@/assets/styles/Layout/Layout.less");
+<style scoped lang="less">
+@import url('@/assets/styles/Layout/Layout.less');
 </style>

@@ -1,5 +1,11 @@
 <template>
-  <div class="anime-card" ref="nowcard" v-if="animeInfo" @mouseenter="requestInfo" @mouseleave="detailInfoShow = false">
+  <div
+    class="anime-card"
+    ref="nowcard"
+    v-if="animeInfo"
+    @mouseenter="requestInfo"
+    @mouseleave="detailInfoShow = false"
+  >
     <div class="card">
       <el-image :src="animeInfo.images && animeInfo.images.large" fit="cover" class="elimg">
         <template #placeholder>
@@ -24,7 +30,7 @@
                   </p>
                   <p class="tw-shrink-0">
                     排名:<span class="rank tw-text-blue-600">{{
-                        animeInfo.rank ? animeInfo.rank : "暂无数据"
+                      animeInfo.rank ? animeInfo.rank : '暂无数据'
                     }}</span>
                   </p>
                 </div>
@@ -36,18 +42,22 @@
               <p class="desc" :key="2" :data-index="1">简介:{{ animeDetailData.summary }}</p>
               <div :key="3" :data-index="2">
                 <p class="tw-mt-1">总集数:{{ animeDetailData.eps }}</p>
-                <p class="tw-text-red-500" v-if="animeInfo.rating">评分:{{ animeInfo.rating.score ? animeInfo.rating.score : '暂无评分'
-                }}&nbsp;<span>({{ animeInfo.rating.total
-}}人参加评分)</span></p>
+                <p class="tw-text-red-500" v-if="animeInfo.rating">
+                  评分:{{ animeInfo.rating.score ? animeInfo.rating.score : '暂无评分' }}&nbsp;<span
+                    >({{ animeInfo.rating.total }}人参加评分)</span
+                  >
+                </p>
                 <div class="tw-flex tw-justify-between tw-items-end tw-flex-wrap">
                   <div class="tw-flex tw-items-center tw-flex-shrink-0">
                     相关tag:
-                    <ElTag v-for="tag in tagsInfoThree" effect="dark" class="tw-m-1">
+                    <ElTag v-for="tag in tagsInfoThree" :key="tag.id" effect="dark" class="tw-m-1">
                       {{ tag.name }}
                     </ElTag>
                   </div>
-                  <router-link class="tw-cursor-pointer tw-underline tw-font-bold tw-text-xl tw-flex-shrink-0"
-                    :to="`/index/animedetail/${animeInfo.id}`">
+                  <router-link
+                    class="tw-cursor-pointer tw-underline tw-font-bold tw-text-xl tw-flex-shrink-0"
+                    :to="`/index/animedetail/${animeInfo.id}`"
+                  >
                     查看更多
                   </router-link>
                 </div>
@@ -57,18 +67,14 @@
           </transition>
         </div>
       </transition>
-      <div class="info" >
+      <div class="info">
         <p class="title text-line-show-2" :alt="animeInfo.name">
           {{ animeInfo.name_cn ? animeInfo.name_cn : animeInfo.name }}
         </p>
         <div class="rating">
-          <p class="man" v-if="animeInfo.collection">
-            {{ animeInfo.collection.doing }}人在看
-          </p>
+          <p class="man" v-if="animeInfo.collection">{{ animeInfo.collection.doing }}人在看</p>
           <p>
-            #<span class="rank">{{
-                animeInfo.rank ? animeInfo.rank : "暂无数据"
-            }}</span>
+            #<span class="rank">{{ animeInfo.rank ? animeInfo.rank : '暂无数据' }}</span>
           </p>
         </div>
       </div>
@@ -77,36 +83,35 @@
 </template>
 
 <script lang="ts" setup>
-import { getSubjectInfoApi } from "@/api/bangumi";
-import { useAnime } from "@/hooks/Anime";
-import { PropType } from "vue";
+import { getSubjectInfoApi } from '@/api/bangumi';
+import { useAnime } from '@/hooks/Anime';
+import { PropType } from 'vue';
 const props = defineProps({
   animeInfo: {
     type: Object as PropType<Bangumi.AnimeItemInfo>,
-    default: {},
-  },
+    default: () => {
+      return {};
+    }
+  }
 });
-const emit=defineEmits(['scrollLeft']);
-const {
-  infoXenter,
-  infoXleave,
-} = useAnime();
+const emit = defineEmits(['scrollLeft']);
+const { infoXenter, infoXleave } = useAnime();
 const detailInfoShow = ref(false);
 const animeDetailData = ref<null | Bangumi.SubjectInfoSmall>();
-const nowcard=ref<HTMLElement>();
+const nowcard = ref<HTMLElement>();
 const getSubjectInfo = async (id: number) => {
   const { data } = await getSubjectInfoApi(id);
   animeDetailData.value = data.data;
-}
+};
 const requestInfo = async () => {
   detailInfoShow.value = true;
-  emit('scrollLeft',nowcard.value.offsetWidth);
+  emit('scrollLeft', nowcard.value.offsetWidth);
   if (!animeDetailData.value) {
     getSubjectInfo(props.animeInfo.id);
   } else {
     return;
   }
-}
+};
 const tagsInfoThree = computed(() => {
   let tags = [];
   if (animeDetailData.value && animeDetailData.value.tags.length > 3) {
@@ -119,7 +124,6 @@ const tagsInfoThree = computed(() => {
   return tags;
 });
 </script>
-
 
 <style lang="less" scoped>
 @import url(../styles/AnimeCard.less);

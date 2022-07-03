@@ -1,5 +1,5 @@
 @media screen and(min-width:@mobile-device) {
-    .container{
+    .container {
         margin-top: @top-nav-bar-height;
         .font-normal();
         .border-normal();
@@ -11,6 +11,7 @@
         background-color: @bgColor;
         color: @textColor;
         text-align: center;
+
         .welcome,
         .adk,
         .avatar,
@@ -20,82 +21,99 @@
         .sns-tip,
         .money-tip,
         .zhifubao,
-        .weixin{
+        .weixin {
             opacity: 0;
             transform: translateY(20px);
         }
-        .out{
+
+        .out {
             width: 100%;
             height: 100%;
             .flexbox(column);
         }
-        .avatar{
-            .ball(20rem,@themeColor);
+
+        .avatar {
+            .ball(20rem, @themeColor);
             overflow: hidden;
             flex-shrink: 0;
         }
-        .welcome{
+
+        .welcome {
             font-size: 3rem;
         }
-        .adk{
+
+        .adk {
             font-size: 2rem;
         }
-        .profile{
+
+        .profile {
             margin: @margin-general 0;
             font-size: @big-text;
             text-align: center;
         }
-        .sns{
+
+        .sns {
             margin: @padding-general 0;
             width: 80%;
             font-size: @mid-text;
             .flexbox(column);
-            ul{
+
+            ul {
                 margin-top: 1rem;
                 display: flex;
                 flex-wrap: wrap;
                 max-width: 100%;
                 align-items: center;
                 justify-content: center;
-                li{
+
+                li {
                     margin: 5px;
                 }
             }
         }
-        .sns-label{
+
+        .sns-label {
             .flexbox(column);
             width: 85px;
             height: 85px;
             .border-normal();
-            padding:@padding-general;
+            padding: @padding-general;
             background-color: @bgColor;
             color: @linkColor;
             cursor: pointer;
-            .svg{
-                width:42px;
-                height:42px;
+
+            .svg {
+                width: 42px;
+                height: 42px;
                 flex-shrink: 0;
             }
-            p{
-                font-size:@very-samll-text;
+
+            p {
+                font-size: @very-samll-text;
                 text-align: center;
                 word-break: break-all;
             }
-            &:hover{
+
+            &:hover {
                 background-color: @themeColor;
                 color: @hoverTextColor;
             }
         }
-        .logo{
+
+        .logo {
             font-size: @big-text;
             .flexbox(column);
             margin: 3rem 0;
         }
-        .money{
+
+        .money {
             margin: @margin-general 0;
-            .pay{
+
+            .pay {
                 display: flex;
-                .zhifubao,.weixin{
+
+                .zhifubao,
+                .weixin {
                     width: 48%;
                     max-width: 350px;
                     margin: 20px;
@@ -109,9 +127,9 @@
 }
 
 
-@media screen and(min-width:@smallpc-device){
-    .sns{
-        ul{
+@media screen and(min-width:@smallpc-device) {
+    .sns {
+        ul {
             max-width: 50%;
         }
     }

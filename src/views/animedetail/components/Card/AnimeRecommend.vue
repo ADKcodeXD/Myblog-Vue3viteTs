@@ -1,7 +1,5 @@
 <template>
-  <div class="
-      recommend
-    ">
+  <div class="recommend">
     <div class="tw-font-bold tw-text-3xl md:tw-text-xl tw-flex tw-justify-between">
       <p>为您推荐同类作品</p>
 
@@ -13,7 +11,7 @@
       <template #template>
         <div class="tw-flex tw-w-full tw-h-48 tw-p-3 tw-mt-3">
           <div class="tw-w-2/5 tw-h-full tw-flex-shrink-0 tw-mr-4">
-            <el-skeleton-item variant="image" style="width:100%;height:100%" class="tw-flex-1" />
+            <el-skeleton-item variant="image" style="width: 100%; height: 100%" class="tw-flex-1" />
           </div>
           <div class="tw-flex tw-flex-1 tw-flex-col tw-justify-between">
             <div>
@@ -34,16 +32,16 @@
 </template>
 
 <script lang="ts" setup>
-import { useBroswer } from "@/hooks/Bangumi";
-import { PropType } from "vue";
-import {SortRole} from '@/interface/EnumExport';
+import { useBroswer } from '@/hooks/Bangumi';
+import { PropType } from 'vue';
+import { SortRole } from '@/interface/EnumExport';
 const props = defineProps({
   tags: {
     type: Object as PropType<Array<Bangumi.AnimeTag>>,
-    require: true,
-  },
+    require: true
+  }
 });
-const emit = defineEmits(['changeId'])
+const emit = defineEmits(['changeId']);
 
 // 随机在count数最高的tag 6个里面取出一个取请求 也要考虑 如果tag数量少于6
 const animeInfoList = ref<Array<Bangumi.BroswerResult>>([]);
@@ -51,7 +49,7 @@ const page = ref(0);
 const Loading = ref(false);
 const mainParams = reactive<Bangumi.BroswerParams>({
   page: 1,
-  sort: SortRole.rank,
+  sort: SortRole.rank
 });
 const getTagInt = (length: number) => {
   if (length > 6) {
@@ -69,7 +67,7 @@ const getRecommend = () => {
   if (props.tags) {
     let index = Math.floor(getTagInt(props.tags.length));
     mainParams.tag = props.tags[index].name;
-    mainParams.sort=SortRole.rank;
+    mainParams.sort = SortRole.rank;
   }
   getBroswer(mainParams);
 };
@@ -86,10 +84,9 @@ const topTen = computed(() => {
   return arr;
 });
 const changeId = (val: number) => {
-  emit('changeId', val)
-}
+  emit('changeId', val);
+};
 </script>
-
 
 <style lang="less" scoped>
 @import url(./styles/AnimeRecommend.less);

@@ -11,7 +11,11 @@
             <span>Article list</span>
           </div>
         </div>
-        <Search :pageParams="pageparams" :searchLoading="searchLoading" @changeKeyword="searchArticle" />
+        <SearchItem
+          :pageParams="pageparams"
+          :searchLoading="searchLoading"
+          @changeKeyword="searchArticle"
+        />
       </div>
       <!-- 条件过滤框 -->
       <ConditionalFilter :pageParams="pageparams" />
@@ -23,10 +27,14 @@
       <AdkDivider />
       <div class="main" v-loading="articlesLoading" v-if="articles">
         <transition-group name="article">
-          <ArticleItem class="article-item-sub" :article-item="item" :key="item.id" v-for="item in articles" />
+          <ArticleItem
+            class="article-item-sub"
+            :article-item="item"
+            :key="item.id"
+            v-for="item in articles"
+          />
         </transition-group>
-        <el-empty v-if="articles.length == 0">
-        </el-empty>
+        <el-empty v-if="articles.length == 0"> </el-empty>
       </div>
     </div>
     <!-- 分页 待会封装一个样式特殊的分页 -->
@@ -36,15 +44,14 @@
   </div>
 </template>
 
-
 <script lang="ts">
-export default { name: "ArticleList" };
+export default { name: 'ArticleList' };
 </script>
 <script setup lang="ts">
-import { listArticleWithCount } from "@/api/article";
-import Search from "./components/Search.vue";
-import ConditionalFilter from "./components/ConditionalFilter.vue";
-import { debounce } from "@/utils/tools";
+import { listArticleWithCount } from '@/api/article';
+import SearchItem from './components/SearchItem.vue';
+import ConditionalFilter from './components/ConditionalFilter.vue';
+import { debounce } from '@/utils/tools';
 
 const total = ref(0); //文章的总数
 
@@ -59,12 +66,12 @@ const route = useRoute(); // 重构 tagids 发送一个数组
 const pageparams: PageParams = reactive({
   page: 1,
   pagesize: 10,
-  pannel:0,
+  pannel: 0
 }); // 文章 的pageparams
 
 const searchArticle = () => {
   getArticle();
-}
+};
 
 const getArticle = async () => {
   searchLoading.value = true;
@@ -75,20 +82,17 @@ const getArticle = async () => {
   articlesLoading.value = false;
   searchLoading.value = false;
 };
-let debounceFn=debounce(100,getArticle);
-watch(pageparams,() => {
+let debounceFn = debounce(100, getArticle);
+watch(pageparams, () => {
   debounceFn();
-})
+});
 // 查看路由有无携带参数
 // bug:由于tag分页查询 这里如果查找了此时页面中没有的tag无法进行筛选 fixed
 onActivated(() => {
   if (
     route &&
     route.query &&
-    (route.query.year ||
-      route.query.month ||
-      route.query.keyword ||
-      route.query.tagId)
+    (route.query.year || route.query.month || route.query.keyword || route.query.tagId)
   ) {
     if (route.query.year) {
       pageparams.year = route.query.year.toString();

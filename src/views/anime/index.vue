@@ -16,14 +16,14 @@
 </template>
 <script lang="ts">
 export default {
-  name: 'Anime',
+  name: 'AnimePage'
 };
 </script>
 <script lang="ts" setup>
-import AnimeHeader from "./components/AnimeHeader.vue";
-import AnimeCarousel from "./components/AnimeCarousel.vue";
-import AnimeBroswerMain from "./components/AnimeBroswerMain.vue";
-import AnimeMina from "./components/AnimeMina.vue";
+import AnimeHeader from './components/AnimeHeader.vue';
+import AnimeCarousel from './components/AnimeCarousel.vue';
+import AnimeBroswerMain from './components/AnimeBroswerMain.vue';
+import AnimeMina from './components/AnimeMina.vue';
 </script>
 <style lang="less" scoped>
 @import url(./styles/AnimePage.less);

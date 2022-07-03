@@ -2,7 +2,7 @@
   <ElScrollbar max-height="80vh" class="message" ref="body">
     <div class="up-info">
       <div class="logo">
-        <div style="width:60px">
+        <div style="width: 60px">
           <MyElimage :img="MessageLogo" />
         </div>
         <p class="title">留言板</p>
@@ -18,16 +18,24 @@
         </div>
         <div class="name">
           <span>您的联系方式：</span>
-          <ElInput class="contact" size="large" v-model="messageParams.contact" show-word-limit maxlength="64"
-          placeholder="example@adkdream.top">
+          <ElInput
+            class="contact"
+            size="large"
+            v-model="messageParams.contact"
+            show-word-limit
+            maxlength="64"
+            placeholder="example@adkdream.top"
+          >
           </ElInput>
         </div>
       </div>
       <ElDivider />
       <div class="main-content">
         <div class="msg-avatar">
-          <UploadAvatar :avatar="messageParams.avatar?messageParams.avatar:DefaultAvatar" 
-          @imglink="changeAvatarParams" />
+          <UploadAvatar
+            :avatar="messageParams.avatar ? messageParams.avatar : DefaultAvatar"
+            @imglink="changeAvatarParams"
+          />
         </div>
         <div class="edit-area">
           <MyEmoji @changeText="changeMsg" ref="emoji" placeholder="在这里输入留言哦~~~" />
@@ -46,45 +54,49 @@
     </div>
 
     <div class="message-part" v-if="messageList">
-      <CommentItem v-for="item in toCommentItem" :commentInfo="item" :key="item.id" :reply="false" :level="false" />
+      <CommentItem
+        v-for="item in toCommentItem"
+        :commentInfo="item"
+        :key="item.id"
+        :reply="false"
+        :level="false"
+      />
     </div>
     <AdkEmpty v-else desc="暂时没有留言哦~"></AdkEmpty>
 
-    <MyPagination :pageParams="pageparams" @changePage="changePage" :total="total" class="pagination" />
+    <MyPagination
+      :pageParams="pageparams"
+      @changePage="changePage"
+      :total="total"
+      class="pagination"
+    />
   </ElScrollbar>
 </template>
 
 <script lang="ts">
 export default {
-  name: "MessageBoard",
+  name: 'MessageBoard'
 };
 </script>
 
 <script lang="ts" setup>
-
-import {  ElScrollbar } from "element-plus";
+import { ElScrollbar } from 'element-plus';
 import MessageLogo from '@/assets/img/liuyan-logo.png';
-import { useChangeParams, useMessageApi, useMessageBoardParams } from "@/hooks/useMessageboard";
-import DefaultAvatar from '@/assets/img/logo.png'
-const {messageParams,
-        pageparams,
-        messageList,
-        total}=useMessageBoardParams();
+import { useChangeParams, useMessageApi, useMessageBoardParams } from '@/hooks/useMessageboard';
+import DefaultAvatar from '@/assets/img/logo.png';
+const { messageParams, pageparams, messageList, total } = useMessageBoardParams();
 
-const { orderRole,
-        publishMessage,
-        order,
-        changePage,
-        body,
-        emoji}=useMessageApi(messageParams,pageparams,messageList,total);
-const {
-  changeAvatarParams,
-        changeMsg,
-        toCommentItem
-}=useChangeParams(messageParams,messageList);
+const { orderRole, publishMessage, order, changePage, body, emoji } = useMessageApi(
+  messageParams,
+  pageparams,
+  messageList,
+  total
+);
+const { changeAvatarParams, changeMsg, toCommentItem } = useChangeParams(
+  messageParams,
+  messageList
+);
 </script>
-
-
 
 <style lang="less" scoped>
 @import url(./styles/MessageBoard.less);

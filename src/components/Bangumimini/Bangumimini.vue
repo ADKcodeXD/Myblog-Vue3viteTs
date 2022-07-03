@@ -6,8 +6,12 @@
           <img src="@/assets/img/每日番剧-logo.png" />
         </div>
         <ul class="week">
-          <li v-for="(week, index) in weekDayList" :key="index" @click="changeDay(week.weekday.id)"
-            :class="{ active: week.weekday.id === nowDay }">
+          <li
+            v-for="(week, index) in weekDayList"
+            :key="index"
+            @click="changeDay(week.weekday.id)"
+            :class="{ active: week.weekday.id === nowDay }"
+          >
             {{ week.weekday.ja }}
             <span>{{ week.weekday.en }}</span>
           </li>
@@ -16,9 +20,21 @@
     </template>
     <!-- 自制的tabs -->
     <div v-for="(week, index) in weekDayList" :key="index">
-      <section class="tab-inner myscrollbar" v-if="week.weekday.id === nowDay" :ref="el => { myRefs[index] = el }">
-        <anime-card :anime-info="item" v-for="(item, index) in week.items" :key="index"
-          @scroll-left="$event => scrollToElement($event, index)">
+      <section
+        class="tab-inner myscrollbar"
+        v-if="week.weekday.id === nowDay"
+        :ref="
+          el => {
+            myRefs[index] = el;
+          }
+        "
+      >
+        <anime-card
+          :anime-info="item"
+          v-for="(item, index) in week.items"
+          :key="index"
+          @scroll-left="$event => scrollToElement($event, index)"
+        >
         </anime-card>
       </section>
     </div>
@@ -29,31 +45,29 @@
 </template>
 
 <script lang="ts" setup>
-import { useAnimeData } from "@/hooks/Bangumi";
-import AnimeCard from "./components/AnimeCard.vue";
+import { useAnimeData } from '@/hooks/Bangumi';
+import AnimeCard from './components/AnimeCard.vue';
 const { weekDayList, day } = useAnimeData();
 const nowDay = ref(0);
 const myRefs = ref([]);
 nowDay.value = Number(day.value) + 1;
 const changeDay = (day: number | string) => {
   nowDay.value = Number(day);
-}
-const animeFlag = ref(false)
+};
+const animeFlag = ref(false);
 const scrollToElement = (val: number, index) => {
-  if(val>500) return;
+  if (val > 500) return;
   if (animeFlag.value) {
-    return
+    return;
   } else {
-    animeFlag.value=true;
-    myRefs.value[nowDay.value - 1].scrollTo({ left: (val) * (index-1.2), behavior: 'smooth' });
+    animeFlag.value = true;
+    myRefs.value[nowDay.value - 1].scrollTo({ left: val * (index - 1.2), behavior: 'smooth' });
     setTimeout(() => {
-      animeFlag.value=false;
-    },500);
+      animeFlag.value = false;
+    }, 500);
   }
-}
-
+};
 </script>
-
 
 <style lang="less" scoped>
 @import url(./styles/Bangumimini.less);

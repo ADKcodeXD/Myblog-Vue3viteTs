@@ -1,4 +1,3 @@
-
 <template>
   <div class="desc" v-if="AnimeItemList && AnimeItemList.length > 0">
     <p class="desc-title">角色介绍</p>
@@ -17,22 +16,25 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from "vue";
-import PopOverStaffHuman from "./PopOverStaffHuman.vue";
-import PopOverAnimeHuman from "./PopOverAnimeHuman.vue";
+import { PropType } from 'vue';
+import PopOverStaffHuman from './PopOverStaffHuman.vue';
+import PopOverAnimeHuman from './PopOverAnimeHuman.vue';
 
 defineProps({
   AnimeItemList: {
     type: Object as PropType<Array<Bangumi.AnimeHuman>>,
-    default: [],
+    default: () => {
+      return [];
+    }
   },
   StaffItemList: {
     type: Object as PropType<Array<Bangumi.StaffHuman>>,
-    default: [],
-  },
+    default: () => {
+      return [];
+    }
+  }
 });
 </script>
-
 
 <style lang="less" scoped>
 @import url(./styles/HumanBoxCard.less);

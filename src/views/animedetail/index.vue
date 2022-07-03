@@ -1,9 +1,7 @@
 <template>
   <!-- 展示动漫详情页 -->
   <article class="big-container">
-    <MyPageHeader :backFn="back" >
-      动漫 {{animeDetail?.name_cn}} 详情
-    </MyPageHeader>
+    <MyPageHeader :backFn="back"> 动漫 {{ animeDetail?.name_cn }} 详情 </MyPageHeader>
     <section class="content">
       <!-- pc端上三栏布局 手机端左边一栏 右边详细信息 右边的往下放 -->
       <aside class="left-content" v-if="!loading">
@@ -28,31 +26,31 @@
   </article>
 </template>
 <script lang="ts">
-import { useStore } from "@/store/main";
+import { useStore } from '@/store/main';
 export default {
-  name:"AnimeDetail",
+  name: 'AnimeDetail',
   beforeRouteEnter(to, from, next) {
-    const mainstroe=useStore();
-    if(to.query.isCache!=='no'){
+    const mainstroe = useStore();
+    if (to.query.isCache !== 'no') {
       mainstroe.sourcePage.push(from.path);
     }
-    to.query={};
+    to.query = {};
     next();
   }
-}
+};
 </script>
 <script lang="ts" setup>
-import { useAnimeDeatil } from "@/hooks/BangumiDetail";
-import { ElMessage } from "element-plus";
-import AnimeDetailHeader from "./components/Header/AnimeDetailHeader.vue";
-import AnimeDetailBody from "./components/Body/AnimeDetailBody.vue";
-import RataingBox from "./components/Card/RataingBox.vue";
-import AnimeCollections from "./components/Card/AnimeCollections.vue";
-import { getSubjectInfoApi } from "@/api/bangumi";
-import AnimeRecommend from "./components/Card/AnimeRecommend.vue";
-import AnimeTags from "./components/Card/AnimeTags.vue";
-import { useBackToSource } from "@/hooks/useSourcepage";
-import { useHead } from "@vueuse/head";
+import { useAnimeDeatil } from '@/hooks/BangumiDetail';
+import { ElMessage } from 'element-plus';
+import AnimeDetailHeader from './components/Header/AnimeDetailHeader.vue';
+import AnimeDetailBody from './components/Body/AnimeDetailBody.vue';
+import RataingBox from './components/Card/RataingBox.vue';
+import AnimeCollections from './components/Card/AnimeCollections.vue';
+import { getSubjectInfoApi } from '@/api/bangumi';
+import AnimeRecommend from './components/Card/AnimeRecommend.vue';
+import AnimeTags from './components/Card/AnimeTags.vue';
+import { useBackToSource } from '@/hooks/useSourcepage';
+import { useHead } from '@vueuse/head';
 const route = useRoute();
 const animeDetail = ref<Bangumi.AnimeDeatilItem | null>();
 const tags = ref<Array<Bangumi.AnimeTag>>([]);
@@ -63,13 +61,13 @@ const { back } = useBackToSource(router);
 const getData = (id: number) => {
   loading.value = true;
   useAnimeDeatil(id)
-    .then((result) => {
+    .then(result => {
       animeDetail.value = result;
       //绘制图表
       loading.value = false;
     })
-    .catch((err) => {
-      ElMessage.error("请求失败");
+    .catch(err => {
+      ElMessage.error('请求失败');
       loading.value = false;
     });
 
@@ -81,43 +79,42 @@ const getData = (id: number) => {
       infoBox.value = data.infobox;
     })
     .catch((err: any) => {
-      ElMessage.error("请求失败");
+      ElMessage.error('请求失败');
       loading.value = false;
     });
 };
 const changeData = () => {
   const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
-  document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+  document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
   animeDetail.value = null;
   const sb = Number(id);
   if (isNaN(sb)) {
     return;
   }
   getData(sb);
-}
-document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
-provide("infoboxVal", infoBox);
+};
+document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+provide('infoboxVal', infoBox);
 useHead({
   // Can be static or computed
   title: computed(() => {
-    if(animeDetail.value){
-      if(animeDetail.value.name_cn) return `${animeDetail.value.name_cn}-ADKBlog-我的个人小站`
-      else return `${animeDetail.value.name}-ADKBlog-我的个人小站`
-    }else {
-      return '动漫详情-ADKBlog-我的个人小站'
+    if (animeDetail.value) {
+      if (animeDetail.value.name_cn) return `${animeDetail.value.name_cn}-ADKBlog-我的个人小站`;
+      else return `${animeDetail.value.name}-ADKBlog-我的个人小站`;
+    } else {
+      return '动漫详情-ADKBlog-我的个人小站';
     }
   }),
   meta: [
     {
       name: `description`,
-      content: computed(() => animeDetail.value?.summary?animeDetail.value.summary:'描述'),
+      content: computed(() => (animeDetail.value?.summary ? animeDetail.value.summary : '描述'))
     }
-  ],
-})
+  ]
+});
 watchEffect(() => {
   changeData();
-})
-
+});
 </script>
 
 <style lang="less" scoped>

@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div
-      class="
-        back
-        tw-flex tw-bg-slate-50 tw-items-center tw-my-5 tw-p-5 tw-justify-between
-      "
-    >
+    <div class="back tw-flex tw-bg-slate-50 tw-items-center tw-my-5 tw-p-5 tw-justify-between">
       <div>
         <el-image :src="BgmLogo" class="tw-h-12"></el-image>
         <el-image :src="ADKLogo" class="tw-h-12"></el-image>
@@ -18,12 +13,10 @@
   </div>
 </template>
 
-
 <script lang="ts" setup>
-import BgmLogo from "@/assets/img/logo (1).png";
-import ADKLogo from "@/assets/img/WebBlog.png";
+import BgmLogo from '@/assets/img/logo (1).png';
+import ADKLogo from '@/assets/img/WebBlog.png';
 </script>
-
 
 <style lang="less" scoped>
 .back {

@@ -13,10 +13,19 @@
     </div>
     <div class="anime-header-search">
       <div class="right tw-flex tw-flex-1">
-        <el-input v-model="searchKw" placeholder="请输入内容搜索番剧" class="tw-text-xl iconfont input-search">
+        <el-input
+          v-model="searchKw"
+          placeholder="请输入内容搜索番剧"
+          class="tw-text-xl iconfont input-search"
+        >
         </el-input>
-        <el-button type="success" size="large" :icon="Search" plain
-          @click="$router.push(`/index/animesearch?keywords=${searchKw}`)">
+        <el-button
+          type="success"
+          size="large"
+          :icon="Search"
+          plain
+          @click="$router.push(`/index/animesearch?keywords=${searchKw}`)"
+        >
           搜索
         </el-button>
       </div>
@@ -28,8 +37,8 @@
 </template>
 
 <script lang="ts" setup>
-import { Search } from "@element-plus/icons-vue";
-let searchKw = ref("");
+import { Search } from '@element-plus/icons-vue';
+let searchKw = ref('');
 </script>
 
 <style lang="less" scoped>

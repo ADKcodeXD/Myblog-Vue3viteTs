@@ -32,8 +32,8 @@
           </p>
 
           <p class="tw-block tw-my-2 tw-text-sm">
-            Bangumi 是由 Sai 于桂林发起的 ACG <br>
-            分享与交流项目，致力于让阿宅们在欣赏ACG作品之余 <br>
+            Bangumi 是由 Sai 于桂林发起的 ACG <br />
+            分享与交流项目，致力于让阿宅们在欣赏ACG作品之余 <br />
             拥有一个轻松便捷独特的交流与沟通环境。
           </p>
         </div>
@@ -43,9 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import NotLogin from "@/assets/img/404bangumi.png";
+import NotLogin from '@/assets/img/404bangumi.png';
 
 const openUrl = (url: string) => {
-  window.open(url, "_blank");
+  window.open(url, '_blank');
 };
 </script>

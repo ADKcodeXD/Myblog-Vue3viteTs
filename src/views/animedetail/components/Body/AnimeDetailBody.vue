@@ -11,9 +11,7 @@
     <div class="playsource-container" v-if="sites.length > 0">
       <p class="frist">播放源</p>
       <div v-if="cnSite.length > 0">
-        <div class="playsource-container-title">
-          简中播放源
-        </div>
+        <div class="playsource-container-title">简中播放源</div>
         <div class="playsource-tag">
           <div
             class="playsource"
@@ -33,7 +31,7 @@
                 'icon-bilibili-line': site.site === 'bilibili',
                 'icon-sohu': site.site === 'sohu',
                 'icon-tengxunshipin': site.site === 'qq',
-                'icon-youku1193430easyiconnet': site.site === 'youku',
+                'icon-youku1193430easyiconnet': site.site === 'youku'
               }"
             ></i>
             <p class="inner_text">
@@ -43,9 +41,7 @@
         </div>
       </div>
       <div v-if="twHkSite.length > 0">
-        <div class="playsource-container-title">
-          繁中播放源
-        </div>
+        <div class="playsource-container-title">繁中播放源</div>
         <div class="playsource-tag">
           <div
             class="playsource"
@@ -58,7 +54,7 @@
               :class="{
                 'icon-bilibili': site.site === 'bilibili_hk_mo_tw',
                 'icon-icon_post_gamer': site.site === 'gamer',
-                'icon-pc-dongman': site.site === 'muse_hk',
+                'icon-pc-dongman': site.site === 'muse_hk'
               }"
             ></i>
             <p class="inner_text">
@@ -68,9 +64,7 @@
         </div>
       </div>
       <div v-if="jpSite.length > 0">
-        <div class="playsource-container-title">
-          日语播放源
-        </div>
+        <div class="playsource-container-title">日语播放源</div>
         <div class="playsource-tag">
           <div
             class="playsource"
@@ -78,10 +72,7 @@
             :key="index"
             @click="openUrl(site.url)"
           >
-            <i
-              class="iconfont inner"
-              :class="{ 'icon-niconico': site.title === 'Niconico' }"
-            ></i>
+            <i class="iconfont inner" :class="{ 'icon-niconico': site.title === 'Niconico' }"></i>
             <p class="inner_text">
               {{ site.title }}
             </p>
@@ -89,9 +80,7 @@
         </div>
       </div>
       <div v-if="otherSite.length > 0">
-        <div class="playsource-container-title">
-          其他播放源
-        </div>
+        <div class="playsource-container-title">其他播放源</div>
         <div class="playsource-tag">
           <div
             class="playsource"
@@ -103,7 +92,7 @@
               class="iconfont inner"
               :class="{
                 'icon-niconico': site.site === 'ani_one_asia',
-                'icon-VIU': site.site === 'viu',
+                'icon-VIU': site.site === 'viu'
               }"
             ></i>
             <p class="inner_text">
@@ -120,15 +109,10 @@
         在线播放(本站不提供存储增值付费服务，仅提供学习交流，所有资源源于网络，侵权请联系)
       </p>
       <div v-for="(yhdm, index) in yhdmList" :key="index">
-        <div
-          v-if="index === 1"
-          class="yhdm-little-title"
-        >
+        <div v-if="index === 1" class="yhdm-little-title">
           相关搜索结果（上条不准确请查看以下列表）
         </div>
-        <div class="yhdm-little-title">
-          {{ yhdm.title }}(樱花动漫)
-        </div>
+        <div class="yhdm-little-title">{{ yhdm.title }}(樱花动漫)</div>
         <div class="tw-flex tw-flex-wrap">
           <div
             class="ep"
@@ -149,31 +133,22 @@
 </template>
 
 <script lang="ts" setup>
-import {  PropType } from "vue";
-import { useYhdm } from "@/hooks/Yhdm";
-import HumanBoxCard from "./HumanBoxCard.vue";
-import AnimeEp from "./AnimeEp.vue";
-import AnimeDetailInfoBox from "./AnimeDetailInfoBox.vue";
+import { PropType } from 'vue';
+import { useYhdm } from '@/hooks/Yhdm';
+import HumanBoxCard from './HumanBoxCard.vue';
+import AnimeEp from './AnimeEp.vue';
+import AnimeDetailInfoBox from './AnimeDetailInfoBox.vue';
 const props = defineProps({
-    animeDetail: {
-      type: Object as PropType<Bangumi.AnimeDeatilItem>,
-      require: true,
-    },
-  });
+  animeDetail: {
+    type: Object as PropType<Bangumi.AnimeDeatilItem>,
+    require: true
+  }
+});
 
-const {
-      eps,
-      sites,
-      cnSite,
-      jpSite,
-      twHkSite,
-      otherSite,
-      openUrl,
-      yhdmList,
-      urlFilter,
-    } = useYhdm(props.animeDetail ? props.animeDetail : null);
+const { sites, cnSite, jpSite, twHkSite, otherSite, openUrl, yhdmList, urlFilter } = useYhdm(
+  props.animeDetail ? props.animeDetail : null
+);
 </script>
-
 
 <style lang="less" scoped>
 @import url(./styles/AnimeBody.less);

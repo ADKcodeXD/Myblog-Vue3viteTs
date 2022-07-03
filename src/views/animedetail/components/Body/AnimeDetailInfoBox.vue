@@ -7,11 +7,7 @@
     border
     v-if="infoboxVal"
   >
-    <el-descriptions-item
-      :label="item.key"
-      v-for="(item, index) in infoboxVal"
-      :key="index"
-    >
+    <el-descriptions-item :label="item.key" v-for="(item, index) in infoboxVal" :key="index">
       <template v-if="Array.isArray(item.value)">
         <span v-for="(v, index) in item.value" :key="index">{{ v.v }}/</span>
       </template>
@@ -21,9 +17,8 @@
 </template>
 
 <script lang="ts" setup>
-const infoboxVal: Array<Bangumi.InfoBoxItem> | undefined = inject("infoboxVal");
+const infoboxVal: Array<Bangumi.InfoBoxItem> | undefined = inject('infoboxVal');
 </script>
-
 
 <style lang="less" scoped>
 @import url(./styles/AnimeDetailInfo.less);

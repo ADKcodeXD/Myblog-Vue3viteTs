@@ -1,0 +1,68 @@
+@x:var(--x);
+@y:var(--y);
+@spacing:var(--spcing);
+@mainTextsize:var(--mainTextsize);
+@subTextsize:var(--subTextsize);
+.button() {
+  background: url('./img/button.png') no-repeat;
+  width: @x;
+  height: @y;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 2px;
+  font-weight: 600;
+  overflow: hidden;
+  color: black;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-family: 'urafont', '幼圆', 'Cartoonfont';
+  p {
+    align-items: center;
+    text-indent: @spacing;
+    letter-spacing: @spacing;
+    line-height: 1;
+    font-size: @mainTextsize;
+  }
+  span {
+    font-size: @subTextsize;
+    line-height: 1;
+  }
+}
+.hover() {
+  color: #fff;
+}
+.adk-button-primary {
+  .button();
+  &:hover {
+    .hover();
+    background: url(./img/button-primary-hover.png) no-repeat;
+    background-size: 100% 100%;
+  }
+}
+.adk-button-danger {
+  .button();
+  &:hover {
+    .hover();
+    background: url(./img/button-danger-hover.png) no-repeat;
+    background-size: 100% 100%;
+  }
+}
+.adk-button-success {
+  .button();
+  &:hover {
+    .hover();
+    background: url(./img/button-success-hover.png) no-repeat;
+    background-size: 100% 100%;
+  }
+}
+.adk-button-info {
+  .button();
+  &:hover {
+    .hover();
+    background: url(./img/button-info-hover.png) no-repeat;
+    background-size: 100% 100%;
+  }
+}

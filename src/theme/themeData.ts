@@ -12,7 +12,7 @@ export const themes = {
     primaryTagBackGroundColor: `${62},${84},${124}`,
     primaryHightlightColor: `${63},${87},${183}`,
     primaryLinkColor: `${75},${23},${60}`,
-    primaryHoverColor: `${39},${72},${108}`,
+    primaryHoverColor: `${39},${72},${108}`
   },
   dark: {
     primaryBackGroundColor: `${25},${25},${25}`,
@@ -25,11 +25,11 @@ export const themes = {
     primaryTagBackGroundColor: `${238},${237},${255}`,
     primaryHightlightColor: `${187},${255},${255}`,
     primaryLinkColor: `${75},${23},${60}`,
-    primaryHoverColor: `${39},${72},${108}`,
-  },
+    primaryHoverColor: `${39},${72},${108}`
+  }
 };
 
-export const defaultConfig:GlobalConfig = {
+export const defaultConfig: GlobalConfig = {
   marginGeneral: 1,
   veryBigText: 2,
   bigText: 1.5,
@@ -39,29 +39,29 @@ export const defaultConfig:GlobalConfig = {
   paddingGeneral: 1,
   borderRadius: 1,
   borderLine: 0.28,
-  bgColor: "rgb(255, 255, 255)",
-  textColor: "rgb(0, 0, 0)",
-  globlBgColor: "rgb(236, 236, 236)",
-  tipTextColor: "rgb(160, 160, 160)",
-  bgTextColor: "rgb(255, 255, 255)",
-  hoverColor: "rgb(250, 14, 73)",
-  hoverTextColor: "rgb(255, 255, 255)",
-  linkColor: "rgb(14, 136, 250)",
-  activeColor: "rgb(250, 14, 73)",
-  shadowColor: "rgba(0, 0, 0, 0.3)",
-  themeColor: "rgb(250, 14, 73)",
-  warnningTextColor: "rgb(247, 44, 8)",
-  errorTextColor: "rgb(255, 0, 0)",
+  bgColor: 'rgb(255, 255, 255)',
+  textColor: 'rgb(0, 0, 0)',
+  globlBgColor: 'rgb(236, 236, 236)',
+  tipTextColor: 'rgb(160, 160, 160)',
+  bgTextColor: 'rgb(255, 255, 255)',
+  hoverColor: 'rgb(250, 14, 73)',
+  hoverTextColor: 'rgb(255, 255, 255)',
+  linkColor: 'rgb(14, 136, 250)',
+  activeColor: 'rgb(250, 14, 73)',
+  shadowColor: 'rgba(0, 0, 0, 0.3)',
+  themeColor: 'rgb(250, 14, 73)',
+  warnningTextColor: 'rgb(247, 44, 8)',
+  errorTextColor: 'rgb(255, 0, 0)',
   // 都是背景图片的配置项
-  backGroundImg: "",
-  backGroundImgBlur:0,
-  backGroundImgLight:100,
-  backGroundImgRepeat:'repeat',
-  backGroundImgSize:'cover',
-  backgroundImgAttachment:'scroll'
-}
+  backGroundImg: '',
+  backGroundImgBlur: 0,
+  backGroundImgLight: 100,
+  backGroundImgRepeat: 'repeat',
+  backGroundImgSize: 'cover',
+  backgroundImgAttachment: 'scroll'
+};
 
-export const darkConfig:GlobalConfig = {
+export const darkConfig: GlobalConfig = {
   marginGeneral: 1,
   veryBigText: 2,
   bigText: 1.5,
@@ -71,24 +71,24 @@ export const darkConfig:GlobalConfig = {
   paddingGeneral: 1,
   borderRadius: 1,
   borderLine: 0.28,
-  bgColor: "rgb(28, 28, 28)",
-  textColor: "rgb(255, 255, 255)",
-  globlBgColor: "rgb(0, 0, 0)",
-  tipTextColor: "rgb(160, 160, 160)",
-  bgTextColor: "rgb(255, 255, 255)",
-  hoverColor: "rgb(3, 108, 183)",
-  hoverTextColor: "rgb(255, 255, 255)",
-  linkColor: "rgb(14, 136, 250)",
-  activeColor: "rgb(250, 14, 73)",
-  shadowColor: "rgba(255, 255, 255, 0.5)",
-  themeColor: "rgb(250, 14, 73)",
-  warnningTextColor: "rgb(247, 44, 8)",
-  errorTextColor: "rgb(255, 0, 0)",
+  bgColor: 'rgb(28, 28, 28)',
+  textColor: 'rgb(255, 255, 255)',
+  globlBgColor: 'rgb(0, 0, 0)',
+  tipTextColor: 'rgb(160, 160, 160)',
+  bgTextColor: 'rgb(255, 255, 255)',
+  hoverColor: 'rgb(3, 108, 183)',
+  hoverTextColor: 'rgb(255, 255, 255)',
+  linkColor: 'rgb(14, 136, 250)',
+  activeColor: 'rgb(250, 14, 73)',
+  shadowColor: 'rgba(255, 255, 255, 0.5)',
+  themeColor: 'rgb(250, 14, 73)',
+  warnningTextColor: 'rgb(247, 44, 8)',
+  errorTextColor: 'rgb(255, 0, 0)',
   // 都是背景图片的配置项
-  backGroundImg: "",
-  backGroundImgBlur:0,
-  backGroundImgLight:100,
-  backGroundImgRepeat:'repeat',
-  backGroundImgSize:'cover',
-  backgroundImgAttachment:'scroll'
-}
+  backGroundImg: '',
+  backGroundImgBlur: 0,
+  backGroundImgLight: 100,
+  backGroundImgRepeat: 'repeat',
+  backGroundImgSize: 'cover',
+  backgroundImgAttachment: 'scroll'
+};

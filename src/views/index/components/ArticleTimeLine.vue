@@ -1,4 +1,3 @@
-
 <template>
   <div class="box">
     <div>
@@ -9,7 +8,7 @@
     </div>
     <el-divider class="tw-my-5"></el-divider>
     <!-- 两栏 文章归档 -->
-    <div class="item" @click="searchBytime(tag.date)" v-for="tag, index in tags" :key="index">
+    <div class="item" @click="searchBytime(tag.date)" v-for="(tag, index) in tags" :key="index">
       <div class="date">{{ tag.date }}</div>
       <div class="num">{{ tag.num }}</div>
     </div>
@@ -17,8 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { getArticleGroupByTimeApi } from "@/api/article";
-import Achive from '@/assets/img/article-achive.png';
+import { getArticleGroupByTimeApi } from '@/api/article';
 let tags = ref<ArticleTime[]>();
 const router = useRouter();
 const getAllTimeTag = async () => {
@@ -30,12 +28,11 @@ const searchBytime = (val: string) => {
   let monthtemp = val.substring(5, 7);
   let month = parseInt(monthtemp);
   router.push(`/index/articlelist?year=${year}&month=${month}`);
-}
+};
 onMounted(() => {
   getAllTimeTag();
-})
+});
 </script>
-
 
 <style lang="less" scoped>
 @import url(../styles/ArticleTimeLine.less);
