@@ -141,7 +141,7 @@ const routes: RouteRecordRaw[] = [
           requireAuth: false,
           keepAlive: true
         },
-        component: () => import('@/views/aboutme/AboutMe.vue')
+        component: () => import('@/views/AboutMe/AboutMe.vue')
       },
       {
         path: 'create',
@@ -171,7 +171,7 @@ const routes: RouteRecordRaw[] = [
           requireAuth: false,
           keepAlive: false
         },
-        component: () => import('@/views/friendslink/FriendsLink.vue')
+        component: () => import('@/views/FriendsLink/FriendsLink.vue')
       },
       {
         path: 'updatearticle/:id',
