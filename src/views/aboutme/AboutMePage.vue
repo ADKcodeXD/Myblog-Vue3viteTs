@@ -92,11 +92,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import Touxiang from './touxiang.jpg';
 import Logo from '@/assets/img/new-logo.png';
-import Wechat from './wechat.png';
-import Zhifubao from './zhifubao.jpg';
+import Touxiang from './img/touxiang.jpg';
+import Wechat from './img/wechat.png';
+import Zhifubao from './img/zhifubao.jpg';
 import gsap from 'gsap';
+
 onMounted(() => {
   let timeline = gsap.timeline({ defaults: { duration: 1 } });
   gsap.set('#avatar', { y: '50%', scale: 0 });
@@ -156,5 +157,5 @@ onMounted(() => {
 </script>
 
 <style lang="less" scoped>
-@import url(./AboutMe.less);
+@import url(./styles/AboutMe.less);
 </style>
