@@ -18,7 +18,7 @@ jobs:
               # 使用action库  actions/setup-node安装node
               uses: actions/setup-node@v1
               with:
-                  node-version: 16.3.1
+                  node-version: 16.13.1
             # 检查缓存
             - name: 缓存依赖
               # 缓存命中结果会存储在steps.[id].outputs.cache-hit里，该变量在继后的step中可读
