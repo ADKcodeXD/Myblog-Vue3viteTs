@@ -1,0 +1,10 @@
+/logs
+/node_modules
+/dist
+/onlinedist
+/src/assets/js
+/package-lock.json
+.DS_Store
+fis-conf.js
+components.d.ts
+changelog.config.js
