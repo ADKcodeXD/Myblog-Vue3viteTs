@@ -171,7 +171,7 @@ const routes: RouteRecordRaw[] = [
           requireAuth: false,
           keepAlive: false
         },
-        component: () => import('@/views/friendslink/FriendsLink.vue')
+        component: () => import('@/views/friendslink/FriendsLinkPage.vue')
       },
       {
         path: 'updatearticle/:id',
