@@ -36,7 +36,7 @@ jobs:
               if: steps.cache-dependencies.outputs.cache-hit != 'true'
               run: npm install -f
             - name: eslint检测代码
-              run: npm run eslintfix
+              run: npm run lintfix
             # 打包
             - name: 打包
               run: npm run build:prod
