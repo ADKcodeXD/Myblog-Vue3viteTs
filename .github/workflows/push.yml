@@ -18,7 +18,7 @@ jobs:
               # 使用action库  actions/setup-node安装node
               uses: actions/setup-node@v1
               with:
-                  node-version: 16.x
+                  node-version: 16.3.1
             # 检查缓存
             - name: 缓存依赖
               # 缓存命中结果会存储在steps.[id].outputs.cache-hit里，该变量在继后的step中可读
@@ -34,7 +34,7 @@ jobs:
             # 如果存在缓存 不安装依赖
             - name: 安装依赖
               if: steps.cache-dependencies.outputs.cache-hit != 'true'
-              run: npm install -f
+              run: npm cache clean -f && npm install -f  
             - name: eslint检测代码
               run: npm run lintfix
             # 打包

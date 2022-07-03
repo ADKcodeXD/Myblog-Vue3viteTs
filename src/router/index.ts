@@ -141,7 +141,7 @@ const routes: RouteRecordRaw[] = [
           requireAuth: false,
           keepAlive: true
         },
-        component: () => import('@/views/AboutMe/AboutMePage.vue')
+        component: () => import('@/views/aboutme/AboutMePage.vue')
       },
       {
         path: 'create',

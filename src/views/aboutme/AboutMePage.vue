@@ -154,6 +154,7 @@ onMounted(() => {
     .to('.weixin', { y: 0, ease: 'power1.out', opacity: 1, duration: 1 });
 });
 </script>
+
 <style lang="less" scoped>
 @import url(./AboutMe.less);
 </style>
