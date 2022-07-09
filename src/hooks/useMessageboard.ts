@@ -27,7 +27,6 @@ export const useMessageApi = (
 ) => {
   // 方法和逻辑区
   const orderRole = ref(0);
-  const emoji = ref();
   const body = ref<InstanceType<typeof ElScrollbar>>();
   const getMessage = async (pageparams: PageParams) => {
     const { data } = await getMessageApi(pageparams);
@@ -50,7 +49,6 @@ export const useMessageApi = (
     const { data } = await addMessageApi(messageParams);
     if (data.code == 200) {
       ElMessage.success('发表成功');
-      emoji.value.clearInput();
     } else {
       ElMessage.error(data.msg);
     }
@@ -89,7 +87,6 @@ export const useMessageApi = (
     order,
     changePage,
     body,
-    emoji,
     orderRole
   };
 };

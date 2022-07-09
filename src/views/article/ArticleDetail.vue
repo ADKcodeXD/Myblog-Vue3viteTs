@@ -43,7 +43,16 @@
                   <MyElimage :img="user?.avatar" :zip="2" />
                 </div>
                 <div class="edit-area">
-                  <MyEmoji @changeText="changeComment" ref="emoji" />
+                  <V3Emoji
+                    :textArea="true"
+                    :customSize="customSize"
+                    :recent="true"
+                    :keep="true"
+                    :optionsName="optionsName"
+                    :disableGroup="disableGroup"
+                    v-model="commentParams.content"
+                    :customTheme="customTheme"
+                  />
                 </div>
               </div>
               <div class="button">
@@ -95,6 +104,8 @@
 
 <script setup lang="ts">
 // 定义组件名字 不然include 和keepalive 无法生效
+import V3Emoji from 'vue3-emoji';
+import 'vue3-emoji/dist/style.css';
 import { useArticle } from '@/hooks/Article';
 import ArticleSummary from './components/ArticleSummary.vue';
 import ArticleBody from './components/ArticleBody.vue';
@@ -102,6 +113,7 @@ import BottomItem from './components/BottomItem.vue';
 import ToolBars from './components/ToolBars.vue';
 import { setConfig } from '@/theme/theme';
 import { useHead } from '@vueuse/head';
+import { useEmoji } from '@/hooks/useEmoji';
 const {
   publishSecond,
   publishComment,
@@ -111,12 +123,11 @@ const {
   likedArticle,
   collectArticle,
   totalComment,
-  changeComment,
-  emoji,
   pageparams,
+  commentParams,
   changePage
 } = useArticle();
-
+const { optionsName, disableGroup, customSize, customTheme } = useEmoji();
 const comment = ref<HTMLElement>();
 const articleContainer = ref<HTMLElement>();
 const isToolsShow = ref(false);
@@ -167,4 +178,17 @@ onMounted(() => {
 @import url(@/assets/styles/Layout/Layout.less);
 @import url(./styles/Article.less);
 @import url('@/assets/styles/MyAnimate.less');
+:deep(.emoji-textarea) {
+  textarea {
+    .border-normal();
+    background-color: @bgColor;
+  }
+  .pollup {
+    background-color: @bgColor;
+    .shadow();
+    .tab-container {
+      background-color: @bgColor;
+    }
+  }
+}
 </style>

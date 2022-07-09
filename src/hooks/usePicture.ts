@@ -141,7 +141,7 @@ export const useGetPics = layoutImage => {
   const loaded = () => {
     layout();
   };
-  onMounted(() => {
+  onMounted(async () => {
     const netAjax = throttle(500, getNext);
     window.addEventListener('resize', layout);
     document.addEventListener('scroll', () => {
@@ -160,7 +160,8 @@ export const useGetPics = layoutImage => {
         }
       }
     });
-    getPicsFn();
+    await getPicsFn();
+    layout();
   });
   watch([isOrigin, tag, orderRole], async () => {
     pageParams.page = 1;

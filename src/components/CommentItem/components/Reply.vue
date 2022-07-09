@@ -6,7 +6,16 @@
     </div>
     <div class="relpycontent" v-if="relpycontentShow">
       <div class="tw-w-full">
-        <MyEmoji placeholder="回复一下呗=w=" @changeText="changeComment" ref="emoji" />
+        <V3Emoji
+          :textArea="true"
+          :customSize="customSize"
+          :recent="true"
+          :keep="true"
+          :optionsName="optionsName"
+          :disableGroup="disableGroup"
+          v-model="reqCommentParams.content"
+          :customTheme="customTheme"
+        />
       </div>
       <el-button type="success" plain @click="publishSubComment">发送</el-button>
     </div>
@@ -14,10 +23,13 @@
 </template>
 <script setup lang="ts">
 import { addComment } from '@/api/comment';
+import { useEmoji } from '@/hooks/useEmoji';
 import { useUserStore } from '@/store/user';
 import { encodeEmoji } from '@/utils/emoji';
 import { ElMessage } from 'element-plus';
 import { PropType } from 'vue';
+import V3Emoji from 'vue3-emoji';
+import 'vue3-emoji/dist/style.css';
 const props = defineProps({
   commentInfo: {
     type: Object as PropType<CommentItemInfo>,
@@ -48,14 +60,12 @@ const reqCommentParams = reactive<CommentParams>({
   authorId: userStrore.userinfo.id,
   content: ''
 });
-let emoji = ref();
 const publishSubComment = async () => {
   if (userStrore.userinfo.id) {
     if (reqCommentParams.content != '') {
       reqCommentParams.content = encodeEmoji(reqCommentParams.content);
       await addComment(reqCommentParams);
       emit('published');
-      emoji.value.clearInput();
       reqCommentParams.content = '';
       relpycontentShow.value = false;
     } else {
@@ -65,9 +75,7 @@ const publishSubComment = async () => {
     ElMessage.error('您当前未登录');
   }
 };
-const changeComment = (val: string) => {
-  reqCommentParams.content = val;
-};
+const { optionsName, disableGroup, customSize, customTheme } = useEmoji();
 onMounted(() => {
   // TODO : 在回复给出了本层层主外的人 自动出现一个回复给？？
   // if(props.commentInfo.level&&props.commentInfo.level>1){
@@ -95,5 +103,18 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+:deep(.emoji-textarea) {
+  textarea {
+    .border-normal();
+    background-color: @bgColor;
+  }
+  .pollup {
+    background-color: @bgColor;
+    .shadow();
+    .tab-container {
+      background-color: @bgColor;
+    }
+  }
 }
 </style>

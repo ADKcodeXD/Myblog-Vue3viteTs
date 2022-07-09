@@ -12,13 +12,10 @@ export const useArticle = () => {
   const route = useRoute();
   const userStore = useUserStore();
   const user = storeToRefs(userStore).userinfo;
-  const emoji = ref();
-  // 定义所有使用到的变量
-  const comment = ref('');
   const commentParams: CommentParams = reactive({
     articleId: route.params.id as string,
     authorId: user.value.id,
-    content: comment
+    content: ''
   });
   const article = ref<ArticleItemInfo>();
   const commentList = ref<CommentItemInfo[]>([]);
@@ -48,7 +45,7 @@ export const useArticle = () => {
       const { data } = await addComment(commentParams);
       if (data.code === 200) {
         ElMessage.success('发布成功');
-        emoji.value.clearInput();
+        commentParams.content = '';
         getAllComment();
       } else {
         ElMessage.error(data.msg);
@@ -65,9 +62,6 @@ export const useArticle = () => {
     } else {
       ElMessage.error(data.msg);
     }
-  };
-  const changeComment = (content: string) => {
-    comment.value = content;
   };
   // 获取评论
   const getAllComment = async () => {
@@ -154,37 +148,6 @@ export const useArticle = () => {
     article,
     commentList,
     pageparams,
-    user,
-    comment,
-    changeComment,
-    emoji
-  };
-};
-/**
- * 要求一个ref
- * @returns
- */
-export const useEmoji = () => {
-  const showEmoji = ref(false);
-  const emojiTarget = ref(null);
-  const disabledGroup = ['travel_places', 'objects', 'symbols', 'flags'];
-  const groupName = {
-    smileys_people: '经典黄豆',
-    animals_nature: '动物 自然',
-    food_drink: '食物饮料',
-    activities: '活动~'
-  };
-  const cursorIndex = ref(0);
-  const handleInputBlur = (e: any) => {
-    // 记录离开焦点时的光标位置
-    cursorIndex.value = e.srcElement.selectionStart;
-  };
-  return {
-    showEmoji,
-    disabledGroup,
-    groupName,
-    handleInputBlur,
-    emojiTarget,
-    cursorIndex
+    user
   };
 };

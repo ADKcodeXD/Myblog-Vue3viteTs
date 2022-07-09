@@ -1,110 +1,146 @@
-@media screen and (min-width:@mobile-device){
-    .message {
-        margin-top: 7rem;
-        padding: 2.5rem;
-        width: 100%;
+@media screen and (min-width:@mobile-device) {
+  .message {
+
+
+    margin-top: 7rem;
+    padding: 2.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    transition: all 1s ease;
+    border-radius: 2.5rem;
+    border: @border-line @textColor solid;
+    background-color: @bgColor;
+
+    .up-info {
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .title {
+        .font-ura();
+        font-size: 2.5rem;
+      }
+
+      .desc {
+        .font-normal();
+        font-size: @big-text;
+      }
+    }
+
+    .edit-part {
+      margin-top: @margin-general 2px;
+      width: 100%;
+      .font-normal();
+
+      .liuyan-info {
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
-        transition: all 1s ease;
-        border-radius: 2.5rem;
-        border: @border-line @textColor solid;
-        background-color: @bgColor;
-        .up-info {
-          .logo{
+
+        .name {
+          .flexbox(row);
+          padding: @padding-general;
+          margin-right: 0;
+          margin-bottom: @margin-general;
+
+          span {
             display: flex;
-            align-items: center;
-          }
-          .title {
-            .font-ura();
-            font-size: 2.5rem;
-          }
-          .desc {
-            .font-normal();
-            font-size: @big-text;
+            flex-shrink: 0;
+            font-size: @mid-text;
+            width: 120px;
           }
         }
-        .edit-part {
-          margin-top: @margin-general;
+      }
+
+      .main-content {
+        display: flex;
+        width: 100%;
+
+        .msg-avatar {
+          width: 100px;
+          height: 100px;
+          flex-shrink: 0;
+        }
+
+        .edit-area {
           width: 100%;
-          .font-normal();
-          .liuyan-info {
-            display: flex;
-            flex-direction: column;
-            .name {
-              .flexbox(row);
-              padding: @padding-general;
-              margin-right: 0;
-              margin-bottom: @margin-general;
-              span {
-                display: flex;
-                flex-shrink: 0;
-                font-size: @mid-text;
-                width: 120px;
+          margin-left: 2.5rem;
+          margin-right: 5px;
+          :deep(.emoji-textarea) {
+            textarea {
+              .border-normal();
+              background-color: @bgColor;
+            }
+            .pollup{
+              background-color: @bgColor;
+              .shadow();
+              .tab-container{
+                background-color: @bgColor;
               }
             }
           }
-          .main-content {
-            display: flex;
-            width: 100%;
-            .msg-avatar{
-              width: 100px;
-              height: 100px;
-              flex-shrink: 0;
-            }
-            .edit-area {
-              width: 100%;
-              margin-left: 2.5rem;
-            }
-          }
-          .button {
-            width: 100%;
-            display: flex;
-            justify-content: flex-end;
-            margin-top: @margin-general;
-          }
         }
-        .paixu {
-          .font-normal();
-          margin-top: @margin-general;
-          display: flex;
-          align-items: center;
-          h2 {
-            margin: 0;
-          }
-          p {
-            align-self: flex-end;
-            margin-left: @margin-general;
-            cursor: pointer;
-            font-weight: 600;
-          }
-          .active {
-            color: @textColor;
-          }
-        }
-        .pagination{
-          margin-top: 2.5rem;
-        }
+      }
+
+      .button {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: @margin-general;
+      }
     }
+
+    .paixu {
+      .font-normal();
+      margin-top: @margin-general;
+      display: flex;
+      align-items: center;
+
+      h2 {
+        margin: 0;
+      }
+
+      p {
+        align-self: flex-end;
+        margin-left: @margin-general;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .active {
+        color: @textColor;
+      }
+    }
+
+    .pagination {
+      margin-top: 2.5rem;
+    }
+  }
 }
 
-@media screen and (min-width:@smallpc-device){
-    .message {
-        margin-top: 1.5rem;
-        .edit-part {
-          .liuyan-info {
-            flex-direction: row;
-            .name {
-              margin-right: @margin-general;
-              margin-bottom: 0;
-              .contact {
-                min-width: 25rem;
-              }
-              span{
-                width: unset;
-              }
-            }
+@media screen and (min-width:@smallpc-device) {
+  .message {
+    margin-top: 1.5rem;
+
+    .edit-part {
+      .liuyan-info {
+        flex-direction: row;
+
+        .name {
+          margin-right: @margin-general;
+          margin-bottom: 0;
+
+          .contact {
+            min-width: 25rem;
+          }
+
+          span {
+            width: unset;
           }
         }
+      }
     }
+  }
 }

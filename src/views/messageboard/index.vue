@@ -1,5 +1,5 @@
 <template>
-  <ElScrollbar max-height="80vh" class="message" ref="body">
+  <div class="message" ref="body">
     <div class="up-info">
       <div class="logo">
         <div style="width: 60px">
@@ -38,7 +38,16 @@
           />
         </div>
         <div class="edit-area">
-          <MyEmoji @changeText="changeMsg" ref="emoji" placeholder="在这里输入留言哦~~~" />
+          <V3Emoji
+            :textArea="true"
+            :customSize="customSize"
+            :recent="true"
+            :keep="true"
+            :optionsName="optionsName"
+            :disableGroup="disableGroup"
+            v-model="messageParams.content"
+            :customTheme="customTheme"
+          />
         </div>
       </div>
       <div class="button">
@@ -70,7 +79,7 @@
       :total="total"
       class="pagination"
     />
-  </ElScrollbar>
+  </div>
 </template>
 
 <script lang="ts">
@@ -80,22 +89,22 @@ export default {
 </script>
 
 <script lang="ts" setup>
-import { ElScrollbar } from 'element-plus';
+import V3Emoji from 'vue3-emoji';
+import 'vue3-emoji/dist/style.css';
 import MessageLogo from '@/assets/img/liuyan-logo.png';
 import { useChangeParams, useMessageApi, useMessageBoardParams } from '@/hooks/useMessageboard';
 import DefaultAvatar from '@/assets/img/logo.png';
+import { useEmoji } from '@/hooks/useEmoji';
 const { messageParams, pageparams, messageList, total } = useMessageBoardParams();
 
-const { orderRole, publishMessage, order, changePage, body, emoji } = useMessageApi(
+const { orderRole, publishMessage, order, changePage, body } = useMessageApi(
   messageParams,
   pageparams,
   messageList,
   total
 );
-const { changeAvatarParams, changeMsg, toCommentItem } = useChangeParams(
-  messageParams,
-  messageList
-);
+const { changeAvatarParams, toCommentItem } = useChangeParams(messageParams, messageList);
+const { optionsName, disableGroup, customSize, customTheme } = useEmoji();
 </script>
 
 <style lang="less" scoped>
