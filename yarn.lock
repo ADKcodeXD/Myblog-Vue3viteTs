@@ -112,11 +112,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     "fastq" "^1.6.0"
 
-"@popperjs/core@^2.11.0":
-  "integrity" "sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA=="
-  "resolved" "https://registry.npmjs.org/@popperjs/core/-/core-2.11.2.tgz"
-  "version" "2.11.2"
-
 "@popperjs/core@npm:@sxzz/popperjs-es@^2.11.7":
   "integrity" "sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ=="
   "resolved" "https://registry.npmmirror.com/@sxzz/popperjs-es/-/popperjs-es-2.11.7.tgz"
@@ -3600,7 +3595,7 @@
   dependencies:
     "@volar/vue-typescript" "0.34.15"
 
-"vue@^2.6.0 || ^3.2.0", "vue@^2.6.14 || ^3.2.0", "vue@^3", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.23", "vue@^3.2.25", "vue@>=3", "vue@2 || 3", "vue@3.2.25":
+"vue@^2.6.0 || ^3.2.0", "vue@^2.6.14 || ^3.2.0", "vue@^3", "vue@^3.0.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.25", "vue@>=3", "vue@2 || 3", "vue@3.2.25":
   "integrity" "sha512-jU3t7fyQDHoCWCqhmRrnSmYZvHC35tOJTP704di7HGfq5EcFA1cU/1ZPjUV1eCxJev65Khjyfni+vk9oa+eTtw=="
   "resolved" "https://registry.npmmirror.com/vue/-/vue-3.2.25.tgz"
   "version" "3.2.25"
@@ -3611,12 +3606,12 @@
     "@vue/server-renderer" "3.2.25"
     "@vue/shared" "3.2.25"
 
-"vue3-emoji-picker@^1.0.1":
-  "integrity" "sha512-Il/DQZhmnXMLC3UpP++T9J/RFoYlyCoRuYKwVq7CE+Q+rNezEx9SHPn88J2iegk1vnH6lDWOO5p4WyCcnSNYHg=="
-  "resolved" "https://registry.npmmirror.com/vue3-emoji-picker/-/vue3-emoji-picker-1.0.1.tgz"
-  "version" "1.0.1"
+"vue3-emoji@^1.2.0":
+  "integrity" "sha512-qLe/51ulUzqIn2UI0ae/YwpaW8GRj7GHrPlWh3V15i8ZF6aghBW5wi3e+7Rv2XW/KPOZmtu18e7GxOmf1s3CLQ=="
+  "resolved" "https://registry.npmjs.org/vue3-emoji/-/vue3-emoji-1.2.0.tgz"
+  "version" "1.2.0"
   dependencies:
-    "@popperjs/core" "^2.11.0"
+    "vue" "^3.2.25"
 
 "webpack-virtual-modules@^0.4.3":
   "integrity" "sha512-5NUqC2JquIL2pBAAo/VfBP6KuGkHIZQXW/lNKupLPfhViwh8wNsu0BObtl09yuKZszeEUfbXz8xhrHvSG16Nqw=="
