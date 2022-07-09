@@ -75,7 +75,7 @@
 <script setup lang="ts">
 import { deleteMyPic, getMyPic, updateMyPic } from '@/api/pic';
 import { PicTag } from '@/interface/EnumExport';
-import { ElMessageBox } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 import PostImg from '../../picture/components/PostImg.vue';
 const pageParams = reactive<PageParams>({
   page: 1,
