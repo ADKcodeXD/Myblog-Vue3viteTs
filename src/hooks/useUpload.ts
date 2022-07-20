@@ -5,7 +5,6 @@ import { ElMessage, genFileId, UploadInstance, UploadProps, UploadRawFile } from
 
 /**
  * 重新封装的useUpload函数 目前可以得知上传的进度
- *
  * @param file 上传的文件
  * @param loadingNum 用于接收上传进度的ref数值 双向绑定数值 可以不传入 则不绑定
  * @returns url 一个图片链接
