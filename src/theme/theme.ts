@@ -1,6 +1,5 @@
 import { humpToLine } from './../utils/tools';
 import { getItem, setItem } from '@/utils/storage';
-import { themes } from './themeData';
 import { darkConfig, defaultConfig } from './themeData.json';
 
 /**
