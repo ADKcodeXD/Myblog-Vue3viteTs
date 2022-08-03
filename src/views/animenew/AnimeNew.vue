@@ -56,7 +56,7 @@ if (month >= 0 && month < 3) {
 } else {
   season = 10;
 }
-const { today, weekDayList, day } = useAnimeData();
+const { today, weekDayList } = useAnimeData();
 </script>
 
 <style lang="less" scoped>

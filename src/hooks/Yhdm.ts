@@ -25,6 +25,7 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem | null) => {
       keywords = TextFilter(keywords);
       if (keywords.indexOf(' ') != -1) {
         keywordArr = keywords.split(' ');
+        // 过滤中文关键词
         const regSeason = new RegExp(
           /[\u7b2c][\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d0-9][\u7ae0\u5b63\u8282]/
         );
@@ -49,7 +50,6 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem | null) => {
         const { data } = await getYhdmAnimeSearchInfo(keywords);
         return data.data.results;
       } catch (error) {
-        console.log(error);
         return null;
       }
     }

@@ -169,7 +169,8 @@
         "three/examples/jsm/loaders/RGBELoader.js",
         "three/examples/jsm/renderers/CSS2DRenderer.js",
         "vue",
-        "vue-router"
+        "vue-router",
+        "vue3-emoji"
       ]
     }
   }
