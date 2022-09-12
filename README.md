@@ -30,10 +30,10 @@
 - 支持移动端(尽可能支持)
 
 ## 预览
-- 首页[![jVy3OH.png]([https://s1.ax1x.com/2022/06/27/jVy3OH.png)](https://imgtu.com/i/jVy3OH]#pic_center)
+- 首页[![jVy3OH.png](https://s1.ax1x.com/2022/06/27/jVy3OH.png)](https://imgtu.com/i/jVy3OH)
 - 文章详情页
 
-[![jVysmj.png]([https://s1.ax1x.com/2022/06/27/jVysmj.png)](https://imgtu.com/i/jVysmj]#pic_center)
+[![jVysmj.png](https://s1.ax1x.com/2022/06/27/jVysmj.png)](https://imgtu.com/i/jVysmj)
 
 - 文章列表
 
