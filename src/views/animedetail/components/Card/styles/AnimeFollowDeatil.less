@@ -1,0 +1,64 @@
+@media screen and(min-width:@mobile-device) {
+    .follow-card {
+        .font-normal();
+        .border-normal();
+        background-color: @bgColor;
+        padding: @padding-general;
+        margin-top: @margin-general;
+
+        .title {
+            font-size: @big-text;
+        }
+
+        .follow-head {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .info-detail {
+            display: flex;
+            flex-direction: column;
+
+            .process {
+                display: flex;
+                flex-direction: column;
+
+                .text-display {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 10px 0;
+
+                    .input-num {
+                        width: 50px;
+                        text-align: center;
+                    }
+                }
+
+                .progress-bar {
+                    height: 20px;
+                    background-color: gray;
+                    overflow: hidden;
+                    border-radius: @border-radius;
+
+                    .progress-bar-inner {
+                        background-color: @themeColor;
+                        height: 20px;
+                    }
+                }
+            }
+
+            .detail-item {
+                display: flex;
+                flex-direction: column;
+                margin: 10px 0;
+            }
+        }
+    }
+}
+
+@media screen and(min-width:@smallpc-device) {
+    .follow-card {
+        margin: @margin-general;
+        margin-top: 0;
+    }
+}

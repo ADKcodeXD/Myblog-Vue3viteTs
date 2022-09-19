@@ -118,7 +118,7 @@
             class="ep"
             v-for="(ep, index) in yhdm.epInfo"
             :key="index"
-            @click="$router.push(`/index/animeplay/${urlFilter(ep.epUrl)}`)"
+            @click="$router.push(`/index/animeplay/${urlFilter(ep.epUrl)}/${animeDetail.id}`)"
           >
             {{ ep.epTitle }}
           </div>

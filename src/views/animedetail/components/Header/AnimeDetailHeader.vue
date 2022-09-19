@@ -22,7 +22,6 @@
           总集数:{{ animeDetail.eps_count ? animeDetail.eps_count : animeDetail.eps.length }}
         </p>
       </div>
-
       <div class="title-info-third">
         <div class="rating" v-if="animeDetail.rating">
           <small class="desc">评分</small>
@@ -65,6 +64,11 @@
         </p>
       </div>
     </div>
+    <div class="follow-bangumi" :class="{ followed: isFollow }" @click="followBangumi">
+      <i class="iconfont" :class="isFollow ? 'icon-star' : 'icon-changyonggongneng'"></i>
+      <p v-if="!isFollow">点击追番</p>
+      <p v-else>已追番</p>
+    </div>
   </div>
 </template>
 
@@ -72,14 +76,20 @@
 import { PropType } from 'vue';
 import { WeekDayType, BangumiType, CollectionType } from '@/interface/EnumExport';
 import { useRatingTag } from '@/hooks/Bangumi';
+import { ElMessageBox } from 'element-plus';
 const props = defineProps({
   animeDetail: {
     type: Object as PropType<Bangumi.AnimeDeatilItem>,
     default: () => {
       return {};
     }
+  },
+  isFollow: {
+    type: Boolean,
+    default: false
   }
 });
+const emit = defineEmits(['follow', 'unFollow']);
 const director = computed(() => {
   if (props.animeDetail.staff) {
     let a = props.animeDetail.staff.find(item => {
@@ -123,6 +133,23 @@ const mostPeople = computed(() => {
   return obj;
 });
 const { ratingTag } = useRatingTag(props.animeDetail?.rating?.score || 0);
+const followBangumi = () => {
+  if (!props.isFollow) {
+    emit('follow');
+  } else {
+    ElMessageBox.confirm(
+      '你确定要取消追番吗，会清除掉所有进度哦(不想追番可以将其设置为抛弃或者看过)?',
+      'Warning',
+      {
+        confirmButtonText: '确定',
+        cancelButtonText: '不取消了',
+        type: 'warning'
+      }
+    ).then(() => {
+      emit('unFollow');
+    });
+  }
+};
 </script>
 
 <style lang="less" scoped>

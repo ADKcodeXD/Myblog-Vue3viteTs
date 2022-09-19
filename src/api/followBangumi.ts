@@ -1,16 +1,16 @@
 import request from '@/utils/request';
+import { AxiosPromise } from 'axios';
 /// 该接口全部需要登录状态下使用
 
 /**
  * 用于添加新增新番
- * @param animeId 动漫id bangumi的id
  * @param followBnagumiParams 需要追番的动漫信息和一些值
- * @returns 不返回任何值
+ * @returns 返回追番成功的信息 一个追番信息vo实体
  */
-export const followNewAnime = (animeId: number, followBnagumiParams: FollowBangumiParams) => {
+export const followNewAnime = (followBnagumiParams: FollowBangumiParams) => {
   return request({
     method: 'post',
-    url: `/api/follow/follownew/${animeId}`,
+    url: `/api/follow/follownew`,
     data: followBnagumiParams
   });
 };
@@ -37,7 +37,7 @@ export const changeStatus = (id: string, status: number) => {
  */
 export const changeProgress = (followProgressParams: FollowProgressParams) => {
   return request({
-    method: 'post',
+    method: 'put',
     url: `/api/follow/changeprogress`,
     data: followProgressParams
   });
@@ -47,7 +47,7 @@ export const changeProgress = (followProgressParams: FollowProgressParams) => {
  * @param id 追番id (注意是追番的详细id 不是动漫id)
  * @returns 不返回任何值
  */
-export const deleteFollow = (id: number) => {
+export const deleteFollow = (id: string) => {
   return request({
     method: 'delete',
     url: `/api/follow/delete/${id}`
@@ -67,7 +67,7 @@ export const getMyFollow = (status: number, pageParams: PageParams) => {
     params: {
       status
     }
-  });
+  }) as AxiosPromise<ApiResult<ListInfoResult<FollowBangumiVo>>>;
 };
 /**
  * 获取某天的追番列表
@@ -92,7 +92,7 @@ export const getMyFollowByDay = (status: number, day: number) => {
  */
 export const getMyFollowDetail = (animeId: number) => {
   return request({
-    method: 'post',
+    method: 'get',
     url: `/api/follow/followdetail`,
     params: {
       animeId

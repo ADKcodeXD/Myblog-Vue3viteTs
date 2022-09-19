@@ -78,6 +78,14 @@
           <span class="label">背景图片亮度(%)</span>
           <el-slider :min="0" :max="300" :step="0.1" v-model="localConfig.backGroundImgLight" />
         </div>
+        <div class="form-item">
+          <span class="label">是否打开追番卡片</span>
+          <el-switch
+            :model-value="main.followBangumiCard"
+            @update:model-value="setFollowCard"
+            style="justify-self: flex-start"
+          />
+        </div>
       </div>
       <div class="tw-flex tw-justify-end">
         <AdkButton
@@ -100,7 +108,8 @@ import { getItem } from '@/utils/storage';
 import { ElMessage } from 'element-plus';
 import { setConfig, setDark, setDefault } from '@/theme/theme';
 import { vOnClickOutside } from '@vueuse/components';
-
+import { useStore } from '@/store/main';
+const main = useStore();
 const localConfig = reactive(getItem('globalConfig') as GlobalConfig);
 const setDefaultFn = () => {
   setDefault();
@@ -120,6 +129,9 @@ const saveLocal = () => {
   ElMessage.success('保存到本地成功!');
   setConfig(localConfig, true);
 };
+const setFollowCard = (val: boolean) => {
+  main.setFollowBangumiCard(val);
+};
 const isElShow = ref(false);
 const target = ref();
 const close = (event: any) => {
@@ -136,16 +148,6 @@ onMounted(() => {
   watch(localConfig, newval => {
     setConfig(newval);
   });
-  // watch(isElShow,(val:Boolean)=>{
-  //     if(val){
-  //         const local=getItem('globalConfig');
-  //         for(let key in local){
-  //             localConfig[key]=local[key]
-  //         }
-  //         console.log(isElShow.value+"watch");
-  //     }
-  //     console.log(val+"2");
-  // })
 });
 </script>
 <style lang="less" scoped>
