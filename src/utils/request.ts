@@ -30,7 +30,18 @@ request.interceptors.request.use((config: AxiosRequestConfig) => {
 request.interceptors.response.use(
   (response: AxiosResponse) => {
     if (response.status > 400) {
-      ElMessage.error(response.data);
+      ElMessage.error(response.statusText);
+      throw new Error(`请求失败`);
+    } else if (response.data.code === 10003) {
+      const store = useStore();
+      if (store.user.token) {
+        store.setUserToken('');
+      }
+    } else if (response.data.code !== 200) {
+      if (response.data.msg) {
+        ElMessage.error(response.data.msg);
+      }
+      throw new Error(response.data.msg);
     }
     return response;
   },

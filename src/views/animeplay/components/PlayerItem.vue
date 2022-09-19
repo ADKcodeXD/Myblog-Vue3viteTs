@@ -9,6 +9,7 @@ import DPlayer from 'dplayer';
 import { useGlobalConfigStore } from '@/store/globalConfig';
 import { isMobile } from '@/utils/mobile';
 const config = useGlobalConfigStore();
+defineExpose(['getVideoTime']);
 let dp = ref();
 const props = defineProps({
   videoUrl: {
@@ -21,6 +22,9 @@ const isM3u8 = computed(() => {
   if (arr[arr.length - 1] === 'm3u8') return true;
   else return false;
 });
+const getVideoTime = () => {
+  return dp.value.video.currentTime;
+};
 onMounted(() => {
   dp.value = new DPlayer({
     container: document.getElementById('dplayer'),
@@ -53,9 +57,9 @@ onMounted(() => {
     }
   });
   dp.value.on('error', e => {
-    console.log(e);
-    dp.value.pause();
-    dp.value.notice('视频加载失败', 2000);
+    // console.log(e);
+    // dp.value.pause();
+    // dp.value.notice('视频加载失败', 2000);
   });
   dp.value.container.addEventListener('mousemove', () => {
     dp.value.controller.setAutoHide();

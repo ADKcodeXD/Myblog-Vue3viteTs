@@ -1,4 +1,4 @@
-import { getItem } from '@/utils/storage';
+import { getItem, setItem, removeItem } from '@/utils/storage';
 import { defineStore } from 'pinia';
 
 export const useStore = defineStore('main', {
@@ -9,18 +9,22 @@ export const useStore = defineStore('main', {
         token: getItem('user') || ''
       },
       cancel: {},
-      sourcePage: []
+      sourcePage: [],
+      followBangumiCard: getItem('followBangumiCard') || true
     };
   },
-  // could also be defined as
-  // state: () => ({ count: 0 })
   actions: {
     // 这里写方法action
     setCancel(cancelObj) {
       this.cancel = cancelObj;
+    },
+    setUserToken(token: string) {
+      this.user.token = token;
+      token ? setItem('user', token) : removeItem('user');
+    },
+    setFollowBangumiCard(val: boolean) {
+      this.followBangumiCard = val;
+      setItem('followBangumiCard', val);
     }
-  },
-  getters: {
-    //   getters
   }
 });

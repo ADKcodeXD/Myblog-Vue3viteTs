@@ -6,6 +6,7 @@
       <template #right> welcome to Adkblog </template>
     </SubTitle>
     <Carousel :items="bannerList" />
+    <FollowBangumiCard v-if="userInfo.user.token && userInfo.followBangumiCard" />
     <SubTitle> 看看新番 </SubTitle>
     <section class="bangumi">
       <Bangumimini />
@@ -67,9 +68,11 @@ import TimeLine from './components/TimeLine.vue';
 import TagsAll from './components/TagsAll.vue';
 import ArticleTimeLine from './components/ArticleTimeLine.vue';
 import SubTitle from './components/SubTitle.vue';
+import { useStore } from '@/store/main';
 // 获取首页文章 按照时间顺序 5篇
 const articles = ref<ArticleItemInfo[]>([]);
 const bannerList = ref<ArticleItemInfo[]>([]);
+const userInfo = useStore();
 const pageparams: PageParams = {
   page: 1,
   pagesize: 5
@@ -80,7 +83,6 @@ const getIndexfive = async () => {
   articles.value = data.data;
 };
 const rightUl = ref<HTMLElement>();
-
 // 获取文章头图
 const getBannerList = async () => {
   const { data } = await getIndexBanner();
@@ -91,9 +93,6 @@ const getBannerList = async () => {
 onMounted(() => {
   getIndexfive();
   getBannerList();
-  // new Sortable(rightUl.value,{
-  //   animation: 150,
-  // })
 });
 </script>
 

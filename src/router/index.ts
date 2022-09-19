@@ -94,7 +94,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/animesearch/AnimeSearch.vue')
       },
       {
-        path: 'animeplay/:id',
+        path: 'animeplay/:id/:animeId',
         name: 'AnimePlay',
         meta: {
           title: '动漫播放',

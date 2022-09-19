@@ -1,4 +1,4 @@
-import { getSubjectInfoAllApi, getSubjectInfoApi } from './../api/bangumi';
+import { getSubjectInfoApi } from './../api/bangumi';
 import { getCalendarApi } from '@/api/bangumi';
 import { getBroswerDataApi } from '@/api/bangumiMy';
 import { getFormatTime } from '@/utils/dayjs';
