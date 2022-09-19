@@ -6,3 +6,15 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>;
   export default component;
 }
+declare interface ApiResult<T> {
+  data: T;
+  msg: string;
+  success: string;
+  code: number;
+}
+
+declare interface ListInfoResult<T> {
+  results: Array<T>;
+  length: number;
+  pages: number;
+}

@@ -41,17 +41,17 @@ jobs:
             - name: 打包
               run: npm run build:prod
             # 上传阿里云
-            - name: 上传阿里云
+            - name: 上传至腾讯服务器
               uses: easingthemes/ssh-deploy@v2.1.1
               env:
                   # 私钥
-                  SSH_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+                  SSH_PRIVATE_KEY: ${{ secrets.TENCENT_PRIVATE_KEY }}
                   # scp参数
                   ARGS: '-avzr --delete'
                   # 源目录
                   SOURCE: 'dist'
                   # 服务器ip：换成你的服务器IP
-                  REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+                  REMOTE_HOST: ${{ secrets.TENCENT_HOST }}
                   # 用户
                   REMOTE_USER: 'root'
                   # 目标地址
