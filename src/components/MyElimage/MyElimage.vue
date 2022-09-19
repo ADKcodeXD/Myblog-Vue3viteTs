@@ -28,37 +28,17 @@
 </template>
 
 <script lang="ts" setup>
-const props = defineProps({
-  /**
-   * 传入图片链接url
-   */
-  img: {
-    type: String,
-    require: true
-  },
-  /**
-   * 加载失败要显示图片 默认是1:1的方形图 可选3:4 3:1 fang
-   */
-  notFoundType: {
-    type: String,
-    default: 'fang'
-  },
-  /**
-   * 是否开启懒加载 默认开启懒加载
-   */
-  isLazy: {
-    type: Boolean,
-    require: true
-  },
-  /**
-   * 可以节省图片加载资源
-   * 指定最大宽度和图片质量
-   * 默认几档 如果不传 则默认原图质量
-   */
-  zip: {
-    type: Number,
-    default: 0
-  }
+interface MyElimageProp {
+  img?: string; // 图片的链接
+  notFoundType?: string; // 定义找不到的图片的比例和大小
+  isLazy?: boolean; // 是否懒加载
+  zip?: number; // 压缩级别 默认为0（不压缩）
+}
+const props = withDefaults(defineProps<MyElimageProp>(), {
+  img: '',
+  notFoundType: 'fang',
+  isLazy: false,
+  zip: 0
 });
 defineEmits(['load']);
 const quatily = computed(() => {
@@ -67,16 +47,16 @@ const quatily = computed(() => {
     case 0:
       break;
     case 1:
-      quality = '?x-oss-process=image/resize,w_100/quality,q_30';
+      quality = '?imageMogr2/thumbnail/100x/quality/30';
       break;
     case 2:
-      quality = '?x-oss-process=image/resize,w_300/quality,q_30';
+      quality = '?imageMogr2/thumbnail/300x/quality/30';
       break;
     case 3:
-      quality = '?x-oss-process=image/resize,w_640/quality,q_60';
+      quality = '?imageMogr2/thumbnail/640x/quality/60';
       break;
     case 4:
-      quality = '?x-oss-process=image/resize,w_1080/quality,q_80';
+      quality = '?imageMogr2/thumbnail/1080x/quality/80';
       break;
   }
   return quality;
