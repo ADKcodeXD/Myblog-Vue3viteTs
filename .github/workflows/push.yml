@@ -1,58 +1,58 @@
 name: CD Autobuild
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 jobs:
-    pushserver:
-        # runs-on 指定job任务运行所需要的虚拟机环境(必填字段)
-        runs-on: ubuntu-latest
-        steps:
-            # 获取源码
-            - name: 迁出代码
-              # 使用action库  actions/checkout获取源码
-              uses: actions/checkout@main
-            # 安装Node10
-            - name: 安装node.js
-              # 使用action库  actions/setup-node安装node
-              uses: actions/setup-node@v1
-              with:
-                  node-version: 16.13.1
-            # 检查缓存
-            - name: 缓存依赖
-              # 缓存命中结果会存储在steps.[id].outputs.cache-hit里，该变量在继后的step中可读
-              id: cache-dependencies
-              uses: actions/cache@v3
-              with:
-                # 缓存文件目录的路径
-                path: |
-                  **/node_modules
-                # key中定义缓存标志位的生成方式。runner.OS指当前环境的系统。外加对yarn.lock内容生成哈希码作为key值，如果yarn.lock改变则代表依赖有变化。
-                # 这里用yarn.lock而不是package.json是因为package.json中还有version和description之类的描述项目但和依赖无关的属性
-                key: ${{runner.OS}}-${{hashFiles('**/yarn.lock')}}
-            # 如果存在缓存 不安装依赖
-            - name: 安装依赖
-              if: steps.cache-dependencies.outputs.cache-hit != 'true'
-              run: npm cache clean -f && npm install -f  
-            - name: eslint检测代码
-              run: npm run lintfix
-            # 打包
-            - name: 打包
-              run: npm run build:prod
-            # 上传阿里云
-            - name: 上传至腾讯服务器
-              uses: easingthemes/ssh-deploy@v2.1.1
-              env:
-                  # 私钥
-                  SSH_PRIVATE_KEY: ${{ secrets.TENCENT_PRIVATE_KEY }}
-                  # scp参数
-                  ARGS: '-avzr --delete'
-                  # 源目录
-                  SOURCE: 'dist'
-                  # 服务器ip：换成你的服务器IP
-                  REMOTE_HOST: ${{ secrets.TENCENT_HOST }}
-                  # 用户
-                  REMOTE_USER: 'root'
-                  # 目标地址
-                  TARGET: '/www/wwwblog/web'
+  pushserver:
+    # runs-on 指定job任务运行所需要的虚拟机环境(必填字段)
+    runs-on: ubuntu-latest
+    steps:
+      # 获取源码
+      - name: 迁出代码
+        # 使用action库  actions/checkout获取源码
+        uses: actions/checkout@main
+      # 安装Node10
+      - name: 安装node.js
+        # 使用action库  actions/setup-node安装node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.13.1
+      # 检查缓存
+      - name: 缓存依赖
+        # 缓存命中结果会存储在steps.[id].outputs.cache-hit里，该变量在继后的step中可读
+        id: cache-dependencies
+        uses: actions/cache@v3
+        with:
+          # 缓存文件目录的路径
+          path: |
+            **/node_modules
+          # key中定义缓存标志位的生成方式。runner.OS指当前环境的系统。外加对yarn.lock内容生成哈希码作为key值，如果yarn.lock改变则代表依赖有变化。
+          # 这里用yarn.lock而不是package.json是因为package.json中还有version和description之类的描述项目但和依赖无关的属性
+          key: ${{runner.OS}}-${{hashFiles('**/yarn.lock')}}
+      # 如果存在缓存 不安装依赖
+      - name: 安装依赖
+        if: steps.cache-dependencies.outputs.cache-hit != 'true'
+        run: npm cache clean -f && npm install -f
+      - name: eslint检测代码
+        run: npm run lintfix
+      # 打包
+      - name: 打包
+        run: npm run build:prod
+      # 上传阿里云
+      - name: 上传至腾讯服务器
+        uses: easingthemes/ssh-deploy@v2.1.1
+        env:
+          # 私钥
+          SSH_PRIVATE_KEY: ${{ secrets.TENCENT_PRIVATE_KEY }}
+          # scp参数
+          ARGS: '-avzr --delete'
+          # 源目录
+          SOURCE: 'dist'
+          # 服务器ip：换成你的服务器IP
+          REMOTE_HOST: ${{ secrets.TENCENT_HOST }}
+          # 用户
+          REMOTE_USER: 'root'
+          # 目标地址
+          TARGET: '/www/wwwroot/adkdream/frontend/toConsumer'
