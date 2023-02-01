@@ -33,11 +33,13 @@
     border-image: url(@/assets/img/page.png) 25 repeat;
     border-image-outset: @outset;
 }
+
 // 4、统一边框类型
-.border-normal(){
+.border-normal() {
     border: @border-line solid @textColor;
     border-radius: @border-radius;
 }
+
 // 定义一个球
 .ball(@size, @color) {
     width: @size;
@@ -53,19 +55,22 @@
     align-items: @align;
     flex-direction: @dir;
 }
+
 .flex(@dir: row, @jus: flex-start, @align: flex-start) {
     display: flex;
     justify-content: @jus;
     align-items: @align;
     flex-direction: @dir;
 }
+
 .shadow(@drop: 3px, @big: 5px, @color: @shadowColor) {
     box-shadow: @drop @drop @big @color;
 }
 
-.textShadow(@drop: 3px, @big: 5px, @color: @shadowColor){
+.textShadow(@drop: 3px, @big: 5px, @color: @shadowColor) {
     text-shadow: @drop @drop @big @color;
 }
-.cusor-pointer(){
-    cursor: url(@/assets/img/Hand2.cur),pointer;
+
+.cusor-pointer() {
+    cursor: url(@/assets/img/Hand2.cur), pointer;
 }

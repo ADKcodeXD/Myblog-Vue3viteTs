@@ -1,6 +1,12 @@
 <template>
   <div class="card-body">
-    <p class="card-body-title">我的追番（在看）</p>
+    <div class="card-body-title">
+      <div>
+        <p class="card-body-title__title">我的追番（在看）</p>
+        <p class="card-body-title__desc">这里记录了你的追番哦~</p>
+      </div>
+      <p class="card-body-title__link" @click="emit('hide')">隐藏</p>
+    </div>
     <el-scrollbar height="400px" class="bgm-list" v-if="currentBangumi.results">
       <div
         class="bgm-list-item"
@@ -50,6 +56,7 @@
 </template>
 <script setup lang="ts">
 import { useGetMyFollow } from '@/hooks/useFollowBangumi';
+const emit = defineEmits(['hide']);
 const customColors = [
   { color: '#0069EB', percentage: 25 },
   { color: '#FD1170', percentage: 50 },
@@ -83,16 +90,29 @@ onMounted(async () => {
   position: absolute;
   .border-normal();
   .font-normal();
-  top: 8rem;
+  top: 7.6rem;
   right: 1.8rem;
   z-index: 10;
   background-color: @bgColor;
   padding: @padding-general;
   &-title {
-    font-size: @big-text;
     margin-bottom: @margin-general;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    &__title {
+      font-size: @big-text;
+    }
+    &__desc {
+      font-size: @small-text;
+    }
+    &__link {
+      color: rgb(78, 158, 250);
+      cursor: pointer;
+    }
   }
   .bgm-list {
+    width: 20rem;
     &-item {
       width: 20rem;
       height: 10rem;

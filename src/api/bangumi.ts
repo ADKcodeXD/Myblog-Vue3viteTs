@@ -27,19 +27,12 @@ export const getSubjectInfoApi = (subjectId: number) => {
 /**
  * 获取条目信息 返回一个SubjectInfoSmall
  * @param subjectId 条目id
- * @param responseGroup 返回数据大小 默认为large 传入small返回small 可选属性
- * @param timestamp 防止走304 强制缓存 可选 传入一个date.getTime()
  * @returns 返回一个
  */
-export const getSubjectInfoAllApi = (
-  subjectId: number,
-  responseGroup?: string,
-  timestamp?: number
-) => {
+export const getSubjectInfoAllApi = (subjectId: number) => {
   return request({
     method: 'get',
-    url: `/api/bgm/subjectAll/${subjectId}`,
-    params: { responseGroup: responseGroup ? responseGroup : 'large', timestamp: timestamp }
+    url: `/api/bgm/subjectAll/${subjectId}`
   });
 };
 

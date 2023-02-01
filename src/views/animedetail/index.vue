@@ -42,15 +42,16 @@ import {
 } from '@/hooks/useFollowBangumi';
 import { useAnimeDeatil } from '@/hooks/BangumiDetail';
 import { ElMessage } from 'element-plus';
+import { getSubjectInfoApi } from '@/api/bangumi';
+import { useBackToSource } from '@/hooks/useSourcepage';
+import { useHead } from '@vueuse/head';
+
 import AnimeDetailHeader from './components/Header/AnimeDetailHeader.vue';
 import AnimeDetailBody from './components/Body/AnimeDetailBody.vue';
 import RataingBox from './components/Card/RataingBox.vue';
 import AnimeCollections from './components/Card/AnimeCollections.vue';
-import { getSubjectInfoApi } from '@/api/bangumi';
 import AnimeRecommend from './components/Card/AnimeRecommend.vue';
 import AnimeTags from './components/Card/AnimeTags.vue';
-import { useBackToSource } from '@/hooks/useSourcepage';
-import { useHead } from '@vueuse/head';
 import AnimeFollowDetail from './components/Card/AnimeFollowDetail.vue';
 
 export default {
@@ -114,6 +115,7 @@ const followThisBangumi = async () => {
   const { followNewAnimeInfo } = await useFollowNewBnagumi(params);
   followInfo.value = followNewAnimeInfo;
 };
+
 const unFollowBangumi = async () => {
   if (!followInfo.value) {
     ElMessage.error('请先追番');
@@ -122,12 +124,14 @@ const unFollowBangumi = async () => {
   followInfo.value = null;
   ElMessage.success('取消追番成功');
 };
+
 const getFollowInfo = async () => {
   const res = await useGetFollowInfoByAnimeId(animeDetail.value.id);
   if (res) followInfo.value = res.followInfo;
 };
 
 document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+
 provide('infoboxVal', infoBox);
 useHead({
   title: computed(() => {

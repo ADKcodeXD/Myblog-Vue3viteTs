@@ -102,7 +102,6 @@
         </div>
       </div>
     </div>
-    <!-- 在线播放源2 senfun -->
     <!-- 在线播放源 樱花 -->
     <div class="yhdm" v-if="yhdmList.length > 0">
       <p class="yhdm-title">
@@ -125,9 +124,9 @@
         </div>
       </div>
     </div>
-    <AnimeEp :eps="animeDetail.eps" v-if="animeDetail.eps" />
-    <HumanBoxCard :AnimeItemList="animeDetail.crt" />
-    <HumanBoxCard :StaffItemList="animeDetail.staff" />
+    <!-- <AnimeEp :eps="animeDetail.eps" v-if="animeDetail.eps" /> -->
+    <!-- <HumanBoxCard :AnimeItemList="animeDetail.crt" /> -->
+    <!-- <HumanBoxCard :StaffItemList="animeDetail.staff" /> -->
     <AnimeDetailInfoBox />
   </div>
 </template>

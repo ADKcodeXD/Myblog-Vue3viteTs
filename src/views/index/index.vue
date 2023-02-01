@@ -6,7 +6,10 @@
       <template #right> welcome to Adkblog </template>
     </SubTitle>
     <Carousel :items="bannerList" />
-    <FollowBangumiCard v-if="userInfo.user.token && userInfo.followBangumiCard" />
+    <FollowBangumiCard
+      v-if="userInfo.user.token && userInfo.followBangumiCard"
+      @hide="hideFollowBgmCard"
+    />
     <SubTitle> 看看新番 </SubTitle>
     <section class="bangumi">
       <Bangumimini />
@@ -88,7 +91,9 @@ const getBannerList = async () => {
   const { data } = await getIndexBanner();
   bannerList.value = data.data;
 };
-
+const hideFollowBgmCard = () => {
+  userInfo.setFollowBangumiCard(false);
+};
 // 拖拽
 onMounted(() => {
   getIndexfive();
