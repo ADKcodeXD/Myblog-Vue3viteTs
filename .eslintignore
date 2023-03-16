@@ -3,8 +3,15 @@
 /dist
 /onlinedist
 /src/assets/js
+/src/assets
 /package-lock.json
 .DS_Store
 fis-conf.js
 components.d.ts
 changelog.config.js
+*.less
+*.css
+*.png
+*.jpg
+*.jpeg
+*.gif

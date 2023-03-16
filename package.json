@@ -8,7 +8,7 @@
     "dev": "vite",
     "prod": "vite --mode production",
     "preview": "vite preview",
-    "lint": "eslint --ext '.js,.ts,.vue' src/**/* --no-error-on-unmatched-pattern",
+    "lint": "eslint src/**/* --ext '.js,.ts,.vue' --no-error-on-unmatched-pattern",
     "lintfix": "eslint --fix --ext '.js,.ts,.vue' src/**/* --no-error-on-unmatched-pattern"
   },
   "dependencies": {
