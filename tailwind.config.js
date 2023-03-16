@@ -2,19 +2,19 @@ module.exports = {
   content: [
     // Example content paths...
     './public/**/*.html',
-    './src/**/*.{js,jsx,ts,tsx,vue}',
+    './src/**/*.{js,jsx,ts,tsx,vue}'
   ],
-  whitelistPatterns:[/el-.+$/],
+  whitelistPatterns: [/el-.+$/],
   whitelistPatternsChildren: [/el-.+$/],
   theme: {
-    extend: {},
+    extend: {}
   },
   variants: {
-    extend: {},
+    extend: {}
   },
   plugins: [],
   prefix: 'tw-',
   corePlugins: {
-    preflight: false,
+    preflight: false
   }
 }

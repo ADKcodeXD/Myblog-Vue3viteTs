@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "suppressImplicitAnyIndexErrors":true,
+    "suppressImplicitAnyIndexErrors": true,
     "lib": [
       "esnext",
       "dom"
@@ -37,7 +37,8 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "./**/*.d.ts"],
+    "./**/*.d.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
