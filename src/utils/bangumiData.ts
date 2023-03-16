@@ -244,7 +244,7 @@ export const getSiteFromBGMId = (id: number, date: string) => {
         return it.site == 'bangumi'
       })
       // 由于传进来的是number类型
-      if (bgmitem && bgmitem.id == id) {
+      if (bgmitem && bgmitem.id === String(id)) {
         findItem = bangumiData.items[up]
         break
       }
@@ -256,7 +256,7 @@ export const getSiteFromBGMId = (id: number, date: string) => {
         return it.site == 'bangumi'
       })
       // 由于传进来的是number类型
-      if (bgmitem && bgmitem.id == id) {
+      if (bgmitem && bgmitem.id === String(id)) {
         findItem = bangumiData.items[down]
         break
       }

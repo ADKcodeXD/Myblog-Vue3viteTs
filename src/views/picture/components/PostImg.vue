@@ -1,6 +1,6 @@
 <template>
   <!-- 表单组件 -->
-  <el-dialog v-model="isDialogShow" title="上传图片" @close="$emit('close')">
+  <el-dialog :model-value="isDialogShow" title="上传图片" @close="$emit('close')">
     <div class="dialog">
       <div class="dialog-image">
         <UploadImage
