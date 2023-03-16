@@ -3,7 +3,9 @@
     <aside class="left">
       <p class="one">Adk-blog</p>
       <p class="two">仅供学习使用 本博客为个人用途 无任何盈利用途</p>
-      <p class="three">备案/许可证编号：粤ICP备2022022555号</p>
+      <p class="three">
+        备案/许可证编号:<a href="https://beian.miit.gov.cn" target="_blank">粤ICP备2022022555号</a>
+      </p>
     </aside>
     <div class="right">
       <p>本项目基于MIT Licence进行开源</p>

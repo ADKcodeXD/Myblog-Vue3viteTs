@@ -1,17 +1,17 @@
-import bangumiRequest from '@/utils/bangumiApi';
-import request from '@/utils/request';
-import axios from 'axios';
-import qs from 'qs';
+import bangumiRequest from '@/utils/bangumiApi'
+import request from '@/utils/request'
+import axios from 'axios'
+import qs from 'qs'
 
-const PROXY = process.env.NODE_ENV == 'development' ? '/bgm' : '';
-const PROXY_TV = process.env.NODE_ENV == 'development' ? '/bgmtv' : 'https://bgm.tv';
+const PROXY = process.env.NODE_ENV == 'development' ? '/bgm' : ''
+const PROXY_TV = process.env.NODE_ENV == 'development' ? '/bgmtv' : 'https://bgm.tv'
 // 获取每日更新 这个不需要登录 /calendar
 export const getCalendarApi = () => {
   return request({
     method: 'get',
     url: '/api/bgm/calendar'
-  });
-};
+  })
+}
 /**
  * 可以通过这个api 来获取infobox 以及tags
  * @param subjectId 需要条目的id
@@ -21,8 +21,8 @@ export const getSubjectInfoApi = (subjectId: number) => {
   return request({
     method: 'get',
     url: `/api/bgm/subject/${subjectId}`
-  });
-};
+  })
+}
 
 /**
  * 获取条目信息 返回一个SubjectInfoSmall
@@ -33,8 +33,8 @@ export const getSubjectInfoAllApi = (subjectId: number) => {
   return request({
     method: 'get',
     url: `/api/bgm/subjectAll/${subjectId}`
-  });
-};
+  })
+}
 
 // 获取搜索结果
 export const getSubjectSeachApi = (searchParams: Bangumi.SearchParamsBgm) => {
@@ -47,8 +47,8 @@ export const getSubjectSeachApi = (searchParams: Bangumi.SearchParamsBgm) => {
       max_results: searchParams.max_results,
       type: searchParams.type
     }
-  });
-};
+  })
+}
 /**
  * 回调页面自动携带query code 参数
  * @param code
@@ -65,8 +65,8 @@ export const getBangumiToken = (code: string) => {
       code: code,
       redirect_uri: 'http://localhost:5000/index/animebgminfo'
     }
-  });
-};
+  })
+}
 
 /**
  * 无需参数 使用authorization头获取信息
@@ -76,8 +76,8 @@ export const getMyBangumiInfo = () => {
   return bangumiRequest({
     method: 'get',
     url: PROXY + '/v0/me'
-  });
-};
+  })
+}
 
 /**
  * @param responseGroup 默认medium 获取条目详细信息
@@ -97,8 +97,8 @@ export const getMySeeingCollection = (
       cat: cat ? cat : 'watching',
       responseGroup: responseGroup ? responseGroup : 'medium'
     }
-  });
-};
+  })
+}
 
 /**
  * 获取收藏信息 比如 comment
@@ -114,8 +114,8 @@ export const getCollectionStatus = (uid: number, timestamp?: number) => {
       app_id: 'bgm21996223860e72a53',
       timestamp: timestamp
     }
-  });
-};
+  })
+}
 
 /**
  * 用于查询用户收藏的某条条目的相关信息
@@ -131,8 +131,8 @@ export const getSubjectCollection = (subjectId: number, timestamp?: number) => {
       app_id: 'bgm21996223860e72a53',
       timestamp: timestamp
     }
-  });
-};
+  })
+}
 /**
  * 根据id和type 获取在看 想看等不同分类的收藏  可以分页
  * @param uid 用户id 必须
@@ -158,8 +158,8 @@ export const getUserCollectionByType = (
       limit: limit,
       offset: offset
     }
-  });
-};
+  })
+}
 
 /**
  * 更改用户的收藏信息
@@ -194,5 +194,5 @@ export const changeCollectionStatus = (
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
-  });
-};
+  })
+}

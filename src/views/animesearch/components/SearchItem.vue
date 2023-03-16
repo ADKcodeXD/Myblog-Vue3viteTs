@@ -47,25 +47,25 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
-import { BangumiType } from '@/interface/EnumExport';
+import { PropType } from 'vue'
+import { BangumiType } from '@/interface/EnumExport'
 const props = defineProps({
   item: {
     type: Object as PropType<Bangumi.AnimeItemInfo>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
+})
 
 let type = computed(() => {
-  var reg = /[a-zA-Z]/g;
+  var reg = /[a-zA-Z]/g
   for (let key in BangumiType) {
     if (props.item.type == parseInt(BangumiType[key])) {
-      return key.replace(reg, '');
+      return key.replace(reg, '')
     }
   }
-});
+})
 </script>
 
 <style lang="less" scoped>

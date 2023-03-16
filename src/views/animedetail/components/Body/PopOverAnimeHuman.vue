@@ -40,24 +40,24 @@
 </template>
 
 <script lang="ts" setup>
-import { isMobile } from '@/utils/mobile';
-import { PropType } from 'vue';
+import { isMobile } from '@/utils/mobile'
+import { PropType } from 'vue'
 
 defineProps({
   role: {
     type: Object as PropType<Bangumi.AnimeHuman>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
+})
 
-const popType = ref<'click' | 'focus' | 'hover' | 'contextmenu'>();
+const popType = ref<'click' | 'focus' | 'hover' | 'contextmenu'>()
 // 判断设备
 if (isMobile()) {
-  popType.value = 'click';
+  popType.value = 'click'
 } else {
-  popType.value = 'hover';
+  popType.value = 'hover'
 }
 </script>
 

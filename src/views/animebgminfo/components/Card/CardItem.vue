@@ -116,51 +116,51 @@
 </template>
 
 <script setup lang="ts">
-import { changeCollectionStatus, getSubjectInfoApi } from '@/api/bangumi';
-import { getFormatTime } from '@/utils/dayjs';
-import { PropType } from '@vue/runtime-core';
-import { onClickOutside } from '@vueuse/core';
-import { ElMessage } from 'element-plus';
+import { changeCollectionStatus, getSubjectInfoApi } from '@/api/bangumi'
+import { getFormatTime } from '@/utils/dayjs'
+import { PropType } from '@vue/runtime-core'
+import { onClickOutside } from '@vueuse/core'
+import { ElMessage } from 'element-plus'
 
-let dialogVisable = ref(false);
-let isStatusBoxShow = ref(false);
-const target = ref(null);
-let tagsOption = ref<Bangumi.AnimeTag[]>([]);
+let dialogVisable = ref(false)
+let isStatusBoxShow = ref(false)
+const target = ref(null)
+let tagsOption = ref<Bangumi.AnimeTag[]>([])
 const props = defineProps({
   item: {
     type: Object as PropType<Bangumi.AnimeItemInfoCollection>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['changeItem']);
+})
+const emit = defineEmits(['changeItem'])
 let form = reactive({
   status: props.item.CollectionInfo.status.type,
   comment: props.item.CollectionInfo.comment,
   rating: props.item.CollectionInfo.rating,
   tags: new Array(...props.item.CollectionInfo.tag)
-});
+})
 let tagType: {
-  mode: '' | 'success' | 'warning' | 'info' | 'danger';
-  type: string;
-  text: string;
+  mode: '' | 'success' | 'warning' | 'info' | 'danger'
+  type: string
+  text: string
 }[] = [
   { mode: '', type: '1', text: '想看' }, //想看
   { mode: 'success', type: '2', text: '看过' }, //在看
   { mode: 'warning', type: '3', text: '在看' },
   { mode: 'info', type: '4', text: '搁置' },
   { mode: 'danger', type: '5', text: '抛弃' }
-];
-const formatTime = getFormatTime;
-onClickOutside(target, () => (isStatusBoxShow.value = false));
+]
+const formatTime = getFormatTime
+onClickOutside(target, () => (isStatusBoxShow.value = false))
 const openForm = () => {
-  dialogVisable.value = true;
+  dialogVisable.value = true
   getSubjectInfoApi(props.item.id).then(({ data }) => {
-    let item: Bangumi.SubjectInfoSmall = data;
-    tagsOption.value = item.tags;
-  });
-};
+    let item: Bangumi.SubjectInfoSmall = data
+    tagsOption.value = item.tags
+  })
+}
 // 提交表单
 const submitChangeCollection = async () => {
   const { data } = await changeCollectionStatus(
@@ -170,11 +170,11 @@ const submitChangeCollection = async () => {
     form.tags,
     form.comment,
     form.rating
-  );
-  ElMessage.success('修改成功');
-  emit('changeItem', data, props.item.id);
-  dialogVisable.value = false;
-};
+  )
+  ElMessage.success('修改成功')
+  emit('changeItem', data, props.item.id)
+  dialogVisable.value = false
+}
 </script>
 
 <style lang="less" scoped>

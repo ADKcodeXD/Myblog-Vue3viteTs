@@ -13,29 +13,29 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 
 defineProps({
   article: {
     type: Object as PropType<ArticleItemInfo>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['likeArticle', 'collectArticle', 'toComment']);
+})
+const emit = defineEmits(['likeArticle', 'collectArticle', 'toComment'])
 const likeEvent = () => {
-  emit('likeArticle');
-};
+  emit('likeArticle')
+}
 const collectEvent = () => {
-  emit('collectArticle');
-};
+  emit('collectArticle')
+}
 const top = () => {
-  document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
-};
+  document.documentElement.scrollTo({ top: 0, behavior: 'smooth' })
+}
 const toComment = () => {
-  emit('toComment');
-};
+  emit('toComment')
+}
 </script>
 <style lang="less" scoped>
 @import url(../styles/ToolBars.less);

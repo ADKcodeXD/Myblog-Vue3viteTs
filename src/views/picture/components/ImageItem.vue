@@ -35,12 +35,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PicTag } from '@/interface/EnumExport';
+import { PicTag } from '@/interface/EnumExport'
 defineProps<{
-  item: PicVo;
-  index: number;
-}>();
-defineEmits(['loaded', 'showImg']);
+  item: PicVo
+  index: number
+}>()
+defineEmits(['loaded', 'showImg'])
 </script>
 <style lang="less" scoped>
 @media screen and (min-width: @mobile-device) {

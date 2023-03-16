@@ -32,12 +32,12 @@
   />
 </template>
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 defineProps({
   childrenItem: {
     type: Object as PropType<CommentItemInfo>,
     default: () => {
-      return {};
+      return {}
     }
   },
   /**
@@ -68,11 +68,11 @@ defineProps({
     type: String,
     default: ''
   }
-});
-const emit = defineEmits(['published']);
+})
+const emit = defineEmits(['published'])
 const published = () => {
-  emit('published');
-};
+  emit('published')
+}
 </script>
 <style lang="less" scoped>
 @import url(../styles/CommentPublic.less);

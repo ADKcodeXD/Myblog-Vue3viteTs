@@ -23,25 +23,25 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { isMobile } from '@/utils/mobile';
-import { PropType } from '@vue/runtime-core';
-import { ElCarousel } from 'element-plus';
+import { isMobile } from '@/utils/mobile'
+import { PropType } from '@vue/runtime-core'
+import { ElCarousel } from 'element-plus'
 
 const props = defineProps({
   items: {
     type: Array as PropType<ArticleItemInfo[]>,
     default: () => []
   }
-});
+})
 
-const carousel = ref<typeof ElCarousel>();
-let isM = ref(false);
-isM.value = isMobile();
+const carousel = ref<typeof ElCarousel>()
+let isM = ref(false)
+isM.value = isMobile()
 onMounted(() => {
   setTimeout(() => {
-    carousel.value?.setActiveItem(0);
-  }, 500);
-});
+    carousel.value?.setActiveItem(0)
+  }, 500)
+})
 </script>
 
 <style lang="less" scoped>

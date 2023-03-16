@@ -41,28 +41,28 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 
 const props = defineProps({
   animeInfo: {
     type: Object as PropType<Bangumi.SubjectInfoSmall>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
+})
 
 const tagsInfoThree = computed(() => {
-  let tags = [];
+  let tags = []
   if (props.animeInfo.tags?.length > 3) {
     for (let i = 0; i < 3; i++) {
-      tags.push(props.animeInfo.tags[i]);
+      tags.push(props.animeInfo.tags[i])
     }
   } else {
-    return props.animeInfo.tags;
+    return props.animeInfo.tags
   }
-  return tags;
-});
+  return tags
+})
 </script>
 
 <style lang="less" scoped>

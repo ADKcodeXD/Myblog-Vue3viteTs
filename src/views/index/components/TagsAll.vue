@@ -12,15 +12,15 @@
 </template>
 
 <script lang="ts" setup>
-import { getTagList } from '@/api/article';
-let tags = ref<Tag[]>();
+import { getTagList } from '@/api/article'
+let tags = ref<Tag[]>()
 const getTags = async () => {
-  const { data } = await getTagList();
-  tags.value = data.data;
-};
+  const { data } = await getTagList()
+  tags.value = data.data
+}
 onMounted(() => {
-  getTags();
-});
+  getTags()
+})
 </script>
 
 <style lang="less" scoped>

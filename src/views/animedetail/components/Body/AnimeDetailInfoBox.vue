@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts" setup>
-const infoboxVal: Array<Bangumi.InfoBoxItem> | undefined = inject('infoboxVal');
+const infoboxVal: Array<Bangumi.InfoBoxItem> | undefined = inject('infoboxVal')
 </script>
 
 <style lang="less" scoped>

@@ -14,8 +14,8 @@
 </template>
 
 <script lang="ts" setup>
-import BgmLogo from '@/assets/img/logo (1).png';
-import ADKLogo from '@/assets/img/WebBlog.png';
+import BgmLogo from '@/assets/img/logo (1).png'
+import ADKLogo from '@/assets/img/WebBlog.png'
 </script>
 
 <style lang="less" scoped>

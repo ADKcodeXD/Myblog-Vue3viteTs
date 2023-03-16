@@ -19,8 +19,10 @@
           <p @click="setDarkFn">暗黑主题</p>
           <p
             @click="
-              $router.push('/index/options');
-              isElShow = false;
+              () => {
+                $router.push('/index/options')
+                isElShow = false
+              }
             "
           >
             跳转设置页面
@@ -104,51 +106,50 @@
   </div>
 </template>
 <script setup lang="ts">
-import { getItem } from '@/utils/storage';
-import { ElMessage } from 'element-plus';
-import { setConfig, setDark, setDefault } from '@/theme/theme';
-import { vOnClickOutside } from '@vueuse/components';
-import { useStore } from '@/store/main';
-const main = useStore();
-const localConfig = reactive(getItem('globalConfig') as GlobalConfig);
+import { getItem } from '@/utils/storage'
+import { ElMessage } from 'element-plus'
+import { setConfig, setDark, setDefault } from '@/theme/theme'
+import { vOnClickOutside } from '@vueuse/components'
+import { useStore } from '@/store/main'
+const main = useStore()
+const localConfig = reactive(getItem('globalConfig') as GlobalConfig)
 const setDefaultFn = () => {
-  setDefault();
-  const newconfig = getItem('globalConfig');
+  setDefault()
+  const newconfig = getItem('globalConfig')
   for (let key in localConfig) {
-    localConfig[key] = newconfig[key];
+    localConfig[key] = newconfig[key]
   }
-};
+}
 const setDarkFn = () => {
-  setDark();
-  const newconfig = getItem('globalConfig');
+  setDark()
+  const newconfig = getItem('globalConfig')
   for (let key in localConfig) {
-    localConfig[key] = newconfig[key];
+    localConfig[key] = newconfig[key]
   }
-};
+}
 const saveLocal = () => {
-  ElMessage.success('保存到本地成功!');
-  setConfig(localConfig, true);
-};
+  ElMessage.success('保存到本地成功!')
+  setConfig(localConfig, true)
+}
 const setFollowCard = (val: boolean) => {
-  main.setFollowBangumiCard(val);
-};
-const isElShow = ref(false);
-const target = ref();
+  main.setFollowBangumiCard(val)
+}
+const isElShow = ref(false)
 const close = (event: any) => {
-  let regex = new RegExp(/el-[\s\S]*/g);
-  let className = event.target.className;
+  let regex = new RegExp(/el-[\s\S]*/g)
+  let className = event.target.className
   if (!className) {
-    className = event.target.parentNode.className;
+    className = event.target.parentNode.className
   }
   if (!regex.test(className)) {
-    isElShow.value = false;
+    isElShow.value = false
   }
-};
+}
 onMounted(() => {
   watch(localConfig, newval => {
-    setConfig(newval);
-  });
-});
+    setConfig(newval)
+  })
+})
 </script>
 <style lang="less" scoped>
 @import url(./styles/ThemeConfig.less);

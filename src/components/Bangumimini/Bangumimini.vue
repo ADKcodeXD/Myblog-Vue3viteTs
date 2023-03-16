@@ -25,7 +25,7 @@
         v-if="week.weekday.id === nowDay"
         :ref="
           el => {
-            myRefs[index] = el;
+            myRefs[index] = el
           }
         "
       >
@@ -45,28 +45,28 @@
 </template>
 
 <script lang="ts" setup>
-import { useAnimeData } from '@/hooks/Bangumi';
-import AnimeCard from './components/AnimeCard.vue';
-const { weekDayList, day } = useAnimeData();
-const nowDay = ref(0);
-const myRefs = ref([]);
-nowDay.value = Number(day.value) + 1;
+import { useAnimeData } from '@/hooks/Bangumi'
+import AnimeCard from './components/AnimeCard.vue'
+const { weekDayList, day } = useAnimeData()
+const nowDay = ref(0)
+const myRefs = ref([])
+nowDay.value = Number(day.value) + 1
 const changeDay = (day: number | string) => {
-  nowDay.value = Number(day);
-};
-const animeFlag = ref(false);
+  nowDay.value = Number(day)
+}
+const animeFlag = ref(false)
 const scrollToElement = (val: number, index) => {
-  if (val > 500) return;
+  if (val > 500) return
   if (animeFlag.value) {
-    return;
+    return
   } else {
-    animeFlag.value = true;
-    myRefs.value[nowDay.value - 1].scrollTo({ left: val * (index - 1.2), behavior: 'smooth' });
+    animeFlag.value = true
+    myRefs.value[nowDay.value - 1].scrollTo({ left: val * (index - 1.2), behavior: 'smooth' })
     setTimeout(() => {
-      animeFlag.value = false;
-    }, 500);
+      animeFlag.value = false
+    }, 500)
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

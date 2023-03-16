@@ -83,46 +83,46 @@
 </template>
 
 <script lang="ts" setup>
-import { getSubjectInfoApi } from '@/api/bangumi';
-import { useAnime } from '@/hooks/Anime';
-import { PropType } from 'vue';
+import { getSubjectInfoApi } from '@/api/bangumi'
+import { useAnime } from '@/hooks/Anime'
+import { PropType } from 'vue'
 const props = defineProps({
   animeInfo: {
     type: Object as PropType<Bangumi.AnimeItemInfo>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['scrollLeft']);
-const { infoXenter, infoXleave } = useAnime();
-const detailInfoShow = ref(false);
-const animeDetailData = ref<null | Bangumi.SubjectInfoSmall>();
-const nowcard = ref<HTMLElement>();
+})
+const emit = defineEmits(['scrollLeft'])
+const { infoXenter, infoXleave } = useAnime()
+const detailInfoShow = ref(false)
+const animeDetailData = ref<null | Bangumi.SubjectInfoSmall>()
+const nowcard = ref<HTMLElement>()
 const getSubjectInfo = async (id: number) => {
-  const { data } = await getSubjectInfoApi(id);
-  animeDetailData.value = data.data;
-};
+  const { data } = await getSubjectInfoApi(id)
+  animeDetailData.value = data.data
+}
 const requestInfo = async () => {
-  detailInfoShow.value = true;
-  emit('scrollLeft', nowcard.value.offsetWidth);
+  detailInfoShow.value = true
+  emit('scrollLeft', nowcard.value.offsetWidth)
   if (!animeDetailData.value) {
-    getSubjectInfo(props.animeInfo.id);
+    getSubjectInfo(props.animeInfo.id)
   } else {
-    return;
+    return
   }
-};
+}
 const tagsInfoThree = computed(() => {
-  let tags = [];
+  let tags = []
   if (animeDetailData.value && animeDetailData.value.tags.length > 3) {
     for (let i = 0; i < 3; i++) {
-      tags.push(animeDetailData.value.tags[i]);
+      tags.push(animeDetailData.value.tags[i])
     }
   } else {
-    return animeDetailData.value.tags;
+    return animeDetailData.value.tags
   }
-  return tags;
-});
+  return tags
+})
 </script>
 
 <style lang="less" scoped>

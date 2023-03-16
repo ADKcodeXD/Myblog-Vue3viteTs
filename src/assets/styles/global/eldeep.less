@@ -1,26 +1,23 @@
 // 重置element的样式
 :deep(.el-input__wrapper) {
-    font-family: 'Thinfont', '幼圆';
+    .font-normal();
     outline: @border-line @textColor solid;
     border-radius: @border-radius;
-    font-weight: 600;
     background-color: @bgColor;
-    color: @textColor;
-    font-size: @mid-text;
-    
-}
-:deep(.el-input__inner){
-    color: @textColor;
     font-size: @mid-text;
 }
-:deep(.el-radio-group){
+
+
+:deep(.el-radio-group) {
     justify-content: flex-end;
 }
-:deep(.el-radio){
+
+:deep(.el-radio) {
     .font-normal();
     margin: 0;
     margin-left: 1rem;
 }
+
 // 重置input框内的字数限制的样式
 :deep(.el-input__suffix) {
     color: @textColor;
@@ -39,7 +36,7 @@
 :deep(.el-pagination.is-background) {
     .el-pager {
         li {
-            font-family: 'Cartoonfont', '幼圆';
+            .font-normal();
             border: 0.8rem solid transparent;
             border-radius: 1rem;
             border-image: url(@/assets/img/page.png) 20;
@@ -114,10 +111,11 @@
 :deep(.el-card__body) {
     background-color: @bgColor;
 }
-.md{
+
+.md {
     background-color: @bgColor;
 }
 
-:deep(.el-dialog){
+:deep(.el-dialog) {
     width: 80%;
 }

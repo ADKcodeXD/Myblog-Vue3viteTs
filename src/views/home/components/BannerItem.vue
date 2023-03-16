@@ -17,28 +17,28 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ElMessage } from 'element-plus';
-import type { UploadProps } from 'element-plus';
-import { useUpload } from '@/hooks/useUpload';
+import { ElMessage } from 'element-plus'
+import type { UploadProps } from 'element-plus'
+import { useUpload } from '@/hooks/useUpload'
 defineProps({
   banner: {
     type: String,
     default: ''
   }
-});
-const emit = defineEmits(['changeBanner']);
+})
+const emit = defineEmits(['changeBanner'])
 // 上传banner
 const beforeBannerUpload: UploadProps['beforeUpload'] = async file => {
-  const url = await useUpload(file);
+  const url = await useUpload(file)
   if (url == '') {
-    return false;
+    return false
   }
-  emit('changeBanner', url);
-};
+  emit('changeBanner', url)
+}
 
 const handleExceed: UploadProps['onExceed'] = () => {
-  ElMessage.warning('只能上传一张头图');
-};
+  ElMessage.warning('只能上传一张头图')
+}
 </script>
 
 <style lang="less" scoped>

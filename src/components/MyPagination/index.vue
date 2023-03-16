@@ -13,14 +13,14 @@
 </template>
 <script setup lang="ts">
 const props = defineProps<{
-  pageParams: PageParams;
-  total: number;
-}>();
-const emit = defineEmits(['changePage']);
+  pageParams: PageParams
+  total: number
+}>()
+const emit = defineEmits(['changePage'])
 const changePage = (val: number) => {
-  props.pageParams.page = val;
-  emit('changePage');
-};
+  props.pageParams.page = val
+  emit('changePage')
+}
 </script>
 
 <style lang="less" scoped>

@@ -15,29 +15,29 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
-import * as echarts from 'echarts';
-import { useRatingTag } from '@/hooks/Bangumi';
-import { useGlobalConfigStore } from '@/store/globalConfig';
+import { PropType } from 'vue'
+import * as echarts from 'echarts'
+import { useRatingTag } from '@/hooks/Bangumi'
+import { useGlobalConfigStore } from '@/store/globalConfig'
 
 const props = defineProps({
   animeDetail: {
     type: Object as PropType<Bangumi.AnimeDeatilItem>,
     require: true
   }
-});
-let ratingChart: echarts.ECharts;
+})
+let ratingChart: echarts.ECharts
 
-const global = useGlobalConfigStore();
+const global = useGlobalConfigStore()
 onMounted(() => {
-  const countValue = props.animeDetail?.rating.count;
-  const chartValue = [];
+  const countValue = props.animeDetail?.rating.count
+  const chartValue = []
   for (let i in countValue) {
-    chartValue.push(countValue[i]);
+    chartValue.push(countValue[i])
   }
-  let domRating = document.getElementById('raitingChart');
+  let domRating = document.getElementById('raitingChart')
   if (domRating != null) {
-    ratingChart = echarts.init(domRating);
+    ratingChart = echarts.init(domRating)
     const option = {
       grid: {
         bottom: '10%'
@@ -85,16 +85,16 @@ onMounted(() => {
       ],
       padding: 0,
       backgroundColor: 'transparent'
-    };
-    ratingChart.setOption(option);
+    }
+    ratingChart.setOption(option)
   } else {
-    return;
+    return
   }
-});
-const { ratingTag } = useRatingTag(props.animeDetail?.rating?.score || 0);
+})
+const { ratingTag } = useRatingTag(props.animeDetail?.rating?.score || 0)
 onBeforeUnmount(() => {
-  if (ratingChart) ratingChart.clear();
-});
+  if (ratingChart) ratingChart.clear()
+})
 </script>
 
 <style lang="less" scoped>

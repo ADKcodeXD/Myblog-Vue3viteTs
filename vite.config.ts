@@ -1,18 +1,18 @@
-import { defineConfig, loadEnv } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import { resolve } from 'path';
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import viteCompression from 'vite-plugin-compression';
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import { defineConfig, loadEnv } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'path'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import viteCompression from 'vite-plugin-compression'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // 预构建插件
-import OptimizationPersist from 'vite-plugin-optimize-persist';
-import PkgConfig from 'vite-plugin-package-config';
-import eslintPlugin from 'vite-plugin-eslint'; // 导入包
+import OptimizationPersist from 'vite-plugin-optimize-persist'
+import PkgConfig from 'vite-plugin-package-config'
+import eslintPlugin from 'vite-plugin-eslint' // 导入包
 function resovePath(paths: string) {
   // 如何 __dirname 找不到 需要 yarn add @types/node --save-dev
-  return resolve(__dirname, paths);
+  return resolve(__dirname, paths)
 }
 // https://vitejs.dev/config/
 export default ({ mode }) => {
@@ -20,7 +20,7 @@ export default ({ mode }) => {
   process.env = {
     ...process.env,
     ...loadEnv(mode, process.cwd())
-  };
+  }
   return defineConfig({
     base: '/',
     assetsInclude: resolve(__dirname, 'src/assets'),
@@ -98,5 +98,5 @@ export default ({ mode }) => {
         }
       }
     }
-  });
-};
+  })
+}

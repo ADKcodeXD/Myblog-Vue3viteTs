@@ -24,15 +24,15 @@
 </template>
 
 <script lang="ts" setup>
-import { getMessageApi } from '@/api/message';
-let result = ref<MessageVo[]>([]);
+import { getMessageApi } from '@/api/message'
+let result = ref<MessageVo[]>([])
 const getMsg = async () => {
-  const { data } = await getMessageApi({ page: 1, pagesize: 2 });
-  result.value = data.data.results;
-};
+  const { data } = await getMessageApi({ page: 1, pagesize: 2 })
+  result.value = data.data.results
+}
 onMounted(() => {
-  getMsg();
-});
+  getMsg()
+})
 </script>
 
 <style lang="less" scoped>

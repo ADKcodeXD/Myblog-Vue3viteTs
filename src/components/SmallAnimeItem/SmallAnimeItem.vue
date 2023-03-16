@@ -23,40 +23,40 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 
 const props = defineProps({
   item: {
     type: Object as PropType<Bangumi.AnimeItemInfo>,
     default: () => {
-      return {};
+      return {}
     }
   },
   broswerItem: {
     type: Object as PropType<Bangumi.BroswerResult>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const myItem = reactive<any>({});
+})
+const myItem = reactive<any>({})
 onMounted(() => {
   if (props.item.id) {
     for (let i in props.item) {
-      myItem[i] = props.item[i];
+      myItem[i] = props.item[i]
     }
   } else if (props.broswerItem) {
-    myItem.images = {};
-    myItem.images.common = props.broswerItem.imageUrl;
-    myItem.name_cn = props.broswerItem.nameCn;
-    myItem.name = props.broswerItem.name;
-    myItem.rating = { total: 0, score: 0, count: null };
-    myItem.rating.score = props.broswerItem.score;
-    myItem.rating.total = props.broswerItem.count;
-    myItem.rank = props.broswerItem.rank;
-    myItem.id = props.broswerItem.id;
+    myItem.images = {}
+    myItem.images.common = props.broswerItem.imageUrl
+    myItem.name_cn = props.broswerItem.nameCn
+    myItem.name = props.broswerItem.name
+    myItem.rating = { total: 0, score: 0, count: null }
+    myItem.rating.score = props.broswerItem.score
+    myItem.rating.total = props.broswerItem.count
+    myItem.rank = props.broswerItem.rank
+    myItem.id = props.broswerItem.id
   }
-});
+})
 </script>
 
 <style lang="less" scoped>

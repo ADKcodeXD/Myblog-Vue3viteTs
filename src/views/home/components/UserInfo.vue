@@ -35,21 +35,21 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 
 defineProps({
   currentUser: {
     type: Object as PropType<UserAll>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['changeAvatar']);
+})
+const emit = defineEmits(['changeAvatar'])
 
 const changeAvatar = (url: string) => {
-  emit('changeAvatar', url);
-};
+  emit('changeAvatar', url)
+}
 </script>
 
 <style lang="less" scoped>

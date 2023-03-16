@@ -29,40 +29,40 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import AnimeBroswerCard from './AnimeBroswerCard.vue';
-import AnimeOrderMenu from './AnimeOrderMenu.vue';
-import { useBroswer } from '@/hooks/Bangumi';
-import { SortRole } from '@/interface/EnumExport';
+import { ref } from 'vue'
+import AnimeBroswerCard from './AnimeBroswerCard.vue'
+import AnimeOrderMenu from './AnimeOrderMenu.vue'
+import { useBroswer } from '@/hooks/Bangumi'
+import { SortRole } from '@/interface/EnumExport'
 
-let animeInfoList = ref<Array<Bangumi.BroswerResult>>([]);
-let page = ref(0);
-let cardLoading = ref(false);
+let animeInfoList = ref<Array<Bangumi.BroswerResult>>([])
+let page = ref(0)
+let cardLoading = ref(false)
 let mainParams = reactive<Bangumi.BroswerParams>({
   page: 1,
   sort: SortRole.rank
-});
-let isNextPageLoading = ref(false);
-const { getBroswer } = useBroswer(cardLoading, animeInfoList, page);
+})
+let isNextPageLoading = ref(false)
+const { getBroswer } = useBroswer(cardLoading, animeInfoList, page)
 const nextPage = () => {
-  isNextPageLoading.value = true;
+  isNextPageLoading.value = true
   if (mainParams.page && mainParams.page < page.value) {
-    mainParams.page++;
+    mainParams.page++
   } else {
-    isNextPageLoading.value = false;
-    return;
+    isNextPageLoading.value = false
+    return
   }
   getBroswer(mainParams).then(() => {
-    isNextPageLoading.value = false;
-  });
-};
+    isNextPageLoading.value = false
+  })
+}
 const changeParams = (params: Bangumi.BroswerParams) => {
   for (let key in params) {
-    mainParams[key] = params[key];
+    mainParams[key] = params[key]
   }
-  getBroswer(params);
-};
-getBroswer(mainParams);
+  getBroswer(params)
+}
+getBroswer(mainParams)
 </script>
 
 <style lang="less" scoped>

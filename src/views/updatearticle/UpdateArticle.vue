@@ -61,16 +61,16 @@
   </div>
 </template>
 <script setup lang="ts">
-import { getArticleItem, updateMyArticle } from '@/api/article';
-import { useEditor } from '@/hooks/useEdit';
-import { useTag } from '@/hooks/useTag';
-import { ArticlePannel } from '@/interface/EnumExport';
-import { ElMessage, ElMessageBox } from 'element-plus';
-const route = useRoute();
-const router = useRouter();
-const articleId = ref(route.params.id.toString());
-const isMarkdown = ref(false);
-const isLoading = ref(true);
+import { getArticleItem, updateMyArticle } from '@/api/article'
+import { useEditor } from '@/hooks/useEdit'
+import { useTag } from '@/hooks/useTag'
+import { ArticlePannel } from '@/interface/EnumExport'
+import { ElMessage, ElMessageBox } from 'element-plus'
+const route = useRoute()
+const router = useRouter()
+const articleId = ref(route.params.id.toString())
+const isMarkdown = ref(false)
+const isLoading = ref(true)
 const updateParam = reactive<ArticleReqParams>({
   body: {
     contentHtml: '',
@@ -82,45 +82,45 @@ const updateParam = reactive<ArticleReqParams>({
   tags: [],
   id: articleId.value,
   pannel: 0
-});
+})
 const { changeEditor, changeContentRich, changeContent, editorName, content, contentRich } =
-  useEditor();
-const { tags, addTagFn, canChooseTags } = useTag();
+  useEditor()
+const { tags, addTagFn, canChooseTags } = useTag()
 // 获取文章
 const getArticle = async () => {
-  const { data } = await getArticleItem(articleId.value);
-  isLoading.value = false;
+  const { data } = await getArticleItem(articleId.value)
+  isLoading.value = false
   if (data.code === 200) {
-    let article = data.data;
+    let article = data.data
     if (article.body.content === '') {
       //如果content为空 可知这个内容是使用富文本编辑器编写的
-      editorName.value = 'tinymce';
-      isMarkdown.value = false;
-      contentRich.html = article.body.html;
-      contentRich.text = article.body.html;
-      content.html = article.body.html;
-      content.text = article.body.html;
+      editorName.value = 'tinymce'
+      isMarkdown.value = false
+      contentRich.html = article.body.html
+      contentRich.text = article.body.html
+      content.html = article.body.html
+      content.text = article.body.html
     } else {
-      editorName.value = 'markdown';
-      isMarkdown.value = true;
-      contentRich.html = article.body.html;
-      contentRich.text = article.body.content;
-      content.html = article.body.html;
-      content.text = article.body.content;
+      editorName.value = 'markdown'
+      isMarkdown.value = true
+      contentRich.html = article.body.html
+      contentRich.text = article.body.content
+      content.html = article.body.html
+      content.text = article.body.content
     }
-    updateParam.articleName = article.articleName;
-    updateParam.summary = article.summary;
-    updateParam.tags = article.tags;
-    updateParam.banner = article.banner;
-    tags.value = article.tags;
+    updateParam.articleName = article.articleName
+    updateParam.summary = article.summary
+    updateParam.tags = article.tags
+    updateParam.banner = article.banner
+    tags.value = article.tags
   } else {
-    ElMessage.error(data.msg);
+    ElMessage.error(data.msg)
   }
-};
-getArticle();
+}
+getArticle()
 const changeBanner = (val: string) => {
-  updateParam.banner = val;
-};
+  updateParam.banner = val
+}
 const confirm = (isMarkdown: boolean) => {
   ElMessageBox.confirm(
     `本文使用了${
@@ -133,37 +133,37 @@ const confirm = (isMarkdown: boolean) => {
       type: 'warning'
     }
   ).then(() => {
-    submit(isMarkdown ? 'rich' : 'markdown');
-  });
-};
+    submit(isMarkdown ? 'rich' : 'markdown')
+  })
+}
 const submitChange = () => {
   if (isMarkdown.value) {
     if (editorName.value !== 'markdown') {
-      confirm(isMarkdown.value);
+      confirm(isMarkdown.value)
     } else {
-      submit('markdown');
+      submit('markdown')
     }
   } else {
     if (editorName.value !== 'tinymce') {
-      confirm(isMarkdown.value);
+      confirm(isMarkdown.value)
     } else {
-      submit('rich');
+      submit('rich')
     }
   }
-};
+}
 const submit = async (type: 'rich' | 'markdown') => {
   if (type === 'rich') {
-    updateParam.body.content = '';
-    updateParam.body.contentHtml = contentRich.html;
+    updateParam.body.content = ''
+    updateParam.body.contentHtml = contentRich.html
   } else {
-    updateParam.body.content = content.text;
-    updateParam.body.contentHtml = content.html;
+    updateParam.body.content = content.text
+    updateParam.body.contentHtml = content.html
   }
-  updateParam.tags = tags.value;
-  await updateMyArticle(updateParam);
-  ElMessage.success('修改成功');
-  router.back();
-};
+  updateParam.tags = tags.value
+  await updateMyArticle(updateParam)
+  ElMessage.success('修改成功')
+  router.back()
+}
 </script>
 
 <style lang="less" scoped>

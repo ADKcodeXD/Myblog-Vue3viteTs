@@ -21,13 +21,13 @@
 <script lang="ts">
 export default {
   name: 'CreatePage'
-};
+}
 </script>
 <script setup lang="ts">
-import { useUserStore } from '@/store/user';
-import MyArticle from './components/MyArticle.vue';
-import MyPicture from './components/MyPicture.vue';
-const userinfo = useUserStore();
+import { useUserStore } from '@/store/user'
+import MyArticle from './components/MyArticle.vue'
+import MyPicture from './components/MyPicture.vue'
+const userinfo = useUserStore()
 </script>
 <style lang="less" scoped>
 @import url(./create.less);

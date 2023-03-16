@@ -7,10 +7,10 @@
   </aside>
 </template>
 <script setup lang="ts">
-const emit = defineEmits(['openPollup']);
+const emit = defineEmits(['openPollup'])
 const openPollup = () => {
-  emit('openPollup');
-};
+  emit('openPollup')
+}
 </script>
 
 <style lang="less" scoped>

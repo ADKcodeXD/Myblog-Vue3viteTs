@@ -61,23 +61,23 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useFormGroup } from '@/hooks/Home';
-import { PropType } from 'vue';
+import { useFormGroup } from '@/hooks/Home'
+import { PropType } from 'vue'
 defineProps({
   formAllinfo: {
     type: Object as PropType<UpdateUserInfoParams>,
     default: () => {
-      return {};
+      return {}
     }
   },
   currentUser: {
     type: Object as PropType<UserAll>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['changeInfo']);
+})
+const emit = defineEmits(['changeInfo'])
 
-const { formSubmit, changeIsEdit, formInstance, rules, isEdit } = useFormGroup(emit);
+const { formSubmit, changeIsEdit, formInstance, rules, isEdit } = useFormGroup(emit)
 </script>

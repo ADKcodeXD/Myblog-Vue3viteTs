@@ -63,12 +63,12 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 defineProps({
   commentInfo: {
     type: Object as PropType<CommentItemInfo>,
     default: () => {
-      return {};
+      return {}
     }
   },
   floor: {
@@ -91,11 +91,11 @@ defineProps({
     type: Boolean,
     default: true
   }
-});
-const emit = defineEmits(['published']);
+})
+const emit = defineEmits(['published'])
 const published = () => {
-  emit('published');
-};
+  emit('published')
+}
 </script>
 
 <style lang="less" scoped>

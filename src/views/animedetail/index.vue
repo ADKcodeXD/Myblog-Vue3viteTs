@@ -34,72 +34,72 @@
   </article>
 </template>
 <script lang="ts">
-import { useStore } from '@/store/main';
+import { useStore } from '@/store/main'
 import {
   useFollowNewBnagumi,
   useGetFollowInfoByAnimeId,
   useUnFollowBangumi
-} from '@/hooks/useFollowBangumi';
-import { useAnimeDeatil } from '@/hooks/BangumiDetail';
-import { ElMessage } from 'element-plus';
-import { getSubjectInfoApi } from '@/api/bangumi';
-import { useBackToSource } from '@/hooks/useSourcepage';
-import { useHead } from '@vueuse/head';
+} from '@/hooks/useFollowBangumi'
+import { useAnimeDeatil } from '@/hooks/BangumiDetail'
+import { ElMessage } from 'element-plus'
+import { getSubjectInfoApi } from '@/api/bangumi'
+import { useBackToSource } from '@/hooks/useSourcepage'
+import { useHead } from '@vueuse/head'
 
-import AnimeDetailHeader from './components/Header/AnimeDetailHeader.vue';
-import AnimeDetailBody from './components/Body/AnimeDetailBody.vue';
-import RataingBox from './components/Card/RataingBox.vue';
-import AnimeCollections from './components/Card/AnimeCollections.vue';
-import AnimeRecommend from './components/Card/AnimeRecommend.vue';
-import AnimeTags from './components/Card/AnimeTags.vue';
-import AnimeFollowDetail from './components/Card/AnimeFollowDetail.vue';
+import AnimeDetailHeader from './components/Header/AnimeDetailHeader.vue'
+import AnimeDetailBody from './components/Body/AnimeDetailBody.vue'
+import RataingBox from './components/Card/RataingBox.vue'
+import AnimeCollections from './components/Card/AnimeCollections.vue'
+import AnimeRecommend from './components/Card/AnimeRecommend.vue'
+import AnimeTags from './components/Card/AnimeTags.vue'
+import AnimeFollowDetail from './components/Card/AnimeFollowDetail.vue'
 
 export default {
   name: 'AnimeDetail',
   beforeRouteEnter(to, from, next) {
-    const mainstroe = useStore();
+    const mainstroe = useStore()
     if (to.query.isCache !== 'no') {
-      mainstroe.sourcePage.push(from.path);
+      mainstroe.sourcePage.push(from.path)
     }
-    to.query = {};
-    next();
+    to.query = {}
+    next()
   }
-};
+}
 </script>
 <script lang="ts" setup>
-const route = useRoute();
-const animeDetail = ref<Bangumi.AnimeDeatilItem | null>();
-const tags = ref<Array<Bangumi.AnimeTag>>([]);
-const infoBox = ref<Array<Bangumi.InfoBoxItem>>([]);
-const followInfo = ref<FollowBangumiVo>();
-const loading = ref(false);
-const router = useRouter();
-const { back } = useBackToSource(router);
+const route = useRoute()
+const animeDetail = ref<Bangumi.AnimeDeatilItem | null>()
+const tags = ref<Array<Bangumi.AnimeTag>>([])
+const infoBox = ref<Array<Bangumi.InfoBoxItem>>([])
+const followInfo = ref<FollowBangumiVo>()
+const loading = ref(false)
+const router = useRouter()
+const { back } = useBackToSource(router)
 const getData = async (id: number) => {
-  loading.value = true;
+  loading.value = true
   try {
-    const animeDetailResult = await useAnimeDeatil(id);
-    const { data } = await getSubjectInfoApi(id);
-    animeDetail.value = animeDetailResult;
-    tags.value = data.data.tags;
-    infoBox.value = data.data.infobox;
-    await getFollowInfo();
+    const animeDetailResult = await useAnimeDeatil(id)
+    const { data } = await getSubjectInfoApi(id)
+    animeDetail.value = animeDetailResult
+    tags.value = data.data.tags
+    infoBox.value = data.data.infobox
+    await getFollowInfo()
   } catch (error) {
-    ElMessage.error(error.message);
+    ElMessage.error(error.message)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 const changeData = () => {
-  const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id;
-  document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
-  animeDetail.value = null;
-  const sb = Number(id);
+  const id = Array.isArray(route.params.id) ? route.params.id[0] : route.params.id
+  document.documentElement.scrollTo({ top: 0, behavior: 'smooth' })
+  animeDetail.value = null
+  const sb = Number(id)
   if (isNaN(sb)) {
-    return;
+    return
   }
-  getData(sb);
-};
+  getData(sb)
+}
 const followThisBangumi = async () => {
   const params: FollowBangumiParams = {
     animeId: animeDetail.value.id,
@@ -111,35 +111,35 @@ const followThisBangumi = async () => {
     animeRating: animeDetail.value.rating.score.toString(),
     totalEps: animeDetail.value.eps_count,
     airDay: animeDetail.value.air_weekday
-  };
-  const { followNewAnimeInfo } = await useFollowNewBnagumi(params);
-  followInfo.value = followNewAnimeInfo;
-};
+  }
+  const { followNewAnimeInfo } = await useFollowNewBnagumi(params)
+  followInfo.value = followNewAnimeInfo
+}
 
 const unFollowBangumi = async () => {
   if (!followInfo.value) {
-    ElMessage.error('请先追番');
+    ElMessage.error('请先追番')
   }
-  await useUnFollowBangumi(followInfo.value.id);
-  followInfo.value = null;
-  ElMessage.success('取消追番成功');
-};
+  await useUnFollowBangumi(followInfo.value.id)
+  followInfo.value = null
+  ElMessage.success('取消追番成功')
+}
 
 const getFollowInfo = async () => {
-  const res = await useGetFollowInfoByAnimeId(animeDetail.value.id);
-  if (res) followInfo.value = res.followInfo;
-};
+  const res = await useGetFollowInfoByAnimeId(animeDetail.value.id)
+  if (res) followInfo.value = res.followInfo
+}
 
-document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+document.documentElement.scrollTo({ top: 0, behavior: 'smooth' })
 
-provide('infoboxVal', infoBox);
+provide('infoboxVal', infoBox)
 useHead({
   title: computed(() => {
     if (animeDetail.value) {
-      if (animeDetail.value.name_cn) return `${animeDetail.value.name_cn}-ADKBlog-我的个人小站`;
-      else return `${animeDetail.value.name}-ADKBlog-我的个人小站`;
+      if (animeDetail.value.name_cn) return `${animeDetail.value.name_cn}-ADKBlog-我的个人小站`
+      else return `${animeDetail.value.name}-ADKBlog-我的个人小站`
     } else {
-      return '动漫详情-ADKBlog-我的个人小站';
+      return '动漫详情-ADKBlog-我的个人小站'
     }
   }),
   meta: [
@@ -148,10 +148,10 @@ useHead({
       content: computed(() => (animeDetail.value?.summary ? animeDetail.value.summary : '描述'))
     }
   ]
-});
+})
 watchEffect(() => {
-  changeData();
-});
+  changeData()
+})
 </script>
 
 <style lang="less" scoped>

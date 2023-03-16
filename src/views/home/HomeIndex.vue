@@ -21,16 +21,16 @@
   </div>
 </template>
 <script lang="ts">
-export default { name: 'HomeIndex' };
+export default { name: 'HomeIndex' }
 </script>
 <script setup lang="ts">
-import BannerItem from './components/BannerItem.vue';
-import UserInfo from './components/UserInfo.vue';
-import FormGroup from './components/FormGroup.vue';
-import { useHomeIndex } from '@/hooks/Home';
-import MyCollect from './components/MyCollect.vue';
-import MyLiked from './components/MyLiked.vue';
-const { changeInfo, changeBanner, changeAvatar, currentUser, formAllinfo } = useHomeIndex();
+import BannerItem from './components/BannerItem.vue'
+import UserInfo from './components/UserInfo.vue'
+import FormGroup from './components/FormGroup.vue'
+import { useHomeIndex } from '@/hooks/Home'
+import MyCollect from './components/MyCollect.vue'
+import MyLiked from './components/MyLiked.vue'
+const { changeInfo, changeBanner, changeAvatar, currentUser, formAllinfo } = useHomeIndex()
 </script>
 
 <style lang="less" scoped>

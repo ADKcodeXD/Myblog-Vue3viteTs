@@ -105,144 +105,144 @@
 </template>
 
 <script lang="ts" setup>
-import { SortRole, BroswerType } from '@/interface/EnumExport';
+import { SortRole, BroswerType } from '@/interface/EnumExport'
 
-const emit = defineEmits(['changeParams']);
-let month = ref(0);
-let yearChoice = ref(0);
-let year = ref<Date>();
-let isMoreShow = ref(false);
+const emit = defineEmits(['changeParams'])
+let month = ref(0)
+let yearChoice = ref(0)
+let year = ref<Date>()
+let isMoreShow = ref(false)
 let params = reactive<Bangumi.BroswerParams>({
   order: undefined,
   sort: SortRole.rank,
   type: undefined,
   page: 1,
   airtime: undefined
-});
+})
 const changeSort = (val: number) => {
   if (val) {
     switch (val) {
       case 1:
-        params.sort = SortRole.rank;
-        break;
+        params.sort = SortRole.rank
+        break
       case 2:
-        params.sort = SortRole.date;
-        break;
+        params.sort = SortRole.date
+        break
       case 3:
-        params.sort = SortRole.title;
-        break;
+        params.sort = SortRole.title
+        break
       default:
-        params.sort = SortRole.title;
-        break;
+        params.sort = SortRole.title
+        break
     }
   }
-};
+}
 const changeType = (val: number) => {
   if (val) {
     switch (val) {
       case 1:
-        params.type = BroswerType.TV;
-        break;
+        params.type = BroswerType.TV
+        break
       case 2:
-        params.type = BroswerType.WEB;
-        break;
+        params.type = BroswerType.WEB
+        break
       case 3:
-        params.type = BroswerType.OVA;
-        break;
+        params.type = BroswerType.OVA
+        break
       case 4:
-        params.type = BroswerType.MOVIE;
-        break;
+        params.type = BroswerType.MOVIE
+        break
       case 5:
-        params.type = BroswerType.MISC;
-        break;
+        params.type = BroswerType.MISC
+        break
       default:
-        params.type = undefined;
-        break;
+        params.type = undefined
+        break
     }
   }
-};
+}
 const changeMonth = (val: number) => {
-  month.value = val;
+  month.value = val
   if (params.airtime) {
     if (params.airtime.indexOf('-') !== -1) {
       if (val === 0) {
-        let newTime = params.airtime.split('-');
-        params.airtime = newTime[0];
+        let newTime = params.airtime.split('-')
+        params.airtime = newTime[0]
       } else {
-        let newTime = params.airtime.split('-');
-        newTime[1] = val.toString();
-        params.airtime = newTime.join('-');
+        let newTime = params.airtime.split('-')
+        newTime[1] = val.toString()
+        params.airtime = newTime.join('-')
       }
     } else {
       if (val === 0) {
-        return;
+        return
       } else {
-        params.airtime += '-' + val;
+        params.airtime += '-' + val
       }
     }
   } else {
-    let str = '';
-    let year = new Date().getFullYear();
-    str += year;
+    let str = ''
+    let year = new Date().getFullYear()
+    str += year
     if (val !== 0) {
-      str += '-' + val;
+      str += '-' + val
     }
-    params.airtime = str;
+    params.airtime = str
   }
-};
+}
 const changeYear = (val: number) => {
-  yearChoice.value = val;
+  yearChoice.value = val
   if (params.airtime) {
     if (params.airtime.indexOf('-') !== -1) {
       if (val === 0) {
-        let newTime = params.airtime.split('-');
-        newTime[0] = new Date().getFullYear().toString();
-        params.airtime = newTime.join('-');
+        let newTime = params.airtime.split('-')
+        newTime[0] = new Date().getFullYear().toString()
+        params.airtime = newTime.join('-')
       } else {
-        let newTime = params.airtime.split('-');
-        newTime[0] = val.toString();
-        params.airtime = newTime.join('-');
+        let newTime = params.airtime.split('-')
+        newTime[0] = val.toString()
+        params.airtime = newTime.join('-')
       }
     } else {
       if (val === 0) {
-        params.airtime = undefined;
+        params.airtime = undefined
       } else {
-        params.airtime = val.toString();
+        params.airtime = val.toString()
       }
     }
   } else {
     if (val !== 0) {
-      params.airtime = val.toString();
+      params.airtime = val.toString()
     }
   }
-};
+}
 
 watch(
   params,
   newval => {
-    emit('changeParams', newval);
+    emit('changeParams', newval)
   },
   { deep: true }
-);
+)
 watch(year, newval => {
   // 用于选择更多年份
-  let val;
-  let m = month.value;
+  let val
+  let m = month.value
   if (newval) {
-    val = newval.getFullYear();
+    val = newval.getFullYear()
   }
   if (m != 0) {
     if (val) {
-      params.airtime = val + '-' + m;
+      params.airtime = val + '-' + m
     } else {
-      params.airtime = new Date().getFullYear() + '-' + m;
+      params.airtime = new Date().getFullYear() + '-' + m
     }
   } else if (val) {
-    params.airtime = val.toString();
+    params.airtime = val.toString()
   } else {
-    params.airtime = undefined;
+    params.airtime = undefined
   }
-});
+})
 </script>
 
 <style lang="less" scoped>

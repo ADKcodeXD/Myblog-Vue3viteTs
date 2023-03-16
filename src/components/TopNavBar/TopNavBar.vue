@@ -31,13 +31,13 @@
 </template>
 
 <script setup lang="ts">
-import { useStore } from '@/store/main';
-import { removeItem } from '@/utils/storage';
-import { ElMessage } from 'element-plus';
-import { currentUserApi } from '@/api/user';
-import { useUserStore } from '@/store/user';
-import router from '@/router';
-import { userLogout } from '@/api/login';
+import { useStore } from '@/store/main'
+import { removeItem } from '@/utils/storage'
+import { ElMessage } from 'element-plus'
+import { currentUserApi } from '@/api/user'
+import { useUserStore } from '@/store/user'
+import router from '@/router'
+import { userLogout } from '@/api/login'
 defineProps({
   backColor: {
     type: String,
@@ -47,12 +47,12 @@ defineProps({
     type: String,
     default: () => '#fff'
   }
-});
+})
 
-let isShow = ref(false);
-const store = useStore();
-const userStore = useUserStore();
-const user = store.user;
+let isShow = ref(false)
+const store = useStore()
+const userStore = useUserStore()
+const user = store.user
 
 // 获取用户的信息
 const getUserInfo = () => {
@@ -60,28 +60,28 @@ const getUserInfo = () => {
     // 获取信息
     currentUserApi()
       .then((result: any) => {
-        const { data } = result;
+        const { data } = result
         if (data.code === 10003) {
-          ElMessage.error(data.msg);
-          removeItem('user');
+          ElMessage.error(data.msg)
+          removeItem('user')
         } else {
-          userStore.setUser(data.data);
+          userStore.setUser(data.data)
         }
       })
       .catch(() => {
-        ElMessage.error('请求失败');
-      });
+        ElMessage.error('请求失败')
+      })
   }
-};
+}
 // 关闭移动端弹出层
 const closePollup = () => {
-  isShow.value = false;
-};
+  isShow.value = false
+}
 // 退出登录
 const logout = async () => {
-  await userLogout();
-  store.user.token = '';
-  removeItem('user');
+  await userLogout()
+  store.user.token = ''
+  removeItem('user')
   userStore.setUser({
     id: '',
     username: '',
@@ -90,12 +90,12 @@ const logout = async () => {
     introduce: '',
     banner: '',
     nickname: ''
-  });
-  ElMessage.success('退出登录成功！');
-  isShow.value = false;
-  router.push('/login');
-};
-getUserInfo();
+  })
+  ElMessage.success('退出登录成功！')
+  isShow.value = false
+  router.push('/login')
+}
+getUserInfo()
 </script>
 
 <style lang="less" scoped>

@@ -16,22 +16,22 @@
 </template>
 
 <script setup lang="ts">
-import { getArticleGroupByTimeApi } from '@/api/article';
-let tags = ref<ArticleTime[]>();
-const router = useRouter();
+import { getArticleGroupByTimeApi } from '@/api/article'
+let tags = ref<ArticleTime[]>()
+const router = useRouter()
 const getAllTimeTag = async () => {
-  const { data } = await getArticleGroupByTimeApi();
-  tags.value = data.data;
-};
+  const { data } = await getArticleGroupByTimeApi()
+  tags.value = data.data
+}
 const searchBytime = (val: string) => {
-  let year = val.substring(0, 4);
-  let monthtemp = val.substring(5, 7);
-  let month = parseInt(monthtemp);
-  router.push(`/index/articlelist?year=${year}&month=${month}`);
-};
+  let year = val.substring(0, 4)
+  let monthtemp = val.substring(5, 7)
+  let month = parseInt(monthtemp)
+  router.push(`/index/articlelist?year=${year}&month=${month}`)
+}
 onMounted(() => {
-  getAllTimeTag();
-});
+  getAllTimeTag()
+})
 </script>
 
 <style lang="less" scoped>

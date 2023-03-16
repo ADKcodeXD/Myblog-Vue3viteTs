@@ -39,10 +39,10 @@
 </template>
 
 <script lang="ts" setup>
-import Avatar from '@/assets/img/logo.png';
-import Aboutme from '@/assets/img/about-me.png';
+import Avatar from '@/assets/img/logo.png'
+import Aboutme from '@/assets/img/about-me.png'
 
-let isInfoshow = ref(false);
+let isInfoshow = ref(false)
 </script>
 
 <style lang="less" scoped>

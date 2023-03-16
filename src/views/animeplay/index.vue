@@ -35,102 +35,102 @@
 export default {
   name: 'AnimePlay',
   beforeRouteEnter(to, from, next) {
-    const mainstroe = useStore();
+    const mainstroe = useStore()
     if (to.query.isCache !== 'no') {
-      mainstroe.sourcePage.push(from.path);
+      mainstroe.sourcePage.push(from.path)
     }
-    to.query = {};
-    next();
+    to.query = {}
+    next()
   }
-};
+}
 </script>
 <script lang="ts" setup>
-import { getYhdmAnimeVideoInfo } from '@/api/YhdmApi';
-import { useChangeProcess, useGetFollowInfoByAnimeId } from '@/hooks/useFollowBangumi';
-import { useBackToSource } from '@/hooks/useSourcepage';
-import { useStore } from '@/store/main';
-import { useUserStore } from '@/store/user';
-import { ElMessage } from 'element-plus';
-import PlayerItem from './components/PlayerItem.vue';
-const route = useRoute();
-const router = useRouter();
-const loading = ref(true);
-const chapter = ref<HTMLElement>();
-const playerUrl = ref('');
-const player = ref();
-const info = ref<YhdmVideoInfo>();
-const { back } = useBackToSource(router);
-const animeId = route.params.animeId ? route.params.animeId.toString() : '';
+import { getYhdmAnimeVideoInfo } from '@/api/YhdmApi'
+import { useChangeProcess, useGetFollowInfoByAnimeId } from '@/hooks/useFollowBangumi'
+import { useBackToSource } from '@/hooks/useSourcepage'
+import { useStore } from '@/store/main'
+import { useUserStore } from '@/store/user'
+import { ElMessage } from 'element-plus'
+import PlayerItem from './components/PlayerItem.vue'
+const route = useRoute()
+const router = useRouter()
+const loading = ref(true)
+const chapter = ref<HTMLElement>()
+const playerUrl = ref('')
+const player = ref()
+const info = ref<YhdmVideoInfo>()
+const { back } = useBackToSource(router)
+const animeId = route.params.animeId ? route.params.animeId.toString() : ''
 const getVideoInfo = async (params: string) => {
-  const { data } = await getYhdmAnimeVideoInfo(params);
-  return data;
-};
+  const { data } = await getYhdmAnimeVideoInfo(params)
+  return data
+}
 const urlFliter = (url: string) => {
-  const temp = url.split('/')[2];
-  return temp.split('.')[0];
-};
+  const temp = url.split('/')[2]
+  return temp.split('.')[0]
+}
 const getData = async () => {
-  const id = route.params.id;
+  const id = route.params.id
   try {
-    const data = await getVideoInfo(id as string);
-    info.value = data.data;
+    const data = await getVideoInfo(id as string)
+    info.value = data.data
     // 排序一下分集数据
     info.value?.epInfo.sort((a, b) => {
-      let num1 = a.epTitle.match(/\d+/g)?.toString();
-      let num2 = b.epTitle.match(/\d+/g)?.toString();
+      let num1 = a.epTitle.match(/\d+/g)?.toString()
+      let num2 = b.epTitle.match(/\d+/g)?.toString()
       if (num1 && num2) {
-        let first = parseInt(num1);
-        let second = parseInt(num2);
-        return first - second;
-      } else return -1;
-    });
-    const src = data.data.videoUrl;
-    let strarr = src.split('$');
-    strarr[0] = strarr[0].replaceAll(/\\/g, '');
+        let first = parseInt(num1)
+        let second = parseInt(num2)
+        return first - second
+      } else return -1
+    })
+    const src = data.data.videoUrl
+    let strarr = src.split('$')
+    strarr[0] = strarr[0].replaceAll(/\\/g, '')
     //解决跨域问题
     if (strarr[0].indexOf('https://tup.yinghuacd.com/') != -1) {
-      strarr[0] = strarr[0].replaceAll('https://tup.yinghuacd.com/', '/yhdm/');
+      strarr[0] = strarr[0].replaceAll('https://tup.yinghuacd.com/', '/yhdm/')
     }
-    playerUrl.value = strarr[0];
+    playerUrl.value = strarr[0]
     let index = info.value.epInfo.findIndex(item => {
-      return urlFliter(item.epUrl) === route.params.id;
-    });
-    chapter.value.scrollTo({ left: index * 120, behavior: 'smooth' });
+      return urlFliter(item.epUrl) === route.params.id
+    })
+    chapter.value.scrollTo({ left: index * 120, behavior: 'smooth' })
   } catch (error) {
-    ElMessage.error(error.massage);
+    ElMessage.error(error.massage)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 const switchVideo = (e, epUrl, index) => {
-  router.push(`/index/animeplay/${urlFliter(epUrl)}/${animeId ? animeId : ''}`);
-};
+  router.push(`/index/animeplay/${urlFliter(epUrl)}/${animeId ? animeId : ''}`)
+}
 const updateFollowInfo = async () => {
-  const store = useUserStore();
-  if (!store.userinfo.id || animeId === '') return;
+  const store = useUserStore()
+  if (!store.userinfo.id || animeId === '') return
   // 首先获取是否追番
-  const data = await useGetFollowInfoByAnimeId(parseInt(animeId));
-  if (!data) return;
+  const data = await useGetFollowInfoByAnimeId(parseInt(animeId))
+  if (!data) return
   else {
-    const urlId = route.params.id.toString();
-    if (!urlId.split('-')[1]) return;
+    const urlId = route.params.id.toString()
+    if (!urlId.split('-')[1]) return
     const processParams: FollowProgressParams = {
       id: data.followInfo.id,
       progress: Number(urlId.split('-')[1]),
       lastViewEpUrl: `/index/animeplay/${urlId}/${animeId ? animeId : ''}`,
       lastViewEpTime: '0'
-    };
-    await useChangeProcess(processParams, false);
+    }
+    await useChangeProcess(processParams, false)
   }
-};
+}
 onMounted(async () => {
-  getData();
-  await updateFollowInfo();
-});
+  getData()
+  await updateFollowInfo()
+})
 watchEffect(async () => {
-  await getData();
-  await updateFollowInfo();
-});
+  await getData()
+  await updateFollowInfo()
+})
 </script>
 
 <style lang="less" scoped>

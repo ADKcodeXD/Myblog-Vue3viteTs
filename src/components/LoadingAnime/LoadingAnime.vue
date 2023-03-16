@@ -27,7 +27,7 @@
   height: 100%;
 }
 .loading-box {
-  .ball(1rem, #fc566c);
+  .ball(1rem, @themeColor);
   margin: 1rem;
   animation: uptodown 1s linear calc(var(--i) * 0.15s) infinite both;
 }

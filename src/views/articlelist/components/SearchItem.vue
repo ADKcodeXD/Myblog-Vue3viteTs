@@ -18,26 +18,26 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useArticleListSearch } from '@/hooks/ArticleList';
-import { PropType } from 'vue';
+import { useArticleListSearch } from '@/hooks/ArticleList'
+import { PropType } from 'vue'
 const props = defineProps({
   pageParams: {
     type: Object as PropType<PageParams>,
     default: () => {
-      return { page: 1, pagesize: 10 };
+      return { page: 1, pagesize: 10 }
     }
   },
   searchLoading: {
     type: Boolean,
     default: false
   }
-});
-const emit = defineEmits(['changeKeyword']);
+})
+const emit = defineEmits(['changeKeyword'])
 
 const { handleSelect, querySearchAsync, nullSearch, searchByKeyword } = useArticleListSearch(
   props,
   emit
-);
+)
 </script>
 
 <style lang="less" scoped>

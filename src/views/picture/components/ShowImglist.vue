@@ -58,73 +58,73 @@
   </template>
 </template>
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { onClickOutside } from '@vueuse/core';
-import { ElMessage } from 'element-plus';
-import { PicTag } from '@/interface/EnumExport';
-import { likePic } from '@/api/pic';
+import { PropType } from 'vue'
+import { onClickOutside } from '@vueuse/core'
+import { ElMessage } from 'element-plus'
+import { PicTag } from '@/interface/EnumExport'
+import { likePic } from '@/api/pic'
 const props = defineProps({
   activeItem: {
     type: Object as PropType<PicVo>,
     default: () => {
-      return {};
+      return {}
     }
   },
   picList: {
     type: Object as PropType<PicVo[]>,
     default: () => {
-      return [];
+      return []
     }
   },
   index: {
     type: Number,
     default: 0
   }
-});
-const emit = defineEmits(['close']);
-const showPreview = ref(false);
+})
+const emit = defineEmits(['close'])
+const showPreview = ref(false)
 const urlList = computed(() => {
-  return [propsItem.value.url];
-});
-const item = ref(null);
-const propsItem = ref(props.activeItem);
-const propsIndex = ref(props.index);
+  return [propsItem.value.url]
+})
+const item = ref(null)
+const propsItem = ref(props.activeItem)
+const propsIndex = ref(props.index)
 const switchPic = (cnt: number) => {
   if (propsIndex.value + cnt > props.picList.length - 1) {
-    ElMessage.error('已经没有啦');
-    return;
+    ElMessage.error('已经没有啦')
+    return
   }
   if (propsIndex.value + cnt < 0) {
-    ElMessage.error('这已经是第一张啦~');
-    return;
+    ElMessage.error('这已经是第一张啦~')
+    return
   }
-  propsItem.value = props.picList[propsIndex.value + cnt];
-  propsIndex.value = propsIndex.value + cnt;
-};
+  propsItem.value = props.picList[propsIndex.value + cnt]
+  propsIndex.value = propsIndex.value + cnt
+}
 const likePicFn = async () => {
-  const { data } = await likePic(propsItem.value.id);
+  const { data } = await likePic(propsItem.value.id)
   if (data.code !== 48484) {
-    ElMessage.success('点赞成功');
-  } else ElMessage.error(data.msg);
-};
+    ElMessage.success('点赞成功')
+  } else ElMessage.error(data.msg)
+}
 onClickOutside(item, (e: any) => {
-  let regex = new RegExp(/el-[\s\S]*/g);
-  let className = e.target.className;
-  let parentNode = e.target.parentNode;
+  let regex = new RegExp(/el-[\s\S]*/g)
+  let className = e.target.className
+  let parentNode = e.target.parentNode
   while (!className || typeof className != 'string') {
-    if (className) className = parentNode.className;
-    parentNode = parentNode.parentNode;
+    if (className) className = parentNode.className
+    parentNode = parentNode.parentNode
   }
   if (!regex.test(className)) {
-    emit('close');
+    emit('close')
   }
-});
+})
 onMounted(() => {
-  document.body.style.overflowY = 'hidden';
-});
+  document.body.style.overflowY = 'hidden'
+})
 onBeforeUnmount(() => {
-  document.body.style.overflowY = 'unset';
-});
+  document.body.style.overflowY = 'unset'
+})
 </script>
 <style lang="less" scoped>
 @import url(../styles/ShowImglist.less);

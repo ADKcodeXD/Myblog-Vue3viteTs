@@ -16,14 +16,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 
 defineProps({
   tags: {
     type: Object as PropType<Array<Bangumi.AnimeTag>>,
     require: true
   }
-});
+})
 
 let type: Array<'success' | 'info' | 'danger' | 'warning' | ''> = [
   'success',
@@ -31,7 +31,7 @@ let type: Array<'success' | 'info' | 'danger' | 'warning' | ''> = [
   'danger',
   'warning',
   ''
-];
+]
 </script>
 
 <style lang="less" scoped>

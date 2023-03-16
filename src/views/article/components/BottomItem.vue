@@ -23,22 +23,22 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 defineProps({
   article: {
     type: Object as PropType<ArticleItemInfo>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['likeArticle', 'collectArticle']);
+})
+const emit = defineEmits(['likeArticle', 'collectArticle'])
 const likeEvent = () => {
-  emit('likeArticle');
-};
+  emit('likeArticle')
+}
 const collectEvent = () => {
-  emit('collectArticle');
-};
+  emit('collectArticle')
+}
 </script>
 
 <style lang="less" scoped>

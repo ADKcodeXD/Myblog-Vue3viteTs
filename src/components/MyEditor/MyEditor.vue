@@ -26,44 +26,44 @@
 </template>
 
 <script lang="ts" setup>
-import Editor from '@tinymce/tinymce-vue';
-import { uploadImage } from '@/api/article';
-import MdEditor from 'md-editor-v3';
-import 'md-editor-v3/lib/style.css';
-import { useThemeStore } from '@/store/theme';
+import Editor from '@tinymce/tinymce-vue'
+import { uploadImage } from '@/api/article'
+import MdEditor from 'md-editor-v3'
+import 'md-editor-v3/lib/style.css'
+import { useThemeStore } from '@/store/theme'
 interface LocalSave {
-  html?: string;
-  saveContent?: Content;
-  saveContentRich?: Content;
-  defaultEditor?: string;
+  html?: string
+  saveContent?: Content
+  saveContentRich?: Content
+  defaultEditor?: string
 }
 const props = withDefaults(defineProps<LocalSave>(), {
   html: '',
   defaultEditor: 'tinymce'
-});
-const emit = defineEmits(['changeContent', 'changeContentRich', 'changeEditor']);
+})
+const emit = defineEmits(['changeContent', 'changeContentRich', 'changeEditor'])
 // 当前tag名 默认富文本
-const theme = useThemeStore();
-let editorName = ref(props.defaultEditor);
+const theme = useThemeStore()
+let editorName = ref(props.defaultEditor)
 // v-model
 // markdown绑定的对象
 let content = reactive<Content>({
   html: '',
   text: ''
-});
+})
 // 富文本编辑器绑定的对象
 let contentRich = reactive<Content>({
   html: '',
   text: ''
-});
+})
 // 如果有本地存储 读取本地存储
 if (props.saveContent) {
-  content.html = props.saveContent.html;
-  content.text = props.saveContent.text;
+  content.html = props.saveContent.html
+  content.text = props.saveContent.text
 }
 if (props.saveContentRich) {
-  contentRich.html = props.saveContentRich.html;
-  contentRich.text = props.saveContentRich.text;
+  contentRich.html = props.saveContentRich.html
+  contentRich.text = props.saveContentRich.text
 }
 // tinyMce编辑器
 let editorInit = {
@@ -96,53 +96,53 @@ let editorInit = {
            bullist numlist outdent indent | removeformat | help',
   images_upload_handler: (blobInfo: { blob: () => string | Blob }) =>
     new Promise((resolve, reject) => {
-      let formdata = new FormData();
-      formdata.append('image', blobInfo.blob());
+      let formdata = new FormData()
+      formdata.append('image', blobInfo.blob())
       uploadImage(formdata).then(result => {
         if (result.data.success) {
-          resolve(result.data.data);
+          resolve(result.data.data)
         } else {
-          reject('上传失败');
+          reject('上传失败')
         }
-      });
+      })
     })
-};
+}
 const saveHtml = (val: string) => {
-  content.html = val;
-};
+  content.html = val
+}
 // markdown图片上传逻辑
 const onUploadImg = async (files: FileList, callback: (urls: string[]) => void) => {
   const res = await Promise.all(
     Array.from(files).map(file => {
       return new Promise((rev, rej) => {
-        const form = new FormData();
-        form.append('image', file);
+        const form = new FormData()
+        form.append('image', file)
         uploadImage(form)
           .then((result: any) => {
-            rev(result);
+            rev(result)
           })
           .catch((err: any) => {
-            rej(err);
-          });
-      });
+            rej(err)
+          })
+      })
     })
-  );
-  callback(res.map((item: any) => item.data.data));
-};
+  )
+  callback(res.map((item: any) => item.data.data))
+}
 const changeEditorName = (val: string) => {
-  val === 'tinymce' ? (editorName.value = 'markdown') : (editorName.value = 'tinymce');
-};
+  val === 'tinymce' ? (editorName.value = 'markdown') : (editorName.value = 'tinymce')
+}
 // 区分开两个编辑器分别传不同的值..... 这里需要
 watch(content, newValue => {
-  emit('changeContent', newValue);
-});
+  emit('changeContent', newValue)
+})
 // 富文本改变
 watch(contentRich, newValue => {
-  emit('changeContentRich', newValue);
-});
+  emit('changeContentRich', newValue)
+})
 watch(editorName, newValue => {
-  emit('changeEditor', newValue);
-});
+  emit('changeEditor', newValue)
+})
 // tinyMce编辑器
 </script>
 

@@ -12,14 +12,14 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    backFn?: (payload: MouseEvent) => void;
+    backFn?: (payload: MouseEvent) => void
   }>(),
   {
     backFn: function () {
-      window.history.back();
+      window.history.back()
     }
   }
-);
+)
 </script>
 <style lang="less" scoped>
 .header {

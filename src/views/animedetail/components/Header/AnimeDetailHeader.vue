@@ -73,69 +73,69 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
-import { WeekDayType, BangumiType, CollectionType } from '@/interface/EnumExport';
-import { useRatingTag } from '@/hooks/Bangumi';
-import { ElMessageBox } from 'element-plus';
+import { PropType } from 'vue'
+import { WeekDayType, BangumiType, CollectionType } from '@/interface/EnumExport'
+import { useRatingTag } from '@/hooks/Bangumi'
+import { ElMessageBox } from 'element-plus'
 const props = defineProps({
   animeDetail: {
     type: Object as PropType<Bangumi.AnimeDeatilItem>,
     default: () => {
-      return {};
+      return {}
     }
   },
   isFollow: {
     type: Boolean,
     default: false
   }
-});
-const emit = defineEmits(['follow', 'unFollow']);
+})
+const emit = defineEmits(['follow', 'unFollow'])
 const director = computed(() => {
   if (props.animeDetail.staff) {
     let a = props.animeDetail.staff.find(item => {
       return item.jobs.find(item => {
-        return item == '导演' || item == '监督';
-      });
-    });
+        return item == '导演' || item == '监督'
+      })
+    })
     if (a) {
-      return a.name_cn ? a.name_cn : a.name;
+      return a.name_cn ? a.name_cn : a.name
     }
   } else {
-    return '未知';
+    return '未知'
   }
-});
+})
 const type = computed(() => {
   for (let i in BangumiType) {
     if (props.animeDetail.type === parseInt(BangumiType[i])) {
-      return i;
+      return i
     }
   }
-});
+})
 const day = computed(() => {
   if (props.animeDetail.air_weekday) {
     for (let i in WeekDayType) {
       if (props.animeDetail.air_weekday === parseInt(WeekDayType[i])) {
-        return i;
+        return i
       }
     }
   }
-});
+})
 const mostPeople = computed(() => {
-  let obj = { type: '', nums: 0 };
+  let obj = { type: '', nums: 0 }
   if (props.animeDetail.collection) {
     for (let i in props.animeDetail.collection) {
       if (props.animeDetail.collection[i] > obj.nums) {
-        obj.type = CollectionType[i];
-        obj.nums = props.animeDetail.collection[i];
+        obj.type = CollectionType[i]
+        obj.nums = props.animeDetail.collection[i]
       }
     }
   }
-  return obj;
-});
-const { ratingTag } = useRatingTag(props.animeDetail?.rating?.score || 0);
+  return obj
+})
+const { ratingTag } = useRatingTag(props.animeDetail?.rating?.score || 0)
 const followBangumi = () => {
   if (!props.isFollow) {
-    emit('follow');
+    emit('follow')
   } else {
     ElMessageBox.confirm(
       '你确定要取消追番吗，会清除掉所有进度哦(不想追番可以将其设置为抛弃或者看过)?',
@@ -146,10 +146,10 @@ const followBangumi = () => {
         type: 'warning'
       }
     ).then(() => {
-      emit('unFollow');
-    });
+      emit('unFollow')
+    })
   }
-};
+}
 </script>
 
 <style lang="less" scoped>

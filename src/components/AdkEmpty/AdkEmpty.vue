@@ -5,13 +5,13 @@
 </template>
 
 <script setup lang="ts">
-import Img from '@/assets/img/Empty.png';
+import Img from '@/assets/img/Empty.png'
 defineProps({
   desc: {
     type: String,
     default: '现在还找不到数据哦~'
   }
-});
+})
 </script>
 <style lang="less" scoped>
 :deep(.el-empty__description) {

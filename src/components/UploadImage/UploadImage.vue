@@ -35,18 +35,18 @@
   </el-upload>
 </template>
 <script setup lang="ts">
-import { useUploadImg } from '@/hooks/useUpload';
+import { useUploadImg } from '@/hooks/useUpload'
 // eslint-disable-next-line vue/no-setup-props-destructure
 const {
   imglink: parentimg,
   maxH,
   onlyShow
 } = defineProps<{
-  imglink: string;
-  maxH?: number;
-  onlyShow?: boolean;
-}>();
-const emit = defineEmits(['imglink']);
+  imglink: string
+  maxH?: number
+  onlyShow?: boolean
+}>()
+const emit = defineEmits(['imglink'])
 const {
   imglink,
   handleRemove,
@@ -58,7 +58,7 @@ const {
   loading,
   loadingPercent,
   uploadEl
-} = useUploadImg(emit, parentimg, onlyShow);
+} = useUploadImg(emit, parentimg, onlyShow)
 </script>
 
 <style lang="less" scoped>

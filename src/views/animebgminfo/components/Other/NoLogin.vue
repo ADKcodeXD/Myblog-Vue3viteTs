@@ -43,9 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import NotLogin from '@/assets/img/404bangumi.png';
+import NotLogin from '@/assets/img/404bangumi.png'
 
 const openUrl = (url: string) => {
-  window.open(url, '_blank');
-};
+  window.open(url, '_blank')
+}
 </script>

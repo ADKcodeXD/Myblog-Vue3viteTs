@@ -1,4 +1,4 @@
-import request from '@/utils/request';
+import request from '@/utils/request'
 
 // 我自己使用爬虫爬取的数据
 export const getBroswerDataApi = (bgmRankParams: Bangumi.BroswerParams) => {
@@ -6,5 +6,5 @@ export const getBroswerDataApi = (bgmRankParams: Bangumi.BroswerParams) => {
     method: 'post',
     url: '/api/bgmrank/getindex',
     data: bgmRankParams
-  });
-};
+  })
+}

@@ -73,8 +73,10 @@
           type="success"
           plain
           @click="
-            $router.push('/login');
-            closePollup;
+            () => {
+              $router.push('/login')
+              closePollup
+            }
           "
           >去登录</el-button
         >
@@ -83,35 +85,35 @@
   </nav>
 </template>
 <script setup lang="ts">
-import { onClickOutside } from '@vueuse/core';
-import Logo from '@/assets/img/logo.png';
-import { PropType } from 'vue';
+import { onClickOutside } from '@vueuse/core'
+import Logo from '@/assets/img/logo.png'
+import { PropType } from 'vue'
 defineProps({
   userinfo: {
     type: Object as PropType<UserEasy>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['close', 'logout']);
-let pollup = ref<HTMLElement | null>();
-const router = useRouter();
+})
+const emit = defineEmits(['close', 'logout'])
+let pollup = ref<HTMLElement | null>()
+const router = useRouter()
 const jumpToEdit = () => {
-  router.push('/index/home');
-  emit('close');
-};
+  router.push('/index/home')
+  emit('close')
+}
 const closePollup = () => {
-  emit('close');
-};
+  emit('close')
+}
 const logout = () => {
-  emit('logout');
-};
+  emit('logout')
+}
 onMounted(() => {
   if (pollup.value) {
-    onClickOutside(pollup, () => emit('close'));
+    onClickOutside(pollup, () => emit('close'))
   }
-});
+})
 </script>
 
 <style lang="less" scoped>

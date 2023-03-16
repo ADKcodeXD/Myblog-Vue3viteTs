@@ -9,7 +9,7 @@
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended"
     ],
-    "parser":"vue-eslint-parser",
+    "parser": "vue-eslint-parser",
     "parserOptions": {
         "ecmaVersion": "latest",
         "parser": "@typescript-eslint/parser",
@@ -21,15 +21,31 @@
     ],
     "rules": {
         "no-undef": "off",
-        "vue/no-mutating-props":"off",
-        "@typescript-eslint/no-explicit-any": ["off"],
-        "prettier/prettier": "error",
+        "vue/no-mutating-props": "off",
+        "@typescript-eslint/no-explicit-any": [
+            "off"
+        ],
         "no-console": "warn",
-        "no-debugger":"warn",
+        "no-debugger": "warn",
         "vue/no-multiple-template-root": "off",
         "vue/multi-word-component-names": "off",
         "no-mutating-props": "off",
         "vue/no-v-html": "off",
-        "vue/no-setup-props-destructure":"off"
+        "vue/no-setup-props-destructure": "off",
+        "prettier/prettier": [
+            "error",
+            {
+                "semi": false,
+                "eslintIntegration": true,
+                "singleQuote": true,
+                "tabWidth": 2,
+                "useTabs": false,
+                "trailingComma": "none",
+                "bracketSpacing": true,
+                "arrowParens": "avoid",
+                "endOfLine": "auto",
+                "printWidth": 100
+            }
+        ]
     }
 }

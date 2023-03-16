@@ -31,9 +31,9 @@
 </template>
 
 <script lang="ts" setup>
-import img from '@/assets/logo.png';
-import { useUploadImg } from '@/hooks/useUpload';
-const emit = defineEmits(['imglink']);
+import img from '@/assets/logo.png'
+import { useUploadImg } from '@/hooks/useUpload'
+const emit = defineEmits(['imglink'])
 const props = defineProps({
   avatar: {
     type: String,
@@ -43,9 +43,9 @@ const props = defineProps({
     type: Boolean,
     default: true
   }
-});
+})
 const { imglink, handleExceed, beforeUpload, upload, loading, loadingPercent, uploadEl } =
-  useUploadImg(emit, props.avatar);
+  useUploadImg(emit, props.avatar)
 </script>
 
 <style lang="less" scoped>

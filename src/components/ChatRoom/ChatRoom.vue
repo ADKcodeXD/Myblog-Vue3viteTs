@@ -66,53 +66,53 @@
 </template>
 
 <script lang="ts">
-let wsUrl = process.env.VITE_APP_WEB_SOCKET_API;
+let wsUrl = process.env.VITE_APP_WEB_SOCKET_API
 interface Msg {
-  type: number;
-  msg: string;
-  time: number;
-  userinfo: UserEasy | null;
+  type: number
+  msg: string
+  time: number
+  userinfo: UserEasy | null
 }
 </script>
 
 <script lang="ts" setup>
-import { useUserStore } from '@/store/user';
-import { getRealativeTime } from '@/utils/dayjs';
-import { useMouseInElement } from '@vueuse/core';
-import { isMobile } from '@/utils/mobile';
-const emit = defineEmits(['close']);
-const { userinfo } = useUserStore();
+import { useUserStore } from '@/store/user'
+import { getRealativeTime } from '@/utils/dayjs'
+import { useMouseInElement } from '@vueuse/core'
+import { isMobile } from '@/utils/mobile'
+const emit = defineEmits(['close'])
+const { userinfo } = useUserStore()
 // 暂时未接入
-let sendMsgBox = ref('');
-let userlist = ref<UserEasy[]>([]);
-let msgList = ref<Msg[]>([]);
-let websocket: WebSocket;
-let modalButton = ref<HTMLElement | null>(null);
-let topbar = ref<HTMLElement | null>();
-let chatbody = ref<HTMLElement | null>();
-let container = ref<HTMLElement | null>();
-let isHide = ref(false);
-let historyXY = ref<{ x: string; y: string }>({ x: '0', y: '0' });
+let sendMsgBox = ref('')
+let userlist = ref<UserEasy[]>([])
+let msgList = ref<Msg[]>([])
+let websocket: WebSocket
+let modalButton = ref<HTMLElement | null>(null)
+let topbar = ref<HTMLElement | null>()
+let chatbody = ref<HTMLElement | null>()
+let container = ref<HTMLElement | null>()
+let isHide = ref(false)
+let historyXY = ref<{ x: string; y: string }>({ x: '0', y: '0' })
 onMounted(() => {
   // 嗯。。 需要等userinfo出来之后才去请求
-  let username = userinfo.username;
+  let username = userinfo.username
 
-  let url = wsUrl + username;
+  let url = wsUrl + username
 
-  websocket = new WebSocket(url);
+  websocket = new WebSocket(url)
 
   websocket.onmessage = msg => {
-    let msgObj = JSON.parse(msg.data);
+    let msgObj = JSON.parse(msg.data)
 
     if (msgObj.type === 1) {
-      userlist.value = msgObj.msg;
+      userlist.value = msgObj.msg
       let sysMsg = {
         type: 1,
         userinfo: null,
         msg: '欢迎 ' + msgObj.userVo.nickname + ' 进入聊天室',
         time: msgObj.createTime
-      };
-      msgList.value.push(sysMsg);
+      }
+      msgList.value.push(sysMsg)
     } else if (msgObj.type === 2) {
       // 发送的信息在这里发
       if (msgObj.userVo.id !== userinfo.id) {
@@ -121,16 +121,16 @@ onMounted(() => {
           userinfo: msgObj.userVo,
           msg: msgObj.msg,
           time: msgObj.createTime
-        };
-        msgList.value.push(otherUserMsg);
+        }
+        msgList.value.push(otherUserMsg)
       } else {
         let myMsg = {
           type: 3,
           userinfo: msgObj.userVo,
           msg: msgObj.msg,
           time: msgObj.createTime
-        };
-        msgList.value.push(myMsg);
+        }
+        msgList.value.push(myMsg)
       }
     } else {
       let sysLogoutMsg = {
@@ -138,19 +138,19 @@ onMounted(() => {
         userinfo: msgObj.userVo,
         msg: msgObj.msg,
         time: msgObj.createTime
-      };
+      }
       let index = userlist.value.findIndex(item => {
-        item.id === msgObj.userVo.id;
-      });
-      userlist.value.splice(index, 1);
-      msgList.value.push(sysLogoutMsg);
+        item.id === msgObj.userVo.id
+      })
+      userlist.value.splice(index, 1)
+      msgList.value.push(sysLogoutMsg)
     }
     nextTick(() => {
       if (container.value) {
-        container.value.scrollTop = container.value.scrollHeight;
+        container.value.scrollTop = container.value.scrollHeight
       }
-    });
-  };
+    })
+  }
 
   websocket.onclose = msg => {
     let sysLogoutMsg = {
@@ -158,78 +158,78 @@ onMounted(() => {
       userinfo: null,
       msg: '连接异常 请重新尝试',
       time: new Date().getTime()
-    };
-  };
+    }
+  }
 
   // 监听事件
   modalButton.value?.addEventListener('mousedown', e => {
-    down.value = true;
-  });
+    down.value = true
+  })
   topbar.value?.addEventListener('mousemove', e => {
     if (down.value && chatbody.value && !isHide.value) {
-      chatbody.value.style.top = e.clientY - elementY.value + 'px';
-      chatbody.value.style.left = e.clientX - elementX.value + 'px';
+      chatbody.value.style.top = e.clientY - elementY.value + 'px'
+      chatbody.value.style.left = e.clientX - elementX.value + 'px'
     }
-  });
+  })
   topbar.value?.addEventListener('mouseleave', e => {
-    down.value = false;
-  });
+    down.value = false
+  })
   modalButton.value?.addEventListener('mouseup', e => {
-    down.value = false;
-  });
+    down.value = false
+  })
   modalButton.value?.addEventListener('touchstart', () => {
-    down.value = true;
-  });
+    down.value = true
+  })
   topbar.value?.addEventListener(
     'touchmove',
     e => {
-      e.preventDefault();
+      e.preventDefault()
       if (down.value && chatbody.value && !isHide.value) {
-        chatbody.value.style.top = e.targetTouches[0].clientY - elementY.value + 'px';
-        chatbody.value.style.left = e.targetTouches[0].clientX - elementX.value + 'px';
+        chatbody.value.style.top = e.targetTouches[0].clientY - elementY.value + 'px'
+        chatbody.value.style.left = e.targetTouches[0].clientX - elementX.value + 'px'
       }
     },
     { passive: false }
-  );
+  )
   topbar.value?.addEventListener('touchend', () => {
-    down.value = false;
-  });
-});
+    down.value = false
+  })
+})
 
 const sendMsg = () => {
   if (sendMsgBox.value === '') {
-    return;
+    return
   }
-  websocket.send(sendMsgBox.value);
-  sendMsgBox.value = '';
-};
+  websocket.send(sendMsgBox.value)
+  sendMsgBox.value = ''
+}
 onBeforeUnmount(() => {
-  websocket.close();
-});
+  websocket.close()
+})
 // 模态框实现
-const { elementX, elementY } = useMouseInElement(chatbody);
-let down = ref(false);
+const { elementX, elementY } = useMouseInElement(chatbody)
+let down = ref(false)
 
 const hideChat = () => {
   if (chatbody.value && !isHide.value) {
-    historyXY.value.x = chatbody.value.style.left;
-    historyXY.value.y = chatbody.value.style.top;
-    chatbody.value.style.top = '50%';
-    chatbody.value.style.left = isMobile() ? '94%' : '98%';
-    chatbody.value.style.transform = 'translateY(-50%)';
-    chatbody.value.style.transition = '0.5s ease all';
-    isHide.value = true;
+    historyXY.value.x = chatbody.value.style.left
+    historyXY.value.y = chatbody.value.style.top
+    chatbody.value.style.top = '50%'
+    chatbody.value.style.left = isMobile() ? '94%' : '98%'
+    chatbody.value.style.transform = 'translateY(-50%)'
+    chatbody.value.style.transition = '0.5s ease all'
+    isHide.value = true
   } else if (chatbody.value && isHide.value) {
-    chatbody.value.style.top = historyXY.value.y;
-    chatbody.value.style.left = historyXY.value.x;
-    chatbody.value.style.transform = 'translateY(0)';
-    chatbody.value.style.transition = 'unset';
-    isHide.value = false;
+    chatbody.value.style.top = historyXY.value.y
+    chatbody.value.style.left = historyXY.value.x
+    chatbody.value.style.transform = 'translateY(0)'
+    chatbody.value.style.transition = 'unset'
+    isHide.value = false
   }
-};
+}
 const closeChat = () => {
-  emit('close');
-};
+  emit('close')
+}
 </script>
 
 <style lang="less" scoped>

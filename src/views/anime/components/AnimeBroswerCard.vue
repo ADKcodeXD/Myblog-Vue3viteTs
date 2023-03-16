@@ -36,20 +36,20 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 
 const props = defineProps({
   item: {
     type: Object as PropType<Bangumi.BroswerResult>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
+})
 
 const score = computed(() => {
-  return props.item.score ? props.item.score / 2 : 0;
-});
+  return props.item.score ? props.item.score / 2 : 0
+})
 </script>
 
 <style lang="less" scoped>

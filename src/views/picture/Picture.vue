@@ -86,15 +86,15 @@
 <script lang="ts">
 export default {
   name: 'PicturePage'
-};
+}
 </script>
 <script setup lang="ts">
-import PostImg from './components/PostImg.vue';
-import ShowImglist from './components/ShowImglist.vue';
-import ImageItem from './components/ImageItem.vue';
-import { PicTag } from '@/interface/EnumExport';
-import { useGetPics, useImageLayout, useShowImgItem } from '@/hooks/usePicture';
-const { layoutImage } = useImageLayout();
+import PostImg from './components/PostImg.vue'
+import ShowImglist from './components/ShowImglist.vue'
+import ImageItem from './components/ImageItem.vue'
+import { PicTag } from '@/interface/EnumExport'
+import { useGetPics, useImageLayout, useShowImgItem } from '@/hooks/usePicture'
+const { layoutImage } = useImageLayout()
 const {
   loaded,
   flushImage,
@@ -107,11 +107,11 @@ const {
   isLoading,
   isAjaxLoading,
   pageParams
-} = useGetPics(layoutImage);
-const { imgShowFn, imgShow, imgShowIndex, activeItem, isDialogShow } = useShowImgItem(picList);
+} = useGetPics(layoutImage)
+const { imgShowFn, imgShow, imgShowIndex, activeItem, isDialogShow } = useShowImgItem(picList)
 const show = (index: number) => {
-  imgShowFn(index);
-};
+  imgShowFn(index)
+}
 </script>
 <style lang="less" scoped>
 @import url(./styles/picture.less);

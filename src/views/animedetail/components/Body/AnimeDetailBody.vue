@@ -132,21 +132,21 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
-import { useYhdm } from '@/hooks/Yhdm';
-import HumanBoxCard from './HumanBoxCard.vue';
-import AnimeEp from './AnimeEp.vue';
-import AnimeDetailInfoBox from './AnimeDetailInfoBox.vue';
+import { PropType } from 'vue'
+import { useYhdm } from '@/hooks/Yhdm'
+import HumanBoxCard from './HumanBoxCard.vue'
+import AnimeEp from './AnimeEp.vue'
+import AnimeDetailInfoBox from './AnimeDetailInfoBox.vue'
 const props = defineProps({
   animeDetail: {
     type: Object as PropType<Bangumi.AnimeDeatilItem>,
     require: true
   }
-});
+})
 
 const { sites, cnSite, jpSite, twHkSite, otherSite, openUrl, yhdmList, urlFilter } = useYhdm(
   props.animeDetail ? props.animeDetail : null
-);
+)
 </script>
 
 <style lang="less" scoped>

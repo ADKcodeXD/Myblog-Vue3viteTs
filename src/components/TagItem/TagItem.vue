@@ -27,11 +27,11 @@ const props = defineProps({
     type: Boolean,
     default: true
   }
-});
-const emit = defineEmits(['closeTag']);
+})
+const emit = defineEmits(['closeTag'])
 const closeTag = () => {
-  emit('closeTag', props.tagId);
-};
+  emit('closeTag', props.tagId)
+}
 </script>
 
 <style lang="less" scoped>

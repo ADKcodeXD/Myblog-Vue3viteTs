@@ -64,10 +64,10 @@
 </template>
 
 <script setup lang="ts">
-import { PropType } from 'vue';
-import { gsap } from 'gsap';
-import { ElInput, ElMessage } from 'element-plus';
-import { useAddtag } from '@/hooks/useEdit';
+import { PropType } from 'vue'
+import { gsap } from 'gsap'
+import { ElInput, ElMessage } from 'element-plus'
+import { useAddtag } from '@/hooks/useEdit'
 const props = defineProps({
   /**
    * 接受一个数组 待选择标签的数组
@@ -76,7 +76,7 @@ const props = defineProps({
   chooseOptions: {
     type: Object as PropType<Array<any>>,
     default: () => {
-      return [];
+      return []
     }
   },
   /**
@@ -85,7 +85,7 @@ const props = defineProps({
   choosedTag: {
     type: Object as PropType<Array<any>>,
     default: () => {
-      return [];
+      return []
     }
   },
   /**
@@ -109,40 +109,40 @@ const props = defineProps({
     type: Boolean,
     default: false
   }
-});
-const emit = defineEmits(['changeTag', 'addTag']);
+})
+const emit = defineEmits(['changeTag', 'addTag'])
 let chooseOptionsFilter = computed(() => {
   return props.chooseOptions.filter(item => {
-    return props.choosedTag.indexOf(typeof item === 'object' ? item.name : item) === -1;
-  });
-});
-const { inputVisible, inputValue, inputref, showInput, handleInputConfirm } = useAddtag(emit);
+    return props.choosedTag.indexOf(typeof item === 'object' ? item.name : item) === -1
+  })
+})
+const { inputVisible, inputValue, inputref, showInput, handleInputConfirm } = useAddtag(emit)
 const setTag = (tag: any) => {
   if (props.choosedTag.length >= props.limit) {
-    ElMessage.error('选择标签达到上限');
-    return;
+    ElMessage.error('选择标签达到上限')
+    return
   }
-  props.choosedTag.push(tag.name ? tag.name : tag);
-};
+  props.choosedTag.push(tag.name ? tag.name : tag)
+}
 const removeTag = (tag: any) => {
-  let index = props.choosedTag.indexOf(tag);
+  let index = props.choosedTag.indexOf(tag)
   if (index !== -1) {
-    props.choosedTag.splice(index, 1);
+    props.choosedTag.splice(index, 1)
   }
-};
+}
 // 延迟动画 TODO:封装起来 统一调用
 const beforeEnter = el => {
-  el.style.opacity = 0;
-  el.style.transform = 'translateY(-10px)';
-};
+  el.style.opacity = 0
+  el.style.transform = 'translateY(-10px)'
+}
 const enter = (el, done) => {
   gsap.to(el, {
     opacity: 1,
     y: '0',
     // delay: el.dataset.index * 0.05,
     onComplete: done
-  });
-};
+  })
+}
 const leave = (el, done) => {
   gsap.to(el, {
     opacity: 0,
@@ -150,8 +150,8 @@ const leave = (el, done) => {
     ease: 'power4.out',
     // delay: el.dataset.index * 0.05,
     onComplete: done
-  });
-};
+  })
+}
 </script>
 
 <style lang="less" scoped>

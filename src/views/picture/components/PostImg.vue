@@ -46,16 +46,16 @@
   </el-dialog>
 </template>
 <script setup lang="ts">
-import { addPic } from '@/api/pic';
-import { useUserStore } from '@/store/user';
-import { ElMessage } from 'element-plus';
-import { PicTag } from '@/interface/EnumExport';
+import { addPic } from '@/api/pic'
+import { useUserStore } from '@/store/user'
+import { ElMessage } from 'element-plus'
+import { PicTag } from '@/interface/EnumExport'
 const props = defineProps<{
-  isDialogShow: boolean;
-  imgItem?: PicVo;
-}>();
-const emit = defineEmits(['flushImage', 'close', 'changeImg']);
-const currentUser = useUserStore();
+  isDialogShow: boolean
+  imgItem?: PicVo
+}>()
+const emit = defineEmits(['flushImage', 'close', 'changeImg'])
+const currentUser = useUserStore()
 const postParams = reactive<PicParams>({
   id: undefined,
   url: '',
@@ -63,52 +63,52 @@ const postParams = reactive<PicParams>({
   summary: '',
   isOrigin: 0,
   tag: 0
-});
+})
 onMounted(() => {
   if (props.imgItem) {
-    postParams.url = props.imgItem.url;
-    postParams.isOrigin = props.imgItem.origin;
-    postParams.id = props.imgItem.id;
-    postParams.summary = props.imgItem.summary;
-    postParams.tag = props.imgItem.tag;
-    postParams.title = props.imgItem.title;
+    postParams.url = props.imgItem.url
+    postParams.isOrigin = props.imgItem.origin
+    postParams.id = props.imgItem.id
+    postParams.summary = props.imgItem.summary
+    postParams.tag = props.imgItem.tag
+    postParams.title = props.imgItem.title
   }
-});
+})
 
 const setUrl = (val: string) => {
-  postParams.url = val;
-};
+  postParams.url = val
+}
 const postImage = async () => {
   if (postParams.summary.length <= 0 || postParams.summary.length > 80) {
-    ElMessage.error('介绍应控制在0-80字哦~');
-    return;
+    ElMessage.error('介绍应控制在0-80字哦~')
+    return
   }
   if (postParams.title.length <= 0 || postParams.summary.length > 24) {
-    ElMessage.error('标题要控制在0-24字哦~');
-    return;
+    ElMessage.error('标题要控制在0-24字哦~')
+    return
   }
   if (!postParams.url) {
-    ElMessage.error('请上传图片~');
-    return;
+    ElMessage.error('请上传图片~')
+    return
   }
   if (!currentUser.userinfo.id) {
-    ElMessage.error('请登录后上传~');
-    return;
+    ElMessage.error('请登录后上传~')
+    return
   }
   if (props.imgItem) {
-    emit('close');
-    emit('changeImg', postParams);
-    return;
+    emit('close')
+    emit('changeImg', postParams)
+    return
   }
-  await addPic(postParams);
-  ElMessage.success('上传成功！');
-  emit('close');
-  postParams.summary = '';
-  postParams.title = '';
-  postParams.url = '';
-  postParams.isOrigin = 0;
-  emit('flushImage');
-};
+  await addPic(postParams)
+  ElMessage.success('上传成功！')
+  emit('close')
+  postParams.summary = ''
+  postParams.title = ''
+  postParams.url = ''
+  postParams.isOrigin = 0
+  emit('flushImage')
+}
 </script>
 <style lang="less" scoped>
 .dialog {

@@ -32,30 +32,30 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 
 const props = defineProps({
   article: {
     type: Object as PropType<ArticleItemInfo>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
+})
 const word = computed(() => {
   if (props.article.body.content && props.article.body.content.length != 0) {
-    return props.article.body.content.length;
+    return props.article.body.content.length
   } else {
-    return props.article.body.html.length;
+    return props.article.body.html.length
   }
-});
+})
 const needMin = computed(() => {
   if (props.article.body.content && props.article.body.content.length != 0) {
-    return Math.round(props.article.body.content.length / 360);
+    return Math.round(props.article.body.content.length / 360)
   } else {
-    return Math.round(props.article.body.html.length / 360);
+    return Math.round(props.article.body.html.length / 360)
   }
-});
+})
 </script>
 
 <style lang="less" scoped>

@@ -73,47 +73,47 @@
   </div>
 </template>
 <script setup lang="ts">
-import { deleteMyPic, getMyPic, updateMyPic } from '@/api/pic';
-import { PicTag } from '@/interface/EnumExport';
-import { ElMessage, ElMessageBox } from 'element-plus';
-import PostImg from '../../picture/components/PostImg.vue';
+import { deleteMyPic, getMyPic, updateMyPic } from '@/api/pic'
+import { PicTag } from '@/interface/EnumExport'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import PostImg from '../../picture/components/PostImg.vue'
 const pageParams = reactive<PageParams>({
   page: 1,
   pagesize: 10,
   isOrigin: 0
-});
-const imgs = ref<PicVo[]>();
-const total = ref(0);
-const activeItem = ref<PicVo>();
+})
+const imgs = ref<PicVo[]>()
+const total = ref(0)
+const activeItem = ref<PicVo>()
 const getPicsFn = async () => {
-  const { data } = await getMyPic(pageParams);
-  imgs.value = data.data.results;
-  total.value = data.data.length;
-};
+  const { data } = await getMyPic(pageParams)
+  imgs.value = data.data.results
+  total.value = data.data.length
+}
 const deleteItem = async (id: string) => {
   ElMessageBox.confirm('删除图片后将无法恢复！', '删除图片', {
     confirmButtonText: '我要删除',
     cancelButtonText: '取消',
     type: 'error'
   }).then(async () => {
-    await deleteMyPic(id);
-    ElMessage.success('删除成功');
-    getPicsFn();
-  });
-};
+    await deleteMyPic(id)
+    ElMessage.success('删除成功')
+    getPicsFn()
+  })
+}
 const changeImg = async (param: PicParams) => {
-  await updateMyPic(param);
-  ElMessage.success('修改成功');
-  getPicsFn();
-};
-const isDialogShow = ref(false);
+  await updateMyPic(param)
+  ElMessage.success('修改成功')
+  getPicsFn()
+}
+const isDialogShow = ref(false)
 const open = (item: PicVo) => {
-  activeItem.value = item;
-  isDialogShow.value = true;
-};
+  activeItem.value = item
+  isDialogShow.value = true
+}
 watchEffect(() => {
-  getPicsFn();
-});
+  getPicsFn()
+})
 </script>
 <style lang="less" scoped>
 .table {

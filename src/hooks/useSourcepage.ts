@@ -1,14 +1,14 @@
-import { useStore } from '@/store/main';
+import { useStore } from '@/store/main'
 
 export const useBackToSource = router => {
   const back = () => {
-    const page = useStore();
+    const page = useStore()
     if (page.sourcePage.length !== 0) {
-      const url = page.sourcePage.pop();
-      router.push({ path: url, query: { isCache: 'no' } });
+      const url = page.sourcePage.pop()
+      router.push({ path: url, query: { isCache: 'no' } })
     } else {
-      router.back();
+      router.back()
     }
-  };
-  return { back };
-};
+  }
+  return { back }
+}

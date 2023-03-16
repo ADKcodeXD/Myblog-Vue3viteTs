@@ -69,63 +69,61 @@
 </template>
 
 <script lang="ts" setup>
-import { isMobile } from '@/utils/mobile';
-import { PropType } from 'vue';
-const props = defineProps({
-  eps: {
-    type: Object as PropType<Array<Bangumi.EpDeatil>>,
-    require: true
-  }
-});
+import { isMobile } from '@/utils/mobile'
+const props = defineProps<{
+  eps: Array<Bangumi.EpDeatil>
+}>()
 const pageParams = reactive({
   page: 1
-});
-const arrs = shallowRef<Array<Bangumi.EpDeatil>>([]);
-const moreFlag = ref(false);
-const loading = ref(false);
-const popType = ref<'click' | 'focus' | 'hover' | 'contextmenu'>();
+})
+const arrs = shallowRef<Array<Bangumi.EpDeatil>>([])
+const moreFlag = ref(false)
+const loading = ref(false)
+const popType = ref<'click' | 'focus' | 'hover' | 'contextmenu'>()
 // 大于100条章节  更多再显示 (防止dom量过多造成卡顿)
 if (props.eps && props.eps.length > 100) {
   for (let i = 0; i < 100; i++) {
-    arrs.value.push(props.eps[i]);
+    arrs.value.push(props.eps[i])
   }
-  moreFlag.value = true;
+  moreFlag.value = true
 } else if (props.eps) {
   // eslint-disable-next-line vue/no-setup-props-destructure
-  arrs.value = props.eps;
+  arrs.value = props.eps
 }
 
 const nextPage = () => {
-  loading.value = true;
+  loading.value = true
   if (props.eps) {
     if (pageParams.page < Math.ceil(props.eps?.length / 100)) {
-      pageParams.page++;
+      pageParams.page++
     } else {
-      return;
+      return
     }
-    let length =
-      pageParams.page * 100 > props.eps.length ? props.eps.length : pageParams.page * 100;
+    let length = pageParams.page * 100 > props.eps.length ? props.eps.length : pageParams.page * 100
     for (let i = (pageParams.page - 1) * 100; i < length; i++) {
-      arrs.value.push(props.eps[i]);
+      arrs.value.push(props.eps[i])
     }
     if (pageParams.page >= Math.ceil(props.eps?.length / 100)) {
-      moreFlag.value = false;
+      moreFlag.value = false
     }
   }
-  loading.value = false;
-};
+  loading.value = false
+}
 
 const filterEp = computed<Array<Bangumi.EpDeatil>>(() => {
-  return arrs.value.sort((a, b) => {
-    if (a.type === b.type) return a.sort - b.sort;
-    else return a.type - b.type;
-  });
-});
+  if (arrs.value) {
+    return arrs.value.sort((a, b) => {
+      if (a.type === b.type) return a.sort - b.sort
+      else return a.type - b.type
+    })
+  }
+})
+
 // 判断设备
 if (isMobile()) {
-  popType.value = 'click';
+  popType.value = 'click'
 } else {
-  popType.value = 'hover';
+  popType.value = 'hover'
 }
 </script>
 

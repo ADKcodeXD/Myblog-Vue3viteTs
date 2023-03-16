@@ -21,34 +21,34 @@
   </div>
 </template>
 <script setup lang="ts">
-import { deleteMyArticle, getMyArticles, switchMyArticle } from '@/api/article';
-import { ElMessage, ElMessageBox } from 'element-plus';
+import { deleteMyArticle, getMyArticles, switchMyArticle } from '@/api/article'
+import { ElMessage, ElMessageBox } from 'element-plus'
 const props = defineProps<{
-  userId: string;
-}>();
+  userId: string
+}>()
 const pageParams = reactive<PageParams>({
   page: 1,
   pagesize: 10
-});
-const myArticleList = ref<ArticleItemInfo[]>();
-const articleTotal = ref(0);
+})
+const myArticleList = ref<ArticleItemInfo[]>()
+const articleTotal = ref(0)
 const getMyarticleFn = async () => {
   if (!props.userId) {
-    ElMessage.error('请登录后重试');
+    ElMessage.error('请登录后重试')
   }
-  const { data } = await getMyArticles(pageParams);
-  myArticleList.value = data.data.results;
-  articleTotal.value = data.data.length;
-};
+  const { data } = await getMyArticles(pageParams)
+  myArticleList.value = data.data.results
+  articleTotal.value = data.data.length
+}
 const switchPrivate = async (id: string) => {
   try {
-    await switchMyArticle(id);
-    ElMessage.success('修改成功');
-    await getMyarticleFn();
+    await switchMyArticle(id)
+    ElMessage.success('修改成功')
+    await getMyarticleFn()
   } catch (error) {
-    ElMessage.error('出现错误');
+    ElMessage.error('出现错误')
   }
-};
+}
 const deleteArticle = async (id: string) => {
   ElMessageBox.confirm(
     '删除文章后，数据库中将永远失去该文章的所有数据，也无法再次查看！',
@@ -59,14 +59,14 @@ const deleteArticle = async (id: string) => {
       type: 'error'
     }
   ).then(async () => {
-    await deleteMyArticle(id);
-    ElMessage.success('删除成功');
-    getMyarticleFn();
-  });
-};
+    await deleteMyArticle(id)
+    ElMessage.success('删除成功')
+    getMyarticleFn()
+  })
+}
 watchEffect(() => {
-  getMyarticleFn();
-});
+  getMyarticleFn()
+})
 </script>
 
 <style lang="less" scoped>

@@ -62,25 +62,25 @@
 </template>
 
 <script setup lang="ts">
-import { ElInput } from 'element-plus';
-import { useArticleSubmit, useEditor, useSave } from '@/hooks/useEdit';
-import { useTag } from '@/hooks/useTag';
-import { ArticlePannel } from '@/interface/EnumExport';
-const imglink = ref('');
+import { ElInput } from 'element-plus'
+import { useArticleSubmit, useEditor, useSave } from '@/hooks/useEdit'
+import { useTag } from '@/hooks/useTag'
+import { ArticlePannel } from '@/interface/EnumExport'
+const imglink = ref('')
 const changeImagelink = (link: string) => {
-  imglink.value = link;
-};
+  imglink.value = link
+}
 const { changeEditor, changeContentRich, changeContent, editorName, content, contentRich } =
-  useEditor();
-const { tags, addTagFn, canChooseTags } = useTag();
+  useEditor()
+const { tags, addTagFn, canChooseTags } = useTag()
 const { submitArticle, styleChange, summary, title, pannel } = useArticleSubmit(
   editorName,
   imglink,
   contentRich,
   content,
   tags
-);
-useSave(content, contentRich);
+)
+useSave(content, contentRich)
 </script>
 
 <style lang="less" scoped>

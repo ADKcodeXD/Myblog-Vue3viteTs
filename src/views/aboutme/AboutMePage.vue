@@ -92,20 +92,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import Logo from '@/assets/img/new-logo.png';
-import Touxiang from './img/touxiang.jpg';
-import Wechat from './img/wechat.png';
-import Zhifubao from './img/zhifubao.jpg';
-import gsap from 'gsap';
+import Logo from '@/assets/img/new-logo.png'
+import Touxiang from './img/touxiang.jpg'
+import Wechat from './img/wechat.png'
+import Zhifubao from './img/zhifubao.jpg'
+import gsap from 'gsap'
 
 onMounted(() => {
-  let timeline = gsap.timeline({ defaults: { duration: 1 } });
-  gsap.set('#avatar', { y: '50%', scale: 0 });
-  gsap.set('.logo-img', { scale: 0 });
-  gsap.set('#welcome', { y: '50%' });
-  gsap.set('#adk', { y: '50%' });
-  gsap.set('.label-1', { y: 10, opacity: 0 });
-  gsap.set('.sns-label', { scale: 0, rotateZ: -90 });
+  let timeline = gsap.timeline({ defaults: { duration: 1 } })
+  gsap.set('#avatar', { y: '50%', scale: 0 })
+  gsap.set('.logo-img', { scale: 0 })
+  gsap.set('#welcome', { y: '50%' })
+  gsap.set('#adk', { y: '50%' })
+  gsap.set('.label-1', { y: 10, opacity: 0 })
+  gsap.set('.sns-label', { scale: 0, rotateZ: -90 })
   timeline
     .to('#avatar', {
       opacity: 1,
@@ -152,8 +152,8 @@ onMounted(() => {
     })
     .to('.money-tip', { y: 0, ease: 'power1.out', opacity: 1, duration: 1 })
     .to('.zhifubao', { y: 0, ease: 'power1.out', opacity: 1, duration: 1 })
-    .to('.weixin', { y: 0, ease: 'power1.out', opacity: 1, duration: 1 });
-});
+    .to('.weixin', { y: 0, ease: 'power1.out', opacity: 1, duration: 1 })
+})
 </script>
 
 <style lang="less" scoped>

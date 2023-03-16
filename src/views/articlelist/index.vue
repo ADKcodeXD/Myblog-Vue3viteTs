@@ -45,47 +45,47 @@
 </template>
 
 <script lang="ts">
-export default { name: 'ArticleList' };
+export default { name: 'ArticleList' }
 </script>
 <script setup lang="ts">
-import { listArticleWithCount } from '@/api/article';
-import SearchItem from './components/SearchItem.vue';
-import ConditionalFilter from './components/ConditionalFilter.vue';
-import { debounce } from '@/utils/tools';
+import { listArticleWithCount } from '@/api/article'
+import SearchItem from './components/SearchItem.vue'
+import ConditionalFilter from './components/ConditionalFilter.vue'
+import { debounce } from '@/utils/tools'
 
-const total = ref(0); //文章的总数
+const total = ref(0) //文章的总数
 
-const searchLoading = ref(false);
+const searchLoading = ref(false)
 
-const articles = ref<ArticleItemInfo[]>(); // 获取文章列表
+const articles = ref<ArticleItemInfo[]>() // 获取文章列表
 
-const articlesLoading = ref(false); // 文章列表加载
+const articlesLoading = ref(false) // 文章列表加载
 
-const route = useRoute(); // 重构 tagids 发送一个数组
+const route = useRoute() // 重构 tagids 发送一个数组
 
 const pageparams: PageParams = reactive({
   page: 1,
   pagesize: 10,
   pannel: 0
-}); // 文章 的pageparams
+}) // 文章 的pageparams
 
 const searchArticle = () => {
-  getArticle();
-};
+  getArticle()
+}
 
 const getArticle = async () => {
-  searchLoading.value = true;
-  articlesLoading.value = true;
-  const { data } = await listArticleWithCount(pageparams);
-  articles.value = data.data.results;
-  total.value = data.data.length;
-  articlesLoading.value = false;
-  searchLoading.value = false;
-};
-let debounceFn = debounce(100, getArticle);
+  searchLoading.value = true
+  articlesLoading.value = true
+  const { data } = await listArticleWithCount(pageparams)
+  articles.value = data.data.results
+  total.value = data.data.length
+  articlesLoading.value = false
+  searchLoading.value = false
+}
+let debounceFn = debounce(100, getArticle)
 watch(pageparams, () => {
-  debounceFn();
-});
+  debounceFn()
+})
 // 查看路由有无携带参数
 // bug:由于tag分页查询 这里如果查找了此时页面中没有的tag无法进行筛选 fixed
 onActivated(() => {
@@ -95,26 +95,26 @@ onActivated(() => {
     (route.query.year || route.query.month || route.query.keyword || route.query.tagId)
   ) {
     if (route.query.year) {
-      pageparams.year = route.query.year.toString();
+      pageparams.year = route.query.year.toString()
     }
     if (route.query.month) {
-      pageparams.month = route.query.month.toString();
+      pageparams.month = route.query.month.toString()
     }
     if (route.query.keyword) {
-      pageparams.keyword = route.query.keyword.toString();
+      pageparams.keyword = route.query.keyword.toString()
     }
-    getArticle();
+    getArticle()
   }
-});
+})
 onDeactivated(() => {
-  pageparams.year = undefined;
-  pageparams.keyword = undefined;
-  pageparams.month = undefined;
-  pageparams.tagIds = undefined;
-});
+  pageparams.year = undefined
+  pageparams.keyword = undefined
+  pageparams.month = undefined
+  pageparams.tagIds = undefined
+})
 onMounted(() => {
-  getArticle();
-});
+  getArticle()
+})
 </script>
 
 <style lang="less" scoped>

@@ -68,12 +68,12 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useChangeFollowStatus, useChangeProcess } from '@/hooks/useFollowBangumi';
-import { getFormatTime } from '@/utils/dayjs';
+import { useChangeFollowStatus, useChangeProcess } from '@/hooks/useFollowBangumi'
+import { getFormatTime } from '@/utils/dayjs'
 interface StatusOptions {
-  type: '' | 'success' | 'warning' | 'danger' | 'info';
-  label: string;
-  value: number;
+  type: '' | 'success' | 'warning' | 'danger' | 'info'
+  label: string
+  value: number
 }
 const statusOptions: StatusOptions[] = [
   {
@@ -91,46 +91,46 @@ const statusOptions: StatusOptions[] = [
     label: '搁置',
     type: 'danger'
   }
-];
+]
 const props = defineProps<{
-  followInfo: FollowBangumiVo;
-}>();
-const isEditProgress = ref(false);
-const inputRef = ref();
-const process = ref(props.followInfo.progress);
+  followInfo: FollowBangumiVo
+}>()
+const isEditProgress = ref(false)
+const inputRef = ref()
+const process = ref(props.followInfo.progress)
 const processBar = computed(() => {
-  const process = props.followInfo.progress / props.followInfo.totalEps;
-  return process * 100 + '%';
-});
+  const process = props.followInfo.progress / props.followInfo.totalEps
+  return process * 100 + '%'
+})
 const lastView = computed(() => {
   if (props.followInfo.lastViewEpTime) {
-    return `你上次看到了第${props.followInfo.progress}集`;
+    return `你上次看到了第${props.followInfo.progress}集`
   } else {
-    return `你没有在本站中看过本番剧哦~`;
+    return `你没有在本站中看过本番剧哦~`
   }
-});
+})
 const currentlyStatus = computed(() => {
   return statusOptions.find(item => {
-    return item.value === props.followInfo.status;
-  });
-});
-const { changeFollowStatus } = useChangeFollowStatus(props.followInfo.id, props.followInfo);
+    return item.value === props.followInfo.status
+  })
+})
+const { changeFollowStatus } = useChangeFollowStatus(props.followInfo.id, props.followInfo)
 const editInput = async () => {
   if (isEditProgress.value) {
-    isEditProgress.value = false;
+    isEditProgress.value = false
     const processParams: FollowProgressParams = {
       id: props.followInfo.id,
       progress: process.value
-    };
-    const info = await useChangeProcess(processParams, true);
+    }
+    const info = await useChangeProcess(processParams, true)
     if (info) {
-      props.followInfo.progress = info.followInfo.progress;
+      props.followInfo.progress = info.followInfo.progress
     }
   } else {
-    isEditProgress.value = true;
-    inputRef.value?.focus();
+    isEditProgress.value = true
+    inputRef.value?.focus()
   }
-};
+}
 </script>
 <style lang="less" scoped>
 @import url(./styles/AnimeFollowDeatil.less);

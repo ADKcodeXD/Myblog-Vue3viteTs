@@ -37,8 +37,8 @@
 </template>
 
 <script lang="ts" setup>
-import { Search } from '@element-plus/icons-vue';
-let searchKw = ref('');
+import { Search } from '@element-plus/icons-vue'
+let searchKw = ref('')
 </script>
 
 <style lang="less" scoped>

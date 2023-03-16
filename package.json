@@ -8,8 +8,8 @@
     "dev": "vite",
     "prod": "vite --mode production",
     "preview": "vite preview",
-    "lint": "eslint --ext '.js,.ts,.vue,.jsx,.tsx' src",
-    "lintfix": "eslint --fix --ext '.js,.ts,.vue,.jsx,.tsx' src"
+    "lint": "eslint --ext '.js,.ts,.vue' src/**/* --no-error-on-unmatched-pattern",
+    "lintfix": "eslint --fix --ext '.js,.ts,.vue' src/**/* --no-error-on-unmatched-pattern"
   },
   "dependencies": {
     "@highlightjs/vue-plugin": "^2.1.0",

@@ -17,16 +17,16 @@
 </template>
 
 <script setup lang="ts">
-import { getMyBangumiInfo } from '@/api/bangumi';
-import { useBangumiUser } from '@/store/bangumiUser';
-let myinfo = ref<Bangumi.BangumiMyInfo>();
-const user = useBangumiUser();
+import { getMyBangumiInfo } from '@/api/bangumi'
+import { useBangumiUser } from '@/store/bangumiUser'
+let myinfo = ref<Bangumi.BangumiMyInfo>()
+const user = useBangumiUser()
 if (!user.bgm_user_info) {
   getMyBangumiInfo().then(result => {
-    myinfo.value = result.data;
-    user.setBangumiUserInfo(myinfo.value);
-  });
+    myinfo.value = result.data
+    user.setBangumiUserInfo(myinfo.value)
+  })
 } else {
-  myinfo.value = user.bgm_user_info;
+  myinfo.value = user.bgm_user_info
 }
 </script>

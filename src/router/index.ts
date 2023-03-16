@@ -1,8 +1,8 @@
-import { getItem } from './../utils/storage';
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import { ElMessageBox } from 'element-plus';
-import NProgress from 'nprogress';
-import '@/assets/styles/myNprogress.css';
+import { getItem } from './../utils/storage'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { ElMessageBox } from 'element-plus'
+import NProgress from 'nprogress'
+import '@/assets/styles/myNprogress.css'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -233,22 +233,22 @@ const routes: RouteRecordRaw[] = [
     },
     component: () => import('@/views/404.vue')
   }
-];
+]
 const router = createRouter({
   linkExactActiveClass: 'router-active',
   history: createWebHistory(),
   routes
-});
+})
 
 router.beforeEach((to, from, next) => {
-  const token = getItem('user');
+  const token = getItem('user')
   if (to.meta.title) {
-    document.title = `${to.meta.title}-ADK-blog 我的个人小站`;
+    document.title = `${to.meta.title}-ADK-blog 我的个人小站`
   }
   if (to.meta.requireAuth) {
     if (token) {
-      NProgress.start();
-      next();
+      NProgress.start()
+      next()
     } else {
       ElMessageBox.confirm('该页面需要登录才能使用，请问是否跳转到登录页面？', '登录提示', {
         confirmButtonText: '确认',
@@ -256,19 +256,19 @@ router.beforeEach((to, from, next) => {
         type: 'warning'
       })
         .then(() => {
-          NProgress.start();
-          next({ path: '/login' });
+          NProgress.start()
+          next({ path: '/login' })
         })
         .catch(() => {
-          return;
-        });
+          return
+        })
     }
   } else {
-    NProgress.start();
-    next();
+    NProgress.start()
+    next()
   }
-});
+})
 router.afterEach(() => {
-  NProgress.done();
-});
-export default router;
+  NProgress.done()
+})
+export default router

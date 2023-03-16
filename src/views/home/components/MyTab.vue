@@ -25,26 +25,26 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 const props = defineProps({
   articles: {
     type: Object as PropType<ArticleItemInfo[]>,
     default: () => {
-      return {};
+      return {}
     }
   },
   fn: {
     type: Function,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['changeTab']);
+})
+const emit = defineEmits(['changeTab'])
 const tabFn = async (id: string) => {
-  await props.fn(id);
-  emit('changeTab');
-};
+  await props.fn(id)
+  emit('changeTab')
+}
 </script>
 <style lang="less" scoped>
 @import url(../styles/MyTab.less);

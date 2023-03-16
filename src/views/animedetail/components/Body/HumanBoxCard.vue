@@ -16,24 +16,24 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
-import PopOverStaffHuman from './PopOverStaffHuman.vue';
-import PopOverAnimeHuman from './PopOverAnimeHuman.vue';
+import { PropType } from 'vue'
+import PopOverStaffHuman from './PopOverStaffHuman.vue'
+import PopOverAnimeHuman from './PopOverAnimeHuman.vue'
 
 defineProps({
   AnimeItemList: {
     type: Object as PropType<Array<Bangumi.AnimeHuman>>,
     default: () => {
-      return [];
+      return []
     }
   },
   StaffItemList: {
     type: Object as PropType<Array<Bangumi.StaffHuman>>,
     default: () => {
-      return [];
+      return []
     }
   }
-});
+})
 </script>
 
 <style lang="less" scoped>

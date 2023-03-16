@@ -44,19 +44,19 @@
 </template>
 
 <script lang="ts" setup>
-import { useAnimeData } from '@/hooks/Bangumi';
-let month = new Date().getMonth();
-let season = 0;
+import { useAnimeData } from '@/hooks/Bangumi'
+let month = new Date().getMonth()
+let season = 0
 if (month >= 0 && month < 3) {
-  season = 1;
+  season = 1
 } else if (month >= 3 && month < 6) {
-  season = 4;
+  season = 4
 } else if (month >= 6 && month < 9) {
-  season = 7;
+  season = 7
 } else {
-  season = 10;
+  season = 10
 }
-const { today, weekDayList } = useAnimeData();
+const { today, weekDayList } = useAnimeData()
 </script>
 
 <style lang="less" scoped>

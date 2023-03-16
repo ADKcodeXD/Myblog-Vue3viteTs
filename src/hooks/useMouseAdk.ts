@@ -1,4 +1,4 @@
-import { Ref } from 'vue';
+import { Ref } from 'vue'
 
 /**
  * 基于屏幕的中间点 计算鼠标的位置
@@ -10,19 +10,19 @@ import { Ref } from 'vue';
  */
 export const useMousePointer = (x: Ref<number>, y: Ref<number>, offset: number) => {
   const xPos = computed(() => {
-    let res = 0;
-    const halfVal = window.innerWidth / 2;
-    res = x.value - halfVal;
-    return res / offset;
-  });
+    let res = 0
+    const halfVal = window.innerWidth / 2
+    res = x.value - halfVal
+    return res / offset
+  })
   const yPos = computed(() => {
-    let res = 0;
-    const halfVal = window.innerHeight / 2;
-    res = y.value - halfVal;
-    return res / offset;
-  });
+    let res = 0
+    const halfVal = window.innerHeight / 2
+    res = y.value - halfVal
+    return res / offset
+  })
   return {
     xPos,
     yPos
-  };
-};
+  }
+}

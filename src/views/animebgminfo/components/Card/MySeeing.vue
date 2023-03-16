@@ -33,14 +33,14 @@
 </template>
 
 <script setup lang="ts">
-import { getMySeeingCollection } from '@/api/bangumi';
-import { useBangumiUser } from '@/store/bangumiUser';
-const bgmUserStore = useBangumiUser();
-const bgmUser = bgmUserStore.bgm_user_info;
-let list = ref<Bangumi.MySeeing[]>([]);
+import { getMySeeingCollection } from '@/api/bangumi'
+import { useBangumiUser } from '@/store/bangumiUser'
+const bgmUserStore = useBangumiUser()
+const bgmUser = bgmUserStore.bgm_user_info
+let list = ref<Bangumi.MySeeing[]>([])
 getMySeeingCollection(bgmUser.id).then(result => {
-  list.value = result.data;
-});
+  list.value = result.data
+})
 </script>
 
 <style lang="less" scoped>

@@ -5,24 +5,24 @@
 </template>
 
 <script setup lang="ts">
-import { CollectionTypeTwo } from '@/interface/EnumExport';
-import { PropType } from '@vue/runtime-core';
-import CardItem from './CardItem.vue';
+import { CollectionTypeTwo } from '@/interface/EnumExport'
+import { PropType } from '@vue/runtime-core'
+import CardItem from './CardItem.vue'
 
 const props = defineProps({
   list: {
     type: Object as PropType<Bangumi.AnimeItemInfoCollection[]>,
     default: () => {
-      return [];
+      return []
     }
   }
-});
+})
 const updateItem = async (data: any, subject_id: number) => {
-  let item = props.list.find(item => item.id === subject_id);
+  let item = props.list.find(item => item.id === subject_id)
   for (let key in item.CollectionInfo) {
-    item.CollectionInfo[key] = data[key];
+    item.CollectionInfo[key] = data[key]
   }
-  let type = item.CollectionInfo.status.type;
-  item.CollectionInfo.status.name = CollectionTypeTwo[type];
-};
+  let type = item.CollectionInfo.status.type
+  item.CollectionInfo.status.name = CollectionTypeTwo[type]
+}
 </script>

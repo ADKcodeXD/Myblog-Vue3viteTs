@@ -88,88 +88,88 @@
 </template>
 
 <script lang="ts" setup>
-import { getSubjectSeachApi } from '@/api/bangumi';
-import { Search } from '@element-plus/icons-vue';
-import { ElMessage } from 'element-plus';
-import SearchItem from './components/SearchItem.vue';
-import { ArrowLeft } from '@element-plus/icons-vue';
-import { BangumiType, ResponseGroup } from '@/interface/EnumExport';
+import { getSubjectSeachApi } from '@/api/bangumi'
+import { Search } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import SearchItem from './components/SearchItem.vue'
+import { ArrowLeft } from '@element-plus/icons-vue'
+import { BangumiType, ResponseGroup } from '@/interface/EnumExport'
 
-const route = useRoute();
-let query = route.query;
-let mykeyword = ref('');
-let loading = ref(false);
+const route = useRoute()
+let query = route.query
+let mykeyword = ref('')
+let loading = ref(false)
 if (query.keywords) {
-  mykeyword.value = query.keywords.toString();
+  mykeyword.value = query.keywords.toString()
 }
 
 let urlencode = computed(() => {
-  return encodeURIComponent(mykeyword.value);
-});
+  return encodeURIComponent(mykeyword.value)
+})
 
 let queryParams = reactive<Bangumi.SearchParamsBgm>({
   keywords: urlencode.value,
   responseGroup: ResponseGroup.Large,
   start: 1,
   max_results: 13
-});
-let animeinfoList = ref<Array<Bangumi.AnimeItemInfo>>([]);
-let total = ref(0);
+})
+let animeinfoList = ref<Array<Bangumi.AnimeItemInfo>>([])
+let total = ref(0)
 let page = computed({
   get: () => {
-    if (queryParams.start === 1) return 1;
+    if (queryParams.start === 1) return 1
     else {
       if (queryParams.start) {
-        return (queryParams.start - 4) / 10 + 1;
+        return (queryParams.start - 4) / 10 + 1
       } else {
-        return 1;
+        return 1
       }
     }
   },
   set: () => {
-    return;
+    return
   }
-});
+})
 const changePage = (val: number) => {
-  queryParams.start = (val - 1) * 10 + 4;
-  search();
-};
+  queryParams.start = (val - 1) * 10 + 4
+  search()
+}
 const search = async () => {
-  loading.value = true;
-  const data = await getSubjectSeachApi(queryParams);
+  loading.value = true
+  const data = await getSubjectSeachApi(queryParams)
   if (data.status !== 200) {
-    ElMessage.error('搜索失败，请稍后重试');
-    loading.value = false;
-    return;
+    ElMessage.error('搜索失败，请稍后重试')
+    loading.value = false
+    return
   } else if (data.data.code === 404) {
-    ElMessage.error('没有搜索到相关结果哦~');
-    animeinfoList.value = [];
-    total.value = 0;
-    loading.value = false;
-    return;
+    ElMessage.error('没有搜索到相关结果哦~')
+    animeinfoList.value = []
+    total.value = 0
+    loading.value = false
+    return
   } else {
-    animeinfoList.value = data.data.list;
-    total.value = data.data.results;
-    loading.value = false;
+    animeinfoList.value = data.data.list
+    total.value = data.data.results
+    loading.value = false
   }
-  loading.value = false;
-};
+  loading.value = false
+}
 
 // 搜索
 const searchKw = () => {
-  queryParams.keywords = mykeyword.value;
-  queryParams.start = 1;
-  search();
-};
+  queryParams.keywords = mykeyword.value
+  queryParams.start = 1
+  search()
+}
 const changeType = (val: number) => {
   if (val !== 0) {
-    queryParams.type = val;
+    queryParams.type = val
   } else {
-    queryParams.type = undefined;
+    queryParams.type = undefined
   }
-  search();
-};
-search();
+  search()
+}
+search()
 </script>
 
 <style lang="less" scoped>

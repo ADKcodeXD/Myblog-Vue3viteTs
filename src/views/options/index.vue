@@ -181,40 +181,40 @@
 </template>
 
 <script lang="ts">
-export default { name: 'OptionsPage' };
+export default { name: 'OptionsPage' }
 </script>
 <script setup lang="ts">
-import { setConfig, setDark, setDefault } from '@/theme/theme';
-import { getItem } from '@/utils/storage';
-import { ElMessage } from 'element-plus';
-let localConfig = reactive(getItem('globalConfig') as GlobalConfig);
+import { setConfig, setDark, setDefault } from '@/theme/theme'
+import { getItem } from '@/utils/storage'
+import { ElMessage } from 'element-plus'
+let localConfig = reactive(getItem('globalConfig') as GlobalConfig)
 const changeLink = link => {
-  localConfig.backGroundImg = link;
-};
+  localConfig.backGroundImg = link
+}
 const saveLocal = () => {
-  ElMessage.success('保存到本地成功!');
-  setConfig(localConfig, true);
-};
-const isClick = ref(false);
+  ElMessage.success('保存到本地成功!')
+  setConfig(localConfig, true)
+}
+const isClick = ref(false)
 const setDefaultFn = () => {
-  setDefault();
-  const newconfig = getItem('globalConfig');
+  setDefault()
+  const newconfig = getItem('globalConfig')
   for (let key in localConfig) {
-    localConfig[key] = newconfig[key];
+    localConfig[key] = newconfig[key]
   }
-};
+}
 const setDarkFn = () => {
-  setDark();
-  const newconfig = getItem('globalConfig');
+  setDark()
+  const newconfig = getItem('globalConfig')
   for (let key in localConfig) {
-    localConfig[key] = newconfig[key];
+    localConfig[key] = newconfig[key]
   }
-};
+}
 onMounted(() => {
   watchEffect(() => {
-    setConfig(localConfig);
-  });
-});
+    setConfig(localConfig)
+  })
+})
 </script>
 <style lang="less" scoped>
 @import url(./styles/Options.less);

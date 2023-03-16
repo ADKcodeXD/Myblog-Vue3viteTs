@@ -159,11 +159,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useMousePointer } from '@/hooks/useMouseAdk';
-import { useMouse } from '@vueuse/core';
-const { x, y } = useMouse();
-const body = ref<HTMLElement | null>(null);
-const { xPos, yPos } = useMousePointer(x, y, 5);
+import { useMousePointer } from '@/hooks/useMouseAdk'
+import { useMouse } from '@vueuse/core'
+const { x, y } = useMouse()
+const body = ref<HTMLElement | null>(null)
+const { xPos, yPos } = useMousePointer(x, y, 5)
 </script>
 <style lang="less" scoped>
 @import url(./styles/NewIndex.less);

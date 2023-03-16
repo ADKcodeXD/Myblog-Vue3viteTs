@@ -85,26 +85,26 @@
 <script lang="ts">
 export default {
   name: 'MessageBoard'
-};
+}
 </script>
 
 <script lang="ts" setup>
-import V3Emoji from 'vue3-emoji';
-import 'vue3-emoji/dist/style.css';
-import MessageLogo from '@/assets/img/liuyan-logo.png';
-import { useChangeParams, useMessageApi, useMessageBoardParams } from '@/hooks/useMessageboard';
-import DefaultAvatar from '@/assets/img/logo.png';
-import { useEmoji } from '@/hooks/useEmoji';
-const { messageParams, pageparams, messageList, total } = useMessageBoardParams();
+import V3Emoji from 'vue3-emoji'
+import 'vue3-emoji/dist/style.css'
+import MessageLogo from '@/assets/img/liuyan-logo.png'
+import { useChangeParams, useMessageApi, useMessageBoardParams } from '@/hooks/useMessageboard'
+import DefaultAvatar from '@/assets/img/logo.png'
+import { useEmoji } from '@/hooks/useEmoji'
+const { messageParams, pageparams, messageList, total } = useMessageBoardParams()
 
 const { orderRole, publishMessage, order, changePage, body } = useMessageApi(
   messageParams,
   pageparams,
   messageList,
   total
-);
-const { changeAvatarParams, toCommentItem } = useChangeParams(messageParams, messageList);
-const { optionsName, disableGroup, customSize, customTheme } = useEmoji();
+)
+const { changeAvatarParams, toCommentItem } = useChangeParams(messageParams, messageList)
+const { optionsName, disableGroup, customSize, customTheme } = useEmoji()
 </script>
 
 <style lang="less" scoped>

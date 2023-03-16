@@ -55,35 +55,35 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useGetMyFollow } from '@/hooks/useFollowBangumi';
-const emit = defineEmits(['hide']);
+import { useGetMyFollow } from '@/hooks/useFollowBangumi'
+const emit = defineEmits(['hide'])
 const customColors = [
   { color: '#0069EB', percentage: 25 },
   { color: '#FD1170', percentage: 50 },
   { color: '#739C70', percentage: 75 },
   { color: '#00CB7C', percentage: 100 }
-];
+]
 const pageparams: PageParams = {
   page: 1,
   pagesize: 10
-};
+}
 const currentBangumi = ref<ListInfoResult<FollowBangumiVo>>({
   length: 0,
   results: [],
   pages: null
-});
-const day = new Date().getDay();
+})
+const day = new Date().getDay()
 const getMyFollow = async () => {
-  const todayBangumi = await useGetMyFollow(1, pageparams);
+  const todayBangumi = await useGetMyFollow(1, pageparams)
   todayBangumi.results.sort(item1 => {
-    if (item1.airDay === day) return -1;
-    return 0;
-  });
-  currentBangumi.value = todayBangumi;
-};
+    if (item1.airDay === day) return -1
+    return 0
+  })
+  currentBangumi.value = todayBangumi
+}
 onMounted(async () => {
-  await getMyFollow();
-});
+  await getMyFollow()
+})
 </script>
 <style lang="less" scoped>
 .card-body {

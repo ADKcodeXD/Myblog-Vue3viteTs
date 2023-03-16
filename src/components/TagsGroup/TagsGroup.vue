@@ -7,20 +7,20 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
-const emit = defineEmits(['tagId']);
+import { PropType } from 'vue'
+const emit = defineEmits(['tagId'])
 defineProps({
   tags: {
     type: Object as PropType<Tag[]>,
     default: () => {
-      return [];
+      return []
     }
   }
-});
+})
 
 const publishId = (id: number) => {
-  emit('tagId', id);
-};
+  emit('tagId', id)
+}
 </script>
 
 <style lang="less" scoped>

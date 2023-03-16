@@ -18,28 +18,28 @@
 </template>
 
 <script lang="ts">
-export default { name: 'LayoutPage' };
+export default { name: 'LayoutPage' }
 </script>
 <script setup lang="ts">
-import { useCacheStore } from '@/store/cache';
-import { setConfig } from '@/theme/theme';
-const cachePages = useCacheStore();
-const pages = cachePages.cachePages;
-const route = useRoute();
-const themeConfig = ref(false);
+import { useCacheStore } from '@/store/cache'
+import { setConfig } from '@/theme/theme'
+const cachePages = useCacheStore()
+const pages = cachePages.cachePages
+const route = useRoute()
+const themeConfig = ref(false)
 // 监视页面 并动态设置页面缓存
 watch(route, to => {
   if (to.meta.keepAlive) {
     if (to.name) {
-      cachePages.setCachePage(to.name.toString());
+      cachePages.setCachePage(to.name.toString())
     }
   }
-});
+})
 
 onMounted(() => {
-  setConfig();
-  themeConfig.value = true;
-});
+  setConfig()
+  themeConfig.value = true
+})
 </script>
 
 <style scoped lang="less">

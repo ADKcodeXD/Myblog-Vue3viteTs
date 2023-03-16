@@ -49,21 +49,21 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue';
-import { getRealativeTime } from '@/utils/dayjs';
-import { ArticlePannel } from '@/interface/EnumExport';
+import { PropType } from 'vue'
+import { getRealativeTime } from '@/utils/dayjs'
+import { ArticlePannel } from '@/interface/EnumExport'
 const props = defineProps({
   articleItem: {
     type: Object as PropType<ArticleItemInfo>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
+})
 
 const time = computed(() => {
-  return getRealativeTime(props.articleItem.createDate);
-});
+  return getRealativeTime(props.articleItem.createDate)
+})
 </script>
 <style lang="less" scoped>
 @import url('./styles/Index.less');

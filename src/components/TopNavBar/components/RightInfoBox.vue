@@ -64,21 +64,21 @@
   </aside>
 </template>
 <script setup lang="ts">
-import { PropType } from 'vue';
-import Logo from '@/assets/img/logo.png';
+import { PropType } from 'vue'
+import Logo from '@/assets/img/logo.png'
 defineProps({
   userinfo: {
     type: Object as PropType<UserEasy>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['logout']);
+})
+const emit = defineEmits(['logout'])
 const logout = () => {
-  emit('logout');
-};
-let infoShow = ref(false);
+  emit('logout')
+}
+let infoShow = ref(false)
 </script>
 
 <style lang="less" scoped>

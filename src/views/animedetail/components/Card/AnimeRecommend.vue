@@ -32,60 +32,60 @@
 </template>
 
 <script lang="ts" setup>
-import { useBroswer } from '@/hooks/Bangumi';
-import { PropType } from 'vue';
-import { SortRole } from '@/interface/EnumExport';
+import { useBroswer } from '@/hooks/Bangumi'
+import { PropType } from 'vue'
+import { SortRole } from '@/interface/EnumExport'
 const props = defineProps({
   tags: {
     type: Object as PropType<Array<Bangumi.AnimeTag>>,
     require: true
   }
-});
-const emit = defineEmits(['changeId']);
+})
+const emit = defineEmits(['changeId'])
 
 // 随机在count数最高的tag 6个里面取出一个取请求 也要考虑 如果tag数量少于6
-const animeInfoList = ref<Array<Bangumi.BroswerResult>>([]);
-const page = ref(0);
-const Loading = ref(false);
+const animeInfoList = ref<Array<Bangumi.BroswerResult>>([])
+const page = ref(0)
+const Loading = ref(false)
 const mainParams = reactive<Bangumi.BroswerParams>({
   page: 1,
   sort: SortRole.rank
-});
+})
 const getTagInt = (length: number) => {
   if (length > 6) {
-    return Math.random() * 6;
+    return Math.random() * 6
   } else {
-    return Math.random() * length;
+    return Math.random() * length
   }
-};
-const { getBroswer } = useBroswer(Loading, animeInfoList, page);
+}
+const { getBroswer } = useBroswer(Loading, animeInfoList, page)
 // get tag 新
 const getRecommend = () => {
   if (Loading.value) {
-    return;
+    return
   }
   if (props.tags) {
-    let index = Math.floor(getTagInt(props.tags.length));
-    mainParams.tag = props.tags[index].name;
-    mainParams.sort = SortRole.rank;
+    let index = Math.floor(getTagInt(props.tags.length))
+    mainParams.tag = props.tags[index].name
+    mainParams.sort = SortRole.rank
   }
-  getBroswer(mainParams);
-};
-getRecommend();
+  getBroswer(mainParams)
+}
+getRecommend()
 const topTen = computed(() => {
-  let arr = [];
+  let arr = []
   if (animeInfoList.value.length > 10) {
     for (let i = 0; i < 10; i++) {
-      arr[i] = animeInfoList.value[i];
+      arr[i] = animeInfoList.value[i]
     }
   } else {
-    arr = animeInfoList.value;
+    arr = animeInfoList.value
   }
-  return arr;
-});
+  return arr
+})
 const changeId = (val: number) => {
-  emit('changeId', val);
-};
+  emit('changeId', val)
+}
 </script>
 
 <style lang="less" scoped>

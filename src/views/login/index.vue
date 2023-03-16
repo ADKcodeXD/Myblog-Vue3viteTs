@@ -140,15 +140,15 @@
 </template>
 
 <script setup lang="ts">
-import { useLoginMethod, useLoginprop, useRegisterMethod, useRoles } from '@/hooks/login';
-import Logo from '@/assets/img/new-logo.png';
-import LogoIcon from '@/assets/img/logo-icon.png';
-import Jieshao from './imgs/介绍.png';
-import gsap from 'gsap';
-import { CustomEase } from 'gsap/CustomEase';
-import { useAnime } from '@/hooks/Anime';
-import { useMousePointer } from '@/hooks/useMouseAdk';
-gsap.registerPlugin(CustomEase);
+import { useLoginMethod, useLoginprop, useRegisterMethod, useRoles } from '@/hooks/login'
+import Logo from '@/assets/img/new-logo.png'
+import LogoIcon from '@/assets/img/logo-icon.png'
+import Jieshao from './imgs/介绍.png'
+import gsap from 'gsap'
+import { CustomEase } from 'gsap/CustomEase'
+import { useAnime } from '@/hooks/Anime'
+import { useMousePointer } from '@/hooks/useMouseAdk'
+gsap.registerPlugin(CustomEase)
 const {
   registerFormRef,
   registerForm,
@@ -160,18 +160,18 @@ const {
   y,
   router,
   userStore
-} = useLoginprop();
-const { submitForm } = useLoginMethod(userStore, router, form);
-const { rules, registerRules } = useRoles(registerForm);
-const { submitRegister } = useRegisterMethod(userStore, router, registerForm);
-const { rotateYenter, rotateYleave } = useAnime();
-const { xPos, yPos } = useMousePointer(x, y, 50);
+} = useLoginprop()
+const { submitForm } = useLoginMethod(userStore, router, form)
+const { rules, registerRules } = useRoles(registerForm)
+const { submitRegister } = useRegisterMethod(userStore, router, registerForm)
+const { rotateYenter, rotateYleave } = useAnime()
+const { xPos, yPos } = useMousePointer(x, y, 50)
 
 const beforeEnter = el => {
   gsap.set(el, {
     rotationY: 90
-  });
-};
+  })
+}
 </script>
 
 <style scoped lang="less">

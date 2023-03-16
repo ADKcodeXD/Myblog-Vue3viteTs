@@ -9,7 +9,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { PropType } from 'vue';
+import { PropType } from 'vue'
 const props = defineProps({
   /**
    * 传入按钮类型 会改变按钮hover的样式 primary默认为蓝色
@@ -50,15 +50,15 @@ const props = defineProps({
     type: Number,
     default: 0.8
   }
-});
+})
 onMounted(() => {
-  dom.value.style.setProperty('--x', props.x.toString() + 'rem');
-  dom.value.style.setProperty('--y', props.y.toString() + 'rem');
-  dom.value.style.setProperty('--spcing', props.spacing.toString() + 'rem');
-  dom.value.style.setProperty('--mainTextsize', props.mainTextsize.toString() + 'rem');
-  dom.value.style.setProperty('--subTextsize', props.mainTextsize.toString() + 'rem');
-});
-let dom = ref<HTMLElement>();
+  dom.value.style.setProperty('--x', props.x.toString() + 'rem')
+  dom.value.style.setProperty('--y', props.y.toString() + 'rem')
+  dom.value.style.setProperty('--spcing', props.spacing.toString() + 'rem')
+  dom.value.style.setProperty('--mainTextsize', props.mainTextsize.toString() + 'rem')
+  dom.value.style.setProperty('--subTextsize', props.mainTextsize.toString() + 'rem')
+})
+let dom = ref<HTMLElement>()
 </script>
 
 <style lang="less" scoped>

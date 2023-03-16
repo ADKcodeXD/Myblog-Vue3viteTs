@@ -119,20 +119,20 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useArticleListConditional } from '@/hooks/ArticleList';
-import { PropType } from 'vue';
-import gsap from 'gsap';
-import { useAnime } from '@/hooks/Anime';
-import { ArticlePannel } from '@/interface/EnumExport';
+import { useArticleListConditional } from '@/hooks/ArticleList'
+import { PropType } from 'vue'
+import gsap from 'gsap'
+import { useAnime } from '@/hooks/Anime'
+import { ArticlePannel } from '@/interface/EnumExport'
 const props = defineProps({
   pageParams: {
     type: Object as PropType<PageParams>,
     default: () => {
-      return {};
+      return {}
     }
   }
-});
-const emit = defineEmits(['changeConditional']);
+})
+const emit = defineEmits(['changeConditional'])
 
 const {
   changeTag,
@@ -147,14 +147,14 @@ const {
   options,
   tagloading,
   currentOrder
-} = useArticleListConditional(props, emit);
+} = useArticleListConditional(props, emit)
 
 const beforeEnter = el => {
   gsap.set(el, {
     x: -200
-  });
-};
-const { translateXenter } = useAnime();
+  })
+}
+const { translateXenter } = useAnime()
 </script>
 
 <style lang="less" scoped>

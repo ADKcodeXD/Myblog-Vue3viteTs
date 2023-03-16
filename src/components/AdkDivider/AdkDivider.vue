@@ -7,7 +7,7 @@ defineProps({
     type: Number,
     deault: 20
   }
-});
+})
 </script>
 <style lang="less" scoped>
 .divider {
