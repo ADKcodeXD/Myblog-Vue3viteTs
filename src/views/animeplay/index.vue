@@ -87,11 +87,9 @@ const getData = async () => {
     const src = data.data.videoUrl
     let strarr = src.split('$')
     strarr[0] = strarr[0].replaceAll(/\\/g, '')
-    //解决跨域问题
-    if (strarr[0].indexOf('https://tup.yinghuacd.com/') != -1) {
-      strarr[0] = strarr[0].replaceAll('https://tup.yinghuacd.com/', '/yhdm/')
-    }
-    playerUrl.value = strarr[0]
+    // 解决跨域问题
+    const newUrl = `${process.env.VITE_BASE_API}/otherSource?videoUrl=${strarr[0]}`
+    playerUrl.value = newUrl
     let index = info.value.epInfo.findIndex(item => {
       return urlFliter(item.epUrl) === route.params.id
     })
