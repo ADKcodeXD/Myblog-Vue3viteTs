@@ -88,7 +88,7 @@ const getData = async () => {
     let strarr = src.split('$')
     strarr[0] = strarr[0].replaceAll(/\\/g, '')
     // 解决跨域问题
-    const newUrl = `${process.env.VITE_BASE_API}/otherSource?videoUrl=${strarr[0]}`
+    const newUrl = `${process.env.VITE_BASE_API}/otherSource/${strarr[0]}`
     playerUrl.value = newUrl
     let index = info.value.epInfo.findIndex(item => {
       return urlFliter(item.epUrl) === route.params.id
