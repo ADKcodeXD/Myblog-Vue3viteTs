@@ -26,12 +26,18 @@
   <body>
     <div class="dplayer" id="dplayer"></div>
     <script type="text/javascript">
-      const param = window.location.href.split('?')[1]
-      let url = param.split('=')[1] || ''
-      function isM3u8(videoUrl) {
-        let arr = videoUrl.split('.') || []
-        if (arr[arr.length - 1] === 'm3u8') return true
-        else return false
+      const handleUrl = url => {
+        const fakeUrl = url
+        const startFlag = '/player.html?videoUrl='
+        const index = fakeUrl.indexOf(startFlag)
+        let temp = fakeUrl.slice(index + startFlag.length, fakeUrl.length)
+        return temp
+      }
+
+      let url = handleUrl(window.location.href)
+      const isM3u8 = url => {
+        if (url && url.indexOf('.m3u8') > -1) return true
+        else if (url.startsWith('blob:')) return true
         return false
       }
 
@@ -84,7 +90,7 @@
         url = e.data.videoUrl
         dplayer.switchVideo({
           url: url,
-          type: isM3u8(e.data.videoUrl) ? 'customHls' : 'auto',
+          type: isM3u8(url) ? 'customHls' : 'auto',
           customType: {
             customHls: function (video) {
               const hls = new Hls()
