@@ -17,6 +17,10 @@ const props = withDefaults(
 const tempUrl = ref<string>(props.videoUrl)
 const transformM3u8 = async (videoUrl: string) => {
   if (videoUrl) {
+    if (videoUrl.startsWith('https://tup.yinghuacd.com')) {
+      tempUrl.value = `https://adkdream.top/otherSource/${videoUrl}`
+      return
+    }
     const arr = videoUrl.split('.')
     if (arr[arr.length - 1] === 'm3u8') {
       // 做处理 请求地址 获取文件 改写m3u8文件 将其赋值给videoUrl
@@ -30,13 +34,13 @@ const transformM3u8 = async (videoUrl: string) => {
 onMounted(async () => {
   await transformM3u8(props.videoUrl)
   if (dp.value) {
-    dp.value.contentWindow.postMessage({ videoUrl: props.videoUrl }, '*')
+    dp.value.contentWindow.postMessage({ videoUrl: tempUrl.value }, '*')
   }
 })
 watch(props, async props => {
   await transformM3u8(props.videoUrl)
   if (dp.value) {
-    dp.value.contentWindow.postMessage({ videoUrl: props.videoUrl }, '*')
+    dp.value.contentWindow.postMessage({ videoUrl: tempUrl.value }, '*')
   }
 })
 </script>
