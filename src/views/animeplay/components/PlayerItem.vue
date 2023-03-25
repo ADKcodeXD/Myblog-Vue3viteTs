@@ -50,6 +50,8 @@ watch(props, async props => {
   #dplayerContainer {
     overflow: hidden;
     border-radius: 2rem;
+    width: 100%;
+    height: 26rem;
     .shadow();
   }
 }
@@ -57,7 +59,6 @@ watch(props, async props => {
 @media screen and (min-width: @smallpc-device) {
   #dplayerContainer {
     height: 54rem;
-    width: 100%;
   }
 }
 </style>

@@ -5,7 +5,7 @@
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
     "build:prod": "vue-tsc --noEmit && vite build --mode production",
-    "dev": "vite",
+    "dev": "vite --host",
     "prod": "vite --mode production",
     "preview": "vite preview",
     "lint": "eslint src/**/* --ext '.js,.ts,.vue' --no-error-on-unmatched-pattern",

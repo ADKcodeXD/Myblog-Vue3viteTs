@@ -78,6 +78,12 @@
         }
       })
 
+      dplayer.on('fullscreen', () => {
+        if (isMobile()) {
+          window.screen.orientation.lock('landscape-primary')
+        }
+      })
+
       dplayer.container.addEventListener('mousemove', () => {
         dplayer.controller.setAutoHide()
       })

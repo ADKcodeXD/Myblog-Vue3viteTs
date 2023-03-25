@@ -105,7 +105,9 @@
     <!-- 在线播放源 樱花 -->
     <div class="yhdm" v-if="yhdmList.length > 0">
       <p class="yhdm-title">
-        在线播放(本站不提供存储增值付费服务，仅提供学习交流，所有资源源于网络，侵权请联系)
+        在线播放<span class="tw-text-xl">
+          (本站不提供存储增值付费服务，仅提供学习交流，所有资源源于网络，侵权请联系)</span
+        >
       </p>
       <div v-for="(yhdm, index) in yhdmList" :key="index">
         <div v-if="index === 1" class="yhdm-little-title">
@@ -132,17 +134,13 @@
 </template>
 
 <script lang="ts" setup>
-import { PropType } from 'vue'
 import { useYhdm } from '@/hooks/Yhdm'
 import HumanBoxCard from './HumanBoxCard.vue'
 import AnimeEp from './AnimeEp.vue'
 import AnimeDetailInfoBox from './AnimeDetailInfoBox.vue'
-const props = defineProps({
-  animeDetail: {
-    type: Object as PropType<Bangumi.AnimeDeatilItem>,
-    require: true
-  }
-})
+const props = defineProps<{
+  animeDetail: Bangumi.AnimeDeatilItem
+}>()
 
 const { sites, cnSite, jpSite, twHkSite, otherSite, openUrl, yhdmList, urlFilter } = useYhdm(
   props.animeDetail ? props.animeDetail : null

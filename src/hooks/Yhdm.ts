@@ -48,6 +48,17 @@ export const useYhdm = (animeDetail: Bangumi.AnimeDeatilItem | null) => {
       }
       try {
         const { data } = await getYhdmAnimeSearchInfo(keywords)
+        data.data.results.forEach((item: YhdmSearchInfo) => {
+          item.epInfo.sort((a: Epinfo, b: Epinfo) => {
+            const num1 = a.epTitle.match(/\d+/g)?.toString()
+            const num2 = b.epTitle.match(/\d+/g)?.toString()
+            if (num1 && num2) {
+              const first = parseInt(num1)
+              const second = parseInt(num2)
+              return first - second
+            } else return -1
+          })
+        })
         return data.data.results
       } catch (error) {
         return null

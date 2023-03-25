@@ -22,6 +22,7 @@ export default ({ mode }) => {
     ...loadEnv(mode, process.cwd())
   }
   return defineConfig({
+    base: '/', // 设置打包路径
     assetsInclude: resolve(__dirname, 'src/assets'),
     plugins: [
       vue(),
