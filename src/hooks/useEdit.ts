@@ -153,11 +153,17 @@ export const useArticleSubmit = (
       // 请求
       const { data } = await publishArticle(articleReqParams)
       removeItem('temp')
-      ElMessage.success('发布成功 2s后跳转文章')
-      content.html = ''
-      setTimeout(() => {
-        router.push(`/article/${data.data.id}`)
-      }, 2000)
+      if (data.code === 200) {
+        ElMessage.success('发布成功 2s后跳转文章')
+        content.html = ''
+        setTimeout(() => {
+          router.push(`/article/${data.data.id}`)
+        }, 2000)
+      } else if (data.code === 401) {
+        ElMessage.error('快去给我登录！！！')
+      } else {
+        ElMessage.error('发布失败')
+      }
     }
   }
   return {
