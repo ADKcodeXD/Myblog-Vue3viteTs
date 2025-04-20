@@ -98,7 +98,7 @@ export const useArticleSubmit = (
   const router = useRouter()
   // elm input
   const summary = ref('')
-  const title = ref('这里输入标题')
+  const title = ref('')
   const styleChange = ref(false)
   const pannel = ref(0)
   // 提交逻辑
