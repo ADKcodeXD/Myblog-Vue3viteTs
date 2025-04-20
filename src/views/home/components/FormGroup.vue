@@ -45,7 +45,7 @@
           <p>{{ currentUser.date }}</p>
         </ElFormItem>
         <ElFormItem label="发布文章数量">
-          <p>1</p>
+          <p>{{ currentUser.allArticleCounts }}</p>
         </ElFormItem>
         <ElFormItem label="简介" prop="introduce">
           <ElInput
