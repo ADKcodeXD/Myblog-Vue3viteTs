@@ -64,11 +64,12 @@
 
     <div class="message-part" v-if="messageList">
       <CommentItem
-        v-for="item in toCommentItem"
+        v-for="(item, i) in toCommentItem"
         :commentInfo="item"
         :key="item.id"
         :reply="false"
         :level="false"
+        :floor="(pageparams.page - 1) * pageparams.pagesize + i + 1"
       />
     </div>
     <AdkEmpty v-else desc="暂时没有留言哦~"></AdkEmpty>

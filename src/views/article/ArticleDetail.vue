@@ -78,7 +78,7 @@
                   class="list-item"
                   v-for="(commentitem, i) in commentList"
                   :commentInfo="commentitem"
-                  :floor="i + 1"
+                  :floor="(pageparams.page - 1) * pageparams.pagesize + i + 1"
                   :key="commentitem.id"
                   :authorId="article.authorVo.id"
                   :articleId="article.id"
