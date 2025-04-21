@@ -6,6 +6,7 @@
       <template #caozuo> 取消点赞 </template>
     </MyTab>
   </div>
+  <MyPagination :pageParams="pageParams" :total="total" @changePage="getMyLiked" />
 </template>
 <script setup lang="ts">
 import { deleteUserLiked, getUserLiked } from '@/api/user'

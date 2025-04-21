@@ -11,6 +11,7 @@
         @focus="styleChange = true"
         @blur="styleChange = false"
         v-model="title"
+        placeholder="这里输入标题"
       />
       <div class="summary">
         <el-input

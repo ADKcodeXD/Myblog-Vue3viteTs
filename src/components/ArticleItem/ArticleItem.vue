@@ -25,7 +25,7 @@
           </div>
           <div>
             <TagItem
-              v-for="tag in articleItem.tags"
+              v-for="tag in articleItem.tags.slice(0, 3)"
               :key="tag.id"
               :tagId="tag.id"
               :tagName="tag.tagName"

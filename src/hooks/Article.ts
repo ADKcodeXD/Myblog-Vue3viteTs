@@ -99,6 +99,11 @@ export const useArticle = () => {
         }
         await userLike(reqParams)
         article.value.isLiked = likedValue
+        if (likedValue) {
+          article.value.likeCounts += 1
+        } else {
+          article.value.likeCounts -= 1
+        }
       }
     } else {
       ElMessage.error('请先登录后点赞')
@@ -117,6 +122,11 @@ export const useArticle = () => {
         }
         await userCollect(reqParams)
         article.value.isCollected = collectValue
+        if (collectValue) {
+          article.value.collectCounts += 1
+        } else {
+          article.value.collectCounts -= 1
+        }
       }
     } else {
       ElMessage.error('请先登录后收藏')

@@ -23,7 +23,8 @@ export const useHomeIndex = () => {
     date: '',
     banner: '',
     avatar: '',
-    introduce: ''
+    introduce: '',
+    allArticleCounts: 0
   })
   const getAllinfo = async () => {
     const { data } = await currentUserAll()
